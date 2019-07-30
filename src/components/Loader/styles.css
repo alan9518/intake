@@ -1,0 +1,21 @@
+.xpl-loaderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* min-height: 800px; */
+}
+
+.xpl-loaderHolder {
+    max-width: 50%;
+}
+
+
+.xpl-loaderContainer.int-transparentBackground {
+    background-color: rgba(255,255,255,0.7);
+    z-index: 200;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}

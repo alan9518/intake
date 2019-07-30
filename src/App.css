@@ -1,33 +1,168 @@
-.App {
-  text-align: center;
+/* ==========================================================================
+** General Layouts Styles
+** 28/01/2019
+** Alan Medina Silva
+** ========================================================================== */
+
+/* ---------------------------------------------------
+** Body Styles
+** --------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+html, body, .App {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-image: url('./assets/img/bg.jpg');
+  background-position: top;
+  background-size: cover;
+  /* background: rgb(63, 94, 251);
+  background: -moz-radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(105, 72, 142, 1) 100%);
+  background: -webkit-radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(105, 72, 142, 1) 100%);
+  background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(105, 72, 142, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3f5efb", endColorstr="#69488e", GradientType=1); */
+}
+
+.App {
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+}
+
+h1, h2, h3, h4, h5, h6, thead {
+  /* font-family: 'Roboto Mono', monospace; */
+  font-family: "ITC Avant Garde Gothic Book","Segoe UI Light","Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
+  font-weight: 700;
+}
+
+p, label {
+  font-family: "ITC Avant Garde Gothic Book","Segoe UI Light","Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
+}
+
+
+tbody {
+  font-family: 'Roboto Mono', monospace;
+  font-weight:500;
+} 
+
+input, textarea {
+  /* font-family: 'Asap', sans-serif; */
+  font-family: 'Roboto Mono', monospace;
+  font-weight:500;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: non;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+a:-webkit-any-link {
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.int-blueText {
+  color: #0099dd;
+}
+
+.shadow-z-1 {
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+}
+
+.int-separator {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 10px;
+  /* min-height: 600px; */
+  background-color: #0099dd;
+}
+
+.int-bottomSeparator {
+  border-bottom: 3px solid #f4f4f4;
+}
+
+.int-col-separator {
+  border-left: 3px solid #f4f4f4;
+}
+
+.int-shadow {
+  /* box-shadow: 0 1px 15px 1px rgba(52, 40, 104, .08); */
+  -webkit-box-shadow: -5px 4px 49px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -5px 4px 49px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: -5px 4px 49px -5px rgba(0, 0, 0, 0.75);
+}
+
+.int-linkText a {
+  color: #009add;
+  font-weight: 700;
+}
+
+.int-container {
+  width: 100%;
+}
+
+.int-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.int-row:first-child {
+  flex-grow: 2
+}
+
+.int-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  width:100% ;
+  max-width: 100%;
+  flex: 1;
+}
+
+.int-double-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 2;
+}
+
+
+.int-errorStatus {
+  border: 1px solid #d23338 !important;
+}
+
+
+.int-controlDisabled {
   pointer-events: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.int-controlEnabled {
+  pointer-events: all;
 }
 
-.App-link {
-  color: #61dafb;
+@media screen and (min-width: 800px) {
+  .int-column {
+    flex: 1
+  }
+  .int-double-column {
+    flex: 2
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+

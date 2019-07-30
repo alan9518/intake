@@ -1,0 +1,71 @@
+/* ==========================================================================
+** Buttons Styles 
+** 28/01/2019
+** Alan Medina Silva
+** ========================================================================== */
+
+
+/* ---------------------------------------------------
+** App Buttons
+** --------------------------------------------------- */
+
+.int-appButtonContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+span.int-buttonText {
+    color: #fff;
+    font-size: 1.5em;
+    font-family: "ITC Avant Garde Gothic Book","Segoe UI Light","Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
+}
+
+.int-appButtonContainer.int-cancelButton {
+    background-color: #333333;
+} 
+
+.int-appButtonContainer.int-saveButton {
+    background-color: #8d8d8d;
+} 
+
+.int-appButtonContainer.int-continueButton {
+    background-color: #009add;
+}
+
+
+/* ---------------------------------------------------
+** AddInputs Button
+** --------------------------------------------------- */
+
+fa.fa-plus.fa-w-14 {
+    color: #009add;
+}
+
+
+.int-AddInputButtonContainer {
+    
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 25px;
+    float: right;
+    cursor: pointer;
+}
+
+.int-AddInputButtonContainer span.int-buttonText {
+    color: #009add;
+    font-size: 25px;
+}
+
+
+.int-disabledLink {
+    pointer-events: none;
+    cursor: not-allowed;
+}

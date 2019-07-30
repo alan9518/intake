@@ -1,26 +1,98 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/* ==========================================================================
+ * App File Init Components And Routes 
+ * 12/02/2019
+ * Alan Medina Silva
+ ========================================================================== */
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// --------------------------------------
+// Get Dependences
+// --------------------------------------
+  import React, { Component, Fragment } from 'react';
+  import createBrowserHistory from 'history/createBrowserHistory'
+  import { Router, Route, Switch, BrowserRouter } from 'react-router-dom';
+  import indexRoutes from './routes/index';
+  import ReactGA from 'react-ga';
+  import Dashboard from './layouts/Dashboard/Dashboard'
+  import './App.css';
 
+
+// --------------------------------------
+// Create Component Class
+// --------------------------------------
+  class App extends Component { 
+    
+
+
+    /* ==========================================================================
+    ** Render Methods
+    ** ========================================================================== */
+
+
+
+      // --------------------------------------
+      // Render Projects
+      // Initialize Google Analytics
+      // --------------------------------------
+      renderApp () { 
+          const history = createBrowserHistory();
+          
+          //? const CurrentSPUser = window.getCurrentSPUser();
+
+          ReactGA.initialize('UA-142850304-1', {
+            debug: true,
+            titleCase: false,
+            gaOptions: {
+              userId: 13,
+              dimensionValue: 'alan.medina@flex.com'
+            }
+            // gaOptions: {
+            //   userId: CurrentSPUser.user_ID,
+            //   dimensionValue: CurrentSPUser.user_email
+            // }
+          });
+    
+          ReactGA.pageview(window.location.pathname + window.location.search);
+          // console.log('ReactGA', ReactGA);
+          console.log('history', history);
+          // Return Routes
+
+          // return <span> App </span>
+
+          // return <Dashboard/>
+
+            return (
+              <BrowserRouter history={history}>
+                <Switch> 
+                  <Route path={'/'} component={Dashboard} key={`dashboard`} ></Route>
+                </Switch>
+
+              </BrowserRouter>
+            );
+        
+      }
+      
+      // --------------------------------------
+      // Render Component
+      // {indexRoutes.map((prop, key) => {
+      //   return <Route path={prop.path} component={prop.component} key={`index-${key}`} ></Route>
+      // })}
+      // --------------------------------------
+      render() { 
+        // return this.renderApp() ; 
+        const history = createBrowserHistory();
+        return  (
+          <BrowserRouter history={history}>
+                <Switch> 
+                  <Route path={'/'} component={Dashboard} key={`dashboard`} ></Route>
+                </Switch>
+          </BrowserRouter>
+        )
+      }
+  } 
+
+
+
+// --------------------------------------
+// Export Component
+// --------------------------------------
 export default App;

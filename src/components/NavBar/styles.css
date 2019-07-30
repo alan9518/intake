@@ -1,0 +1,71 @@
+/* ==========================================================================
+** Header Navigation Styles
+** 28/01/2019
+** Alan Medina Silva
+** ========================================================================== */
+
+.int-navigationContainer {
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+}
+
+
+ul {
+    padding: 0px;
+    list-style: none;
+}
+
+.int-navList {
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+}
+
+.int-navList li {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.int-active  {
+    background-color: #0099dd;
+}
+
+.int-navItem {
+    text-align: center;
+    padding: 20px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+
+.int-navItem span {
+    color: #fff;
+    font-family: "ITC Avant Garde Gothic Book","Segoe UI Light","Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
+    white-space: pre-line;      /* Webkit */    
+    white-space: -moz-pre-line; /* Firefox */     
+    white-space: -pre-line;     /* Opera <7 */    
+    white-space: -o-pre-line;   /* Opera 7 */     
+    word-wrap: break-word;      /* IE */ 
+}
+
+
+.int-disabledLink {
+    pointer-events: none;
+}
+
+a.int-disabledLink span {
+    color: #333;
+}
+
+@media all and (max-width: 600px) {
+
+    .int-navList {
+        flex-wrap: wrap;
+    }
+    
+    .int-navList > li {
+        flex-basis: 100%;
+    }
+}

@@ -1,0 +1,693 @@
+/* ==========================================================================
+** Layout Styles
+** 28/01/2019
+** Alan Medina Silva
+** ========================================================================== */
+
+
+    /* ==========================================================================
+    *  Form Header
+    ========================================================================== */
+
+    .int-projectsContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 50px;
+    }
+
+    .int-formContainer {
+        border-radius: 3px 3px 0 0;
+        width: 80%;
+        margin-bottom: 80px;
+    }
+
+    .int-formFieldsContainer {
+        width: 100%;
+        padding: 20px 40px;
+    }
+
+    
+    /* ==========================================================================
+    *  Form Header
+    ========================================================================== */
+
+    .int-formHeaderContainer {
+        background-color: #0099dd;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .int-formContainer h1 {
+        color: #fff;
+    }
+
+    h1.int-formHeaderTitle {
+        white-space: pre;
+        text-align: center;
+        font-size: 2.8em;
+    }
+
+    .int-titleSection p {
+        font-size: 15px;
+    }
+
+    h3.int-blueText.int-sectionTitle {
+        font-size: 19px;
+    }
+
+    
+/* ==========================================================================
+ *  Form Body
+ ========================================================================== */
+
+    .int-formBodyContainer {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #fff;
+        /* height: 100%; */
+        /* min-height: 600px; */
+    }
+
+    .int-separatorLeft {
+        left: 10px;
+    }
+
+    .int-separatorRight {
+        right: 10px;
+    }
+
+    .int-searchContainer {
+        padding: 20px 0;
+    }
+
+/* ==========================================================================
+ *  Form Footer
+ ========================================================================== */
+
+    .int-formFooterContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+
+
+
+/* ==========================================================================
+ *  Requirement Details
+ ========================================================================== */
+
+    .int-spaceBetween {
+        justify-content: space-between;
+    }
+
+    .int-reqDefHeader {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .int-fieldsContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 320px;
+        padding-bottom: 20px;
+    }
+
+    .int-fieldsSection {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        min-height: 150px;
+        margin-bottom: 20px;
+    }
+
+    .int-headerSection1 {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .int-iconHolder {
+        max-width: 145px;
+        margin-right: 20px;
+    }
+
+    .int-iconHolder img {
+        width: 100%;
+        height: auto;
+        ;
+    }
+
+    h2.int-subHeader {
+        font-size: 2.3em;
+        border-bottom: 3px solid #0099dd;
+        margin-bottom: 10px;
+    }
+
+    h3.int-processMessage {
+        font-size: 1.8em;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .int-FieldSpContainerRow {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+/* ==========================================================================
+ *  Custom react Select
+ ========================================================================== */
+    .react-select-container {
+        width: 175px;
+        display: flex;
+        font-family: 'Roboto Mono', monospace;
+        font-weight:500;
+        font-size: 16px;
+    }
+
+    .react-select-container-wide {
+        width: 400px;
+        display: flex;
+        font-family: 'Roboto Mono', monospace;
+        font-weight:500;
+        font-size: 16px;
+    }
+
+
+    .react-select-container-extra-wide {
+        width: 650px;
+        display: flex;
+        font-family: 'Roboto Mono', monospace;
+        font-weight:500;
+        font-size: 16px;
+    }
+
+    .react-select-container-extra-wide {
+        width: 650px;
+    }
+
+    .react-select-container-medium {
+        width: 275px;
+        display: flex;
+        font-family: 'Roboto Mono', monospace;
+        font-weight:500;
+        font-size: 16px;
+    }
+
+    .react-select__placeholder, .react-select__indicator, .react-select__dropdown-indicator , 
+    .react-select-wide__placeholder, .react-select-wide__indicator, .react-select-wide__dropdown-indicator,
+    .react-select-extra-wide__placeholder, .react-select-extra-wide__indicator, .react-select-extra-wide__dropdown-indicator,
+    .react-select-medium__placeholder, .react-select-medium__indicator, .react-select-medium__dropdown-indicator  {
+        color: #000000 !important;
+        
+    }
+
+    .react-select-extra-wid__placeholder, .react-select-wide__placeholder, .react-select__placeholder {
+        /* font-size: 13px!important;
+        color: #000000 !important; */
+        font-size: 16px!important;
+        color: #777 !important;
+    }
+
+    .react-select__control {
+        width: 175px;
+        background-color: transparent !important;
+        border: none !important;
+    }
+
+    .react-select-wide__control {
+        width: 400px;
+        background-color: transparent !important;
+        border: none !important;
+    }
+
+    .react-select-extra-wide__control {
+        width: 650px;
+        background-color: transparent !important;
+        border: none !important;
+    }
+
+    .react-select-medium__control {
+        width: 275px;
+        background-color: transparent !important;
+        border: none !important;
+    }
+
+    .react-select-wide__single-value,  .react-select-extra-wide__single-value .react-select__single-value  {
+        color: #777777;
+    }
+
+    .react-select-wide__value-container.react-select-wide__value-container--is-multi.react-select-wide__value-container--has-value {
+        background-color: #f3f3f3;
+    }
+
+    .react-select-extra-wide__value-container.react-select-extra-wide__value-container--is-multi.react-select-extra-wide__value-container--has-value {
+        background-color: #f3f3f3;
+    }
+
+    .react-select-extra-wide__dropdown-indicator, .react-select-extra-wide__indicator, .react-select-extra-wide__placeholder, .react-select-medium__dropdown-indicator, .react-select-medium__indicator, .react-select-medium__placeholder, .react-select-wide__dropdown-indicator, .react-select-wide__indicator, .react-select-wide__placeholder, .react-select__dropdown-indicator, .react-select__indicator, .react-select__placeholder {
+        /* color: #000!important; */
+        color: #777777;
+        background-color: #f3f3f3;
+    }
+
+    /* .react-select__placeholder,  .react-select-wide__placeholder,  .react-select-extra-wid__placeholder {
+        font-size: 13px !important;
+        
+        color: #d3d3d3!important;
+    } */
+
+
+/* ==========================================================================
+ *  Custom DropZone
+ ========================================================================== */
+
+    .dropzone.dz-clickable {
+        cursor: pointer;
+    }
+
+    .dz-default.dz-message {
+        font-size: 16px;
+    }
+
+    div.filepicker {
+        text-align: center;
+        padding: 5px;
+        background-color: #f3f3f3;
+        border-radius: 5px;
+        min-height: 60px;
+        /* border: 2px dashed #C7C7C7; */
+        border: none;
+    }
+
+    .dropzone {
+        min-height: 150px;
+        border: 2px solid rgba(0, 0, 0, 0.3);
+        background: white;
+        padding: 20px 20px;
+    }
+
+    .dropzone, .dropzone * {
+        box-sizing: border-box;
+    }
+
+    .dropzone.dz-started .dz-message {
+        display: none;
+    }
+
+    .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {
+        cursor: pointer;
+    }
+
+    .dropzone .dz-message {
+        text-align: center;
+        margin: 2em 0;
+    }
+
+    .filepicker.dropzone .dz-preview.dz-image-preview {
+        background: none;
+    }
+
+    .dropzone .dz-preview.dz-image-preview {
+        background: white;
+    }
+
+    .dropzone .dz-preview {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        margin: 16px;
+        min-height: 100px;
+    }
+
+    .dropzone.dz-clickable * {
+        cursor: default;
+    }
+
+    .dropzone, .dropzone * {
+        box-sizing: border-box;
+    }
+
+    /* Filepicker CSS */
+
+    .filepicker {
+        font-family: texgyreadventorbold;
+    }
+
+
+    /* Icon */
+
+    .filepicker-file-icon {
+        position: relative;
+        display: inline-block;
+        margin: 1.5em 0 2.5em 0;
+        padding-left: 45px;
+        color: black;
+    }
+
+    .filepicker-file-icon::before {
+        position: absolute;
+        top: -7px;
+        left: 0;
+        width: 29px;
+        height: 34px;
+        content: '';
+        border: solid 2px #7F7F7F;
+        border-radius: 2px;
+    }
+
+    .filepicker-file-icon::after {
+        font-size: 11px;
+        line-height: 1.3;
+        position: absolute;
+        top: 9px;
+        left: -4px;
+        padding: 0 2px;
+        content: 'file';
+        content: attr(data-filetype);
+        text-align: right;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #000;
+    }
+
+    .filepicker-file-icon .fileCorner {
+        position: absolute;
+        top: -7px;
+        left: 22px;
+        width: 0;
+        height: 0;
+        border-width: 11px 0 0 11px;
+        border-style: solid;
+        border-color: white transparent transparent #920035;
+    }
+
+    .slick-slide img {
+        display: block;
+        margin: auto;
+    }
+
+    .sp-peoplepicker-autoFillContainer {
+        z-index: 100 !important;
+    }
+
+
+
+
+    
+    /* ==========================================================================
+    ** Custom DatePicker
+    ** ========================================================================== */
+
+    .DateInput__small {
+        width: 130px;
+    }
+
+    .DayPicker {
+        background: #fff;
+        position: relative;
+        text-align: left;
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    .SingleDatePickerInput {
+        background-color: transparent;
+        border: none;
+    }
+
+    /* .DateInput_input {
+        background-color: #f3f3f3 !important;
+    } */
+
+    .DateInput_input, .DateInput_input__focused {
+        background-color: #f3f3f3!important;
+        border: none !important;
+        padding-left: 15px !important;
+    }
+
+    /* .DateInput_input__focused {
+        background-color: #f3f3f3 !important;
+    } */
+
+    .SingleDatePickerInput_calendarIcon_svg {
+        fill: #0099dd !important;
+    }
+
+    .DateInput_input__focused {
+        border-bottom: 2px solid #0099dd;
+    }
+
+    .CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
+        background: #0099dd;
+        border: 1px double #0099dd;
+        color: #fff;
+    }
+
+/* ---------------------------------------------------
+** Business Information
+** --------------------------------------------------- */
+
+    .int-singleTitleContainer {
+        width: 100%;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    .int-sectionTitle {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .int-sectionTitle::after {
+        content: "";
+        flex: 1 1;
+        /* grow 1, shrink 1  */
+        border-bottom: 2px solid #f3f3f3;
+        margin: auto 20px;
+    }
+
+
+    .int-titleSectionMessage {
+        width: 100%;
+        padding: 30px;
+    }
+
+
+    /* ==========================================================================
+    ** Custom People Picker
+    ** ========================================================================== */
+        
+    
+        div.sp-peoplepicker-topLevel {
+            background-color: transparent;
+            border: none !important;
+            width: 100% !important;
+            padding: 6px;
+            font-family: Roboto Mono,monospace !important;
+            font-weight: 500 !important;
+        }
+
+        .sp-peoplepicker-initialHelpText {
+            top: 9px !important;
+            left: 16px !important;
+            font-size: 16px !important;
+            font-family: Roboto Mono,monospace !important;
+            font-weight: 500 !important;
+        }
+
+        div.sp-peoplepicker-topLevel {
+
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .sp-peoplepicker-autoFillContainer {
+            z-index: 2;
+            max-width: 100% !important;
+            min-width: 100% !important;
+            font-family: Roboto Mono,monospace !important;
+            font-weight: 500 !important;
+        }
+
+
+    /* ==========================================================================
+    ** Single Button
+    ** ========================================================================== */
+    .int-singleButton {
+        background-color: transparent;
+        border: 2px solid #009add;
+        padding: 10px 16px;
+        font-size: 12px;
+        color: #009add;
+        cursor: pointer;
+    }
+
+    .int-singleButton:hover{
+        background-color: #009add;
+        color: #fff;
+        border: 2px solid #fff;
+    }
+
+    .int-singleButtonDanger {
+        background-color: transparent;
+        border: 2px solid #d23338;
+        padding: 10px 16px;
+        font-size: 12px;
+        color: #d23338;
+        cursor: pointer;
+    }
+
+    .int-singleButtonDanger:hover{
+        background-color: #d23338;
+        color: #fff;
+        border: 2px solid #fff;
+    }
+
+
+/* ==========================================================================
+** Pagination
+** ========================================================================== */
+    ul.int-pagination {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+
+    
+    li.int-page-item {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #eee;
+        border-radius: 2px;
+        padding: 10px;
+        margin: 2px;
+        cursor: pointer;
+    }
+
+    li.int-page-item:hover {
+        border-color: #009add;
+    }
+
+/* ==========================================================================
+** Responsive Styles
+** ========================================================================== */
+
+@media screen and (max-width: 767px) { 
+    h1.int-formHeaderTitle {
+        white-space: pre;
+        text-align: center;
+        font-size: 1.5em;
+    }
+
+}
+
+
+
+/* ==========================================================================
+** HDMI Laptop 
+** ========================================================================== */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+    .int-iconHolder {
+        max-width: 100px;
+        margin-right: 10px;
+    }
+  
+    h2.int-subHeader {
+        font-size: 2em;
+    }
+
+    .int-titleSection p {
+        font-size: 13px;
+    }
+
+    .int-fieldLabel {
+        padding: 12px 5px 12px 5px;
+        font-size: 14px;
+    }
+
+    input.int-textInput, textarea {
+        width: 100%;
+        border: none;
+        background-color: initial;
+        padding: 5px 10px;
+        height: 100%;
+        text-align: center;
+        /* font-size: 14px; */
+    }
+
+    .int-column {
+        -webkit-flex: 1 1;
+        flex: 1 1;
+        justify-content: space-evenly;
+    }
+
+    .DateInput__small {
+        width: 85px !important; 
+    }
+
+
+    /* Select */
+
+
+    .react-select-container-extra-wide {
+        width: 415px;
+        display: flex;
+        font-family: 'Roboto Mono', monospace;
+        font-size: 16px;
+    }
+
+    .react-select-extra-wide__control {
+        width: 415px;
+        background-color: transparent !important;
+        border: none !important;
+    }
+    
+  }
+
+
+
+/* ==========================================================================
+** IPAD 
+** ========================================================================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .react-select-container-extra-wide {
+        width: 490px;
+    }
+
+    .react-select-extra-wide__control {
+        width: 490px;
+        background-color: initial!important;
+        border: none!important;
+    }
+}
+
+
+@media (min-width: 1025px) and (max-width: 1600px) {
+
+    .react-select-container-extra-wide {
+        width: 490px;
+    }
+
+    .react-select-extra-wide__control {
+        width: 490px;
+        background-color: initial!important;
+        border: none!important;
+    }
+}
