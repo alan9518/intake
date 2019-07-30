@@ -16,7 +16,7 @@
     import {appRoutes} from '../../routes/routes';
     import { withRouter } from 'react-router';
     import {Endpoints} from '../../services/Endpoints';
-    import { Switch, Route,  Redirect, BrowserRouter } from "react-router-dom";
+    import { Switch, Route,  Redirect, BrowserRouter,  } from "react-router-dom";
     import axios from 'axios';
     
     import '../styles.css'
@@ -70,10 +70,12 @@
             // Load API & Register Window Listener
             // Event for Responsive Sharepoint
             // --------------------------------------
-            componentDidMount() {
+            async componentDidMount() {
+                
                 window.addEventListener("resize", this.updateContainerDimensions);
                 // ? Check if user is PMO
                 try {
+                    console.log("TCL: Dashboard -> componentDidMount -> DidMount", )    
                     this.loadAPI();
                 }
                 catch(error) {
@@ -110,7 +112,9 @@
             // --------------------------------------
             async loadAPI() {
                 const sitePMOsPromise =  this.fetchSitePMOS();
-                const sitePMOS =   await  sitePMOsPromise.data ?  sitePMOsPromise.data.value : this.users.value
+                // const sitePMOS =   await  sitePMOsPromise.data ?  sitePMOsPromise.data.value : this.users.value
+
+                const sitePMOS = this.users.value
                 console.log("TCL: Dashboard -> loadAPI -> sitePMOS", sitePMOS)
                 let isPMO = false
 
@@ -174,21 +178,24 @@
             renderDashboard() {
                 
                 const {responsiveWidth} = this.state;
+                // const history = createBrowserHistory();
 
                 console.log("TCL: Dashboard -> renderDashboard -> this.props", this.props)
 
-                console.log("TCL: Dashboard -> renderDashboard -> this.props.route", this.props.route)
+                // console.log("TCL: Dashboard -> renderDashboard -> this.props.route", this.props.route)
 
 
                     return (
                         <div className = "int-mainContainer" style = {{maxWidth:responsiveWidth}}>
+                        <BrowserRouter history={this.props.history}>
                             <Switch>
                                     {appRoutes.map((prop,key) => {
+                                        console.log("TCL: Dashboard -> renderDashboard -> prop", prop)
                                         if (prop.redirect)
                                             return <Redirect from={prop.path} to={prop.to} key={key} />;
                                         
                                         return <Route 
-                                                    route={this.props.route}
+                                                    // route={this.props.route}
                                                     exact={prop.exact} 
                                                     path={prop.path} 
                                                     component={prop.component} 
@@ -196,6 +203,7 @@
                                                     
                                     })}
                                 </Switch>
+                            </BrowserRouter>
                         </div>
                     )
             }
@@ -238,4 +246,4 @@
 // Export Component
 // --------------------------------------
     // export default withRouter (connect(mapStateToProps, {fetchSitePMOS}) (Dashboard));
-    export default (Dashboard);
+    export default  (Dashboard);

@@ -1,0 +1,93 @@
+.int-fieldItemContainer {
+    padding: 10px;
+}
+
+.int-fieldItemContainerColumn {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    /* margin-top: auto; */
+}
+
+.int-fieldItemContainerRow {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    /* margin-top: auto; */
+}
+
+input[readonly] {
+    color: #777777 !important;
+}
+
+
+.int-fieldLabel {
+    /* padding: 12px 5px; */
+    padding: 12px 5px 12px 10px;
+    font-weight: 700;
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+.bordered {
+    border-left: 5px solid #0099dd;
+}
+
+svg.svg-inline--fa.fa-question-circle.fa-w-16 {
+    color: #0099dd;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+span.int-blueText {
+    position: absolute;
+}
+
+.int-fieldText {
+    background-color: #f3f3f3;
+    margin-top: 5px;
+    height: 40px;
+    min-height: 40px;
+}
+
+
+
+
+.int-fieldTextArea {
+    background-color: #f3f3f3;
+    margin-top: 5px;
+    height: 80px;
+    min-height: 80px;
+}
+
+input.int-textInput, textarea {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    padding: 5px 10px;
+    height: 100%;
+    text-align: center;
+}
+
+textarea {
+    margin-bottom: 5px;
+}
+
+
+span.int-inputMessageError {
+    padding: 10px;
+    color: #d23338;
+    display: none;
+}
+
+
+span.int-textCounter {
+    font-size: 13px;
+    margin-top: 5px;
+    color: #d3d3d3;
+}
+
+

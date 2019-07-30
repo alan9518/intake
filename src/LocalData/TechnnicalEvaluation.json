@@ -1,0 +1,420 @@
+[
+    {
+        "Field_Name": "Delivery Team",
+        "Field_State_Name": "Delivery_Team",
+        "group": "firstHalf1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "41",
+        "Type": "Combo",
+        "General_Value": [
+            {
+                "label": "1- PlatformSolution - Ben Webs Org",
+                "value": "1- PlatformSolution - Ben Webs Org"
+            },
+            {
+                "label": "2.- Global Ops - RaghuPulakurthisOrg",
+                "value": "2.- Global Ops - RaghuPulakurthisOrg"
+            },
+            {
+                "label": "3.- GSS & Sales - Sapan Parikhs Org",
+                "value": "3.- GSS & Sales - Sapan Parikhs Org"
+            },
+            {
+                "label": "4.- Pulse, Quality & Architecture - Ulises Ruizs Org",
+                "value": "4.- Pulse, Quality & Architecture - Ulises Ruizs Org"
+            },
+            {
+                "label": "5.- D&E - WFD - Aristoteles Portillos Org",
+                "value": "5.- D&E - WFD - Aristoteles Portillos Org"
+            }
+        ],
+        "columns": 2,
+        "hasToolTip": true,
+        "wideControl": true,
+        "toolTipText": "Pick from the drop-down, who will handle this project"
+    },
+    {
+        "Field_Name": "Platform type",
+        "Field_State_Name": "Platform_type",
+        "group": "firstHalf2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "42",
+        "Type": "Combo",
+        "General_Value": [
+            {
+                "label": "1.- Web Based On-Premise",
+                "value": "1.- Web Based On-Premise"
+            },
+            {
+                "label": "2.- Web Base On-Cloud",
+                "value": "2.- Web Base On-Cloud"
+            },
+            {
+                "label": "3.- Mobile App",
+                "value": "3.- Mobile App"
+            },
+            {
+                "label": "4.- Web & Mobile",
+                "value": "4.- Web & Mobile"
+            },
+            {
+                "label": "5.- Reports and Dashboards",
+                "value": "5.- Reports and Dashboards"
+            },
+            {
+                "label": "6.- Desktop",
+                "value": "6.- Desktop"
+            },
+            {
+                "label": "7.- Integration",
+                "value": "7.- Integration"
+            },
+            {
+                "label": "8.- Desktop Application",
+                "value": "8.- Desktop Application"
+            }
+        ],
+        "columns": 2,
+        "hasToolTip": true,
+        "wideControl": true,
+        "toolTipText": "Pick from the drop-down, technology/Platform"
+    },
+    {
+        "Field_Name": "Applications involved",
+        "Field_State_Name": "Applications_involved",
+        "group": "first3column1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "43",
+        "Type": "Combo",
+        "General_Value": [],
+        "columns": 2,
+        "hasToolTip": true,
+        "wideControl": true,
+        "toolTipText": "Pick from the drop-down, applications involved"
+    },
+    {
+        "Field_Name": "Technology",
+        "Field_State_Name": "Technology",
+        "group": "first3column2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "44",
+        "Type": "Combo",
+        "General_Value": [],
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Pick from the drop-down, technology/Platform",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "IT Groups Required",
+        "Field_State_Name": "IT_Groups_Required",
+        "group": "first3column3",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "45",
+        "Type": "Combo",
+        "General_Value": [],
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Autopick from the drop-down",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Estimated Effort",
+        "Field_State_Name": "Estimated_Effort",
+        "group": "second3column1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "46",
+        "Type": "Combo",
+        "General_Value": [
+            {
+                "label": "High",
+                "value": "High"
+            },
+            {
+                "label": "Medium",
+                "value": "Medium"
+            },
+            {
+                "label": "Low",
+                "value": "Low"
+            }
+        ],
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Effort involved by the delivery team",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Project Team Size",
+        "Field_State_Name": "Project_Team_Size",
+        "group": "second3column2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "47",
+        "Type": "Combo",
+        "General_Value": [
+            {
+                "label": "High",
+                "value": "High"
+            },
+            {
+                "label": "Medium",
+                "value": "Medium"
+            },
+            {
+                "label": "Low",
+                "value": "Low"
+            }
+        ],
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Size of the project base on effort",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Project Manager",
+        "Field_State_Name": "Project_Manager",
+        "group": "second3column3",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "48",
+        "Type": "Combo",
+        "General_Value": [],
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Name of the project manager",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Target Start Date",
+        "Field_State_Name": "Target_Start_Date",
+        "group": "third3column1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "49",
+        "Type": "Date",
+        "General_Value": "Date Picker",
+        "columns": 2,
+        "hasToolTip": true,
+        "wideControl": true,
+        "toolTipText": "Project Start Date"
+    },
+    {
+        "Field_Name": "Target Go Live Date",
+        "Field_State_Name": "Target_Go_Live_Date",
+        "group": "third3column2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "50",
+        "Type": "Date",
+        "General_Value": "Date Picker",
+        "columns": 2,
+        "hasToolTip": true,
+        "wideControl": true,
+        "toolTipText": "Project Go Live Date"
+    },
+    {
+        "Field_Name": "IT FTE required",
+        "Field_State_Name": "IT_FTE_required",
+        "group": "third3column3",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "51",
+        "Type": "Integer",
+        "General_Value": "Numeric",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Number of FTEs involved with the project",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Approver",
+        "Field_State_Name": "Approver",
+        "group": "fourth3column1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "52",
+        "Type": "Combo",
+        "General_Value": [],
+        "columns": 2,
+        "hasToolTip": true,
+        "wideControl": true,
+        "toolTipText": "Approver name of the project"
+    },
+    {
+        "Field_Name": "Approval Date",
+        "Field_State_Name": "Approval_Date",
+        "group": "fourth3column2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "53",
+        "Type": "Date",
+        "General_Value": "Date Picker",
+        "columns": 2,
+        "hasToolTip": true,
+        "wideControl": true,
+        "toolTipText": "Auto pick of Date & Time stamp from the system. It should follow standard time across locations"
+    },
+    {
+        "Field_Name": "Justification/ROI (reason why we took up this project)",
+        "Field_State_Name": "Justification_ROI",
+        "group": "fifth3column",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "54",
+        "Type": "Text 150",
+        "max_Length": 150,
+        "General_Value": "Open Text",
+        "isTextArea": true,
+        "columns": 1,
+        "hasToolTip": true,
+        "wideControl": true,
+        "toolTipText": "Justification for acceptance of this project"
+    },
+    {
+        "Field_Name": "Design, Development & Testing Effort (hours)",
+        "Field_State_Name": "Design_Development_Testing_Effort",
+        "group": "sixth3column1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "55",
+        "Type": "Decimal",
+        "General_Value": "0",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Hours",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Travel (T&E)",
+        "Field_State_Name": "Travel_TE",
+        "group": "sixth3column2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "56",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Numbers",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Consulting",
+        "Field_State_Name": "Consulting",
+        "group": "sixth3column3",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "57",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Numbers",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Training",
+        "Field_State_Name": "Training",
+        "group": "sixth3column4",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "58",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Numbers",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Licenses Cost per year",
+        "Field_State_Name": "Licenses_Cost_per_year",
+        "group": "twocolumn1",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "59",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Numbers",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Hardware leasing",
+        "Field_State_Name": "Hardware_leasing",
+        "group": "twocolumn2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "60",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Numbers",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Maintenance Hardware (hours per year)",
+        "Field_State_Name": "Maintenance_Hardware_hours_per_year",
+        "group": "twocolumn3",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "61",
+        "Type": "Decimal",
+        "General_Value": "0",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Hours",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "Maintenance Salaries (hours per year)",
+        "Field_State_Name": "Maintenance_Salaries_hours_per_year",
+        "group": "twocolumn4",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "62",
+        "Type": "Decimal",
+        "General_Value": "0",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Hours",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "No of Sites",
+        "Field_State_Name": "No_of_Sites",
+        "group": "two2column1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "63",
+        "Type": "Integer",
+        "General_Value": "?",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Number of sites where already is implemented.",
+        "wideControl": false
+    },
+    {
+        "Field_Name": "No of Active users",
+        "Field_State_Name": "No_of_Active_users",
+        "group": "two2column2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "64",
+        "Type": "Integer",
+        "General_Value": "?",
+        "columns": 2,
+        "hasToolTip": true,
+        "toolTipText": "Number of active users using system. ",
+        "wideControl": false
+    }
+]

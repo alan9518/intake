@@ -1,0 +1,675 @@
+[
+    {
+        "Field_Name": "Business Objective",
+        "Field_State_Name": "Business_Objective",
+        "group": "firstHalf1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "12",
+        "Field_State_Name": "Text 150",
+        "isTextArea" : true,
+        "max_Length" : 150,
+        "General_Value": "Open Text",
+        "columns" : 1,
+        "hasToolTip" : true,
+        "toolTipText" : "Objective of this project "
+    },
+    {
+        "Field_Name": "Outcomes from the Objective",
+        "Field_State_Name": "Outcomes_from_the_Objective",
+        "group": "firstHalf2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "13",
+        "Type": "Text 150",
+        "isTextArea" : true,
+        "max_Length" : 150,
+        "General_Value": "Open Text",
+        "columns" : 1,
+        "hasToolTip" : true,
+        "toolTipText" : "Yields and results expected from this project"
+    },
+    {
+        "Field_Name": "Impact",
+        "Field_State_Name": "Impact",
+        "group": "firstHalf1",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "14",
+        "Type": "Text 150",
+        "isTextArea" : true,
+        "max_Length" : 150,
+        "General_Value": "Open Text",
+        "columns" : 1,
+        "hasToolTip" : true,
+        "toolTipText" : "Project Impact"
+    },
+    {
+        "Field_Name": "Background",
+        "Field_State_Name": "Background",
+        "group": "firstHalf2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "15",
+        "Type": "Text 150",
+        "isTextArea" : true,
+        "max_Length" : 150,
+        "General_Value": "Open Text",
+        "columns" : 1,
+        "hasToolTip" : true,
+        "toolTipText" : "About the project in detail"
+    },
+    {
+        "Field_Name": "Dependencies",
+        "Field_State_Name": "Dependencies",
+        "group": "firstHalf1",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "16",
+        "Type": "Text 150",
+        "isTextArea" : true,
+        "max_Length" : 150,
+        "General_Value": "Open Text",
+        "columns" : 1,
+        "hasToolTip" : true,
+        "toolTipText" : "Dependencies of this project"
+    },
+    {
+        "Field_Name": "Constrains",
+        "Field_State_Name": "Constrains",
+        "group": "firstHalf2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "17",
+        "Type": "Text 150",
+        "isTextArea" : true,
+        "max_Length" : 150,
+        "General_Value": "Open Text",
+        "columns" : 1,
+        "hasToolTip" : true,
+        "toolTipText" : "Constraints of this project"
+    },
+    {
+        "Field_Name": "Business Model",
+        "Field_State_Name": "Business Model",
+        "group": "firstHalf1",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "18",
+        "Type": "Combo",
+        "General_Value": [
+            {
+                "label": "1- ASP (Auth Service Partner)",
+                "value": "ASP (Auth Service Partner)"
+            },
+            {
+                "label": "2 - Automation",
+                "value": "Automation"
+            },
+            {
+                "label": "3 - BTO/BTS",
+                "value": "BTO/BTS"
+            },
+            {
+                "label": "4 - CTO",
+                "value": "CTO"
+            },
+            {
+                "label": "5 - Direct Fulfilment",
+                "value": "Direct Fulfilment"
+            },
+            {
+                "label": "6 - DOF",
+                "value": "DOF"
+            },
+            {
+                "label": "7 - e-Commerce",
+                "value": "e-Commerce"
+            },
+            {
+                "label": "8 -IntegratonServices",
+                "value": "IntegratonServices"
+            },
+            {
+                "label": "9 - Reverse Logistics",
+                "value": "Reverse Logistics"
+            },
+            {
+                "label": "10 - RMA",
+                "value": "RMA"
+            },
+            {
+                "label": "11 - Sketch to Scale and Other",
+                "value": "Sketch to Scale and Other"
+            },
+            {
+                "label": "12 - SPL (Spare Parts Logistics)",
+                "value": "SPL (Spare Parts Logistics)"
+            },
+            {
+                "label": "13 - Other",
+                "value": "Other"
+            }
+        ],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Detailed business model for user understanding ",
+        "wideControl" : true
+    },
+    {
+        "Field_Name": "Business lead",
+        "Field_State_Name": "Business_lead",
+        "group": "firstHalf2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "19",
+        "Type": "Combo",
+        "General_Value": [],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Name of the Business Lead (Autopick from employee)",
+        "wideControl" : true
+    },
+    {
+        "Field_Name": "Project Purpose",
+        "Field_State_Name": "Project_Purpose",
+        "group": "secondHalf1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "20",
+        "Type": "Text 150",
+        "isTextArea" : true,
+        "max_Length" : 150,
+        "General_Value": "Open Text",
+        "columns" : 1,
+        "hasToolTip" : true,
+        "toolTipText" : "Purpose of this project for the organization"
+    },
+    {
+        "Field_Name": "Project Risks",
+        "Field_State_Name": "Project_Risks",
+        "group": "secondHalf2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "21",
+        "Type": "Text 150",
+        "isTextArea" : true,
+        "max_Length" : 150,
+        "General_Value": "Open Text",
+        "columns" : 1,
+        "hasToolTip" : true,
+        "toolTipText" : "Specify the project risks"
+    },
+    {
+        "Field_Name": "Line of Business",
+        "Field_State_Name": "Line_of_Business",
+        "group": "secondHalf1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "22",
+        "Type": "Combo",
+        "General_Value": [
+            {
+                "label": "1.- New Ventures - CTG (Britt)",
+                "value": "New Ventures - CTG (Britt)"
+            },
+            {
+                "label": "2.- New Ventures - GOPS (Barbier)",
+                "value": "New Ventures - GOPS (Barbier)"
+            },
+            {
+                "label": "3.- New Ventures -HRS Med (Humphries)",
+                "value": "New Ventures -HRS Med (Humphries)"
+            },
+            {
+                "label": "4.- FIS - CEC (Britt)",
+                "value": "FIS - CEC (Britt)"
+            },
+            {
+                "label": "5.- FIS - Components (Britt)",
+                "value": "FIS - Components (Britt)"
+            },
+            {
+                "label": "6.- FIS - CTG (Britt)",
+                "value": "FIS - CTG (Britt)"
+            },
+            {
+                "label": "7.- FIS - GSS (Britt)",
+                "value": "FIS - GSS (Britt)"
+            },
+            {
+                "label": "8.- FIS - Industrial (Britt)",
+                "value": "FIS - Industrial (Britt)"
+            },
+            {
+                "label": "9.- FIS - Power (Britt)",
+                "value": "FIS - Power (Britt)"
+            },
+            {
+                "label": "10.- Flex Building Group (Hopkins)",
+                "value": "Flex Building Group (Hopkins)"
+            },
+            {
+                "label": "11.- HRS - AGM (Humphries)",
+                "value": "HRS - AGM (Humphries)"
+            },
+            {
+                "label": "12.- HRS - Automotive (Humphries)",
+                "value": "HRS - Automotive (Humphries)"
+            },
+            {
+                "label": "13.- HRS - DE&I (Humphries)",
+                "value": "HRS - DE&I (Humphries)"
+            },
+            {
+                "label": "14.- HRS - Health Solutions (Humphries)",
+                "value": "HRS - Health Solutions (Humphries)"
+            },
+            {
+                "label": "15.- HRS - Mechanicals (Humphries)",
+                "value": "HRS - Mechanicals (Humphries)"
+            },
+            {
+                "label": "16.- HRS - Mirror Controls International (Humphries)",
+                "value": "HRS - Mirror Controls International (Humphries)"
+            },
+            {
+                "label": "17.- HRS - Precision Plastics Group (Humphries)",
+                "value": "HRS - Precision Plastics Group (Humphries)"
+            },
+            {
+                "label": "18.- IDE8 (Shaibel)",
+                "value": "IDE8 (Shaibel)"
+            },
+            {
+                "label": "19.- Mech Asia (Zebe)",
+                "value": "Mech Asia (Zebe)"
+            },
+            {
+                "label": "20.-Multek (Lize)",
+                "value": "Multek (Lize)"
+            },
+            {
+                "label": "21.- Segment - Other",
+                "value": "Segment - Other"
+            },
+            {
+                "label": "22.- Corp Management (Advaithi)",
+                "value": "Corp Management (Advaithi)"
+            },
+            {
+                "label": "23.- Ethics & Compliance (Wolf)",
+                "value": "Ethics & Compliance (Wolf)"
+            },
+            {
+                "label": "24.- Facilities (Baldassari)",
+                "value": "Facilities (Baldassari)"
+            },
+            {
+                "label": "25.- Finance (Collier)",
+                "value": "Finance (Collier)"
+            },
+            {
+                "label": "26.- Global Ops (Bechor & Tan)",
+                "value": "Global Ops (Bechor & Tan)"
+            },
+            {
+                "label": "27.- Global Ops EQE (Doiron)",
+                "value": "Global Ops EQE (Doiron)"
+            },
+            {
+                "label": "28.- Global Ops EQE GBSE (Doiron)",
+                "value": "Global Ops EQE GBSE (Doiron)"
+            },
+            {
+                "label": "29.- Global Ops FB (Barbier)",
+                "value": "Global Ops FB (Barbier)"
+            },
+            {
+                "label": "30.- Global Ops TM (Mannion)",
+                "value": "Global Ops TM (Mannion)"
+            },
+            {
+                "label": "31.- Global Ops TR (Rodrig)",
+                "value": "Global Ops TR (Rodrig)"
+            },
+            {
+                "label": "32.- Global Procurement (Linton)",
+                "value": "Global Procurement (Linton)"
+            },
+            {
+                "label": "33.- Global Procurement Logistics (Linton)",
+                "value": "Global Procurement Logistics (Linton)"
+            },
+            {
+                "label": "34.- Global Procurement Mgmt (Linton)",
+                "value": "Global Procurement Mgmt (Linton)"
+            },
+            {
+                "label": "35.- Global Procurement Planning (Linton)",
+                "value": "Global Procurement Planning (Linton)"
+            },
+            {
+                "label": "36.- Innovative Technology (Humphries)",
+                "value": "Innovative Technology (Humphries)"
+            },
+            {
+                "label": "37.- IT (Shahin)",
+                "value": "IT (Shahin)"
+            },
+            {
+                "label": "38.- Legal (Offer)",
+                "value": "Legal (Offer)"
+            },
+            {
+                "label": "39.- Legal Brand Protecion & Security (Offer)",
+                "value": "Legal Brand Protecion & Security (Offer)"
+            },
+            {
+                "label": "40.- Marketing (Holman)",
+                "value": "Marketing (Holman)"
+            },
+            {
+                "label": "41.- PAR (Baldassari)",
+                "value": "PAR (Baldassari)"
+            }
+        ],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Pick from the drop-down",
+        "wideControl" : true
+    },
+    {
+        "Field_Name": "IT Vector",
+        "Field_State_Name": "IT_Vector",
+        "group": "secondHalf2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "23",
+        "Type": "Combo",
+        "General_Value": [
+            {
+                "label": "1 - Strengthen and leverage our ecosystems",
+                "value": "Strengthen and leverage our ecosystems"
+            },
+            {
+                "label": "2 - Optimize sketch-to-scale performance",
+                "value": "Optimize sketch-to-scale performance"
+            },
+            {
+                "label": "3 - Enhance operational capabilities",
+                "value": "Enhance operational capabilities"
+            },
+            {
+                "label": "4 - Engage global workforce",
+                "value": "Engage global workforce"
+            },
+            {
+                "label": "5 - Upgrade customer engagement model",
+                "value": "Upgrade customer engagement model"
+            },
+            {
+                "label": "6 - Drive superior cost performance",
+                "value": "Drive superior cost performance"
+            },
+            {
+                "label": "7 - Execute on core compliance",
+                "value": "Execute on core compliance"
+            }
+        ],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "",
+        "wideControl": true
+    },
+    {
+        "Field_Name": "RPA?",
+        "Field_State_Name": "RPA",
+        "group": "secondHalf1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "24",
+        "Type": "Combo",
+        "General_Value": [
+            {"label" :"Yes" , "value": "yes" },
+            {"label" :"No" , "value": "no" }
+        ],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Indicate if it is a project related to a Robot Process Automation."
+    },
+    {
+        "Field_Name": "Region",
+        "Field_State_Name": "Region",
+        "group": "secondHalf1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "25",
+        "Type": "Combo",
+        "General_Value": [
+            {
+                "label": "Americas",
+                "value": "Americas"
+            },
+            {
+                "label": "EMEA",
+                "value": "EMEA"
+            },
+            {
+                "label": "Asia",
+                "value": "Asia"
+            },
+            {
+                "label": "Global",
+                "value": "Global"
+            }
+        ],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Autopick from the drop-down. Flex region where this project will be implemented."
+    },
+    {
+        "Field_Name": "Sites Impacted",
+        "Field_State_Name": "Sites_Impacted",
+        "group": "secondHalf2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "26",
+        "Type": "Combo",
+        "General_Value": [],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Sites impacted for this project implementation",
+        "wideControl":true
+    },
+    {
+        "Field_Name": "Customer",
+        "Field_State_Name": "Customer",
+        "group": "third1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "27",
+        "Type": "Combo",
+        "General_Value": [],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Customers names involved for this project",
+        "wideControl":true
+    },
+    {
+        "Field_Name": "Requested by Customer?",
+        "Field_State_Name": "Requested_by_Customer",
+        "group": "third2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "28",
+        "Type": "Combo",
+        "General_Value": [
+            {"label" :"Yes" , "value": "yes" },
+            {"label" :"No" , "value": "no" }
+        ],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Indicates if this requirement was requested by customer."
+    },
+    {
+        "Field_Name": "Customer Priority",
+        "Field_State_Name": "Customer_Priority",
+        "group": "third3",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "29",
+        "Type": "Combo",
+        "General_Value": [
+            {"label" :"High" , "value": "High" },
+            {"label" :"Medium" , "value": "Medium" },
+            {"label" :"Low" , "value": "Low" }
+        ],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Indicates the Priority."
+    },
+    {
+        "Field_Name": "Estimated Annual Revenue (EAR)",
+        "Field_State_Name": "Estimated_Annual_Revenue",
+        "group": "fourthHalf1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "30",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Revenue from the project"
+    },
+    {
+        "Field_Name": "Sales Contact",
+        "Field_State_Name": "Sales_Contact",
+        "group": "fourthHalf2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "31",
+        "Type": "Combo",
+        "General_Value": [],
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Contact Person Details"
+    },
+    {
+        "Field_Name": "Average number of users for this application",
+        "Field_State_Name": "Average_number_of_users_for_this_application",
+        "group": "fourthHalf1",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "32",
+        "Type": "Integer",
+        "General_Value": "$",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Number of application users"
+    },
+    {
+        "Field_Name": "FTE Saved per year",
+        "Field_State_Name": "FTE_Saved_per_year",
+        "group": "fourthHalf2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "33",
+        "Type": "Decimal",
+        "General_Value": "0",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Number of saved persons when implementation is completed."
+    },
+    {
+        "Field_Name": "Hours saved per year",
+        "Field_State_Name": "Hours_saved_per_year",
+        "group": "fourthHalf1",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "34",
+        "Type": "Integer",
+        "General_Value": "0",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Number of saved hours of process when implementation is completed."
+    },
+    {
+        "Field_Name": "Savings revenue",
+        "Field_State_Name": "Savings_revenue",
+        "group": "fourthHalf2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "35",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Savings once implementation completed. "
+    },
+    {
+        "Field_Name": "Compliance / Risk cost that will be avoided by this application.",
+        "Field_State_Name": "Compliance_Risk_cost_that_will_be_avoided_by_this_application.",
+        "group": "fourthHalf1",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "36",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Numbers"
+    },
+    {
+        "Field_Name": "Risk Avoidance",
+        "Field_State_Name": "Risk_Avoidance",
+        "group": "fourthHalf2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "37",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Numbers"
+    },
+    {
+        "Field_Name": "Savings from Retirement of Legacy application in hours per year by Maintenance Team?",
+        "Field_State_Name": "Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team",
+        "group": "fourthHalf1",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "38",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Numbers"
+    },
+    {
+        "Field_Name": "Legacy System Infra and License Fee savings per year?",
+        "Field_State_Name": "Legacy_System_Infra_and_License_Fee_savings_per_year",
+        "group": "fourthHalf2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "39",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Numbers"
+    },
+    {
+        "Field_Name": "Other Savings",
+        "Field_State_Name": "Other_Savings",
+        "group": "fourthHalf2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "40",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "columns" : 2,
+        "hasToolTip" : true,
+        "toolTipText" : "Numbers"
+    }
+]

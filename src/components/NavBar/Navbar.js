@@ -32,6 +32,7 @@
 // --------------------------------------
     const Navbar = (props) => {
         const {routes, activeRoute, currentProjectID} = props;
+        console.log("TCL: Navbar -> routes", routes)
         return (
             <div className = "int-navigationContainer">
                 <ul class="int-navList">

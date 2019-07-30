@@ -17,8 +17,8 @@
     // Add Project
     // --------------------------------------
     import formHolder from '../layouts/Projects/FormHolder';
-    // import AddRequirementsDefinition from '../views/AddProject/Requirements/RequirementsDefinition';
-    // import AddBusinessInformation from '../views/AddProject/Business/BusinessInformation';
+    import AddRequirementsDefinition from '../views/AddProject/Requirements/RequirementsDefinition';
+    import AddBusinessInformation from '../views/AddProject/Business/BusinessInformation';
     // import AddTechnicalEvaluation from '../views/AddProject/Thecnical/TechnicalEvaluation';
     // import AddPMOEvaluation from '../views/AddProject/PMOEvaluation/PMOEvaluation';
     // import AddROIRealized from '../views/AddProject/ROIRealized/ROIRealized';
@@ -86,7 +86,7 @@
 
         { redirect: true, path: '/', to: `${localPath}/intake-projects`, key: 'indexRedirect-route' },
         { redirect: true, path: '/project/:projectID', to: `/project/:projectID/requirement-definition`, key: 'eidtProjectRedirect-route' },
-        { redirect: true, path: '/add-project', to: `/add-project/requirement-definition`, key: 'addProjectRedirect-route' }
+        { redirect: true, path: `/add-project/`, to: `${localPath}/add-project/requirement-definition`, key: 'addProjectRedirect-route' }
         
 
 
@@ -110,52 +110,52 @@
             allowNormalUser : true,
             
         },
-        // {
-        //     // path: `/add-project/requirement-definition`,
-        //     path: `${localPath}/add-project/requirement-definition`,
-        //     exact: true,
-        //     key: 'route-addRequirementDefinition',
-        //     menuTitle: 'Requirements \n Definition',
-        //     component: AddRequirementsDefinition,
-        //     allowNormalUser : true,
+        {
+            // path: `/add-project/requirement-definition`,
+            path: `${localPath}/add-project/requirement-definition`,
+            exact: true,
+            key: 'route-addRequirementDefinition',
+            menuTitle: 'Requirements \n Definition',
+            // component: AddRequirementsDefinition,
+            allowNormalUser : true,
 
-        // },
-        // {
-        //     // path: `/add-project/business-information`,
-        //     path: `${localPath}/add-project/business-information`,
-        //     exact: true,
-        //     key: 'route-addPusinessInformation',
-        //     menuTitle: 'Business \n Information',
-        //     component: AddBusinessInformation,
-        //     allowNormalUser : true,
-        // },
-        // {
-        //     // path: `/add-project/technical-evaluation`,
-        //     path: `${localPath}/add-project/technical-evaluation`,
-        //     exact: true,
-        //     key: 'route-addPechnicalEvaluation',
-        //     menuTitle: 'Technical \n Evaluation',
-        //     component: AddTechnicalEvaluation,
-        //     allowNormalUser : false,
-        // },
-        // {
-        //     // path: `/add-project/pmo-evaluation`,
-        //     path: `${localPath}/add-project/pmo-evaluation`,
-        //     exact: true,
-        //     key: 'route-addPmoEvaluation',
-        //     menuTitle: 'PMO \n Evaluation',
-        //     component: AddPMOEvaluation,
-        //     allowNormalUser : false,
-        // },
-        // {
-        //     // path: `/add-project/roi-realized`,
-        //     path: `${localPath}/add-project/roi-realized`,
-        //     exact: true,
-        //     key: 'route-addPoiRealized',
-        //     menuTitle: 'ROI \n Realized',
-        //     component: AddROIRealized,
-        //     allowNormalUser : false,
-        // },
+        },
+        {
+            // path: `/add-project/business-information`,
+            path: `${localPath}/add-project/business-information`,
+            exact: true,
+            key: 'route-addBusinessInformation',
+            menuTitle: 'Business \n Information',
+            // component: AddBusinessInformation,
+            allowNormalUser : true,
+        },
+        {
+            // path: `/add-project/technical-evaluation`,
+            path: `${localPath}/add-project/technical-evaluation`,
+            exact: true,
+            key: 'route-addTechnicalEvaluation',
+            menuTitle: 'Technical \n Evaluation',
+            // component: AddTechnicalEvaluation,
+            allowNormalUser : false,
+        },
+        {
+            // path: `/add-project/pmo-evaluation`,
+            path: `${localPath}/add-project/pmo-evaluation`,
+            exact: true,
+            key: 'route-addPmoEvaluation',
+            menuTitle: 'PMO \n Evaluation',
+            // component: AddPMOEvaluation,
+            allowNormalUser : false,
+        },
+        {
+            // path: `/add-project/roi-realized`,
+            path: `${localPath}/add-project/roi-realized`,
+            exact: true,
+            key: 'route-addPoiRealized',
+            menuTitle: 'ROI \n Realized',
+            // component: AddROIRealized,
+            allowNormalUser : false,
+        },
         { redirect: true, path: `${localPath}/add-project/`, to: `${localPath}/add-project/requirement-definition`, key: 'addProjectRedirect-route' }
     ]
 

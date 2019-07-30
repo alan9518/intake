@@ -1,0 +1,3120 @@
+[
+    {
+        "label": "2Gig Technologies",
+        "value": "2Gig Technologies"
+    },
+    {
+        "label": "3D Systems",
+        "value": "3D Systems"
+    },
+    {
+        "label": "3M",
+        "value": "3M"
+    },
+    {
+        "label": "A.tron3d",
+        "value": "A.tron3d"
+    },
+    {
+        "label": "AAC",
+        "value": "AAC"
+    },
+    {
+        "label": "Aastra Telecom",
+        "value": "Aastra Telecom"
+    },
+    {
+        "label": "ABB",
+        "value": "ABB"
+    },
+    {
+        "label": "Abbott Diabetes Care",
+        "value": "Abbott Diabetes Care"
+    },
+    {
+        "label": "Abbott Laboratories",
+        "value": "Abbott Laboratories"
+    },
+    {
+        "label": "Abbott Medical Optics Inc",
+        "value": "Abbott Medical Optics Inc"
+    },
+    {
+        "label": "Abbott Point Of Care",
+        "value": "Abbott Point Of Care"
+    },
+    {
+        "label": "AbbVie Inc.",
+        "value": "AbbVie Inc."
+    },
+    {
+        "label": "Accedian Networks",
+        "value": "Accedian Networks"
+    },
+    {
+        "label": "Acclarent Inc",
+        "value": "Acclarent Inc"
+    },
+    {
+        "label": "Accudyne Industries, LLC",
+        "value": "Accudyne Industries, LLC"
+    },
+    {
+        "label": "Actia Nordic",
+        "value": "Actia Nordic"
+    },
+    {
+        "label": "Advanced Energy",
+        "value": "Advanced Energy"
+    },
+    {
+        "label": "Adyen",
+        "value": "Adyen"
+    },
+    {
+        "label": "Affix Medical",
+        "value": "Affix Medical"
+    },
+    {
+        "label": "Agilent",
+        "value": "Agilent"
+    },
+    {
+        "label": "Air Liquide Advanced Technologies",
+        "value": "Air Liquide Advanced Technologies"
+    },
+    {
+        "label": "Air Liquide Neo Smart",
+        "value": "Air Liquide Neo Smart"
+    },
+    {
+        "label": "Air Liquide Nowox",
+        "value": "Air Liquide Nowox"
+    },
+    {
+        "label": "Airespace",
+        "value": "Airespace"
+    },
+    {
+        "label": "Airtel",
+        "value": "Airtel"
+    },
+    {
+        "label": "Airvana",
+        "value": "Airvana"
+    },
+    {
+        "label": "Aisin",
+        "value": "Aisin"
+    },
+    {
+        "label": "Akamai",
+        "value": "Akamai"
+    },
+    {
+        "label": "Alcatel",
+        "value": "Alcatel"
+    },
+    {
+        "label": "Alcon",
+        "value": "Alcon"
+    },
+    {
+        "label": "Alibaba",
+        "value": "Alibaba"
+    },
+    {
+        "label": "Alimera Sciences",
+        "value": "Alimera Sciences"
+    },
+    {
+        "label": "Alion",
+        "value": "Alion"
+    },
+    {
+        "label": "AliveCor",
+        "value": "AliveCor"
+    },
+    {
+        "label": "Allegion",
+        "value": "Allegion"
+    },
+    {
+        "label": "Allen-Vanguard Technologies",
+        "value": "Allen-Vanguard Technologies"
+    },
+    {
+        "label": "Allergan, Inc",
+        "value": "Allergan, Inc"
+    },
+    {
+        "label": "Altria",
+        "value": "Altria"
+    },
+    {
+        "label": "Amazon.com LLC",
+        "value": "Amazon.com LLC"
+    },
+    {
+        "label": "Amgen",
+        "value": "Amgen"
+    },
+    {
+        "label": "Amiigo",
+        "value": "Amiigo"
+    },
+    {
+        "label": "AngioMetrix Corporation",
+        "value": "AngioMetrix Corporation"
+    },
+    {
+        "label": "Animas",
+        "value": "Animas"
+    },
+    {
+        "label": "Anova",
+        "value": "Anova"
+    },
+    {
+        "label": "AO Smith",
+        "value": "AO Smith"
+    },
+    {
+        "label": "AOS",
+        "value": "AOS"
+    },
+    {
+        "label": "Applied Materials",
+        "value": "Applied Materials"
+    },
+    {
+        "label": "Appollo Wind Technologies, LLC",
+        "value": "Appollo Wind Technologies, LLC"
+    },
+    {
+        "label": "Apptricity Corporation",
+        "value": "Apptricity Corporation"
+    },
+    {
+        "label": "Apptricity Corporation",
+        "value": "Apptricity Corporation"
+    },
+    {
+        "label": "Aprium Tech Limited",
+        "value": "Aprium Tech Limited"
+    },
+    {
+        "label": "Aptar Radolfzell GmbH",
+        "value": "Aptar Radolfzell GmbH"
+    },
+    {
+        "label": "Arista",
+        "value": "Arista"
+    },
+    {
+        "label": "Aristocrat Leisure Limited",
+        "value": "Aristocrat Leisure Limited"
+    },
+    {
+        "label": "Aritco",
+        "value": "Aritco"
+    },
+    {
+        "label": "Arris",
+        "value": "Arris"
+    },
+    {
+        "label": "Ascom Energy Systems",
+        "value": "Ascom Energy Systems"
+    },
+    {
+        "label": "Assa Abloy",
+        "value": "Assa Abloy"
+    },
+    {
+        "label": "ASUS Technology",
+        "value": "ASUS Technology"
+    },
+    {
+        "label": "Asymmetric Medical",
+        "value": "Asymmetric Medical"
+    },
+    {
+        "label": "AT&T Operations, Inc",
+        "value": "AT&T Operations, Inc"
+    },
+    {
+        "label": "Atentiv LLC",
+        "value": "Atentiv LLC"
+    },
+    {
+        "label": "Atheer",
+        "value": "Atheer"
+    },
+    {
+        "label": "ATK",
+        "value": "ATK"
+    },
+    {
+        "label": "Atmel",
+        "value": "Atmel"
+    },
+    {
+        "label": "Atrica",
+        "value": "Atrica"
+    },
+    {
+        "label": "Audi AG",
+        "value": "Audi AG"
+    },
+    {
+        "label": "AudioCodes",
+        "value": "AudioCodes"
+    },
+    {
+        "label": "AudiX",
+        "value": "AudiX"
+    },
+    {
+        "label": "Autoliv",
+        "value": "Autoliv"
+    },
+    {
+        "label": "Automotive Lighting",
+        "value": "Automotive Lighting"
+    },
+    {
+        "label": "Autonomics",
+        "value": "Autonomics"
+    },
+    {
+        "label": "Avago Technologies",
+        "value": "Avago Technologies"
+    },
+    {
+        "label": "Avaya",
+        "value": "Avaya"
+    },
+    {
+        "label": "Aviage",
+        "value": "Aviage"
+    },
+    {
+        "label": "Avisa",
+        "value": "Avisa"
+    },
+    {
+        "label": "Baker Hughes",
+        "value": "Baker Hughes"
+    },
+    {
+        "label": "Bang&Olufsen",
+        "value": "Bang&Olufsen"
+    },
+    {
+        "label": "Barco",
+        "value": "Barco"
+    },
+    {
+        "label": "Barthelme",
+        "value": "Barthelme"
+    },
+    {
+        "label": "Baxalta",
+        "value": "Baxalta"
+    },
+    {
+        "label": "Baxter",
+        "value": "Baxter"
+    },
+    {
+        "label": "Bayer",
+        "value": "Bayer"
+    },
+    {
+        "label": "BBK Electronics",
+        "value": "BBK Electronics"
+    },
+    {
+        "label": "BD",
+        "value": "BD"
+    },
+    {
+        "label": "Beats Electronics",
+        "value": "Beats Electronics"
+    },
+    {
+        "label": "Beckman Coulter",
+        "value": "Beckman Coulter"
+    },
+    {
+        "label": "Beijing Avori Tech Corp",
+        "value": "Beijing Avori Tech Corp"
+    },
+    {
+        "label": "Bellerophon Therapeutics",
+        "value": "Bellerophon Therapeutics"
+    },
+    {
+        "label": "BenQ",
+        "value": "BenQ"
+    },
+    {
+        "label": "Bergquist",
+        "value": "Bergquist"
+    },
+    {
+        "label": "BGM",
+        "value": "BGM"
+    },
+    {
+        "label": "Bilton",
+        "value": "Bilton"
+    },
+    {
+        "label": "Biosense Webster",
+        "value": "Biosense Webster"
+    },
+    {
+        "label": "Biovendor",
+        "value": "Biovendor"
+    },
+    {
+        "label": "Bird Foundation",
+        "value": "Bird Foundation"
+    },
+    {
+        "label": "Blackberry Limited",
+        "value": "Blackberry Limited"
+    },
+    {
+        "label": "Blacksumac",
+        "value": "Blacksumac"
+    },
+    {
+        "label": "Blackton LLC (DBA Goldstur)",
+        "value": "Blackton LLC (DBA Goldstur)"
+    },
+    {
+        "label": "Bloomberg L. P.",
+        "value": "Bloomberg L. P."
+    },
+    {
+        "label": "Blueprinter",
+        "value": "Blueprinter"
+    },
+    {
+        "label": "Bluewind Medical Ltd",
+        "value": "Bluewind Medical Ltd"
+    },
+    {
+        "label": "BluEye Robotics AS",
+        "value": "BluEye Robotics AS"
+    },
+    {
+        "label": "BMW",
+        "value": "BMW"
+    },
+    {
+        "label": "Bonaverde GmbH",
+        "value": "Bonaverde GmbH"
+    },
+    {
+        "label": "BorgWarner",
+        "value": "BorgWarner"
+    },
+    {
+        "label": "Bosch",
+        "value": "Bosch"
+    },
+    {
+        "label": "Bose",
+        "value": "Bose"
+    },
+    {
+        "label": "Bose Corporation",
+        "value": "Bose Corporation"
+    },
+    {
+        "label": "Bossa Nova Robotics Inc.",
+        "value": "Bossa Nova Robotics Inc."
+    },
+    {
+        "label": "Boston Scientific",
+        "value": "Boston Scientific"
+    },
+    {
+        "label": "Bowers & Wilkins",
+        "value": "Bowers & Wilkins"
+    },
+    {
+        "label": "Bracco",
+        "value": "Bracco"
+    },
+    {
+        "label": "Breas",
+        "value": "Breas"
+    },
+    {
+        "label": "Breathometer",
+        "value": "Breathometer"
+    },
+    {
+        "label": "Breezer Holding, LLC",
+        "value": "Breezer Holding, LLC"
+    },
+    {
+        "label": "BRG",
+        "value": "BRG"
+    },
+    {
+        "label": "Briggo Inc",
+        "value": "Briggo Inc"
+    },
+    {
+        "label": "Brita",
+        "value": "Brita"
+    },
+    {
+        "label": "Broadcom",
+        "value": "Broadcom"
+    },
+    {
+        "label": "Brose",
+        "value": "Brose"
+    },
+    {
+        "label": "BRP",
+        "value": "BRP"
+    },
+    {
+        "label": "Brycen Co.,Ltd.",
+        "value": "Brycen Co.,Ltd."
+    },
+    {
+        "label": "BTI Photonic Systems Inc",
+        "value": "BTI Photonic Systems Inc"
+    },
+    {
+        "label": "BTI Systems",
+        "value": "BTI Systems"
+    },
+    {
+        "label": "Bunn O Matic",
+        "value": "Bunn O Matic"
+    },
+    {
+        "label": "BYD",
+        "value": "BYD"
+    },
+    {
+        "label": "Cale Access",
+        "value": "Cale Access"
+    },
+    {
+        "label": "Calient Networks",
+        "value": "Calient Networks"
+    },
+    {
+        "label": "Calient Technologies Inc.",
+        "value": "Calient Technologies Inc."
+    },
+    {
+        "label": "Calix Networks",
+        "value": "Calix Networks"
+    },
+    {
+        "label": "Calsonic Kansei",
+        "value": "Calsonic Kansei"
+    },
+    {
+        "label": "Cambium Networks",
+        "value": "Cambium Networks"
+    },
+    {
+        "label": "Cambridge Sensors",
+        "value": "Cambridge Sensors"
+    },
+    {
+        "label": "CannaKorp",
+        "value": "CannaKorp"
+    },
+    {
+        "label": "CardTech",
+        "value": "CardTech"
+    },
+    {
+        "label": "Carefusion",
+        "value": "Carefusion"
+    },
+    {
+        "label": "Carl Zeiss",
+        "value": "Carl Zeiss"
+    },
+    {
+        "label": "Caterpillar",
+        "value": "Caterpillar"
+    },
+    {
+        "label": "CATL",
+        "value": "CATL"
+    },
+    {
+        "label": "Cellnovo",
+        "value": "Cellnovo"
+    },
+    {
+        "label": "Cequr SA",
+        "value": "Cequr SA"
+    },
+    {
+        "label": "Ceragon Networks",
+        "value": "Ceragon Networks"
+    },
+    {
+        "label": "Chamberlain",
+        "value": "Chamberlain"
+    },
+    {
+        "label": "Changan",
+        "value": "Changan"
+    },
+    {
+        "label": "Changan Ford",
+        "value": "Changan Ford"
+    },
+    {
+        "label": "Checkpoint Systems.Inc.",
+        "value": "Checkpoint Systems.Inc."
+    },
+    {
+        "label": "Chehejia",
+        "value": "Chehejia"
+    },
+    {
+        "label": "Chery",
+        "value": "Chery"
+    },
+    {
+        "label": "CHI Technologies Inc.",
+        "value": "CHI Technologies Inc."
+    },
+    {
+        "label": "China Tsp",
+        "value": "China Tsp"
+    },
+    {
+        "label": "Chrono Therapeudics",
+        "value": "Chrono Therapeudics"
+    },
+    {
+        "label": "Chrysler",
+        "value": "Chrysler"
+    },
+    {
+        "label": "Ci3",
+        "value": "Ci3"
+    },
+    {
+        "label": "Ciena",
+        "value": "Ciena"
+    },
+    {
+        "label": "Ciena Canada",
+        "value": "Ciena Canada"
+    },
+    {
+        "label": "Cisco Systems",
+        "value": "Cisco Systems"
+    },
+    {
+        "label": "Cisco Systems Norway AS",
+        "value": "Cisco Systems Norway AS"
+    },
+    {
+        "label": "Citrix Systems",
+        "value": "Citrix Systems"
+    },
+    {
+        "label": "Clear Ballot Group, Inc.",
+        "value": "Clear Ballot Group, Inc."
+    },
+    {
+        "label": "Clearone Communications",
+        "value": "Clearone Communications"
+    },
+    {
+        "label": "Cleversafe",
+        "value": "Cleversafe"
+    },
+    {
+        "label": "Cobbosseecontee Communications, LLC",
+        "value": "Cobbosseecontee Communications, LLC"
+    },
+    {
+        "label": "Coloplast",
+        "value": "Coloplast"
+    },
+    {
+        "label": "Commscope",
+        "value": "Commscope"
+    },
+    {
+        "label": "Concentric",
+        "value": "Concentric"
+    },
+    {
+        "label": "Consilia Brno",
+        "value": "Consilia Brno"
+    },
+    {
+        "label": "Continental",
+        "value": "Continental"
+    },
+    {
+        "label": "Continental VDO JF",
+        "value": "Continental VDO JF"
+    },
+    {
+        "label": "Continental VDO RD",
+        "value": "Continental VDO RD"
+    },
+    {
+        "label": "Continental VDO SS",
+        "value": "Continental VDO SS"
+    },
+    {
+        "label": "Coppernic",
+        "value": "Coppernic"
+    },
+    {
+        "label": "Corsa Technology",
+        "value": "Corsa Technology"
+    },
+    {
+        "label": "CORSAIR",
+        "value": "CORSAIR"
+    },
+    {
+        "label": "Covidien",
+        "value": "Covidien"
+    },
+    {
+        "label": "Cox Communications",
+        "value": "Cox Communications"
+    },
+    {
+        "label": "CQREBO",
+        "value": "CQREBO"
+    },
+    {
+        "label": "Cree",
+        "value": "Cree"
+    },
+    {
+        "label": "Cree Inc",
+        "value": "Cree Inc"
+    },
+    {
+        "label": "CRT Electronic",
+        "value": "CRT Electronic"
+    },
+    {
+        "label": "Curtiss Wright",
+        "value": "Curtiss Wright"
+    },
+    {
+        "label": "Cyan Optics",
+        "value": "Cyan Optics"
+    },
+    {
+        "label": "Cyrcadia",
+        "value": "Cyrcadia"
+    },
+    {
+        "label": "D-TA Systems",
+        "value": "D-TA Systems"
+    },
+    {
+        "label": "DA Wallace Inc.",
+        "value": "DA Wallace Inc."
+    },
+    {
+        "label": "DAF Brasil",
+        "value": "DAF Brasil"
+    },
+    {
+        "label": "Daikin Industries",
+        "value": "Daikin Industries"
+    },
+    {
+        "label": "Daimer",
+        "value": "Daimer"
+    },
+    {
+        "label": "Daimler AG",
+        "value": "Daimler AG"
+    },
+    {
+        "label": "Dakkota",
+        "value": "Dakkota"
+    },
+    {
+        "label": "Dana",
+        "value": "Dana"
+    },
+    {
+        "label": "Danfoss",
+        "value": "Danfoss"
+    },
+    {
+        "label": "Datang Mobile Communications Equipment Co.Ltd",
+        "value": "Datang Mobile Communications Equipment Co.Ltd"
+    },
+    {
+        "label": "DDN Storage",
+        "value": "DDN Storage"
+    },
+    {
+        "label": "De'Longhi",
+        "value": "De'Longhi"
+    },
+    {
+        "label": "Dedicated Computing",
+        "value": "Dedicated Computing"
+    },
+    {
+        "label": "Delaval international",
+        "value": "Delaval international"
+    },
+    {
+        "label": "Dell",
+        "value": "Dell"
+    },
+    {
+        "label": "Delphi",
+        "value": "Delphi"
+    },
+    {
+        "label": "Delta Controls",
+        "value": "Delta Controls"
+    },
+    {
+        "label": "Delta Q Technologies",
+        "value": "Delta Q Technologies"
+    },
+    {
+        "label": "Denso",
+        "value": "Denso"
+    },
+    {
+        "label": "DentaRay",
+        "value": "DentaRay"
+    },
+    {
+        "label": "Detroit Diesel",
+        "value": "Detroit Diesel"
+    },
+    {
+        "label": "Disney",
+        "value": "Disney"
+    },
+    {
+        "label": "Dongfeng Motor",
+        "value": "Dongfeng Motor"
+    },
+    {
+        "label": "Dot Hill System",
+        "value": "Dot Hill System"
+    },
+    {
+        "label": "DragonWave",
+        "value": "DragonWave"
+    },
+    {
+        "label": "Dresser, Inc.",
+        "value": "Dresser, Inc."
+    },
+    {
+        "label": "DSIH",
+        "value": "DSIH"
+    },
+    {
+        "label": "Dura",
+        "value": "Dura"
+    },
+    {
+        "label": "Duracell",
+        "value": "Duracell"
+    },
+    {
+        "label": "Dynamics Inc",
+        "value": "Dynamics Inc"
+    },
+    {
+        "label": "DynoSense",
+        "value": "DynoSense"
+    },
+    {
+        "label": "Dyson",
+        "value": "Dyson"
+    },
+    {
+        "label": "E.I. Dupont De Nemours and Co",
+        "value": "E.I. Dupont De Nemours and Co"
+    },
+    {
+        "label": "Eastman Kodak",
+        "value": "Eastman Kodak"
+    },
+    {
+        "label": "Eaton",
+        "value": "Eaton"
+    },
+    {
+        "label": "eBay",
+        "value": "eBay"
+    },
+    {
+        "label": "Eberspcher",
+        "value": "Eberspcher"
+    },
+    {
+        "label": "EBW",
+        "value": "EBW"
+    },
+    {
+        "label": "EDMI",
+        "value": "EDMI"
+    },
+    {
+        "label": "Edwards LifeSciences",
+        "value": "Edwards LifeSciences"
+    },
+    {
+        "label": "Edyn",
+        "value": "Edyn"
+    },
+    {
+        "label": "EE Vegas",
+        "value": "EE Vegas"
+    },
+    {
+        "label": "Elcam Medical",
+        "value": "Elcam Medical"
+    },
+    {
+        "label": "Electrodyne",
+        "value": "Electrodyne"
+    },
+    {
+        "label": "Eli Lilly",
+        "value": "Eli Lilly"
+    },
+    {
+        "label": "eLichens SAS",
+        "value": "eLichens SAS"
+    },
+    {
+        "label": "Elster Metering",
+        "value": "Elster Metering"
+    },
+    {
+        "label": "Ember Technologies, Inc",
+        "value": "Ember Technologies, Inc"
+    },
+    {
+        "label": "EMC",
+        "value": "EMC"
+    },
+    {
+        "label": "Emerson Network Power",
+        "value": "Emerson Network Power"
+    },
+    {
+        "label": "EMS Aviation",
+        "value": "EMS Aviation"
+    },
+    {
+        "label": "Enable",
+        "value": "Enable"
+    },
+    {
+        "label": "Enphase Energy",
+        "value": "Enphase Energy"
+    },
+    {
+        "label": "Enterasys Networks",
+        "value": "Enterasys Networks"
+    },
+    {
+        "label": "Ericsson",
+        "value": "Ericsson"
+    },
+    {
+        "label": "Ericsson Canada Inc",
+        "value": "Ericsson Canada Inc"
+    },
+    {
+        "label": "Ericsson Network Technologies",
+        "value": "Ericsson Network Technologies"
+    },
+    {
+        "label": "Erwin Quarder",
+        "value": "Erwin Quarder"
+    },
+    {
+        "label": "Ethicon Endo-Surgery Inc.",
+        "value": "Ethicon Endo-Surgery Inc."
+    },
+    {
+        "label": "Evobus",
+        "value": "Evobus"
+    },
+    {
+        "label": "Facebook",
+        "value": "Facebook"
+    },
+    {
+        "label": "FARM",
+        "value": "FARM"
+    },
+    {
+        "label": "Faurecia",
+        "value": "Faurecia"
+    },
+    {
+        "label": "FAW",
+        "value": "FAW"
+    },
+    {
+        "label": "Federated Wireless, Inc",
+        "value": "Federated Wireless, Inc"
+    },
+    {
+        "label": "FedEx Corporation",
+        "value": "FedEx Corporation"
+    },
+    {
+        "label": "FEI",
+        "value": "FEI"
+    },
+    {
+        "label": "FemtoDx",
+        "value": "FemtoDx"
+    },
+    {
+        "label": "FIAT Group",
+        "value": "FIAT Group"
+    },
+    {
+        "label": "Ficosa",
+        "value": "Ficosa"
+    },
+    {
+        "label": "FireEye",
+        "value": "FireEye"
+    },
+    {
+        "label": "First Warning Systems",
+        "value": "First Warning Systems"
+    },
+    {
+        "label": "Fitbit",
+        "value": "Fitbit"
+    },
+    {
+        "label": "Flaircomm",
+        "value": "Flaircomm"
+    },
+    {
+        "label": "Flexenclosure",
+        "value": "Flexenclosure"
+    },
+    {
+        "label": "Flextronics - BRUNO",
+        "value": "Flextronics - BRUNO"
+    },
+    {
+        "label": "Flextronics - CORP FIUI 777",
+        "value": "Flextronics - CORP FIUI 777"
+    },
+    {
+        "label": "Flextronics - DSN AUSTIN",
+        "value": "Flextronics - DSN AUSTIN"
+    },
+    {
+        "label": "Flextronics - DSN CANADA 310",
+        "value": "Flextronics - DSN CANADA 310"
+    },
+    {
+        "label": "Flextronics - DSN MILP SVSD 335",
+        "value": "Flextronics - DSN MILP SVSD 335"
+    },
+    {
+        "label": "Flextronics - DSN PLANO 744",
+        "value": "Flextronics - DSN PLANO 744"
+    },
+    {
+        "label": "Flextronics - DSN SCAR CAD 892",
+        "value": "Flextronics - DSN SCAR CAD 892"
+    },
+    {
+        "label": "Flextronics - INTERNAL",
+        "value": "Flextronics - INTERNAL"
+    },
+    {
+        "label": "Flextronics - Internal Burlington",
+        "value": "Flextronics - Internal Burlington"
+    },
+    {
+        "label": "Flextronics - Internal Juarez",
+        "value": "Flextronics - Internal Juarez"
+    },
+    {
+        "label": "Flextronics - Internal Lab IX",
+        "value": "Flextronics - Internal Lab IX"
+    },
+    {
+        "label": "Flextronics - Internal Plano",
+        "value": "Flextronics - Internal Plano"
+    },
+    {
+        "label": "Flextronics - LAB IX 335",
+        "value": "Flextronics - LAB IX 335"
+    },
+    {
+        "label": "Flextronics - MILAN",
+        "value": "Flextronics - MILAN"
+    },
+    {
+        "label": "Flextronics - PCBA Althofen",
+        "value": "Flextronics - PCBA Althofen"
+    },
+    {
+        "label": "Flextronics - PCBA CHARLOTTE 15H",
+        "value": "Flextronics - PCBA CHARLOTTE 15H"
+    },
+    {
+        "label": "Flextronics - PCBA MILPITAS 335",
+        "value": "Flextronics - PCBA MILPITAS 335"
+    },
+    {
+        "label": "Flextronics - PCBA Zalaegersek",
+        "value": "Flextronics - PCBA Zalaegersek"
+    },
+    {
+        "label": "Flextronics - PCBA_TIMISOARA_2",
+        "value": "Flextronics - PCBA_TIMISOARA_2"
+    },
+    {
+        "label": "Flextronics - STUTTGART",
+        "value": "Flextronics - STUTTGART"
+    },
+    {
+        "label": "Flir Systems",
+        "value": "Flir Systems"
+    },
+    {
+        "label": "Flowserve USA Inc",
+        "value": "Flowserve USA Inc"
+    },
+    {
+        "label": "Fluidigm",
+        "value": "Fluidigm"
+    },
+    {
+        "label": "FMC Technologies",
+        "value": "FMC Technologies"
+    },
+    {
+        "label": "Ford Motor",
+        "value": "Ford Motor"
+    },
+    {
+        "label": "Fortinet Teachnologies",
+        "value": "Fortinet Teachnologies"
+    },
+    {
+        "label": "Fossil",
+        "value": "Fossil"
+    },
+    {
+        "label": "Foton",
+        "value": "Foton"
+    },
+    {
+        "label": "Foton Motor",
+        "value": "Foton Motor"
+    },
+    {
+        "label": "Frnkische Rohrwerke Gebr",
+        "value": "Frnkische Rohrwerke Gebr"
+    },
+    {
+        "label": "Franklin",
+        "value": "Franklin"
+    },
+    {
+        "label": "FTE",
+        "value": "FTE"
+    },
+    {
+        "label": "Fusar",
+        "value": "Fusar"
+    },
+    {
+        "label": "GAC Fiat-Chrysler",
+        "value": "GAC Fiat-Chrysler"
+    },
+    {
+        "label": "GAGC",
+        "value": "GAGC"
+    },
+    {
+        "label": "Galaxy Gaming Inc.",
+        "value": "Galaxy Gaming Inc."
+    },
+    {
+        "label": "Galmedics",
+        "value": "Galmedics"
+    },
+    {
+        "label": "Gambro",
+        "value": "Gambro"
+    },
+    {
+        "label": "Gambro Lundia",
+        "value": "Gambro Lundia"
+    },
+    {
+        "label": "GE Health Care",
+        "value": "GE Health Care"
+    },
+    {
+        "label": "GE Intelligent Platforms",
+        "value": "GE Intelligent Platforms"
+    },
+    {
+        "label": "Geely",
+        "value": "Geely"
+    },
+    {
+        "label": "Genband",
+        "value": "Genband"
+    },
+    {
+        "label": "General Dynamics",
+        "value": "General Dynamics"
+    },
+    {
+        "label": "General Electric",
+        "value": "General Electric"
+    },
+    {
+        "label": "General Motors",
+        "value": "General Motors"
+    },
+    {
+        "label": "Generation NEXT Franchise Brands, Inc",
+        "value": "Generation NEXT Franchise Brands, Inc"
+    },
+    {
+        "label": "Gentex",
+        "value": "Gentex"
+    },
+    {
+        "label": "Geophysical Technology",
+        "value": "Geophysical Technology"
+    },
+    {
+        "label": "Geotab",
+        "value": "Geotab"
+    },
+    {
+        "label": "GHD Professional",
+        "value": "GHD Professional"
+    },
+    {
+        "label": "Gigamon",
+        "value": "Gigamon"
+    },
+    {
+        "label": "Gigaset Communications",
+        "value": "Gigaset Communications"
+    },
+    {
+        "label": "Gira",
+        "value": "Gira"
+    },
+    {
+        "label": "Given Imaging",
+        "value": "Given Imaging"
+    },
+    {
+        "label": "GL Electronic",
+        "value": "GL Electronic"
+    },
+    {
+        "label": "GlaxoSmithKline plc",
+        "value": "GlaxoSmithKline plc"
+    },
+    {
+        "label": "Glide Talk",
+        "value": "Glide Talk"
+    },
+    {
+        "label": "Global Solar",
+        "value": "Global Solar"
+    },
+    {
+        "label": "Glowforge",
+        "value": "Glowforge"
+    },
+    {
+        "label": "Gold reclaim",
+        "value": "Gold reclaim"
+    },
+    {
+        "label": "Goodman manufacturing company, L.P.",
+        "value": "Goodman manufacturing company, L.P."
+    },
+    {
+        "label": "Gooee, LLC.",
+        "value": "Gooee, LLC."
+    },
+    {
+        "label": "Google",
+        "value": "Google"
+    },
+    {
+        "label": "GoPro",
+        "value": "GoPro"
+    },
+    {
+        "label": "Gorenje",
+        "value": "Gorenje"
+    },
+    {
+        "label": "Great Wall Motor",
+        "value": "Great Wall Motor"
+    },
+    {
+        "label": "Great Wall Motor",
+        "value": "Great Wall Motor"
+    },
+    {
+        "label": "Greenlee Opto-Electronics",
+        "value": "Greenlee Opto-Electronics"
+    },
+    {
+        "label": "Grote",
+        "value": "Grote"
+    },
+    {
+        "label": "Grupo Antolin",
+        "value": "Grupo Antolin"
+    },
+    {
+        "label": "Guangzhou Weimeizi Industrial Co.,Ltd",
+        "value": "Guangzhou Weimeizi Industrial Co.,Ltd"
+    },
+    {
+        "label": "Guardhat",
+        "value": "Guardhat"
+    },
+    {
+        "label": "Hallmark",
+        "value": "Hallmark"
+    },
+    {
+        "label": "Harman Becker",
+        "value": "Harman Becker"
+    },
+    {
+        "label": "Harry's, Inc.",
+        "value": "Harry's, Inc."
+    },
+    {
+        "label": "Heilux",
+        "value": "Heilux"
+    },
+    {
+        "label": "Hella Autotechnik",
+        "value": "Hella Autotechnik"
+    },
+    {
+        "label": "Hermes International SCA",
+        "value": "Hermes International SCA"
+    },
+    {
+        "label": "Hewlett Packard",
+        "value": "Hewlett Packard"
+    },
+    {
+        "label": "Hi-Lex",
+        "value": "Hi-Lex"
+    },
+    {
+        "label": "Hill-Rom",
+        "value": "Hill-Rom"
+    },
+    {
+        "label": "Hirschmann",
+        "value": "Hirschmann"
+    },
+    {
+        "label": "Hologic",
+        "value": "Hologic"
+    },
+    {
+        "label": "Home Shopping Network (HSN)",
+        "value": "Home Shopping Network (HSN)"
+    },
+    {
+        "label": "Honda",
+        "value": "Honda"
+    },
+    {
+        "label": "Honeywell",
+        "value": "Honeywell"
+    },
+    {
+        "label": "Honeywell Life Safety",
+        "value": "Honeywell Life Safety"
+    },
+    {
+        "label": "HTC",
+        "value": "HTC"
+    },
+    {
+        "label": "Huatai",
+        "value": "Huatai"
+    },
+    {
+        "label": "Huawei",
+        "value": "Huawei"
+    },
+    {
+        "label": "Humavox, Ltd.",
+        "value": "Humavox, Ltd."
+    },
+    {
+        "label": "Humavox, Ltd.",
+        "value": "Humavox, Ltd."
+    },
+    {
+        "label": "Husqvarna AB",
+        "value": "Husqvarna AB"
+    },
+    {
+        "label": "Hyundai",
+        "value": "Hyundai"
+    },
+    {
+        "label": "Hyundai-KIA America Technical Center,Inc",
+        "value": "Hyundai-KIA America Technical Center,Inc"
+    },
+    {
+        "label": "i.am.plus LLC",
+        "value": "i.am.plus LLC"
+    },
+    {
+        "label": "IBM",
+        "value": "IBM"
+    },
+    {
+        "label": "IBM Microelectronics",
+        "value": "IBM Microelectronics"
+    },
+    {
+        "label": "Icedot",
+        "value": "Icedot"
+    },
+    {
+        "label": "Ichor",
+        "value": "Ichor"
+    },
+    {
+        "label": "ICON Health and Fitness",
+        "value": "ICON Health and Fitness"
+    },
+    {
+        "label": "Icotera",
+        "value": "Icotera"
+    },
+    {
+        "label": "ICVT",
+        "value": "ICVT"
+    },
+    {
+        "label": "ID Systems",
+        "value": "ID Systems"
+    },
+    {
+        "label": "IDC",
+        "value": "IDC"
+    },
+    {
+        "label": "Ideas & Solutions",
+        "value": "Ideas & Solutions"
+    },
+    {
+        "label": "iDevices",
+        "value": "iDevices"
+    },
+    {
+        "label": "IDFC",
+        "value": "IDFC"
+    },
+    {
+        "label": "iDirect",
+        "value": "iDirect"
+    },
+    {
+        "label": "IEE",
+        "value": "IEE"
+    },
+    {
+        "label": "iFlytek",
+        "value": "iFlytek"
+    },
+    {
+        "label": "Ikon Fitness",
+        "value": "Ikon Fitness"
+    },
+    {
+        "label": "IMEC",
+        "value": "IMEC"
+    },
+    {
+        "label": "Imergy",
+        "value": "Imergy"
+    },
+    {
+        "label": "Immagotag",
+        "value": "Immagotag"
+    },
+    {
+        "label": "Impact Tech Labs Ltd",
+        "value": "Impact Tech Labs Ltd"
+    },
+    {
+        "label": "IMT International",
+        "value": "IMT International"
+    },
+    {
+        "label": "Indak",
+        "value": "Indak"
+    },
+    {
+        "label": "Indesit",
+        "value": "Indesit"
+    },
+    {
+        "label": "Indra",
+        "value": "Indra"
+    },
+    {
+        "label": "Ingenico",
+        "value": "Ingenico"
+    },
+    {
+        "label": "Inova Design Solutions Ltd",
+        "value": "Inova Design Solutions Ltd"
+    },
+    {
+        "label": "InSilixa",
+        "value": "InSilixa"
+    },
+    {
+        "label": "Insulet",
+        "value": "Insulet"
+    },
+    {
+        "label": "Intel",
+        "value": "Intel"
+    },
+    {
+        "label": "Intelligrated",
+        "value": "Intelligrated"
+    },
+    {
+        "label": "Interco",
+        "value": "Interco"
+    },
+    {
+        "label": "Inthic",
+        "value": "Inthic"
+    },
+    {
+        "label": "Inthic",
+        "value": "Inthic"
+    },
+    {
+        "label": "Intune Networks",
+        "value": "Intune Networks"
+    },
+    {
+        "label": "Inveatech",
+        "value": "Inveatech"
+    },
+    {
+        "label": "ISA",
+        "value": "ISA"
+    },
+    {
+        "label": "Itron",
+        "value": "Itron"
+    },
+    {
+        "label": "J&J Sedays",
+        "value": "J&J Sedays"
+    },
+    {
+        "label": "Jabra",
+        "value": "Jabra"
+    },
+    {
+        "label": "Jaguar Cars",
+        "value": "Jaguar Cars"
+    },
+    {
+        "label": "Japhl",
+        "value": "Japhl"
+    },
+    {
+        "label": "Jaybird",
+        "value": "Jaybird"
+    },
+    {
+        "label": "JCI",
+        "value": "JCI"
+    },
+    {
+        "label": "JDS Uniphase",
+        "value": "JDS Uniphase"
+    },
+    {
+        "label": "Jemac",
+        "value": "Jemac"
+    },
+    {
+        "label": "Jemac",
+        "value": "Jemac"
+    },
+    {
+        "label": "JLR",
+        "value": "JLR"
+    },
+    {
+        "label": "JLT Mobile Computers",
+        "value": "JLT Mobile Computers"
+    },
+    {
+        "label": "Johnson Controls International",
+        "value": "Johnson Controls International"
+    },
+    {
+        "label": "Johnson Electric",
+        "value": "Johnson Electric"
+    },
+    {
+        "label": "Juniper Networks",
+        "value": "Juniper Networks"
+    },
+    {
+        "label": "Juul Labs Inc.",
+        "value": "Juul Labs Inc."
+    },
+    {
+        "label": "Keboda",
+        "value": "Keboda"
+    },
+    {
+        "label": "Kemet",
+        "value": "Kemet"
+    },
+    {
+        "label": "Kenzen, Inc",
+        "value": "Kenzen, Inc"
+    },
+    {
+        "label": "Kerlink",
+        "value": "Kerlink"
+    },
+    {
+        "label": "KGPS",
+        "value": "KGPS"
+    },
+    {
+        "label": "Kimball",
+        "value": "Kimball"
+    },
+    {
+        "label": "Kimball",
+        "value": "Kimball"
+    },
+    {
+        "label": "Kimberly Clark",
+        "value": "Kimberly Clark"
+    },
+    {
+        "label": "Kinetic Concepts Inc",
+        "value": "Kinetic Concepts Inc"
+    },
+    {
+        "label": "Kitchenaid Europa",
+        "value": "Kitchenaid Europa"
+    },
+    {
+        "label": "Knorr Bremse",
+        "value": "Knorr Bremse"
+    },
+    {
+        "label": "Kollmorgen",
+        "value": "Kollmorgen"
+    },
+    {
+        "label": "Konica Minolta",
+        "value": "Konica Minolta"
+    },
+    {
+        "label": "Kontron",
+        "value": "Kontron"
+    },
+    {
+        "label": "Kostal",
+        "value": "Kostal"
+    },
+    {
+        "label": "Kuester",
+        "value": "Kuester"
+    },
+    {
+        "label": "Lear",
+        "value": "Lear"
+    },
+    {
+        "label": "LED Linear",
+        "value": "LED Linear"
+    },
+    {
+        "label": "Leica",
+        "value": "Leica"
+    },
+    {
+        "label": "Leica Camera",
+        "value": "Leica Camera"
+    },
+    {
+        "label": "Leica Geosystems",
+        "value": "Leica Geosystems"
+    },
+    {
+        "label": "Leica Microsystems",
+        "value": "Leica Microsystems"
+    },
+    {
+        "label": "Lenovo",
+        "value": "Lenovo"
+    },
+    {
+        "label": "Leroy Merlin",
+        "value": "Leroy Merlin"
+    },
+    {
+        "label": "Lexington Medical Center",
+        "value": "Lexington Medical Center"
+    },
+    {
+        "label": "LF Illumination",
+        "value": "LF Illumination"
+    },
+    {
+        "label": "LG Electronics",
+        "value": "LG Electronics"
+    },
+    {
+        "label": "LG Innotek",
+        "value": "LG Innotek"
+    },
+    {
+        "label": "Libratone",
+        "value": "Libratone"
+    },
+    {
+        "label": "Lifescan",
+        "value": "Lifescan"
+    },
+    {
+        "label": "Light Co.",
+        "value": "Light Co."
+    },
+    {
+        "label": "Light Flex Technology SL",
+        "value": "Light Flex Technology SL"
+    },
+    {
+        "label": "Linak",
+        "value": "Linak"
+    },
+    {
+        "label": "Linak France",
+        "value": "Linak France"
+    },
+    {
+        "label": "Linde AG",
+        "value": "Linde AG"
+    },
+    {
+        "label": "Link22 AB",
+        "value": "Link22 AB"
+    },
+    {
+        "label": "LinkedIn",
+        "value": "LinkedIn"
+    },
+    {
+        "label": "Linough",
+        "value": "Linough"
+    },
+    {
+        "label": "Lockheed Martin",
+        "value": "Lockheed Martin"
+    },
+    {
+        "label": "Logitech",
+        "value": "Logitech"
+    },
+    {
+        "label": "Lucibel",
+        "value": "Lucibel"
+    },
+    {
+        "label": "Luigi Lavazza S.p.A",
+        "value": "Luigi Lavazza S.p.A"
+    },
+    {
+        "label": "LumiraDx UK Ltd",
+        "value": "LumiraDx UK Ltd"
+    },
+    {
+        "label": "Lumo Bodytech Inc",
+        "value": "Lumo Bodytech Inc"
+    },
+    {
+        "label": "Lutron",
+        "value": "Lutron"
+    },
+    {
+        "label": "MACOM",
+        "value": "MACOM"
+    },
+    {
+        "label": "Madorra Inc.",
+        "value": "Madorra Inc."
+    },
+    {
+        "label": "Magna Autosystems",
+        "value": "Magna Autosystems"
+    },
+    {
+        "label": "March Networks",
+        "value": "March Networks"
+    },
+    {
+        "label": "Marisense",
+        "value": "Marisense"
+    },
+    {
+        "label": "MAS Active Trading Pvt Limited",
+        "value": "MAS Active Trading Pvt Limited"
+    },
+    {
+        "label": "Master Precision",
+        "value": "Master Precision"
+    },
+    {
+        "label": "Mavenir Systems, Inc",
+        "value": "Mavenir Systems, Inc"
+    },
+    {
+        "label": "MC10",
+        "value": "MC10"
+    },
+    {
+        "label": "McAfee",
+        "value": "McAfee"
+    },
+    {
+        "label": "McNeil AB",
+        "value": "McNeil AB"
+    },
+    {
+        "label": "Mcor Technologies",
+        "value": "Mcor Technologies"
+    },
+    {
+        "label": "Measurement Specialties",
+        "value": "Measurement Specialties"
+    },
+    {
+        "label": "Medtronic",
+        "value": "Medtronic"
+    },
+    {
+        "label": "Melling",
+        "value": "Melling"
+    },
+    {
+        "label": "Merck Serono",
+        "value": "Merck Serono"
+    },
+    {
+        "label": "Mercury Marine",
+        "value": "Mercury Marine"
+    },
+    {
+        "label": "Mersen",
+        "value": "Mersen"
+    },
+    {
+        "label": "MetaFractal",
+        "value": "MetaFractal"
+    },
+    {
+        "label": "Micromem Applied Sensor Technologies Inc",
+        "value": "Micromem Applied Sensor Technologies Inc"
+    },
+    {
+        "label": "Microsoft",
+        "value": "Microsoft"
+    },
+    {
+        "label": "MidTronic",
+        "value": "MidTronic"
+    },
+    {
+        "label": "Mimosa Networks, Inc",
+        "value": "Mimosa Networks, Inc"
+    },
+    {
+        "label": "Minimially Invasive Devices",
+        "value": "Minimially Invasive Devices"
+    },
+    {
+        "label": "Minute Key",
+        "value": "Minute Key"
+    },
+    {
+        "label": "Mist Mobility Integrated Systems",
+        "value": "Mist Mobility Integrated Systems"
+    },
+    {
+        "label": "Mistbox",
+        "value": "Mistbox"
+    },
+    {
+        "label": "Mitel Networks",
+        "value": "Mitel Networks"
+    },
+    {
+        "label": "Moen",
+        "value": "Moen"
+    },
+    {
+        "label": "Mojo Networks",
+        "value": "Mojo Networks"
+    },
+    {
+        "label": "Molex Ireland",
+        "value": "Molex Ireland"
+    },
+    {
+        "label": "Molex Reelflex",
+        "value": "Molex Reelflex"
+    },
+    {
+        "label": "Molex Shield",
+        "value": "Molex Shield"
+    },
+    {
+        "label": "Mont Blanc International GmbH",
+        "value": "Mont Blanc International GmbH"
+    },
+    {
+        "label": "Motorola Mobility",
+        "value": "Motorola Mobility"
+    },
+    {
+        "label": "Motorola Solutions",
+        "value": "Motorola Solutions"
+    },
+    {
+        "label": "MPB Communications Inc",
+        "value": "MPB Communications Inc"
+    },
+    {
+        "label": "MRV Communications",
+        "value": "MRV Communications"
+    },
+    {
+        "label": "Multimatic",
+        "value": "Multimatic"
+    },
+    {
+        "label": "Muse",
+        "value": "Muse"
+    },
+    {
+        "label": "My Skin",
+        "value": "My Skin"
+    },
+    {
+        "label": "MyEcoHealth",
+        "value": "MyEcoHealth"
+    },
+    {
+        "label": "N&W Global Vending",
+        "value": "N&W Global Vending"
+    },
+    {
+        "label": "NA Lighting",
+        "value": "NA Lighting"
+    },
+    {
+        "label": "Nagravision",
+        "value": "Nagravision"
+    },
+    {
+        "label": "Nanit",
+        "value": "Nanit"
+    },
+    {
+        "label": "NDA",
+        "value": "NDA"
+    },
+    {
+        "label": "NEC",
+        "value": "NEC"
+    },
+    {
+        "label": "Nemko",
+        "value": "Nemko"
+    },
+    {
+        "label": "Neptec Design Group",
+        "value": "Neptec Design Group"
+    },
+    {
+        "label": "Nespresso",
+        "value": "Nespresso"
+    },
+    {
+        "label": "Nestle",
+        "value": "Nestle"
+    },
+    {
+        "label": "Net Insight",
+        "value": "Net Insight"
+    },
+    {
+        "label": "NetApp",
+        "value": "NetApp"
+    },
+    {
+        "label": "NetScout",
+        "value": "NetScout"
+    },
+    {
+        "label": "Neuon Inc.",
+        "value": "Neuon Inc."
+    },
+    {
+        "label": "Neuroderm",
+        "value": "Neuroderm"
+    },
+    {
+        "label": "Neusoft",
+        "value": "Neusoft"
+    },
+    {
+        "label": "NEVS",
+        "value": "NEVS"
+    },
+    {
+        "label": "Nexiot AG",
+        "value": "Nexiot AG"
+    },
+    {
+        "label": "Nexteer Automotive",
+        "value": "Nexteer Automotive"
+    },
+    {
+        "label": "nextEV",
+        "value": "nextEV"
+    },
+    {
+        "label": "NextInput",
+        "value": "NextInput"
+    },
+    {
+        "label": "Nextracker",
+        "value": "Nextracker"
+    },
+    {
+        "label": "Nicoventures",
+        "value": "Nicoventures"
+    },
+    {
+        "label": "Nike",
+        "value": "Nike"
+    },
+    {
+        "label": "Nimble Storage",
+        "value": "Nimble Storage"
+    },
+    {
+        "label": "Nokia",
+        "value": "Nokia"
+    },
+    {
+        "label": "Nokia Solutions and Networks",
+        "value": "Nokia Solutions and Networks"
+    },
+    {
+        "label": "Nortec Humidity Ltd.",
+        "value": "Nortec Humidity Ltd."
+    },
+    {
+        "label": "NorthVu",
+        "value": "NorthVu"
+    },
+    {
+        "label": "Novaerus",
+        "value": "Novaerus"
+    },
+    {
+        "label": "Novariant",
+        "value": "Novariant"
+    },
+    {
+        "label": "Novartis",
+        "value": "Novartis"
+    },
+    {
+        "label": "NovaSom Inc.",
+        "value": "NovaSom Inc."
+    },
+    {
+        "label": "Novo Nordisk",
+        "value": "Novo Nordisk"
+    },
+    {
+        "label": "Novocure",
+        "value": "Novocure"
+    },
+    {
+        "label": "NPI Customers",
+        "value": "NPI Customers"
+    },
+    {
+        "label": "Nutanix",
+        "value": "Nutanix"
+    },
+    {
+        "label": "Nyxoah",
+        "value": "Nyxoah"
+    },
+    {
+        "label": "Oakley",
+        "value": "Oakley"
+    },
+    {
+        "label": "Oculeve",
+        "value": "Oculeve"
+    },
+    {
+        "label": "Odelo",
+        "value": "Odelo"
+    },
+    {
+        "label": "Ohlins Racing",
+        "value": "Ohlins Racing"
+    },
+    {
+        "label": "Olio Devices",
+        "value": "Olio Devices"
+    },
+    {
+        "label": "OM Signal",
+        "value": "OM Signal"
+    },
+    {
+        "label": "OneChip Photonics",
+        "value": "OneChip Photonics"
+    },
+    {
+        "label": "Optelian",
+        "value": "Optelian"
+    },
+    {
+        "label": "Optiscan Biomedical",
+        "value": "Optiscan Biomedical"
+    },
+    {
+        "label": "Oracle",
+        "value": "Oracle"
+    },
+    {
+        "label": "Orbit One",
+        "value": "Orbit One"
+    },
+    {
+        "label": "Organic Response",
+        "value": "Organic Response"
+    },
+    {
+        "label": "Orn, Inc",
+        "value": "Orn, Inc"
+    },
+    {
+        "label": "Osram",
+        "value": "Osram"
+    },
+    {
+        "label": "Ossia",
+        "value": "Ossia"
+    },
+    {
+        "label": "Ossur",
+        "value": "Ossur"
+    },
+    {
+        "label": "Other",
+        "value": "Other"
+    },
+    {
+        "label": "Otis",
+        "value": "Otis"
+    },
+    {
+        "label": "Otterbox",
+        "value": "Otterbox"
+    },
+    {
+        "label": "Packet Front",
+        "value": "Packet Front"
+    },
+    {
+        "label": "Palo Alto Networks",
+        "value": "Palo Alto Networks"
+    },
+    {
+        "label": "Panasonic",
+        "value": "Panasonic"
+    },
+    {
+        "label": "Parrot",
+        "value": "Parrot"
+    },
+    {
+        "label": "PayPal",
+        "value": "PayPal"
+    },
+    {
+        "label": "Pebble Technology, Inc.",
+        "value": "Pebble Technology, Inc."
+    },
+    {
+        "label": "Peli",
+        "value": "Peli"
+    },
+    {
+        "label": "Pella",
+        "value": "Pella"
+    },
+    {
+        "label": "Peloton Cycle",
+        "value": "Peloton Cycle"
+    },
+    {
+        "label": "Perkin Elmer",
+        "value": "Perkin Elmer"
+    },
+    {
+        "label": "Philip Morris International",
+        "value": "Philip Morris International"
+    },
+    {
+        "label": "Phillips Components",
+        "value": "Phillips Components"
+    },
+    {
+        "label": "Phillips Lighting",
+        "value": "Phillips Lighting"
+    },
+    {
+        "label": "Phillips Other",
+        "value": "Phillips Other"
+    },
+    {
+        "label": "Phillips Plastics",
+        "value": "Phillips Plastics"
+    },
+    {
+        "label": "Philo",
+        "value": "Philo"
+    },
+    {
+        "label": "Phononic",
+        "value": "Phononic"
+    },
+    {
+        "label": "PicoBrew",
+        "value": "PicoBrew"
+    },
+    {
+        "label": "Pixeom",
+        "value": "Pixeom"
+    },
+    {
+        "label": "Pleora",
+        "value": "Pleora"
+    },
+    {
+        "label": "PLX Tech",
+        "value": "PLX Tech"
+    },
+    {
+        "label": "Pointgrab Ltd",
+        "value": "Pointgrab Ltd"
+    },
+    {
+        "label": "Polycom, Inc",
+        "value": "Polycom, Inc"
+    },
+    {
+        "label": "Porsche",
+        "value": "Porsche"
+    },
+    {
+        "label": "Powerchord Limited",
+        "value": "Powerchord Limited"
+    },
+    {
+        "label": "Powermat",
+        "value": "Powermat"
+    },
+    {
+        "label": "Precision Gasket",
+        "value": "Precision Gasket"
+    },
+    {
+        "label": "Preh",
+        "value": "Preh"
+    },
+    {
+        "label": "Procter and Gamble",
+        "value": "Procter and Gamble"
+    },
+    {
+        "label": "Profusa Inc.",
+        "value": "Profusa Inc."
+    },
+    {
+        "label": "Project Decibel",
+        "value": "Project Decibel"
+    },
+    {
+        "label": "Protean Electric",
+        "value": "Protean Electric"
+    },
+    {
+        "label": "Proteus",
+        "value": "Proteus"
+    },
+    {
+        "label": "Prototype",
+        "value": "Prototype"
+    },
+    {
+        "label": "PSA",
+        "value": "PSA"
+    },
+    {
+        "label": "Pure Storage",
+        "value": "Pure Storage"
+    },
+    {
+        "label": "Qoros",
+        "value": "Qoros"
+    },
+    {
+        "label": "Qualcomm",
+        "value": "Qualcomm"
+    },
+    {
+        "label": "Quanttus",
+        "value": "Quanttus"
+    },
+    {
+        "label": "Quantum",
+        "value": "Quantum"
+    },
+    {
+        "label": "Quidel Corporation",
+        "value": "Quidel Corporation"
+    },
+    {
+        "label": "Quirky",
+        "value": "Quirky"
+    },
+    {
+        "label": "Ranzure Networks",
+        "value": "Ranzure Networks"
+    },
+    {
+        "label": "Raymarine",
+        "value": "Raymarine"
+    },
+    {
+        "label": "Redback Technologies",
+        "value": "Redback Technologies"
+    },
+    {
+        "label": "Renault",
+        "value": "Renault"
+    },
+    {
+        "label": "Replenish",
+        "value": "Replenish"
+    },
+    {
+        "label": "Republic Services Inc",
+        "value": "Republic Services Inc"
+    },
+    {
+        "label": "Republic Wireless",
+        "value": "Republic Wireless"
+    },
+    {
+        "label": "Rinnai",
+        "value": "Rinnai"
+    },
+    {
+        "label": "Roche Diagnostic",
+        "value": "Roche Diagnostic"
+    },
+    {
+        "label": "Rockley Photonics, Inc.",
+        "value": "Rockley Photonics, Inc."
+    },
+    {
+        "label": "Rodan and Fields",
+        "value": "Rodan and Fields"
+    },
+    {
+        "label": "Rogers",
+        "value": "Rogers"
+    },
+    {
+        "label": "Roli",
+        "value": "Roli"
+    },
+    {
+        "label": "Ross Digital PTE. Ltd.",
+        "value": "Ross Digital PTE. Ltd."
+    },
+    {
+        "label": "Ross Video",
+        "value": "Ross Video"
+    },
+    {
+        "label": "Ruckus",
+        "value": "Ruckus"
+    },
+    {
+        "label": "S Group",
+        "value": "S Group"
+    },
+    {
+        "label": "S1NN",
+        "value": "S1NN"
+    },
+    {
+        "label": "SAAB",
+        "value": "SAAB"
+    },
+    {
+        "label": "Safariland",
+        "value": "Safariland"
+    },
+    {
+        "label": "SAIC",
+        "value": "SAIC"
+    },
+    {
+        "label": "Samsung Electronics",
+        "value": "Samsung Electronics"
+    },
+    {
+        "label": "Samsung Semiconductor Inc",
+        "value": "Samsung Semiconductor Inc"
+    },
+    {
+        "label": "Sanofi-Aventis Deutschland Gmbh",
+        "value": "Sanofi-Aventis Deutschland Gmbh"
+    },
+    {
+        "label": "Savari Inc",
+        "value": "Savari Inc"
+    },
+    {
+        "label": "SCA Hygiene Products",
+        "value": "SCA Hygiene Products"
+    },
+    {
+        "label": "Schlumberger",
+        "value": "Schlumberger"
+    },
+    {
+        "label": "Schneider",
+        "value": "Schneider"
+    },
+    {
+        "label": "Schneider Electric",
+        "value": "Schneider Electric"
+    },
+    {
+        "label": "Sciemetric Instruments Inc.",
+        "value": "Sciemetric Instruments Inc."
+    },
+    {
+        "label": "Scientific Atlanta",
+        "value": "Scientific Atlanta"
+    },
+    {
+        "label": "Scypho",
+        "value": "Scypho"
+    },
+    {
+        "label": "Seagate Technology",
+        "value": "Seagate Technology"
+    },
+    {
+        "label": "Segment - No Customer",
+        "value": "Segment - No Customer"
+    },
+    {
+        "label": "Segment Platform",
+        "value": "Segment Platform"
+    },
+    {
+        "label": "Select Comfort Corporation",
+        "value": "Select Comfort Corporation"
+    },
+    {
+        "label": "Sensorin",
+        "value": "Sensorin"
+    },
+    {
+        "label": "Sensus Metering Systems",
+        "value": "Sensus Metering Systems"
+    },
+    {
+        "label": "Shanxi Fast Gear Co. Ltd",
+        "value": "Shanxi Fast Gear Co. Ltd"
+    },
+    {
+        "label": "SharkNinja Operating LLC",
+        "value": "SharkNinja Operating LLC"
+    },
+    {
+        "label": "Sharp",
+        "value": "Sharp"
+    },
+    {
+        "label": "Shengrui transmission corporation limited",
+        "value": "Shengrui transmission corporation limited"
+    },
+    {
+        "label": "Siklu",
+        "value": "Siklu"
+    },
+    {
+        "label": "Silver Spring Networks",
+        "value": "Silver Spring Networks"
+    },
+    {
+        "label": "Simba",
+        "value": "Simba"
+    },
+    {
+        "label": "Skullcandy, Inc",
+        "value": "Skullcandy, Inc"
+    },
+    {
+        "label": "Skywave",
+        "value": "Skywave"
+    },
+    {
+        "label": "SLW",
+        "value": "SLW"
+    },
+    {
+        "label": "Smart Sensor Telemed",
+        "value": "Smart Sensor Telemed"
+    },
+    {
+        "label": "Smart Technologies",
+        "value": "Smart Technologies"
+    },
+    {
+        "label": "Smartrac",
+        "value": "Smartrac"
+    },
+    {
+        "label": "Smiths Medical",
+        "value": "Smiths Medical"
+    },
+    {
+        "label": "SMR Automotive",
+        "value": "SMR Automotive"
+    },
+    {
+        "label": "SMR Metal",
+        "value": "SMR Metal"
+    },
+    {
+        "label": "Snapchat, Inc.",
+        "value": "Snapchat, Inc."
+    },
+    {
+        "label": "Software Radio Technology",
+        "value": "Software Radio Technology"
+    },
+    {
+        "label": "Solace Systems",
+        "value": "Solace Systems"
+    },
+    {
+        "label": "Solaredge Technologies",
+        "value": "Solaredge Technologies"
+    },
+    {
+        "label": "Solid Semecs",
+        "value": "Solid Semecs"
+    },
+    {
+        "label": "Soneter",
+        "value": "Soneter"
+    },
+    {
+        "label": "Sony",
+        "value": "Sony"
+    },
+    {
+        "label": "Sparq Systems Inc",
+        "value": "Sparq Systems Inc"
+    },
+    {
+        "label": "Specialized Bicycle Component, Inc.",
+        "value": "Specialized Bicycle Component, Inc."
+    },
+    {
+        "label": "Sphere Medical Ltd",
+        "value": "Sphere Medical Ltd"
+    },
+    {
+        "label": "Sphero",
+        "value": "Sphero"
+    },
+    {
+        "label": "Spotify",
+        "value": "Spotify"
+    },
+    {
+        "label": "Sproutling Inc",
+        "value": "Sproutling Inc"
+    },
+    {
+        "label": "SquareTrade, Inc.",
+        "value": "SquareTrade, Inc."
+    },
+    {
+        "label": "Stabilus",
+        "value": "Stabilus"
+    },
+    {
+        "label": "Starbucks Coffee Company",
+        "value": "Starbucks Coffee Company"
+    },
+    {
+        "label": "Starry",
+        "value": "Starry"
+    },
+    {
+        "label": "Sterling Services",
+        "value": "Sterling Services"
+    },
+    {
+        "label": "Sterling Services",
+        "value": "Sterling Services"
+    },
+    {
+        "label": "Strattec",
+        "value": "Strattec"
+    },
+    {
+        "label": "Strauss",
+        "value": "Strauss"
+    },
+    {
+        "label": "Sumitomo",
+        "value": "Sumitomo"
+    },
+    {
+        "label": "Sun Edison",
+        "value": "Sun Edison"
+    },
+    {
+        "label": "Sunpower Corporation",
+        "value": "Sunpower Corporation"
+    },
+    {
+        "label": "SuperMicro",
+        "value": "SuperMicro"
+    },
+    {
+        "label": "SVAB",
+        "value": "SVAB"
+    },
+    {
+        "label": "Swatch Group Ltd",
+        "value": "Swatch Group Ltd"
+    },
+    {
+        "label": "Swisslog AB",
+        "value": "Swisslog AB"
+    },
+    {
+        "label": "Syneron Medical Ltd",
+        "value": "Syneron Medical Ltd"
+    },
+    {
+        "label": "Takata",
+        "value": "Takata"
+    },
+    {
+        "label": "Tandem Diabetes Care, Inc.",
+        "value": "Tandem Diabetes Care, Inc."
+    },
+    {
+        "label": "Techem",
+        "value": "Techem"
+    },
+    {
+        "label": "Telenor",
+        "value": "Telenor"
+    },
+    {
+        "label": "Telit Communications S.p.A.",
+        "value": "Telit Communications S.p.A."
+    },
+    {
+        "label": "Tellabs",
+        "value": "Tellabs"
+    },
+    {
+        "label": "Telstra",
+        "value": "Telstra"
+    },
+    {
+        "label": "Tenneco",
+        "value": "Tenneco"
+    },
+    {
+        "label": "TenXc Wireless",
+        "value": "TenXc Wireless"
+    },
+    {
+        "label": "Teradata",
+        "value": "Teradata"
+    },
+    {
+        "label": "Teradyne",
+        "value": "Teradyne"
+    },
+    {
+        "label": "Teva",
+        "value": "Teva"
+    },
+    {
+        "label": "Thales",
+        "value": "Thales"
+    },
+    {
+        "label": "Thales Defense & Security",
+        "value": "Thales Defense & Security"
+    },
+    {
+        "label": "The Medicines Ccompany",
+        "value": "The Medicines Ccompany"
+    },
+    {
+        "label": "Thomson",
+        "value": "Thomson"
+    },
+    {
+        "label": "Thyssen krupp",
+        "value": "Thyssen krupp"
+    },
+    {
+        "label": "ThyssenKrupp",
+        "value": "ThyssenKrupp"
+    },
+    {
+        "label": "TI Automotive",
+        "value": "TI Automotive"
+    },
+    {
+        "label": "Tigo Energy",
+        "value": "Tigo Energy"
+    },
+    {
+        "label": "Tile",
+        "value": "Tile"
+    },
+    {
+        "label": "Tintri",
+        "value": "Tintri"
+    },
+    {
+        "label": "TJ Smith & Nephew Ltd",
+        "value": "TJ Smith & Nephew Ltd"
+    },
+    {
+        "label": "Tople Bio",
+        "value": "Tople Bio"
+    },
+    {
+        "label": "Toyota Material Handling, U.S.A., Inc.",
+        "value": "Toyota Material Handling, U.S.A., Inc."
+    },
+    {
+        "label": "TPS",
+        "value": "TPS"
+    },
+    {
+        "label": "Trackio GmbH",
+        "value": "Trackio GmbH"
+    },
+    {
+        "label": "TransMedics",
+        "value": "TransMedics"
+    },
+    {
+        "label": "Trek Bicycle Corporation",
+        "value": "Trek Bicycle Corporation"
+    },
+    {
+        "label": "Tremec",
+        "value": "Tremec"
+    },
+    {
+        "label": "Triacta Power Technologies",
+        "value": "Triacta Power Technologies"
+    },
+    {
+        "label": "Trimble",
+        "value": "Trimble"
+    },
+    {
+        "label": "Trina Solar",
+        "value": "Trina Solar"
+    },
+    {
+        "label": "Truphatek",
+        "value": "Truphatek"
+    },
+    {
+        "label": "TRW",
+        "value": "TRW"
+    },
+    {
+        "label": "TT Electronics",
+        "value": "TT Electronics"
+    },
+    {
+        "label": "TTTECH",
+        "value": "TTTECH"
+    },
+    {
+        "label": "Tyco Electronics RD",
+        "value": "Tyco Electronics RD"
+    },
+    {
+        "label": "Tyco Healthcare Group",
+        "value": "Tyco Healthcare Group"
+    },
+    {
+        "label": "Tyco Other",
+        "value": "Tyco Other"
+    },
+    {
+        "label": "Tyco Packaging Systems",
+        "value": "Tyco Packaging Systems"
+    },
+    {
+        "label": "Tyco Power Systems",
+        "value": "Tyco Power Systems"
+    },
+    {
+        "label": "Tyco Printed Circuit Group",
+        "value": "Tyco Printed Circuit Group"
+    },
+    {
+        "label": "Tyco TDI Batteries",
+        "value": "Tyco TDI Batteries"
+    },
+    {
+        "label": "U-blox",
+        "value": "U-blox"
+    },
+    {
+        "label": "Uber Technology",
+        "value": "Uber Technology"
+    },
+    {
+        "label": "UCB",
+        "value": "UCB"
+    },
+    {
+        "label": "Unilife",
+        "value": "Unilife"
+    },
+    {
+        "label": "Universal Robots",
+        "value": "Universal Robots"
+    },
+    {
+        "label": "Valeo",
+        "value": "Valeo"
+    },
+    {
+        "label": "Valmet Automotive",
+        "value": "Valmet Automotive"
+    },
+    {
+        "label": "Valve",
+        "value": "Valve"
+    },
+    {
+        "label": "Vapor IO",
+        "value": "Vapor IO"
+    },
+    {
+        "label": "Varjo Technologies Oy",
+        "value": "Varjo Technologies Oy"
+    },
+    {
+        "label": "Varroc",
+        "value": "Varroc"
+    },
+    {
+        "label": "vClick3d",
+        "value": "vClick3d"
+    },
+    {
+        "label": "Vectura Limited",
+        "value": "Vectura Limited"
+    },
+    {
+        "label": "Ventra (FlexNGate)",
+        "value": "Ventra (FlexNGate)"
+    },
+    {
+        "label": "Ventus",
+        "value": "Ventus"
+    },
+    {
+        "label": "Verifone",
+        "value": "Verifone"
+    },
+    {
+        "label": "Verizon sourcing LLC",
+        "value": "Verizon sourcing LLC"
+    },
+    {
+        "label": "Vetter-Pharma",
+        "value": "Vetter-Pharma"
+    },
+    {
+        "label": "Viasat",
+        "value": "Viasat"
+    },
+    {
+        "label": "Viessmann",
+        "value": "Viessmann"
+    },
+    {
+        "label": "Viking GmbH",
+        "value": "Viking GmbH"
+    },
+    {
+        "label": "VIMOC Technologies",
+        "value": "VIMOC Technologies"
+    },
+    {
+        "label": "Visteon",
+        "value": "Visteon"
+    },
+    {
+        "label": "Viveo Labs Inc",
+        "value": "Viveo Labs Inc"
+    },
+    {
+        "label": "Vodafone",
+        "value": "Vodafone"
+    },
+    {
+        "label": "Volvo",
+        "value": "Volvo"
+    },
+    {
+        "label": "Volvo trucks",
+        "value": "Volvo trucks"
+    },
+    {
+        "label": "VW Group",
+        "value": "VW Group"
+    },
+    {
+        "label": "Watchfire Signs",
+        "value": "Watchfire Signs"
+    },
+    {
+        "label": "Waters",
+        "value": "Waters"
+    },
+    {
+        "label": "Webasto",
+        "value": "Webasto"
+    },
+    {
+        "label": "Weibel CDS AG",
+        "value": "Weibel CDS AG"
+    },
+    {
+        "label": "Wellbilt, Inc",
+        "value": "Wellbilt, Inc"
+    },
+    {
+        "label": "Welspun Inc. Ltd",
+        "value": "Welspun Inc. Ltd"
+    },
+    {
+        "label": "Western Digital",
+        "value": "Western Digital"
+    },
+    {
+        "label": "Whirlpool",
+        "value": "Whirlpool"
+    },
+    {
+        "label": "Whirlpool Other",
+        "value": "Whirlpool Other"
+    },
+    {
+        "label": "Witte",
+        "value": "Witte"
+    },
+    {
+        "label": "WM Motor",
+        "value": "WM Motor"
+    },
+    {
+        "label": "Workout Enterprises LLC",
+        "value": "Workout Enterprises LLC"
+    },
+    {
+        "label": "World of Medicine",
+        "value": "World of Medicine"
+    },
+    {
+        "label": "Wuxi Mingfang Automobile Parts Industry Co.Ltd",
+        "value": "Wuxi Mingfang Automobile Parts Industry Co.Ltd"
+    },
+    {
+        "label": "X-Core",
+        "value": "X-Core"
+    },
+    {
+        "label": "Xerox",
+        "value": "Xerox"
+    },
+    {
+        "label": "Xiaomi",
+        "value": "Xiaomi"
+    },
+    {
+        "label": "Xilinx",
+        "value": "Xilinx"
+    },
+    {
+        "label": "Xylem",
+        "value": "Xylem"
+    },
+    {
+        "label": "Xyratex",
+        "value": "Xyratex"
+    },
+    {
+        "label": "Y-soft",
+        "value": "Y-soft"
+    },
+    {
+        "label": "Yazaki",
+        "value": "Yazaki"
+    },
+    {
+        "label": "Ypsomed AG",
+        "value": "Ypsomed AG"
+    },
+    {
+        "label": "Yura",
+        "value": "Yura"
+    },
+    {
+        "label": "Zapgocharger",
+        "value": "Zapgocharger"
+    },
+    {
+        "label": "Zebra Technologies Corporation",
+        "value": "Zebra Technologies Corporation"
+    },
+    {
+        "label": "ZF",
+        "value": "ZF"
+    },
+    {
+        "label": "Zollner",
+        "value": "Zollner"
+    },
+    {
+        "label": "Zone24x7, Inc.",
+        "value": "Zone24x7, Inc."
+    },
+    {
+        "label": "Zoppas Industries",
+        "value": "Zoppas Industries"
+    },
+    {
+        "label": "zSpace Inc",
+        "value": "zSpace Inc"
+    }
+]
+
+

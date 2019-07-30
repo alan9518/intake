@@ -1,0 +1,49 @@
+/* ==========================================================================
+** Files List Styles
+** 23/05/2019
+** Alan Medina Silva
+** ========================================================================== */
+
+.int-fileListContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+
+.xpl-fileRow {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.xpl-fileIconContainer {
+    width: 100%;
+    position: relative;
+    width: 100%;
+    padding: 7px;
+}
+
+.xpl-iconClickContainer {
+    cursor: pointer;
+}
+
+
+.xpl-iconClickContainer img {
+    width: 20px;
+    height: auto;
+    vertical-align: middle;
+}
+
+a.xpl-iconClickContainer:visited {
+    text-decoration: none;
+    color: #444444;
+}
+
+span.xpl-fileName {
+    font-size: 12px;
+}
+

@@ -1,0 +1,82 @@
+[
+    {
+        "Field_Name": "Expected total ROI",
+        "Field_State_Name": "Expected_total_ROI",
+        "group": "firstCol1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "64",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "hasToolTip" : true,
+        "toolTipText" : "ROI Calculation in Excel Spread Sheet format",
+        "columns" : 2
+    },
+    {
+        "Field_Name": "Expected IRR",
+        "Field_State_Name": "Expected_IRR",
+        "group": "firstCol2",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "65",
+        "Type": "Decimal",
+        "General_Value": "$",
+        "hasToolTip" : true,
+        "toolTipText" : "IRR Calculation in Excel Spread Sheet format ",
+        "columns" : 2
+        
+    },
+    {
+        "Field_Name": "ROI Category",
+        "Field_State_Name": "ROI_Category",
+        "group": "firstCol3",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "66",
+        "Type": "Combo",
+        "General_Value": [
+            {"label" : "Revenue - New", "value" : "Revenue - New"},
+            {"label" : "Revenue - Sustaining", "value" : "Revenue - Sustaining"},
+            {"label" : "Cost Savings", "value" : "Cost Savings"},
+            {"label" : "Cost Avoidance - Compliance", "value" : "Cost Avoidance - Compliance"},
+            {"label" : "Process Improvement / Time /FTE savings (soft savings)", "value" : "Process Improvement / Time /FTE savings (soft savings)"},
+            {"label" : "HeadCountReduction", "value" : "HeadCountReduction"},
+            {"label" : "Strategy", "value" : "Strategy"},
+            {"label" : "Management Requirement", "value" : "Management Requirement"},
+            {"label" : "IT Internal", "value" : "IT Internal"},
+            {"label" : "Customer Requirement", "value" : "Customer Requirement"},
+            {"label" : "Platform Development", "value" : "Platform Development"},
+            {"label" : "R&D (POCs, Training, Conferences, etc.)", "value" : "R&D (POCs, Training, Conferences, etc.)"}
+        ],
+        "hasToolTip" : true,
+        "toolTipText" : "Pick from drop-down ",
+        "columns" : 2,
+        "wideControl" : true
+    },
+    {
+        "Field_Name": "WorkID(PlanView,FlexPM, SN Ticket)",
+        "Field_State_Name": "WorkID_PlanView_FlexPM_SN_Ticket",
+        "group": "secondCol1",
+        "Mandatory": "Yes",
+        "Enabled": "Yes",
+        "Sequence": "67",
+        "Type": "Text 15",
+        "General_Value": "Data Picker",
+        "hasToolTip" : true,
+        "toolTipText" : "Project ID ",
+        "columns" : 2
+    },
+    {
+        "Field_Name": "Documents",
+        "Field_State_Name": "Documents",
+        "group": "secondCol2",
+        "Mandatory": "No",
+        "Enabled": "Yes",
+        "Sequence": "68",
+        "Type": "filesPicker",
+        "General_Value": "Attachments",
+        "hasToolTip" : true,
+        "toolTipText" : "Attach ROI Excel Spread Sheet document ",
+        "columns" : 1
+    }
+]
