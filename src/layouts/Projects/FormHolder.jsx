@@ -27,12 +27,11 @@
     
 
     // --------------------------------------
-    // Add Project
+    // Add Project Views 
     // --------------------------------------
     // import formHolder from '../layouts/Projects/FormHolder';
     import AddRequirementsDefinition from '../../views/AddProject/Requirements/RequirementsDefinition';
     import AddBusinessInformation from '../../views/AddProject/Business/BusinessInformation';
-    
     import AddTechnicalEvaluation from '../../views/AddProject/Thecnical/TechnicalEvaluation';
     import AddPMOEvaluation from '../../views/AddProject/PMOEvaluation/PMOEvaluation';
     import AddROIRealized from '../../views/AddProject/ROIRealized/ROIRealized';
@@ -46,8 +45,6 @@
     //! Create Global Objects to keep track 
     //! of the state
     //! --------------------------------------
-    
-
     let projectIntake = {
         requirementsDefinition : {
             Date_Submitted : null,
@@ -311,7 +308,7 @@
 
                     </Switch>
             
-        );
+                );
 
 
             

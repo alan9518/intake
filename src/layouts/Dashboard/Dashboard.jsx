@@ -187,8 +187,8 @@
 
                     return (
                         <div className = "int-mainContainer" style = {{maxWidth:responsiveWidth}}>
-                        <BrowserRouter history={this.props.history}>
-                            <Switch>
+                            <BrowserRouter history={this.props.history}>
+                                <Switch>
                                     {appRoutes.map((prop,key) => {
                                         console.log("TCL: Dashboard -> renderDashboard -> prop", prop)
                                         if (prop.redirect)

@@ -27,14 +27,14 @@
     // Edit Project
     // https://flextronics365.sharepoint.com/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx
     // --------------------------------------
-    // import editformHolder from '../layouts/Projects/editFormHolder';
+    import editformHolder from '../layouts/Projects/EditFormHolder';
     // import EditRequirementsDefinition from '../views/EditProject/Requirements/RequirementsDefinition';
     // import EditBusinessInformation from '../views/EditProject/Business/BusinessInformation';
     // import EditTechnicalEvaluation from '../views/EditProject/Thecnical/TechnicalEvaluation';
     // import EditPMOEvaluation from '../views/EditProject/PMOEvaluation/PMOEvaluation';
     // import EditROIRealized from '../views/EditProject/ROIRealized/ROIRealized';
 
-    // import ProcessEndedView from '../views/ProcessEnded/ProcessEnded';
+    import ProcessEndedView from '../views/ProcessEnded/ProcessEnded';
     // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
     // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
     
@@ -67,22 +67,22 @@
             menuTitle: 'Add \n Project',
             component: formHolder
         },
-        // {
-        //     path: `${localPath}/proccess-ended/:projId`,
-        //     exact: false,
-        //     key: 'route-processEnded',
-        //     // menuTitle: 'Add \n Project',
-        //     component: ProcessEndedView
-        // },
+        {
+            path: `${localPath}/proccess-ended/:projId`,
+            exact: false,
+            key: 'route-processEnded',
+            // menuTitle: 'Add \n Project',
+            component: ProcessEndedView
+        },
 
-        // {
-        //     path: `${localPath}/project/:projectID/`,
-        //     exact: false,
-        //     key: 'route-editProject',
-        //     // menuTitle: 'Add \n Project',
-        //     component: editformHolder
+        {
+            path: `${localPath}/project/:projectID/`,
+            exact: false,
+            key: 'route-editProject',
+            // menuTitle: 'Add \n Project',
+            component: editformHolder
 
-        // },
+        },
 
         { redirect: true, path: '/', to: `${localPath}/intake-projects`, key: 'indexRedirect-route' },
         { redirect: true, path: '/project/:projectID', to: `/project/:projectID/requirement-definition`, key: 'eidtProjectRedirect-route' },
@@ -113,7 +113,7 @@
         {
             // path: `/add-project/requirement-definition`,
             path: `${localPath}/add-project/requirement-definition`,
-            exact: true,
+            exact: false,
             key: 'route-addRequirementDefinition',
             menuTitle: 'Requirements \n Definition',
             // component: AddRequirementsDefinition,
@@ -165,68 +165,68 @@
 // Edit Project Rpoutes
 // --------------------------------------
 
-// export const editProjectRoutes = [
-//     {
-//         path: `${localPath}/intake-projects`,
-//         exact: true,
-//         key: 'route-intakeProjects',
-//         menuTitle: 'All \n Projects',
-//         component: AllProjectsView,
-//         allowNormalUser : true,
+export const editProjectRoutes = [
+    {
+        path: `${localPath}/intake-projects`,
+        exact: true,
+        key: 'route-intakeProjects',
+        menuTitle: 'All \n Projects',
+        component: AllProjectsView,
+        allowNormalUser : true,
         
-//     },
+    },
 
-//     {
-//         path: `${localPath}/project/:projectID/requirement-definition`,
-//         exact: true,
-//         key: 'route-requirementDefinition',
-//         menuTitle: 'Requirements \n Definition',
-//         component: EditRequirementsDefinition,
-//         allowNormalUser : true,
-//         editRoute : true
+    {
+        path: `${localPath}/project/:projectID/requirement-definition`,
+        exact: true,
+        key: 'route-requirementDefinition',
+        menuTitle: 'Requirements \n Definition',
+        // component: EditRequirementsDefinition,
+        allowNormalUser : true,
+        editRoute : true
 
-//     },
-//     {
-//         // path: `/add-project/business-information`,
-//         path: `${localPath}/project/:projectID/business-information`,
-//         exact: true,
-//         key: 'route-editPusinessInformation',
-//         menuTitle: 'Business \n Information',
-//         component: EditBusinessInformation,
-//         allowNormalUser : true,
-//         editRoute : true
-//     },
-//     {
-//         // path: `/edit-project/technical-evaluation`,
-//         path: `${localPath}/project/:projectID/technical-evaluation`,
-//         exact: true,
-//         key: 'route-editPechnicalEvaluation',
-//         menuTitle: 'Technical \n Evaluation',
-//         component: EditTechnicalEvaluation,
-//         EllowNormalUser : false,
-//         editRoute : true
-//     },
-//     {
-//         // path: `/edit-project/pmo-evaluation`,
-//         path: `${localPath}/project/:projectID/pmo-evaluation`,
-//         exact: true,
-//         key: 'route-editPmoEvaluation',
-//         menuTitle: 'PMO \n Evaluation',
-//         component: EditPMOEvaluation,
-//         allowNormalUser : false,
-//         editRoute : true
-//     },
-//     {
-//         // path: `/edit-project/roi-realized`,
-//         path: `${localPath}/project/:projectID/roi-realized`,
-//         exact: true,
-//         key: 'route-editPoiRealized',
-//         menuTitle: 'ROI \n Realized',
-//         component: EditROIRealized,
-//         allowNormalUser : false,
-//         editRoute : true
-//     },
-//     { redirect: true, path: `${localPath}/project/`, to: `${localPath}/intake-projects`, key: 'editProjectRedirect-route' }
-// ]
+    },
+    {
+        // path: `/add-project/business-information`,
+        path: `${localPath}/project/:projectID/business-information`,
+        exact: true,
+        key: 'route-editPusinessInformation',
+        menuTitle: 'Business \n Information',
+        // component: EditBusinessInformation,
+        allowNormalUser : true,
+        editRoute : true
+    },
+    {
+        // path: `/edit-project/technical-evaluation`,
+        path: `${localPath}/project/:projectID/technical-evaluation`,
+        exact: true,
+        key: 'route-editPechnicalEvaluation',
+        menuTitle: 'Technical \n Evaluation',
+        // component: EditTechnicalEvaluation,
+        allowNormalUser : false,
+        editRoute : true
+    },
+    {
+        // path: `/edit-project/pmo-evaluation`,
+        path: `${localPath}/project/:projectID/pmo-evaluation`,
+        exact: true,
+        key: 'route-editPmoEvaluation',
+        menuTitle: 'PMO \n Evaluation',
+        // component: EditPMOEvaluation,
+        allowNormalUser : false,
+        editRoute : true
+    },
+    {
+        // path: `/edit-project/roi-realized`,
+        path: `${localPath}/project/:projectID/roi-realized`,
+        exact: true,
+        key: 'route-editPoiRealized',
+        menuTitle: 'ROI \n Realized',
+        // component: EditROIRealized,
+        allowNormalUser : false,
+        editRoute : true
+    },
+    { redirect: true, path: `${localPath}/project/`, to: `${localPath}/intake-projects`, key: 'editProjectRedirect-route' }
+]
 
 

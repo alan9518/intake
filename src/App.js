@@ -56,19 +56,19 @@
           console.log('history', history);
 
 
-          return <Dashboard history = {history}/>
+          // return <Dashboard history = {history}/>
         
 
-            // return (
-            //   <BrowserRouter history={history}>
-            //     <Switch> 
-            //     {indexRoutes.map((prop, key) => {
-            //         return <Route path={prop.path} component={prop.component} key={`index-${key}`} ></Route>
-            //     })}
-            //     </Switch>
+            return (
+              <BrowserRouter history={history}>
+                <Switch> 
+                {indexRoutes.map((prop, key) => {
+                    return <Route path={prop.path} component={prop.component} key={`index-${key}`} ></Route>
+                })}
+                </Switch>
 
-            //   </BrowserRouter>
-            // );
+              </BrowserRouter>
+            );
         
       }
       
@@ -81,7 +81,18 @@
       // <Route path={'/'} component={Dashboard} key={`dashboard`} ></Route>
       // --------------------------------------
       render() { 
-        return this.renderApp() ; 
+        // return this.renderApp() ; 
+        const history = createBrowserHistory();
+        return (
+          <BrowserRouter history={history}>
+            <Switch> 
+            {indexRoutes.map((prop, key) => {
+                return <Route path={prop.path} component={prop.component} key={`index-${key}`} ></Route>
+            })}
+            </Switch>
+
+          </BrowserRouter>
+        );
       
       }
   } 
