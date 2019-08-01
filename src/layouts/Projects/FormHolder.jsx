@@ -204,8 +204,34 @@
         // --------------------------------------
         componentDidMount() {
             // const pmos = this.props.sharepoint;
+
+
             this.setState({isLoaded : true});
+
+            
+            console.log("TCL: formHolder -> componentDidMount -> this.props", this.props)
+
         }
+
+
+        componentWillReceiveProps(nextProps) {
+            console.log("TCL: formHolder -> componentWillReceiveProps -> nextProps", nextProps)
+
+            
+
+            if(this.props.location.pathname === '/intake/add-project/') {
+                if(projectIntake.requirementsDefinition.savedLocally === true || projectIntake.requirementsDefinition.savedLocally === false ) {
+                    // ? Reset Object
+                    console.log("TCL: formHolder -> componentWillReceiveProps -> Reset Object")
+                    this.resetProjectIntake()
+                    this.setState({isLoaded : true});
+                }
+            }
+            else 
+                this.setState({isLoaded : true});
+            
+        }
+
 
         /* ==========================================================================
         ** Handle State
@@ -424,6 +450,139 @@
 
 
 
+            
+            // ?--------------------------------------
+            // ? Reset Project Intake state
+            // ?--------------------------------------
+            resetProjectIntake() {
+                console.log('reset State');
+                projectIntake = {
+                    requirementsDefinition : {
+                        Date_Submitted : null,
+                        Request_Owner : null,
+                        Request_ID : null,  
+                        Workstage : null,
+                        Project_Name : null,
+                        Description : null,
+                        Expected_Start_Date : null,
+                        Expected_Completion_Date : null,
+                        Expected_Start_Date_Moment : null,
+                        Expected_Completion_Date_Moment : null,
+                        Deadline_Justification : null,
+                        Project_Type : null,
+                        Project_Documents : null,
+                        savedLocally : false,
+                        savedonDB : false
+                    },
+            
+                    businessInformation : {
+            
+                        Business_Objective : null ,
+                        Outcomes_from_the_Objective : null ,
+                        Impact : null ,
+                        Background : null ,
+                        Dependencies : null ,
+                        Constrains : null ,
+                        Business_Model : null ,
+                        Business_lead : null ,
+                        Project_Purpose : null ,
+                        Project_Risks : null ,
+                        Line_of_Business : null ,
+                        IT_Vector : null ,
+                        RPA : null ,
+                        Region : null ,           
+                        Sites_Impacted : null ,
+                        Customer : null ,
+                        Requested_by_Customer : null ,
+                        Customer_Priority : null ,
+                        Estimated_Annual_Revenue : null ,
+                        Sales_Contact : null ,
+                        Average_number_of_users_for_this_application : null ,
+                        FTE_Saved_per_year : null ,
+                        Hours_saved_per_year : null ,
+                        Savings_revenue : null ,
+                        Compliance_Risk_cost_that_will_be_avoided_by_this_application : null ,
+                        Risk_Avoidance : null ,
+                        Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : null ,
+                        Legacy_System_Infra_and_License_Fee_savings_per_year : null ,
+                        Other_Savings : null ,
+                        conditionalSites : [],
+                        savedLocally : false,
+                        savedonDB : false
+                        
+                    },
+            
+                    technicalEvaluation : {
+                        Delivery_Team : null,
+                        Platform_type : null,
+                        Applications_involved : null,
+                        Technology : null,
+                        IT_Groups_Required : null,
+                        Estimated_Effort : null,
+                        Project_Team_Size : null,
+                        Project_Manager : null,
+                        Target_Start_Date : null,
+                        Target_Go_Live_Date : null,
+                        IT_FTE_required : null,
+                        Approver : null,
+                        Approval_Date : null,
+                        Justification_ROI : null,
+                        Design_Development_Testing_Effort : null,
+                        Travel_TE : null,
+                        Consulting : null,
+                        Training : null,
+                        Licenses_Cost_per_year : null,
+                        Hardware_leasing : null,
+                        Maintenance_Hardware_hours_per_year : null,
+                        Maintenance_Salaries_hours_per_year : null,
+                        No_of_Sites : null,
+                        No_of_Active_users : null,
+                        savedLocally : false,
+                        savedonDB : false
+                    },
+                    pmoEvaluation : {
+                        Expected_total_ROI : null,
+                        Expected_IRR : null,
+                        ROI_Category : null,
+                        WorkID_PlanView_FlexPM_SN_Ticket : null,
+                        Documents : null,
+                        savedLocally : false,
+                        savedonDB : false
+                    },
+                    roiRealized : {
+                        Implementation_Date :   moment().format("MM/DD/YYYY") || null,
+                        FTE_Saved_per_year : null,
+                        Hours_saved_per_year : null,
+                        Compliance_Ris_cost_that_was_avoided_by_this_application : null,
+                        Risk_Avoidance : null,
+                        Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : null,
+                        Legacy_System_Infra_and_License_Fee_savings_per_year : null,
+                        Other_Savings : null,
+                        Design_Developmen_Testing_Effort_hours : null,
+                        Travel_TE : null,
+                        Consulting : null,
+                        Training : null,
+                        Licenses_Cost_per_year : null,
+                        Hardware_leasing : null,
+                        Maintenance_Hardware_hours_per_year : null,
+                        Maintenance_Salaries_hours_per_year : null,
+                        Site_Usage : null,
+                        Usage_Footprint_1_week : null,
+                        Transactions_per_minute_TPM : null,
+                        ROI_Realized_Date :  null,
+                        Site_UsageRows : null,
+                        Usage_FootprintRows : null,
+                        dynatrace : null,
+                        showDynatrace : null,
+                        savedLocally : false,
+                        savedonDB : false
+                    }
+                
+                }
+            }
+
+
+
         /* ==========================================================================
         ** Render Methods
         ** ========================================================================== */
@@ -465,7 +624,7 @@
                             exact =  {true}
                             key =  'route-intakeProjects'
                             ref = 'route-intakeProjects'
-                            render={(props) => <AllProjectsView projectIntake = {projectIntake}  isPMO = {isPMO} locationData = {this.props}  />}
+                            render={(props) => <AllProjectsView projectIntake = {projectIntake}  isPMO = {isPMO} locationData = {this.props} resetProjectIntake = {this.resetProjectIntake} />}
                         />
 
 

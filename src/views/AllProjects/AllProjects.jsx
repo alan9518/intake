@@ -55,7 +55,15 @@ import { async } from 'q';
             // Get all projects
             // --------------------------------------
             componentDidMount() {
+                // this.props
+                console.log("TCL: Home -> componentDidMount -> this.props", this.props)
                 this.loadAPI();
+            }
+
+
+            componentWillReceiveProps(nextProps) {
+            console.log("TCL: Home -> componentWillReceiveProps -> nextProps", nextProps)
+                
             }
 
 
