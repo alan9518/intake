@@ -9,37 +9,15 @@
 // --------------------------------------
     import React, { Component, Fragment } from 'react';
     import { FieldsGenerator, AppLoader, SectionHeader, FormBody, FormFooter, AppButton } from  '../../../components';
-    // import { connect } from 'react-redux';
-    // import { compose } from 'redux';
     import { isEmpty } from 'lodash';
     import { withRouter } from 'react-router';
     import {Redirect} from 'react-router-dom';
-    // import { 
-    //         saveLocalRoiRealized, 
-    //         saveROIRealizedDB, 
-    //         saveDynatraceDB, 
-    //         updateROIRealizedDB, 
-    //         resetRequirementsState, 
-    //         saveProjectFiles,
-    //         resetBusinessState, 
-    //         resetTechnicalState, 
-    //         resetPMOEvaluationState, 
-    //         resetROIRealizedState,
-    //         saveRequirementsDB,
-    //         updateRequirementsDB,
-    //         updateBusinesInformationDB,
-    //         saveBusinesInformationDB,
-    //         updateTechnicalDB,
-    //         saveTechnicalDB,
-    //         savePMOEvaluationDB,
-    //         updatePMOEvaluation,
-
-
-    //     } from '../../../actions'
     import PropTypes from 'prop-types';
     import Alert from 'react-s-alert';
     import moment from "moment";
 
+
+    const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
 
 // --------------------------------------
 // Create Component Class
@@ -644,12 +622,12 @@
                 // --------------------------------------
                 // Save Form Values
                 // --------------------------------------
-                saveFormValues(projectID, newROIID) {
+                saveFormValues(projectID = null, newROIID = null) {
                     // const currentUser = window.getCurrentSPUser();
                     // const projId = this.props.projectID || 'GSD67';
                     // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
 
-                    const projId = this.props.requirementsDefinition.newProjectID || projectID;
+                    const projId = this.props.projectIntake.requirementsDefinition.Request_ID || projectID;
                     let requestID = null
                     
                     if(projId === undefined || projectID === undefined || projectID === null)
@@ -658,7 +636,7 @@
                         requestID = projId.indexOf('D') >= 0 ? projId.substr(projId.indexOf('D')+1,projId.length) : projId;
                     
 
-                    const currentUser = window.getCurrentSPUser();
+                    // const currentUser = window.getCurrentSPUser();
                     // const projId = this.props.projectID || projectID;
                     // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
 					
@@ -702,15 +680,15 @@
                     // const {Usage_Footprint_1_week, Site_Usage, Transactions_per_minute_TPM, ROI_Realized_Date} = dynatrace[0];
 
                     let projId = null
-                    if(this.props.requirementsDefinition.newProjectID) {
-                        projId = this.props.projectID || this.props.requirementsDefinition.newProjectID;
+                    if(this.props.projectIntake.requirementsDefinition.Request_ID) {
+                        projId = this.props.projectIntake.requirementsDefinition.Request_ID
                     }
                     else    
                         projId = undefined
 
                      
                     const requestID =  projId !== undefined ? projId.substr(projId.indexOf('D')+1,projId.length) : null;
-                    const currentUser = window.getCurrentSPUser();
+                    //! const currentUser = window.getCurrentSPUser();
 
                     // Iterate Dynatrace Array
                     const data = dynatrace.map((dyna)=> {
@@ -820,31 +798,45 @@
                     // }
 
 
-                    if(isPMO === true && !this.props.requirementsDefinition.newProjectID)  {
-                        // this.createErrorAlertTop('You Have to Create First the Requirements Definition');
-                        // this.submitFormLocalData(false);
+                    // ? Test Save Values
+
+                    const formData = this.saveFormValues();
+                    console.log("TCL: submitFormDB -> formData", formData)
+                    this.props.updateProjectIntakeValues('roiRealized',formData,formData.dynatrace )
+
+                    this.createSuccessAlert('Data Saved ');
+
+
+                    // return;
+
+                    // !
+                    // if(isPMO === true && !this.props.requirementsDefinition.newProjectID)  {
+                    //     // this.createErrorAlertTop('You Have to Create First the Requirements Definition');
+                    //     // this.submitFormLocalData(false);
     
-                        this.saveOtherTabs(null, true);
+                    //     this.saveOtherTabs(null, true);
                         
-                        return;
-                    }
-                    else if(isPMO === false)
-                        return;
+                    //     return;
+                    // }
+                    // else if(isPMO === false)
+                    //     return;
                     
-                    if(this.validateFormInputs() === false) {
-                        this.createErrorAlertTop('Please Fill all the Required Fields');
-                        return;
-                    }
+                    // if(this.validateFormInputs() === false) {
+                    //     this.createErrorAlertTop('Please Fill all the Required Fields');
+                    //     return;
+                    // }
 
 
-                    this.setState({sendingData : true})
+                    // this.setState({sendingData : true})
 
-                    // Check if is new ROI or updated
+                    // // Check if is new ROI or updated
 
-                    const {roiRealizedSaved, projectID} = this.props;
+                    // const {roiRealizedSaved, projectID} = this.props;
                     
-                    this.saveNewROI(projectID)
-                    this.saveOtherTabs(projectID);
+                    // this.saveNewROI(projectID)
+                    // this.saveOtherTabs(projectID);
+
+                    // !
 
 
                     // if(roiRealizedSaved) {
@@ -1715,22 +1707,7 @@
         props: PropTypes
     };
 
-/* ==========================================================================
-** Redux Functions
-** ========================================================================== */
-    // const mapStateToProps = (state) => {
-    //     return {
-    //         roiRealized : state.roiRealized,
-    //         projectID : state.requirementsDefinition.newProjectID,
-    //         pmos : state.sharepoint.pmos,
-    //         isPMO : state.sharepoint.isPMO,
-    //         roiRealizedSaved : state.roiRealized.roiRealizedSaved,
-    //         requirementsDefinition : state.requirementsDefinition,
-    //         businessInformation : state.businessInformation,
-    //         technicalEvaluation : state.technicalEvaluation,
-    //         pmoEvaluation : state.pmoEvaluation,
-    //     }
-    // }
+
 
 
 
@@ -1738,27 +1715,6 @@
 // Export Component
 // --------------------------------------
     export default (ROIRealized);
-    // export default compose(withRouter, connect (mapStateToProps, {
-    //                                                                 saveLocalRoiRealized, 
-    //                                                                 saveROIRealizedDB, 
-    //                                                                 saveDynatraceDB, 
-    //                                                                 updateROIRealizedDB, 
-    //                                                                 saveProjectFiles,
-    //                                                                 resetRequirementsState,
-    //                                                                 resetBusinessState, 
-    //                                                                 resetTechnicalState, 
-    //                                                                 resetPMOEvaluationState, 
-    //                                                                 resetROIRealizedState,
-    //                                                                 saveRequirementsDB,
-    //                                                                 updateRequirementsDB,
-    //                                                                 updateBusinesInformationDB,
-    //                                                                 saveBusinesInformationDB,
-    //                                                                 updateTechnicalDB,
-    //                                                                 saveTechnicalDB,
-    //                                                                 savePMOEvaluationDB,
-    //                                                                 updatePMOEvaluation,
-    //                                                             })) (ROIRealized);
-
-
+    
 
     

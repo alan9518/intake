@@ -12,31 +12,16 @@
     import CustomerValues from '../../../LocalData/customerValues.json'
     import PropTypes from 'prop-types';
     import { withRouter } from 'react-router';
-    // import { connect } from 'react-redux';
-    // import { compose } from 'redux';
+   
     import { isEmpty } from 'lodash';
     import Alert from 'react-s-alert';
     import 'react-s-alert/dist/s-alert-default.css';
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
-    // import {
-    //             saveLocalBusiness, 
-    //             saveBusinesInformationDB, 
-    //             saveRequirementsDB,
-    //             updateRequirementsDB,
-    //             saveLocalRequirements, 
-    //             updateBusinesInformationDB, 
-    //             resetRequirementsState, 
-    //             resetBusinessState, 
-    //             saveProjectFiles,
-    //             updateTechnicalDB,
-    //             saveTechnicalDB,
-    //             savePMOEvaluationDB,
-    //             updatePMOEvaluation,
-    //             updateROIRealizedDB,
-    //             saveROIRealizedDB,
-    //             saveDynatraceDB,
-    //         } from '../../../actions'
+   
     import { FieldsGenerator, AppLoader, SectionHeader, FormBody, FormFooter, AppButton } from '../../../components';
+
+
+    const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
 
 // --------------------------------------
 // Create Component Class
@@ -971,6 +956,10 @@
             // --------------------------------------
             getPeoplePickerData(peoplePicker) {
                 const pickerName = `peoplePicker${peoplePicker}_TopSpan_HiddenInput`
+
+                if( !document.getElementById(pickerName)) 
+                    return null;
+
                 const pickerValue = document.getElementById(pickerName).value || "";
                 if(pickerValue === "" || pickerValue === "[]" || pickerValue === [] ) 
                     return null;
@@ -1878,17 +1867,17 @@
                 // --------------------------------------
                 // Save Form Values
                 // --------------------------------------
-                saveFormValues (projectID, newBusinessID) {
-                    const currentUser = window.getCurrentSPUser();
-                    const projId = this.props.requirementsDefinition.newProjectID || projectID;
+                saveFormValues (projectID = null, newBusinessID = null) {
+                    //! const currentUser = window.getCurrentSPUser();
+                    const projId = this.props.projectIntake.requirementsDefinition.Request_ID || projectID;
                     let requestID = null
                     
                     if(projId === undefined)
                         requestID = null;
                     else if(projectID === null && newBusinessID === null) 
-                        requestID = this.props.requirementsDefinition.newProjectID || null
+                        requestID = this.props.projectIntake.requirementsDefinition.Request_ID || null
                     else
-                        requestID = projId.substr(projId.indexOf('D')+1,projId.length);    
+                        requestID = projId.indexOf('D') >= 0 ? projId.substr(projId.indexOf('D')+1,projId.length) : projId;    
                     
                     const formData = {
                         Project_ID : requestID,
@@ -1922,7 +1911,7 @@
                         Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team :  this.state.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
                         Legacy_System_Infra_and_License_Fee_savings_per_year :  this.state.Legacy_System_Infra_and_License_Fee_savings_per_year,
                         Other_Savings :  this.state.Other_Savings,
-                        workstage : this.props.requirementsDefinition.Workstage,
+                        workstage : this.props.projectIntake.requirementsDefinition.Workstage,
                         Created_by : currentUser.userEmail,
                         Last_modifed_by : currentUser.userEmail
                     }
@@ -1939,7 +1928,7 @@
                     // let erros = {};
                     const nextStep = '/add-project/technical-evaluation';
                     // const nextStep = 'proccess-ended';
-                    // const formData = this.saveFormValues();
+                    const formData = this.saveFormValues();
 
                     //console.log('TCL: submitFormLocalData -> this.props', this.props)
                     // this.validateFormInputs();
@@ -1951,17 +1940,19 @@
                     //     setTimeout(()=>{this.redirectUser(nextStep);},700);
                     // }
 
-                    if(this.validateFormInputs() === false) {
-                        this.createErrorAlertTop('Please Fill all the Required Fields');
-                        this.setState({checkForErrors: true})
-                        return;
-                    }
+                    //! if(this.validateFormInputs() === false) {
+                    //!     this.createErrorAlertTop('Please Fill all the Required Fields');
+                    //!     this.setState({checkForErrors: true})
+                    //!     return;
+                    //! }
 
                     this.createSuccessAlert('Data Saved Locally');
-                    this.redirectUser(nextStep);
+                    //! this.redirectUser(nextStep);
                         // setTimeout(()=>{this.redirectUser(nextStep);},700);
                     
 
+
+                    this.props.updateProjectIntakeValues('business',formData)
                    
 
                     // const {requirementsDefinition}  = this.props;
@@ -2703,10 +2694,10 @@
 
 
             checkErrorClass = (event)=> {
-                console.log("TCL: BusinessInformation -> checkErrorClass -> event", event)
+                
                 const {target} = event;
                 const {id, value} = target;
-                console.log("TCL: BusinessInformation -> checkErrorClass -> target", target)
+                
                 
                 if(this.state.checkForErrors === true) {
 

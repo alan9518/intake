@@ -9,24 +9,7 @@
 // Get Dependences
 // --------------------------------------
     import React, { Component, Fragment } from 'react';
-    // import { connect } from 'react-redux';
     import { withRouter } from 'react-router';
-    // import { compose } from 'redux';
-    // import {
-    //             saveLocalTechnical, 
-    //             saveTechnicalDB, 
-    //             updateTechnicalDB,
-    //             saveRequirementsDB,
-    //             updateRequirementsDB,
-    //             saveProjectFiles,
-    //             saveBusinesInformationDB, 
-    //             updateBusinesInformationDB, 
-    //             savePMOEvaluationDB,
-    //             updatePMOEvaluation,
-    //             updateROIRealizedDB,
-    //             saveROIRealizedDB,
-    //             saveDynatraceDB
-    //         } from '../../../actions';
     import {Redirect} from 'react-router-dom';
     import { FieldsGenerator, AppLoader, SectionHeader, FormBody, FormFooter, AppButton } from '../../../components';
     import { isEmpty } from 'lodash';
@@ -35,6 +18,9 @@
     import 'react-s-alert/dist/s-alert-default.css';
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
     import moment from 'moment';
+
+
+    const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
 
 
 // --------------------------------------
@@ -1170,7 +1156,11 @@
             // peoplePickerBusiness_lead_TopSpan_HiddenInput
             // --------------------------------------
             getPeoplePickerData(peoplePicker) {
-                const pickerName = `peoplePicker${peoplePicker}_TopSpan_HiddenInput`
+                const pickerName = `peoplePicker${peoplePicker}_TopSpan_HiddenInput`;
+
+                if( !document.getElementById(pickerName)) 
+                    return null;
+
                 const pickerValue = document.getElementById(pickerName).value || "";
                 if(pickerValue === "" || pickerValue === "[]" || pickerValue === [] ) 
                     return null;
@@ -1353,15 +1343,15 @@
                 // const projId = this.props.projectID || 'GSD67';
                 // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
 
-                const currentUser = window.getCurrentSPUser();
-                const projId = this.props.projectID || projectID
+                // ! const currentUser = window.getCurrentSPUser();
+                const projId = this.props.projectIntake.requirementsDefinition.Request_ID || projectID;
 
                 let requestID = null
                     
                 if(projId === undefined)
                     requestID = null;
                 else if(projectID === null && newTechnicalEvaluationId === null) 
-                    requestID = this.props.requirementsDefinition.newProjectID || null
+                    requestID =  this.props.projectIntake.requirementsDefinition.Request_ID  || null
                 else
                     requestID = projId.indexOf('D') >= 0 ? projId.substr(projId.indexOf('D')+1,projId.length) : projId;    
                 
@@ -1410,21 +1400,28 @@
             // --------------------------------------
             submitFormLocalData = (redirectNextStep = true) => {
             
-                // const formData = this.saveFormValues();
+              
+
                 // this.props.saveLocalTechnical(formData);
 
-                if(this.validateFormInputs() === false) {
-                    this.createErrorAlertTop('Please Fill all the Required Fields');
-                    this.setState({checkForErrors: true})
-                    return;
-                }
+                //! if(this.validateFormInputs() === false) {
+                //!     this.createErrorAlertTop('Please Fill all the Required Fields');
+                //!     this.setState({checkForErrors: true})
+                //!     return;
+                //! }
 
                 if(redirectNextStep !== false) {
+
+
+                    const formData = this.saveFormValues();
+
+                    this.props.updateProjectIntakeValues('technical',formData)
+
                     // Show Sucess Message 
                     this.createSuccessAlert('Data Saved Locally');
                     // Redirect User
                     // setTimeout(()=>{this.redirectUser();},700);
-                    this.redirectUser();
+                    // this.redirectUser();
                 }
                 
             
@@ -2387,22 +2384,7 @@
         props: PropTypes
     };
 
-/* ==========================================================================
-** Redux Functions
-** ========================================================================== */
-    // const mapStateToProps = (state) => {
-    //     return {
-    //         technicalEvaluation : state.technicalEvaluation,
-    //         projectID : state.requirementsDefinition.newProjectID,
-    //         pmos : state.sharepoint.pmos,
-    //         isPMO : state.sharepoint.isPMO,
-    //         technicalEvaluationSaved : state.technicalEvaluation.technicalEvaluationSaved,
-    //         requirementsDefinition : state.requirementsDefinition,
-    //         businessInformation : state.businessInformation,
-    //         pmoEvaluation : state.pmoEvaluation,
-    //         roiRealized : state.roiRealized,
-    //     }
-    // }
+
 
 
 
@@ -2410,18 +2392,4 @@
 // Export Component
 // --------------------------------------
     export default (TechnicalEvaluation);
-    // export default compose(withRouter, connect (mapStateToProps, {
-    //                                                                 saveLocalTechnical, 
-    //                                                                 saveTechnicalDB, 
-    //                                                                 updateTechnicalDB,
-    //                                                                 saveRequirementsDB,
-    //                                                                 updateRequirementsDB,
-    //                                                                 saveProjectFiles,
-    //                                                                 saveBusinesInformationDB, 
-    //                                                                 updateBusinesInformationDB, 
-    //                                                                 savePMOEvaluationDB,
-    //                                                                 updatePMOEvaluation,
-    //                                                                 updateROIRealizedDB,
-    //                                                                 saveROIRealizedDB,
-    //                                                                 saveDynatraceDB
-    //                                                             })) (TechnicalEvaluation);
+    

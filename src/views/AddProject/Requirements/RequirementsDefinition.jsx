@@ -22,7 +22,7 @@
     import axios from 'axios';
 
 
-
+    const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'}
 
 
 // --------------------------------------
@@ -42,7 +42,7 @@
                 super(props);
                 //? const currentUser = window.getCurrentSPUser();
 
-                const currentUser = {userEmail : 'alan.medina@flex.com'}
+                
 
                 const projectID = null;
                 console.log("TCL: RequirementsDefinition -> constructor -> props", props.projectIntake.requirementsDefinition)
@@ -63,7 +63,7 @@
                     Expected_Completion_Date_Moment : props.projectIntake.requirementsDefinition.Expected_Completion_Date || null,   
                     Deadline_Justification : props.projectIntake.requirementsDefinition.Deadline_Justification || "",     
                     Project_Type : props.projectIntake.requirementsDefinition.Project_Type || {label : "Project Type", value : ""},    
-                    Project_Documents : props.projectIntake.requirementsDefinition.Project_docs ||  [],  
+                    Project_Documents : props.projectIntake.requirementsDefinition.Project_Documents ||  [],  
                     hasErrors : false,
                     isShowingModal : false,
                     buttonDisabled : false,
@@ -76,7 +76,7 @@
                 this.onDateChange =  this.onDateChange.bind(this);
                 this.preloadFiles =  this.preloadFiles.bind(this);
                 // this.checkErrorClass = this.checkErrorClass.bind(this);
-                // this.filesArray =  props.requirementsDefinition.Project_docs ||  [];
+                this.filesArray =  props.projectIntake.requirementsDefinition.Project_Documents ||  [];
                 this.formFields =  this.createFormStructure();
             }
 
@@ -707,10 +707,10 @@
                 // --------------------------------------
                 // Save Form Values
                 // --------------------------------------
-                saveFormValues (projectID) { 
-                    const currentUser = window.getCurrentSPUser();
+                saveFormValues (projectID = null) { 
+                    //? const currentUser = window.getCurrentSPUser();
 
-                    const projId = this.props.requirementsDefinition.newProjectID || projectID;
+                    const projId = this.props.projectIntake.requirementsDefinition.Request_ID || projectID;
                     let requestID = null
                     
                     if(projId === undefined || projectID === undefined || projectID === null)
@@ -775,7 +775,7 @@
                     
 
                     // const {hasErrors} = this.state;
-                    // const formData = this.saveFormValues();
+                    const formData = this.saveFormValues();
 
 
                     // // Reset State
@@ -793,7 +793,15 @@
 
                         // this.renderLoader(true);
 
-                        this.redirectUser();
+                        // ? this.redirectUser();
+
+
+
+                        this.props.updateProjectIntakeValues('requirements',formData)
+
+
+
+
                 }
 
 

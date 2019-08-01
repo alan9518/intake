@@ -20,7 +20,7 @@
     const MultipleSelect = (props) => {
         // const SingleSelect = (props) => {
 
-        console.log("TCL: props.defaultValue", props.defaultValue)
+        
 
         // let optionsArray = [];
         // if(props.defaultValue.length > 0 && typeof props.defaultValue === 'string') {

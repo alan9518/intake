@@ -213,7 +213,7 @@
 
 
                 const getReqPromise = this.handleGetRequestsForData('requirements', requestID)
-                const getBussPromise = this.handleGetRequestsForData('bussines', requestID)
+                const getBussPromise = this.handleGetRequestsForData('business', requestID)
                 const getTechPromise = this.handleGetRequestsForData('technical', requestID)
                 const getPmoPromise = this.handleGetRequestsForData('pmoEval', requestID)
                 const getRoiPromise = this.handleGetRequestsForData('roiRealized', requestID)
@@ -238,7 +238,7 @@
                 }
                     
                 if(businessData.data)
-                    this.setDataSourceValuesFromDB('bussines', businessData.data[0], true)
+                    this.setDataSourceValuesFromDB('business', businessData.data[0], true)
                 if(techData.data)
                     this.setDataSourceValuesFromDB('technical', techData.data[0], true)
                 if(pmoData.data) {
@@ -311,7 +311,7 @@
                         case  'requirementsFiles' : serviceURL = Endpoints.getRequirementsFiles;
                             break;
                        
-                        case  'bussines' : serviceURL =  Endpoints.getBusiness;
+                        case  'business' : serviceURL =  Endpoints.getBusiness;
                             break;
 
                         case  'technical' : serviceURL =  Endpoints.getTechnical;
@@ -430,7 +430,7 @@
                 }
 
                 // ? Set Business Information
-                if (objectToChange === 'bussines') {
+                if (objectToChange === 'business') {
                     let businessInformation = {
                         buss_info_id : newValues.buss_info_id,
                         Business_Objective : newValues.business_objective ,

@@ -9,33 +9,17 @@
 // Get Dependences
 // --------------------------------------
     import React, { Component, Fragment } from 'react';
-    // import { connect } from 'react-redux';
-    // import { compose } from 'redux';
     import { Redirect } from 'react-router-dom';
     import { isEmpty } from 'lodash';
     import { withRouter } from 'react-router';
-    // import { 
-    //             saveLocalPMOEvaluation,
-    //             savePMOEvaluationDB, 
-    //             updatePMOEvaluation, 
-    //             saveProjectFiles,
-    //             saveRequirementsDB,
-    //             updateRequirementsDB,
-    //             updateBusinesInformationDB,
-    //             saveBusinesInformationDB,
-    //             updateTechnicalDB,
-    //             saveTechnicalDB,
-    //             updateROIRealizedDB,
-    //             saveROIRealizedDB,
-    //             saveDynatraceDB
-
-
-    //         } from  '../../../actions'
     import { FieldsGenerator, AppLoader, FormBody, FormFooter, AppButton  } from '../../../components';
     import Alert from 'react-s-alert';
     import 'react-s-alert/dist/s-alert-default.css';
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
     import PropTypes from 'prop-types';
+
+
+    const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
 
 
 // --------------------------------------
@@ -342,7 +326,7 @@
 
                         let mockFiles = project_docs.map((mockDoc, index) => {
 
-                            mockFile = this.createMockFile(mockDoc)
+                            mockFile = typeof mockDoc === 'string' ?  this.createMockFile(mockDoc) : mockDoc
 
                             console.log("TCL: preloadFiles -> mockFile", mockFile)
                         // Check if is the List from the DB or the New One
@@ -621,19 +605,19 @@
                 // Save Form Values
                 // --------------------------------------
                 saveFormValues(projectID, newProjectID) {
-                    const currentUser = window.getCurrentSPUser();
+                    // ! const currentUser = window.getCurrentSPUser();
 
                     // const projId = this.props.projectID || this.props.requirementsDefinition.newProjectID;
                     // const projId =  'GSD127';
                     // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
 
-                    const projId = this.props.requirementsDefinition.newProjectID || projectID;
+                    const projId = this.props.projectIntake.requirementsDefinition.Request_ID || projectID;
                     let requestID = null
                     
                     if(projId === undefined || projId === null )
                         requestID = null;
                     else if(projectID === null && newProjectID === null) 
-                        requestID = this.props.requirementsDefinition.newProjectID || null
+                        requestID = this.props.projectIntake.requirementsDefinition.Request_ID || null
                     else
                         requestID = projId.indexOf('D') >= 0 ? projId.substr(projId.indexOf('D')+1,projId.length) : projId;    
                     
@@ -641,7 +625,7 @@
 
                     const formData = {
                         Project_ID : requestID,
-                        pmo_eval_id : this.props.pmoEvaluation.newPMOEvaluationID || null,
+                        pmo_eval_id : this.props.projectIntake.pmoEvaluation.newPMOEvaluationID || null,
                         Expected_total_ROI : this.state.Expected_total_ROI ,
                         Expected_IRR : this.state.Expected_IRR ,
                         ROI_Category : this.state.ROI_Category ,
@@ -662,17 +646,23 @@
                 // Submit Form
                 // --------------------------------------
                 submitFormLocalData = (redirect) => {
-                    // const formData =  this.saveFormValues();
+                    
 
                     // this.props.saveLocalPMOEvaluation(formData);
                     
                     if(redirect) {
 
+                        const formData =  this.saveFormValues();
+
+                        this.props.updateProjectIntakeValues('pmoEval',formData)
+
+
+
                         // Show Sucess Message 
                         this.createSuccessAlert('Data Saved Locally');
                         // Redirect User
                         // setTimeout(()=>{this.redirectUser();},700);
-                        this.redirectUser();
+                        // this.redirectUser();
                     }
                 }
 
@@ -1504,22 +1494,7 @@
         props: PropTypes
     };
 
-/* ==========================================================================
-** Redux Functions
-** ========================================================================== */
-    // const mapStateToProps = (state) => {
-	// 	//console.log('TCL: mapStateToProps -> state.requirementsDefinition.newProjectID', state.requirementsDefinition.newProjectID)
-    //     return {
-    //         pmoEvaluation : state.pmoEvaluation,
-    //         projectID : state.requirementsDefinition.newProjectID,
-    //         isSaved : state.pmoEvaluation.isSaved,
-    //         isPMO : state.sharepoint.isPMO,
-    //         requirementsDefinition : state.requirementsDefinition,
-    //         businessInformation : state.businessInformation,
-    //         technicalEvaluation : state.technicalEvaluation,
-    //         roiRealized : state.roiRealized,
-    //     }
-    // }
+
 
 
 
@@ -1527,18 +1502,4 @@
 // Export Component
 // --------------------------------------
     export default  (PMOEvaluation);
-    // export default compose(withRouter, connect (mapStateToProps, {
-    //                                                                 saveLocalPMOEvaluation, 
-    //                                                                 savePMOEvaluationDB, 
-    //                                                                 updatePMOEvaluation, 
-    //                                                                 saveProjectFiles,
-    //                                                                 saveRequirementsDB,
-    //                                                                 updateRequirementsDB,
-    //                                                                 updateBusinesInformationDB,
-    //                                                                 saveBusinesInformationDB,
-    //                                                                 updateTechnicalDB,
-    //                                                                 saveTechnicalDB,
-    //                                                                 updateROIRealizedDB,
-    //                                                                 saveROIRealizedDB,
-    //                                                                 saveDynatraceDB
-    //                                                             })) (PMOEvaluation);
+   
