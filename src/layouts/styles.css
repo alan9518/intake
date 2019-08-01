@@ -213,11 +213,16 @@
         
     }
 
+/* 
+    .react-select-wide__placeholder {
+        color: #000 !important;
+    } */
+
     .react-select-extra-wid__placeholder, .react-select-wide__placeholder, .react-select__placeholder {
         /* font-size: 13px!important;
         color: #000000 !important; */
         font-size: 16px!important;
-        color: #777 !important;
+        color :#000 !important;
     }
 
     .react-select__control {

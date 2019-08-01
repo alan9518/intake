@@ -19,6 +19,8 @@
     import PropTypes from 'prop-types';
 
 
+    const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -512,7 +514,11 @@
             // Get ID from URL
             // --------------------------------------
             getProjectID() {
-                const {projectID} = this.props.match.params;
+
+                console.log("TCL: getProjectID -> this.props.locationData", this.props.locationData)
+
+                const {projectID} = this.props.locationData.match.params;
+                
                 const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
 
                 return requestID
@@ -917,7 +923,7 @@
                 // Save Form Values
                 // --------------------------------------
                 saveFormValues() {
-                    const currentUser = window.getCurrentSPUser();
+                    //! const currentUser = window.getCurrentSPUser();
                     // const projId = this.props.projectID || 'GSD67';
                     // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
 
@@ -988,7 +994,7 @@
                 // Submit Form
                 // --------------------------------------
                 submitFormLocalData = (event) => {
-                    // const formData =  this.saveFormValues();
+                    
 
                       // Validate Empty Fields
                     if(this.validateFormInputs() === false) {
@@ -998,6 +1004,11 @@
 
                     // this.props.saveLocalPMOEvaluation(formData);
                     this.setState({showFileManager : false})
+
+
+                    const formData =  this.saveFormValues();
+                    this.props.updateProjectIntakeValues('pmoEval',formData)
+
                     // // Show Sucess Message 
                     this.createSuccessAlert('Data Saved Locally');
 
@@ -1222,9 +1233,11 @@
             // Redirect User
             // --------------------------------------
             redirectUser() {
-                const {history} = this.props;
-                const id = this.props.match.params.projectID
-                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const {history, location, match} = this.props.locationData;
+                const id = match.params.projectID
+                //? const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+
+                const path = '/intake';
                 
                 history.push(`${path}/project/${id}/roi-realized`);
                 
@@ -1235,9 +1248,12 @@
             // --------------------------------------
             
             redirectUserPrev =() => {
-                const {history} = this.props;
-                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
-                let pathArray = this.props.location.pathname.split('/');
+                const {history, location} = this.props.locationData;
+                //? const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+
+                const path = '/intake';
+
+                let pathArray = location.pathname.split('/');
                 let projectIndex = pathArray[pathArray.length - 2];
 				console.log("TCL: BusinessInformation -> redirectUserPrev -> projectIndex", projectIndex)
                 
@@ -1540,24 +1556,14 @@
             // Render Component
             // --------------------------------------
             render() {
-                // const {isLoaded} = this.props.loadedPMOEvaluation
-                // let showComponent =  false;
-				// // console.log("TCL: render -> isLoaded", isLoaded)
-                // console.log("TCL: render -> this.props.", this.props)
-                
-                // if(isLoaded === undefined && this.props.loadedPMOEvaluation) {
-                //     showComponent = true
-                //     return showComponent ? this.renderPMOEvaluation()  : this.renderLoader();
-                // }
-                // else
-
+              
                 const {isLoaded} = this.state;
 
                 return isLoaded ? this.renderPMOEvaluation()  : this.renderLoader();
                     
 
                 
-                // return this.renderPMOEvaluation();
+                
             }
     }
 

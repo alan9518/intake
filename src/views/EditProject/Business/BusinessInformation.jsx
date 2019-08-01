@@ -12,14 +12,14 @@
     import CustomerValues from '../../../LocalData/customerValues.json'
     import PropTypes from 'prop-types';
     import { withRouter, Redirect } from 'react-router';
-    // import { connect } from 'react-redux';
-    // import { compose } from 'redux';
     import { isEqual , isEmpty} from 'lodash'
     import Alert from 'react-s-alert';
     import 'react-s-alert/dist/s-alert-default.css';
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
  
     import { FieldsGenerator, AppLoader, SectionHeader, FormBody, FormFooter, AppButton } from '../../../components';
+
+    const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
 
 // --------------------------------------
 // Create Component Class
@@ -101,13 +101,7 @@
             }
 
             
-            // --------------------------------------
-            // Create Form Fields to be rendered
-            // --------------------------------------
-            // componentWillMount() {
-            //     this.formFields =  this.createFormStructure();
-            // }
-
+           
 
 
             componentDidMount() {
@@ -134,12 +128,9 @@
             // unloads by the menu navigation
             // --------------------------------------
             componentWillUnmount() {
+                
+                this.submitFormLocalData(true)
 
-
-
-
-                // let data = this.saveFormValues();
-                // this.props.saveLocalBusiness(data);
                 // this.props.updateLocalBusinesInformation(data);
                 
             }
@@ -515,24 +506,27 @@
             // --------------------------------------
             createFormStructure() {
                 let usersCanEdit = false;
-                console.log("TCL: BusinessInformation -> createFormStructure -> usersCanEdit", usersCanEdit)
                 let workstage = '';
                 try {
                     // let workstage 
 
-                    if(this.props.requirementsDefinition) {
-                        if(this.props.requirementsDefinition.requirementsDefinition)
-                            workstage =  this.props.requirementsDefinition.requirementsDefinition.workstage  
-                        else if(this.props.requirementsDefinition.Workstage)
-                            workstage = this.props.requirementsDefinition.Workstage.value
+                    if(this.props.projectIntake.requirementsDefinition) {
+                        if(this.props.projectIntake.requirementsDefinition.Workstage.value)
+                            workstage = this.props.projectIntake.requirementsDefinition.Workstage.value
+                        else if(this.props.projectIntake.requirementsDefinition.Workstage)
+                            workstage = this.props.projectIntake.requirementsDefinition.Workstage
                         else
                             workstage = ''
+
                         
-                        if(workstage=== "Requested" && this.props.isPMO === false)
+                        if(workstage === "Requested" && this.props.isPMO === false)
                             usersCanEdit = false;
                         else
                             usersCanEdit = true;
+                            
                     }
+
+
 
                     
                     // if(this.props.requirementsDefinition.Workstage.value === "Requested" && this.props.isPMO === false)
@@ -541,7 +535,6 @@
                     //     usersCanEdit = true;
                 }
                 catch(error) {
-					// console.log("TCL: BusinessInformation -> createFormStructure -> error", error)
                     // this.redirectUserPrev();
                 }
 
@@ -549,8 +542,9 @@
                 let sites_ImpactedValue = null ;
                 // let condSites = null;
                 
-                if(!this.state.Sites_Impacted.length && this.props.businessInformation.businessInformation) {
-                    sites_ImpactedValue = this.loadImpactedSites(this.props.businessInformation.businessInformation.sites_impacted)
+                if(!this.state.Sites_Impacted && this.props.projectIntake.businessInformation) {
+                    // if()
+                    sites_ImpactedValue = this.loadImpactedSites(this.props.projectIntake.businessInformation.Sites_Impacted)
                     // this.loadConditionalValues(this.props.businessInformation.businessInformation.region)
                 }
                     
@@ -565,10 +559,7 @@
                 }
 
 
-                console.log("TCL: createFormStructure -> this.state.conditionalSites", this.state.conditionalSites)
                     
-                    
-                    console.log("TCL: createFormStructure -> sites_ImpactedValue", sites_ImpactedValue)
 
                 const formFields =
                 [
@@ -736,6 +727,7 @@
                         // "columns" : 2,
                         "columns" : 1,
                         "hasToolTip" : true,
+                        "allowFilter" : true,
                         "toolTipText" : "Detailed business model for user understanding ",
                         "extraWideControl" : true
                     },
@@ -965,6 +957,7 @@
                         "columns" : 2,
                         "hasToolTip" : true,
                         "toolTipText" : "Pick from the drop-down",
+                        "allowFilter" : true,
                         "wideControl" : true
                     },
                     {
@@ -1079,6 +1072,7 @@
                     {
                         "Field_Name": "Sites Impacted",
                         "value":  sites_ImpactedValue,
+                        // "value":  this.state.Sites_Impacted,
                         "Field_State_Name": "Sites_Impacted",
                         // "group": "secondHalf1",
                         "group": this.state.responsiveWidth <= 1440 ? "secondHalf1" : "secondHalf2",
@@ -1534,9 +1528,13 @@
 
             // --------------------------------------
             // Validate Empty People Pickers
+            // TODO Remove empty pp validation
             // --------------------------------------
             validatePeoplePicker(pickerName) {
                 let isValid = true;
+
+                if(!document.getElementById(`peoplePicker${pickerName}_TopSpan_HiddenInput`))
+                    return true
 
                 if (document.getElementById(`peoplePicker${pickerName}_TopSpan_HiddenInput`).value === "[]" || document.getElementById(`peoplePicker${pickerName}_TopSpan_HiddenInput`).value === "") {
                     isValid = false;
@@ -1653,7 +1651,7 @@
                 // Save Form Values
                 // --------------------------------------
                 saveFormValues (projectID) {
-                    const currentUser = window.getCurrentSPUser();
+                    //! const currentUser = window.getCurrentSPUser();
 
 
                     // requestID = projId.substr(projId.indexOf('D')+1,projId.length);    
@@ -1674,13 +1672,14 @@
                         // if( this.props.requirementsDefinition !== undefined ||  !isEmpty(this.props.requirementsDefinition))
                         // reqWorkstage =  this.props.requirementsDefiniton.Workstage.value || this.props.requirementsDefinition.requirementsDefinition.workstage
 
-                        if(this.props.requirementsDefinition) {
+                        if(this.props.projectIntake.requirementsDefinition) {
+
                             if(this.props.requirementsDefinition.requirementsDefinition &&  this.props.requirementsDefinition.requirementsDefinition.workstage !== "")
-                                reqWorkstage =  this.props.requirementsDefinition.requirementsDefinition.workstage  
-                            else if(this.props.requirementsDefinition.Workstage)
+                                reqWorkstage =  reqWorkstage = this.props.projectIntake.requirementsDefinition.Workstage  
+                            else if(this.props.projectIntake.requirementsDefinition.Workstage.value)
                                 reqWorkstage = this.props.requirementsDefinition.Workstage.value
-                            else
-                                reqWorkstage = ''
+                             else
+                                reqWorkstage = ' '
                         }
                        
                     }
@@ -1740,42 +1739,34 @@
                 // --------------------------------------
                 // Submit Form
                 // --------------------------------------
-                submitFormLocalData = (saveFormValues) => {
-                    // let erros = {};
-                    // const nextStep = '/add-project/technical-evaluation';
-                    // const nextStep = 'proccess-ended';
-                    // const formData = this.saveFormValues();
-
-                    // if(saveFormValues === true) {
-                    //     this.props.saveLocalBusiness(formData);
-                    // }
-
+                submitFormLocalData = (exitFromMenu =  false) => {
+                  
                     if(this.state.sendingData === true)
                         return;
 
-                    //console.log('TCL: submitFormLocalData -> this.props', this.props)
-                    //! if(this.validateFormInputs() === false) {
-                    //!     this.createErrorAlertTop('Please Fill all the Required Fields');
-                    //!   this.setState({checkForErrors: true})
-                    //!     return;
-                    //! };
+                    
+                    if(this.validateFormInputs() === false) {
+                        this.createErrorAlertTop('Please Fill all the Required Fields');
+                        this.setState({checkForErrors: true})
+                        return;
+                    };
+
+
+                    const formData = this.saveFormValues();
+                    this.props.updateProjectIntakeValues('business',formData)
                     
                     
 					
-
                     
-                
-                    //console.log('TCL: submitFormLocalData -> formData', formData)
+                    //? Show Sucess Message if 
+                        
 
-                    
-                    // Show Sucess Message 
-                        this.createSuccessAlert('Data Saved Locally');
+                        if(exitFromMenu !== true) {
+                            this.createSuccessAlert('Data Saved Locally');
+                            this.redirectUser();
+                        }
 
-                    // Redirect User
-                        // setTimeout(()=>{this.redirectUser(nextStep);},700);
-
-                        this.redirectUser();
-                    // this.redirectUser(nextStep);
+                       
                 }
 
 
@@ -3446,22 +3437,8 @@
             // --------------------------------------
             render() {
                 const {isLoaded} = this.state;
-                let showComponent =  false;
-
-                // if(isLoaded === undefined && this.props.updateFromDB === true && this.props.updateFromDB) 
-                //     return this.renderBusinessInformation();
-                // else
-                //     return isLoaded ?  this.renderBusinessInformation() : this.renderLoader();
-
-                // if(isLoaded === undefined && this.props.loadedBusinessInformation) {
-                //     // showComponent = true
-                //     return showComponent ? this.renderBusinessInformation() : this.renderLoader();
-                // }
-                    
-                // else
-                    return isLoaded ? this.renderBusinessInformation() : this.renderLoader();
+                return isLoaded ? this.renderBusinessInformation() : this.renderLoader();
             
-                // else
                     
             }
     }
@@ -3470,38 +3447,14 @@
 // -------------------------------------- 
 // Define PropTypes 
 // -------------------------------------- 
-    // BusinessInformation.propTypes = {
-    //     props: PropTypes
-    // };
+    BusinessInformation.propTypes = {
+        projectIntake : PropTypes.object,
+        isPMO : PropTypes.bool,
+        locationData : PropTypes.object,
+        updateProjectIntakeValue : PropTypes.func
+    };
 
 
-/* ==========================================================================
-** Redux Functions
-** ========================================================================== */
-    // const mapStateToProps = (state, props) => {
-    //     if(props.match.params.projectID) {
-    //         console.log("TCL: mapStateToProps -> state", state)
-    //         return {
-    //             businessInformation : state.businessInformation,
-    //             loadedBusinessInformation : state.businessInformation,
-    //             projectID : state.requirementsDefinition.newProjectID,
-    //             pmos : state.sharepoint.pmos,
-    //             isPMO : state.sharepoint.isPMO,
-    //             requirementsDefinition : state.requirementsDefinition,
-    //             updateFromState : state.businessInformation.updateFromState, 
-    //             updateFromDB : state.businessInformation.updateFromDB,
-    //             isLoaded : state.businessInformation.isLoaded,
-    //             technicalEvaluation : state.technicalEvaluation,
-    //             pmoEvaluation : state.pmoEvaluation,
-    //             roiRealized : state.roiRealized,
-    //         }
-    //     }
-    //     return {
-    //         businessInformation : null
-    //     }
-
-       
-    // }
 
 
 // --------------------------------------

@@ -21,6 +21,9 @@
     import moment from 'moment';
 
 
+    const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+
+
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -1508,29 +1511,19 @@
                 }
 
 
-                // if(preloadData === true) {
-                //     // this.props
-                //     console.log("TCL: TechnicalEvaluation -> loadConditionalValues -> this.props", this.props)
-                //     this.setState({
-                //         // Technology : this.createSelectOption(this.props.loadedtechnicalEvaluation.technicalEvaluation.Technology),
-                //         // Applications_involved :  this.createSelectOption(this.props.loadedtechnicalEvaluation.technicalEvaluation.Applications_involved)
-                //     })
-
-                //     // this.setState({
-                      
-                // }
 
                 if(preloadData === false) {
                         
-                    // this.setState({
-                    //     Applications_involved :  {label : "", value : null} ,
-                    //     Technology :  [] ,
-                    //     IT_Groups_Required :  {label : "", value : null} 
-                    // })
+                    this.setState({
+                        Applications_involved :  {label : "", value : null} ,
+                        Technology :  [] ,
+                        IT_Groups_Required :  {label : "", value : null} 
+                    })
 
                     // reset Other Selects
                     let sel1 = document.getElementById('Applications_involved').getElementsByClassName('react-select-wide__single-value')[0];
                         if(sel1) sel1.textContent = "Select Applications Involved";
+                        else document.getElementById('Applications_involved').getElementsByClassName('react-select-wide__placeholder')[0].textContent = "Select Applications Involved"
 
                         let sel2 = document.getElementById('Technology').querySelectorAll('.react-select-wide__multi-value')
                         // document.querySelectorAll('.react-select-wide__multi-value')
@@ -1546,6 +1539,7 @@
                     
                     let sel3 = document.getElementById('IT_Groups_Required').getElementsByClassName('react-select-wide__single-value')[0];
                         if(sel3)  sel3.textContent = "Select IT Groups Required"
+                        else document.getElementById('IT_Groups_Required').getElementsByClassName('react-select-wide__placeholder')[0].textContent = "Select IT Groups Required"
                 }
 
 
@@ -1585,7 +1579,11 @@
             // peoplePickerBusiness_lead_TopSpan_HiddenInput
             // --------------------------------------
             getPeoplePickerData(peoplePicker) {
-                const pickerName = `peoplePicker${peoplePicker}_TopSpan_HiddenInput`
+                const pickerName = `peoplePicker${peoplePicker}_TopSpan_HiddenInput`;
+
+                if( !document.getElementById(pickerName) )
+                    return null;
+
                 const pickerValue = document.getElementById(pickerName).value || "";
                 if(pickerValue === "" || pickerValue === "[]" || pickerValue === [] ) 
                     return null;
@@ -1652,7 +1650,7 @@
             // Get ID from URL
             // --------------------------------------
             getProjectID() {
-                const {projectID} = this.props.match.params;
+                const {projectID} = this.props.locationData.match.params;
                 const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
 
                 return requestID
@@ -1704,9 +1702,15 @@
 
             // --------------------------------------
             // Validate Empty PP
+            // ! TODO Remove Empty Validation
             // --------------------------------------
             validatePeoplePicker(pickerName) {
                 let isValid = true;
+
+                if(!document.getElementById(`peoplePicker${pickerName}_TopSpan_HiddenInput`))
+                    return true
+
+
                 if (document.getElementById(`peoplePicker${pickerName}_TopSpan_HiddenInput`).value === "[]" || document.getElementById(`peoplePicker${pickerName}_TopSpan_HiddenInput`).value === "") {
                     isValid = false;
                     document.getElementById(`peoplePicker${pickerName}_TopSpan`).style = 'border: 1px solid #e76c90 !important';
@@ -1819,7 +1823,7 @@
             // Save Form values
             // --------------------------------------
             saveFormValues() {
-                const currentUser = window.getCurrentSPUser();
+                //! const currentUser = window.getCurrentSPUser();
             
                 // const projectID = this.props.requirementsDefinition.requirementsDefinition.newProjectID || this.props.loadedtechnicalEvaluation.technicalEvaluation.project_id;
                 // const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
@@ -1837,7 +1841,7 @@
                     
 
                     if(this.state.Delivery_Team.value === undefined || this.state.Delivery_Team.value === null) 
-                        delTeam = this.props.loadedtechnicalEvaluation.technicalEvaluation.Delivery_Team || this.props.loadedtechnicalEvaluation.Delivery_Team   
+                        delTeam = this.props.projectIntake.technicalEvaluation.Delivery_Team 
                     else
                         delTeam = this.state.Delivery_Team.value
                 }
@@ -1888,7 +1892,7 @@
             // --------------------------------------
             submitFormLocalData = (event) => {
             
-                // const formData = this.saveFormValues();
+                
                 // this.props.saveLocalTechnical(formData);
 
                 if(this.validateFormInputs() === false) {
@@ -1896,6 +1900,9 @@
                     this.setState({checkForErrors : true})
                     return;
                 }
+
+                const formData = this.saveFormValues();
+                this.props.updateProjectIntakeValues('technical',formData)
                 
 
                 // Show Sucess Message 
@@ -2132,9 +2139,11 @@
             // Redirect User
             // --------------------------------------
             redirectUser() {
-                const {history} = this.props;
-                const id = this.props.match.params.projectID
-                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const {history} = this.props.locationData;
+                const id = this.props.locationData.match.params.projectID
+                //? const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+
+                const path = '/intake'
                 
                 history.push(`${path}/project/${id}/pmo-evaluation`);
                 
@@ -2145,9 +2154,11 @@
             // --------------------------------------
             
             redirectUserPrev() {
-                const {history} = this.props;
-                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
-                let pathArray = this.props.location.pathname.split('/');
+                const {history, location} = this.props.locationData;
+                //? const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+
+                const path = '/intake'
+                let pathArray = location.pathname.split('/');
                 let projectIndex = pathArray[pathArray.length - 2];
 				// console.log("TCL: BusinessInformation -> redirectUserPrev -> projectIndex", projectIndex)
                 
@@ -2741,15 +2752,7 @@
             // Render Component
             // --------------------------------------
             render() {
-                // const {isLoaded} = this.props;
-                // const {isLoaded} = this.props.loadedtechnicalEvaluation;
-                // let showComponent =  false;
-                // if(isLoaded === undefined && this.props.loadedtechnicalEvaluation) {
-                //     // showComponent = true
-                //     return showComponent ? this.renderTechnicalEvaluation() : this.renderLoader();
-                // }
-                    
-                // else
+                
                 const {isLoaded} = this.state
                 return isLoaded ? this.renderTechnicalEvaluation() : this.renderLoader();
             }
@@ -2760,7 +2763,10 @@
 // Define PropTypes 
 // -------------------------------------- 
     TechnicalEvaluation.propTypes = {
-        props: PropTypes
+        projectIntake : PropTypes.object,
+        isPMO : PropTypes.bool,
+        locationData : PropTypes.object,
+        updateProjectIntakeValue : PropTypes.func
     };
 
 /* ==========================================================================

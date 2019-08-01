@@ -71,6 +71,7 @@ class DatePicker extends Component {
                     onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
                     id = {name} // PropTypes.string.isRequired,
                     showDefaultInputIcon = {true}
+                    isOutsideRange={() => false}
                     inputIconPosition="after"
                     small = {true}
                     disabled = {readOnly}

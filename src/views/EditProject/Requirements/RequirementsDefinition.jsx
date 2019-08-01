@@ -12,35 +12,10 @@
     import PropTypes from 'prop-types';
     import form_icon from '../../../assets/img/form_icon.png';
     import { FieldsGenerator, AppLoader, FormFooter, AppButton, FormBody } from '../../../components';
-    // import { connect } from 'react-redux';
-    // import { compose } from 'redux';
+  
     import { isEqual , isEmpty} from 'lodash';
     import { withRouter } from 'react-router';
-    // import {
-    //             saveLocalRequirements, 
-    //             saveRequirementsDB, 
-    //             findProjectFolder, 
-    //             fetchProjectRequirements,
-    //             fetchProjectRequirementsFiles,  
-    //             updateRequirementsDB, 
-    //             updateLocalRequirements, 
-    //             saveProjectFiles, 
-    //             fetchProjectFiles, 
-    //             updateBusinesInformationDB,
-    //             saveBusinesInformationDB,
-    //             updateTechnicalDB,
-    //             saveTechnicalDB,
-    //             savePMOEvaluationDB,
-    //             updatePMOEvaluation,
-    //             updateROIRealizedDB,
-    //             saveROIRealizedDB,
-    //             saveDynatraceDB,
-    //             resetRequirementsState, 
-    //             resetBusinessState, 
-    //             resetPMOEvaluationState, 
-    //             resetROIRealizedState, 
-    //             resetTechnicalState
-    //         } from '../../../actions';
+  
     import Alert from 'react-s-alert';
     import 'react-s-alert/dist/s-alert-default.css';
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
@@ -125,8 +100,8 @@
             // unloads by the menu navigation
             // --------------------------------------
             componentWillUnmount() {
-                // let formData =  this.saveFormValues();
-                // this.submitFormLocalData(true)
+                
+                this.submitFormLocalData(true)
                 // this.props.saveLocalRequirements(formData);
             }
 
@@ -134,39 +109,7 @@
 
             componentDidMount() {
 
-                // console.log("TCL: RequirementsDefinition -> componentDidMount -> this.props", this.props)
-
-
-                // // this.state
-                // console.log("TCL: RequirementsDefinition -> componentDidMount -> this.state", this.state)
-
-                // this.setState({
-                //     Date_Submitted : this.formatDate(this.props.projectIntake.requirementsDefinition.Date_submitted) ,  
-                    
-                //     Date_Submitted_Moment : this.convertStringToMomentObject(this.props.projectIntake.requirementsDefinition.Date_submitted) || moment(),  
-                //     Request_Owner : this.props.projectIntake.requirementsDefinition.Request_Owner ,  
-                //     Request_ID : this.props.projectIntake.requirementsDefinition.request_id ||  this.props.projectIntake.requirementsDefinition.Project_id,  
-                //     // Workstage : {label : this.props.projectIntake.requirementsDefinition.workstage, value : this.props.projectIntake.requirementsDefinition.workstage},  
-                //     // Workstage : {label : this.props.loadedRequirements.requirementsDefinition.workstage, value : this.props.loadedRequirements.requirementsDefinition.workstage},  
-                //     Workstage : this.createSelectOption(this.props.projectIntake.requirementsDefinition.Workstage),
-                //     Project_Name :this.props.projectIntake.requirementsDefinition.Project_Name ,  
-                //     Description : this.props.projectIntake.requirementsDefinition.Description , 
-                //     Expected_Start_Date : moment(this.props.projectIntake.requirementsDefinition.Expected_Start_Date )|| moment(),  
-                //     Expected_Completion_Date : moment(this.props.projectIntake.requirementsDefinition.Expected_Completion_Date) || moment(),   
-                //     Expected_Start_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.requirementsDefinition.Expected_Start_Date) || moment(),  
-                //     Expected_Completion_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.requirementsDefinition.Expected_Completion_Date) || moment(),   
-                //     Deadline_Justification : this.props.projectIntake.requirementsDefinition.Deadline_Justification || "",     
-                //     // Project_Type : {label : this.props.projectIntake.requirementsDefinition.Project_Type, value : this.props.projectIntake.requirementsDefinition.Project_Type},    
-                //     Project_Type : this.createSelectOption(this.props.projectIntake.requirementsDefinition.Project_Type),
-                //     Project_Documents : this.props.projectIntake.requirementsDefinition.Project_docs ||  [],  
-                //     // usersCanEdit : usersCanEdit,
-                //     sendingData : false,
-                //     redirectUser : false,
-                //     dataSavedOnDB : false,
-                //     isLoaded : true
-                //                 // showFileManager : this.props.projectIntake.requirementsDefinition.requirementsDefinition.project_docs.length > 0 ? true : false
-                // })
-                // this.filesArray =  this.props.projectIntake.requirementsDefinition.Project_docs ;
+              
 
                 this.setState({
                     Expected_Start_Date : moment(this.props.projectIntake.requirementsDefinition.Expected_Start_Date )|| moment(),  
@@ -451,8 +394,7 @@
                 else
                     usersCanEdit = true;
 
-                // this.state
-                console.log("TCL: RequirementsDefinition -> createFormStructure -> this.state", this.state)
+            
 
                
                 const formFields = [
@@ -675,7 +617,6 @@
 
             setDateSubmittedValue(date) {
                 
-                console.log("TCL: RequirementsDefinition -> setDateSubmittedValue -> date", date)
                
                 if(!date)
                     return ''
@@ -1201,9 +1142,9 @@
                 // Save Form Values
                 // --------------------------------------
                 saveFormValues () { 
-                    const currentUser = window.getCurrentSPUser();
-                    const startDate = this.state.Expected_Start_Date || moment();
-                    const completionDate = this.state.Expected_Completion_Date || moment();
+                    //! const currentUser = window.getCurrentSPUser();
+                    // const startDate = this.state.Expected_Start_Date || moment();
+                    // const completionDate = this.state.Expected_Completion_Date || moment();
 
                     //console.log('TCL: saveFormValues -> startDate',  moment(startDate).format("DD/MM/YYYY")  )
                     //console.log('TCL: saveFormValues -> completionDate', moment(completionDate).format("DD/MM/YYYY"))
@@ -1212,14 +1153,15 @@
 
                     this.filesArray = this.state.Project_Documents;
 
-                    const projId = this.props.loadedRequirements.requirementsDefinition ? this.props.loadedRequirements.requirementsDefinition.request_id : this.props.loadedRequirements.Project_id
+                    // const projId = this.props.projectIntake.requirementsDefinition ? this.props.projectIntake.requirementsDefinition.Request_ID : this.props.loadedRequirements.Project_id
+                    const projId = this.props.projectIntake.requirementsDefinition.Request_ID 
                     const requestID =  projId.indexOf('D') >= 0 ?  projId.substr(projId.indexOf('D')+1,projId.length) : projId;
 
 
                     console.log("TCL: RequirementsDefinition -> saveFormValues -> this.originalFiles", this.originalFiles)
 
                     // ?Filter Docs
-                    let docsToSave = [];
+                    // let docsToSave = [];
                     // if(this.state.newFilesCancelled === true &)
                     //     docsToSave = this.originalFiles
                     
@@ -1291,8 +1233,9 @@
                 // --------------------------------------
                 // Submit Form
                 // --------------------------------------
-                submitFormLocalData = (saveFormValues) => {
+                submitFormLocalData = (exitFromMenu =  false) => {
 
+                   
                     
                     if(this.validateFormInputs() === false) {
                         this.createErrorAlertTop('Please Fill all the Required Fields');
@@ -1302,8 +1245,15 @@
 
                     this.renderLoader(true);
 
-                    this.createSuccessAlert('Data Saved Locally');
-                    this.redirectUser();
+                    const formData = this.saveFormValues();
+
+                    this.props.updateProjectIntakeValues('requirements',formData)
+
+                    if(exitFromMenu !== true) {
+                        this.createSuccessAlert('Data Saved Locally');
+                        this.redirectUser();
+                    }
+                       
 
 
 				
@@ -1651,7 +1601,7 @@
             renderFormFields(group, renderBorder, startPosition) {
 
                 // this.state
-                console.log("TCL: RequirementsDefinition -> renderFormFields -> this.state", this.state)
+                
 
                 // const ProjectID = this.props.match.params.projectID;
 
@@ -1865,16 +1815,6 @@
             // --------------------------------------
             render() {
                 const {isLoaded} = this.state;
-                // const {isLoaded} = this.props.loadedRequirements || this.props.requirementsDefinition;
-
-                // let showComponent =  false;
-                // if(isLoaded === undefined && this.props.loadedRequirements) {
-                //     // showComponent = true
-                //     return showComponent ? this.renderRequirementsDefinition() : this.renderLoader();
-                // }
-                
-                // return this.renderLoader();
-
                 return isLoaded ? this.renderRequirementsDefinition() : this.renderLoader();
             }
     }
@@ -1883,67 +1823,19 @@
 // Define PropTypes 
 // -------------------------------------- 
     RequirementsDefinition.propTypes = {
-        requirementsDefinition: PropTypes.object.isRequired
+        projectIntake : PropTypes.object,
+        isPMO : PropTypes.bool,
+        locationData : PropTypes.object,
+        updateProjectIntakeValue : PropTypes.func
     };
 
 
 /* ==========================================================================
 ** Redux Functions
 ** ========================================================================== */
-    // const mapStateToProps = (state, props) => {
-    //     console.log("TCL: mapStateToProps -> props", props)
-    //     console.log("TCL: mapStateToProps -> state", state)
-    //     if(props.match.params.projectID) {
-    //         return {
-    //             requirementsDefinition : state.requirementsDefinition,
-    //             requirementsDefinitionFiles : state.requirementsDefinitionFiles,
-    //             loadedRequirements : state.requirementsDefinition,
-    //             isLoaded : state.requirementsDefinition.isLoaded,
-    //             updateFromState : state.requirementsDefinition.updateFromState, 
-    //             updateFromDB : state.requirementsDefinition.updateFromDB,
-    //             unsavedChanges : state.requirementsDefinition.unsavedChanges,
-    //             isPMO : state.sharepoint.isPMO,
-    //             requirementsFiles : state.sharepoint.requirementsDocs,
-    //             businessInformation : state.businessInformation,
-    //             technicalEvaluation : state.technicalEvaluation,
-    //             pmoEvaluation : state.pmoEvaluation,
-    //             roiRealized : state.roiRealized,
-                
-    //         }
-    //     }
-
-    //     return {
-    //         requirementsDefinition : null
-    //     }
-        
-    // }
-
+    
 // --------------------------------------
 // Export Component
 // --------------------------------------
     export default (RequirementsDefinition);
-    // export default compose(withRouter, connect (mapStateToProps, {
-    //                                                                 saveLocalRequirements, 
-    //                                                                 saveRequirementsDB, 
-    //                                                                 updateRequirementsDB, 
-    //                                                                 updateLocalRequirements,    
-    //                                                                 findProjectFolder, 
-    //                                                                 fetchProjectRequirements, 
-    //                                                                 fetchProjectRequirementsFiles, 
-    //                                                                 saveProjectFiles, 
-    //                                                                 fetchProjectFiles, 
-    //                                                                 updateBusinesInformationDB,
-    //                                                                 saveBusinesInformationDB,
-    //                                                                 updateTechnicalDB,
-    //                                                                 saveTechnicalDB,
-    //                                                                 savePMOEvaluationDB,
-    //                                                                 updatePMOEvaluation,
-    //                                                                 updateROIRealizedDB,
-    //                                                                 saveROIRealizedDB,
-    //                                                                 saveDynatraceDB,
-    //                                                                 resetRequirementsState ,
-    //                                                                 resetBusinessState, 
-    //                                                                 resetPMOEvaluationState, 
-    //                                                                 resetROIRealizedState, 
-    //                                                                 resetTechnicalState
-    //                                                 })) (RequirementsDefinition);
+    

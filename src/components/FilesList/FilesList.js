@@ -34,7 +34,7 @@ const FilesList = (props) => {
                     filesData && filesData.length > 0 
                     ? filesData.map((doc) => {
                         // let nameToSplit = "";
-                        console.log('render doc', doc);
+                        // console.log('render doc', doc);
 
                         if(doc.name ) {
                             // nameToSplit =  doc.name;
@@ -49,7 +49,7 @@ const FilesList = (props) => {
 
 
                             documentArray = doc.split('/');
-                            console.log("TCL: FilesList -> documentArray", documentArray)
+                            // console.log("TCL: FilesList -> documentArray", documentArray)
                         
                             fileExtensionArray = (documentArray[documentArray.length - 1]).split('.');
                             fileExtension =  fileExtensionArray[fileExtensionArray.length -1];

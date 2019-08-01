@@ -19,6 +19,9 @@
     import moment from "moment";
 
 
+    const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+
+
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -67,7 +70,7 @@
                 }
                 this.onChangeSelect =  this.onChangeSelect.bind(this);
                 this.onDateChange =  this.onDateChange.bind(this);
-                
+                this.formFields =  this.createFormStructure();
             }
 
 
@@ -75,20 +78,48 @@
             // --------------------------------------
             // Create Form Fields to be rendered
             // --------------------------------------
-            componentWillMount() {
-                this.formFields =  this.createFormStructure();
-            }
-
+           
 
             componentDidMount() {
                 
                 console.log("TCL: componentDidMount -> this.state", this.state)
+                
+                console.log("TCL: componentDidMount -> this.props", this.props)
 
                 this.setState({
-                    Implementation_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.roiRealized.Implementation_Date),
-                    // ROI_Realized_Date : this.props.
+                    roi_real_id : this.props.projectIntake.roiRealized.roi_real_id || null,
+                    Implementation_Date : this.props.projectIntake.roiRealized.Implementation_Date,
+                    Implementation_Date_Moment : moment(this.props.projectIntake.roiRealized.Implementation_Date),
+                    FTE_Saved_per_year : this.props.projectIntake.roiRealized.FTE_Saved_per_year,
+                    Hours_saved_per_year : this.props.projectIntake.roiRealized.Hours_saved_per_year,
+                    Compliance_Ris_cost_that_was_avoided_by_this_application : this.props.projectIntake.roiRealized.Compliance_Ris_cost_that_was_avoided_by_this_application,
+                    Risk_Avoidance : this.props.projectIntake.roiRealized.Risk_Avoidance,
+                    Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : this.props.projectIntake.roiRealized.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
+                    Legacy_System_Infra_and_License_Fee_savings_per_year : this.props.projectIntake.roiRealized.Legacy_System_Infra_and_License_Fee_savings_per_year,
+                    Other_Savings : this.props.projectIntake.roiRealized.Other_Savings,
+                    Design_Developmen_Testing_Effort_hours : this.props.projectIntake.roiRealized.Design_Developmen_Testing_Effort_hours,
+                    Travel_TE : this.props.projectIntake.roiRealized.Travel_TE,
+                    Consulting : this.props.projectIntake.roiRealized.Consulting_roi,
+                    Training : this.props.projectIntake.roiRealized.Training,
+                    Licenses_Cost_per_year : this.props.projectIntake.roiRealized.Licenses_Cost_per_year,
+                    Hardware_leasing : this.props.projectIntake.roiRealized.Hardware_leasing,
+                    Maintenance_Hardware_hours_per_year : this.props.projectIntake.roiRealized.Maintenance_Hardware_hours_per_year,
+                    Maintenance_Salaries_hours_per_year : this.props.projectIntake.roiRealized.Maintenance_Salaries_hours_per_year,
+                    Site_Usage : this.props.projectIntake.roiRealized.Site_Usage,
+                    Usage_Footprint_1_week : this.props.projectIntake.roiRealized.Usage_Footprint_1_week,
+                    Transactions_per_minute_TPM : this.props.projectIntake.roiRealized.Transactions_per_minute_TPM,
+                    ROI_Realized_Date_Moment : moment(),
+                    Site_UsageRows : [],
+                    Usage_FootprintRows : [],
+                    dynatrace : this.props.projectIntake.roiRealized.dynatrace || [],
+                    showDynatrace : this.props.projectIntake.roiRealized.showDynatrace || false,
+                    
+                    
                     isLoaded : true
                 })
+
+
+                
 
             }
 
@@ -257,302 +288,311 @@
             // Crate JSON Data FIelds
             // --------------------------------------
             createFormStructure() {
-                const formFields = [
-                    {
-                        "Field_Name": "Implementation Date",
-                        "value": this.state.Implementation_Date_Moment,
-                        "Field_State_Name": "Implementation_Date",
-                        "group" : "firstSection1",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "69",
-                        "Type": "Date",
-                        "General_Value": "?",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Date when implementation was completed."
-                
-                    },
-                    {
-                        "Field_Name": "FTE Saved per year",
-                        "value": this.state.FTE_Saved_per_year,
-                        "Field_State_Name": "FTE_Saved_per_year",
-                        "group" : "firstSection2",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "70",
-                        "Type": "Integer",
-                        "General_Value": "0",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                
-                    },
-                    {
-                        "Field_Name": "Hours saved per year",
-                        "value": this.state.Hours_saved_per_year,
-                        "Field_State_Name": "Hours_saved_per_year",
-                        "group" : "firstSection3",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "71",
-                        "Type": "Integer",
-                        "General_Value": "0",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                
-                    },
-                    {
-                        "Field_Name": "Compliance / Risk cost that was avoided by this application.",
-                        "value": this.state.Compliance_Ris_cost_that_was_avoided_by_this_application,
-                        "Field_State_Name": "Compliance_Ris_cost_that_was_avoided_by_this_application",
-                        "group" : "secondSection1",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "72",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        // "columns" : 2,
-                        "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Risk Avoidance",
-                        "value": this.state.Risk_Avoidance,
-                        "Field_State_Name": "Risk_Avoidance",
-                        "group" : "secondSection2",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "73",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        // "columns" : 2,
-                        "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Savings from Retirement of Legacy application in hours per year by Maintenance Team?",
-                        "value": this.state.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
-                        "Field_State_Name": "Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team",
-                        "group" : "thirdSection1",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "74",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        // "columns" : 2,
-                        "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Legacy System Infra and License Fee savings per year?",
-                        "value": this.state.Legacy_System_Infra_and_License_Fee_savings_per_year,
-                        "Field_State_Name": "Legacy_System_Infra_and_License_Fee_savings_per_year",
-                        "group" : "fourthSection1",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "75",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        // "columns" : 2,
-                        "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Other Savings",
-                        "value": this.state.Other_Savings,
-                        "Field_State_Name": "Other_Savings",
-                        "group" : "fourthSection2",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "76",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        // "columns" : 2,
-                        "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Design, Development & Testing Effort (hours)",
-                        "value": this.state.Design_Developmen_Testing_Effort_hours,
-                        "Field_State_Name": "Design_Developmen_Testing_Effort_hours",
-                        "group" : "fifthSection1",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "77",
-                        "Type": "Decimal",
-                        "General_Value": "0",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Travel (T&E)",
-                        "value": this.state.Travel_TE,
-                        "Field_State_Name": "Travel_TE",
-                        "group" : "fifthSection2",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "78",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Consulting",
-                        "value": this.state.Consulting,
-                        "Field_State_Name": "Consulting",
-                        "group" : "fifthSection3",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "79",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Training",
-                        "value": this.state.Training,
-                        "Field_State_Name": "Training",
-                        "group" : "sixthSection1",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "80",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Licenses Cost per year",
-                        "value": this.state.Licenses_Cost_per_year,
-                        "Field_State_Name": "Licenses_Cost_per_year",
-                        "group" : "seventhSection1",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "81",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Hardware leasing",
-                        "value": this.state.Hardware_leasing,
-                        "Field_State_Name": "Hardware_leasing",
-                        "group" : "seventhSection2",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "82",
-                        "Type": "Decimal",
-                        "General_Value": "$",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Maintenance Hardware (hours per year)",
-                        "value": this.state.Maintenance_Hardware_hours_per_year,
-                        "Field_State_Name": "Maintenance_Hardware_hours_per_year",
-                        "group" : "eigthSection1",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "83",
-                        "Type": "Decimal",
-                        "General_Value": "0",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Maintenance Salaries (hours per year)",
-                        "value": this.state.Maintenance_Salaries_hours_per_year,
-                        "Field_State_Name": "Maintenance_Salaries_hours_per_year",
-                        "group" : "eigthSection2",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "84",
-                        "Type": "Decimal",
-                        "General_Value": "0",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Hours"
-                    },
-                    {
-                        "Field_Name": "Site Usage",
-                        "value": this.state.Site_Usage,
-                        "Field_State_Name": "Site_Usage",
-                        "group" : "ninthSection1",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "85",
-                        "Type": "text",
-                        "General_Value": [],
-                        "columns" : 2,
-                        "wideControl" : true,
-                        // "multipleRows" : true,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Sites where new systems were implemented."
-                    },
-                    {
-                        "Field_Name": "Usage Footprint (1 week)",
-                        "value": this.state.Usage_Footprint_1_week,
-                        "Field_State_Name": "Usage_Footprint_1_week",
-                        "group" : "ninthSection2",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "86",
-                        "Type": "text",
-                        "General_Value": [],
-                        "columns" : 2,
-                        "wideControl" : true,
-                        // "multipleRows" : true,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "Transactions per minute (TPM)",
-                        "value": this.state.Transactions_per_minute_TPM,
-                        "Field_State_Name": "Transactions_per_minute_TPM",
-                        "group" : "ninthSection3",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "87",
-                        "Type": "Integer",
-                        "General_Value": "?See Notes below",
-                        "columns" : 2,
-                        "hasToolTip" : true,
-                        "toolTipText" : "Numbers"
-                    },
-                    {
-                        "Field_Name": "ROI Realized Date",
-                        "value": this.state.ROI_Realized_Date_Moment,
-                        "Field_State_Name": "ROI_Realized_Date",
-                        "group" : "ninthSection4",
-                        "Mandatory": false,
-                        "Enabled": true,
-                        "Sequence": "88",
-                        "Type": "Date",
-                        "General_Value": "Date Picker",
-                        "hasToolTip" : true,
-                        "toolTipText" : "Date when ROI realized analysis was completed",
-                        "columns" : 2
-                    }
-                ]
 
-                return formFields;
+
+                try {
+                    const formFields = [
+                        {
+                            "Field_Name": "Implementation Date",
+                            "value": this.state.Implementation_Date_Moment,
+                            "Field_State_Name": "Implementation_Date",
+                            "group" : "firstSection1",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "69",
+                            "Type": "Date",
+                            "General_Value": "?",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Date when implementation was completed."
+                    
+                        },
+                        {
+                            "Field_Name": "FTE Saved per year",
+                            "value": this.state.FTE_Saved_per_year,
+                            "Field_State_Name": "FTE_Saved_per_year",
+                            "group" : "firstSection2",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "70",
+                            "Type": "Integer",
+                            "General_Value": "0",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                    
+                        },
+                        {
+                            "Field_Name": "Hours saved per year",
+                            "value": this.state.Hours_saved_per_year,
+                            "Field_State_Name": "Hours_saved_per_year",
+                            "group" : "firstSection3",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "71",
+                            "Type": "Integer",
+                            "General_Value": "0",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                    
+                        },
+                        {
+                            "Field_Name": "Compliance / Risk cost that was avoided by this application.",
+                            "value": this.state.Compliance_Ris_cost_that_was_avoided_by_this_application,
+                            "Field_State_Name": "Compliance_Ris_cost_that_was_avoided_by_this_application",
+                            "group" : "secondSection1",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "72",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            // "columns" : 2,
+                            "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Risk Avoidance",
+                            "value": this.state.Risk_Avoidance,
+                            "Field_State_Name": "Risk_Avoidance",
+                            "group" : "secondSection2",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "73",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            // "columns" : 2,
+                            "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Savings from Retirement of Legacy application in hours per year by Maintenance Team?",
+                            "value": this.state.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
+                            "Field_State_Name": "Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team",
+                            "group" : "thirdSection1",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "74",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            // "columns" : 2,
+                            "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Legacy System Infra and License Fee savings per year?",
+                            "value": this.state.Legacy_System_Infra_and_License_Fee_savings_per_year,
+                            "Field_State_Name": "Legacy_System_Infra_and_License_Fee_savings_per_year",
+                            "group" : "fourthSection1",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "75",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            // "columns" : 2,
+                            "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Other Savings",
+                            "value": this.state.Other_Savings,
+                            "Field_State_Name": "Other_Savings",
+                            "group" : "fourthSection2",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "76",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            // "columns" : 2,
+                            "columns" : this.state.responsiveWidth <= 1440 ? 1 : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Design, Development & Testing Effort (hours)",
+                            "value": this.state.Design_Developmen_Testing_Effort_hours,
+                            "Field_State_Name": "Design_Developmen_Testing_Effort_hours",
+                            "group" : "fifthSection1",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "77",
+                            "Type": "Decimal",
+                            "General_Value": "0",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Travel (T&E)",
+                            "value": this.state.Travel_TE,
+                            "Field_State_Name": "Travel_TE",
+                            "group" : "fifthSection2",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "78",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Consulting",
+                            "value": this.state.Consulting,
+                            "Field_State_Name": "Consulting",
+                            "group" : "fifthSection3",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "79",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Training",
+                            "value": this.state.Training,
+                            "Field_State_Name": "Training",
+                            "group" : "sixthSection1",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "80",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Licenses Cost per year",
+                            "value": this.state.Licenses_Cost_per_year,
+                            "Field_State_Name": "Licenses_Cost_per_year",
+                            "group" : "seventhSection1",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "81",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Hardware leasing",
+                            "value": this.state.Hardware_leasing,
+                            "Field_State_Name": "Hardware_leasing",
+                            "group" : "seventhSection2",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "82",
+                            "Type": "Decimal",
+                            "General_Value": "$",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Maintenance Hardware (hours per year)",
+                            "value": this.state.Maintenance_Hardware_hours_per_year,
+                            "Field_State_Name": "Maintenance_Hardware_hours_per_year",
+                            "group" : "eigthSection1",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "83",
+                            "Type": "Decimal",
+                            "General_Value": "0",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Maintenance Salaries (hours per year)",
+                            "value": this.state.Maintenance_Salaries_hours_per_year,
+                            "Field_State_Name": "Maintenance_Salaries_hours_per_year",
+                            "group" : "eigthSection2",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "84",
+                            "Type": "Decimal",
+                            "General_Value": "0",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Hours"
+                        },
+                        {
+                            "Field_Name": "Site Usage",
+                            "value": this.state.Site_Usage,
+                            "Field_State_Name": "Site_Usage",
+                            "group" : "ninthSection1",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "85",
+                            "Type": "text",
+                            "General_Value": [],
+                            "columns" : 2,
+                            "wideControl" : true,
+                            // "multipleRows" : true,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Sites where new systems were implemented."
+                        },
+                        {
+                            "Field_Name": "Usage Footprint (1 week)",
+                            "value": this.state.Usage_Footprint_1_week,
+                            "Field_State_Name": "Usage_Footprint_1_week",
+                            "group" : "ninthSection2",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "86",
+                            "Type": "text",
+                            "General_Value": [],
+                            "columns" : 2,
+                            "wideControl" : true,
+                            // "multipleRows" : true,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "Transactions per minute (TPM)",
+                            "value": this.state.Transactions_per_minute_TPM,
+                            "Field_State_Name": "Transactions_per_minute_TPM",
+                            "group" : "ninthSection3",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "87",
+                            "Type": "Integer",
+                            "General_Value": "?See Notes below",
+                            "columns" : 2,
+                            "hasToolTip" : true,
+                            "toolTipText" : "Numbers"
+                        },
+                        {
+                            "Field_Name": "ROI Realized Date",
+                            "value": this.state.ROI_Realized_Date_Moment,
+                            "Field_State_Name": "ROI_Realized_Date",
+                            "group" : "ninthSection4",
+                            "Mandatory": false,
+                            "Enabled": true,
+                            "Sequence": "88",
+                            "Type": "Date",
+                            "General_Value": "Date Picker",
+                            "hasToolTip" : true,
+                            "toolTipText" : "Date when ROI realized analysis was completed",
+                            "columns" : 2
+                        }
+                    ]
+    
+                    return formFields;
+                }
+
+                catch(error) {
+                    console.log("TCL: createFormStructure -> error", error)
+                    
+                }
             }
 
 
@@ -600,7 +640,7 @@
             // Get ID from URL
             // --------------------------------------
             getProjectID() {
-                const {projectID} = this.props.match.params;
+                const {projectID} = this.props.locationData.match.params;
                 const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
 
                 return requestID
@@ -845,7 +885,7 @@
                 // Save Form Values
                 // --------------------------------------
                 saveFormValues() {
-                    const currentUser = window.getCurrentSPUser();
+                    //! const currentUser = window.getCurrentSPUser();
                     // const projId = this.props.projectID || this.props.requirementsDefinition.newProjectID;
                     // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
 
@@ -894,7 +934,7 @@
                     // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
 
                     const requestID = this.getProjectID();
-                    const currentUser = window.getCurrentSPUser();
+                    //! const currentUser = window.getCurrentSPUser();
 
                     // Iterate Dynatrace Array
                     const data = dynatrace.map((dyna)=> {
@@ -1023,36 +1063,52 @@
                 // !--------------------------------------
                 submitFormDB = () => {
 
+
+                    // ? Test Save Values
                     
+                    // ? Test Save Values
 
+                    const formData = this.saveFormValues();
+                    console.log("TCL: submitFormDB -> formData", formData)
+                    this.props.updateProjectIntakeValues('roiRealized',formData,formData.dynatrace )
+
+                    this.createSuccessAlert('Data Saved ');
+
+
+                    return;
+
+
+                    // !
                     // Validate Empty Fields
-                    if(this.validateFormInputs() === false) {
-                        this.createErrorAlertTop('Please Fill all the Required Fields');
-                        return;
-                    }
+                    // if(this.validateFormInputs() === false) {
+                    //     this.createErrorAlertTop('Please Fill all the Required Fields');
+                    //     return;
+                    // }
 
-                    this.setState({sendingData : true, keepState : true})
+                    // this.setState({sendingData : true, keepState : true})
 
-                    // Check if is Update or New ROI
+                    // // Check if is Update or New ROI
 
-                    // const {roiRealized} =  this.props.loadedROIRealized;
+                    // // const {roiRealized} =  this.props.loadedROIRealized;
 
-                    if(!isEmpty(this.props.loadedROIRealized.roiRealized)) {
-                        // Update Current ROI
-                        this.updateROIRealizedDB();
-                    }
-                    else {
-                        // Create New ROI
-                        this.saveNewROI();
-                    }
-
-
-                    this.setState({ sendingData : false})
-
-                    this.saveOtherTabs();
+                    // if(!isEmpty(this.props.loadedROIRealized.roiRealized)) {
+                    //     // Update Current ROI
+                    //     this.updateROIRealizedDB();
+                    // }
+                    // else {
+                    //     // Create New ROI
+                    //     this.saveNewROI();
+                    // }
 
 
-                    this.componentDidMount();
+                    // this.setState({ sendingData : false})
+
+                    // this.saveOtherTabs();
+
+
+                    // this.componentDidMount();
+
+                    // !
 
 
                     // const formData = this.saveFormValues();
@@ -1152,14 +1208,17 @@
                 // --------------------------------------
                 
                 redirectUserPrev =() => {
-                    const {history} = this.props;
-                    const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
-                    let pathArray = this.props.location.pathname.split('/');
+                    const {history,location} = this.props.locationData;
+                    //? const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+
+                    const path = '/intake';
+
+                    let pathArray = location.pathname.split('/');
                     let projectIndex = pathArray[pathArray.length - 2];
                     console.log("TCL: BusinessInformation -> redirectUserPrev -> projectIndex", projectIndex)
                     
                     history.push(`${path}/project/${projectIndex}/pmo-evaluation`);
-                    // history.goBack();
+                    
                 }
 
                 
@@ -1350,6 +1409,7 @@
             // --------------------------------------
             renderFormFields(group, renderBorder, startPosition) {
                 const formFieldsValues =  this.createFormStructure();
+                // const formFieldsValues =  this.formFields;
                 const formData = formFieldsValues.filter((item) => { return item.group === group });
                 
                 

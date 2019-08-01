@@ -777,6 +777,7 @@
                     // const {hasErrors} = this.state;
                     const formData = this.saveFormValues();
 
+                    this.props.updateProjectIntakeValues('requirements',formData)
 
                     // // Reset State
                     // // this.props.resetRequirementsState();
@@ -797,7 +798,7 @@
 
 
 
-                        this.props.updateProjectIntakeValues('requirements',formData)
+                       
 
 
 

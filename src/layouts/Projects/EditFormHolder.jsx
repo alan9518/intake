@@ -255,6 +255,8 @@
                     // ? Get ROI Dynatrace
                     // ? Combine RoI Data && Dynatrace
 
+                    
+
                     this.getProjectDynatrace(requestID, roiID).then((result) => {
                     
                     
@@ -264,7 +266,7 @@
                         const roiDataDyna = result.data;
                         this.setDataSourceValuesFromDB('roiRealized', roiDataObject, true, requestID, roiDataDyna)
 
-
+                        this.setState({isLoaded : true});
 
                     })
                     .catch((error) => {
@@ -284,11 +286,13 @@
                     // this.setDataSourceValuesFromDB('roiRealizedDynatrace', roiDataDyna.data[0], true)
                     
                 }
+                else
+                    this.setState({isLoaded : true});
                     
                     
                 
                 
-                this.setState({isLoaded : true});
+                // this.setState({isLoaded : true});
 
 
 
@@ -571,10 +575,198 @@
                 }
 
                
-                console.log("TCL: formHolder -> setDataSourceValuesFromDB -> projectIntake", projectIntake)
+                
 
               
             }
+
+
+
+
+            // ?--------------------------------------
+            // ? Update ProjectIntake Object 
+            // ? With New Values
+            // ?--------------------------------------
+
+            updateProjectIntakeValues(objectToChange,  newValues , extraValues = null, savedonDB = false) {
+                console.log("TCL: formHolder -> updateProjectIntakeValues -> newValues", newValues)
+                console.log("TCL: formHolder -> updateProjectIntakeValues -> currentView", objectToChange)
+
+
+                  // ? Set Requirements Definition
+                if(objectToChange === 'requirements') {
+
+                    let requirementsDefinition = {
+                       
+                        project_id: newValues.Project_id || null ,
+                        created_by: newValues.Created_by ,
+                        Date_Submitted : newValues.Date_submitted,
+                        Request_Owner : newValues.Request_Owner,
+                        Request_ID :  newValues.Project_id || null,  
+                        Workstage : newValues.Workstage,
+                        Project_Name : newValues.Project_Name,
+                        Description : newValues.Description,
+                        Expected_Start_Date : newValues.Expected_Start_Date,
+                        Expected_Completion_Date : newValues.Expected_Completion_Date,
+                        Deadline_Justification : newValues.Deadline_Justification,
+                        Project_Type : newValues.Project_Type,
+                        Project_Documents : newValues.Project_docs,
+                        SPFiles : newValues.SPFiles || [],
+                        savedLocally : true,
+                        savedonDB : savedonDB
+                        // this.getSharepointFilesByProject(projectID, 'requirementsDefinition')
+                    }     
+                    
+                    // ? Assign New Values to DataSet
+                    projectIntake.requirementsDefinition = Object.assign({}, projectIntake.requirementsDefinition, requirementsDefinition)
+                    console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                    
+
+                }
+                
+
+
+                // ? Set Business Information
+                if(objectToChange === 'business') {
+
+                    let businessInformation = {
+                        project_id: newValues.Project_id || null ,
+                        Business_Objective : newValues.Business_Objective,
+                        Outcomes_from_the_Objective : newValues.Outcomes_from_the_Objective,
+                        Impact : newValues.Impact,
+                        Background : newValues.Background,
+                        Dependencies : newValues.Dependencies ,
+                        Constrains : newValues.Constrains,
+                        Business_Model : newValues.Business_Model,
+                        Business_lead : newValues.Business_lead,  
+                        Project_Purpose : newValues.Project_Purpose,
+                        Project_Risks : newValues.Project_Risks,
+                        Line_of_Business : newValues.Line_of_Business,
+                        IT_Vector : newValues.IT_Vector,
+                        RPA : newValues.RPA,
+                        Region : newValues.Region,
+                        Sites_Impacted : newValues.Sites_Impacted,
+                        Customer : newValues.Customer,
+                        Requested_by_Customer : newValues.Requested_by_Customer ,
+                        Customer_Priority : newValues.Customer_Priority,
+                        Estimated_Annual_Revenue : newValues.Estimated_Annual_Revenue,
+                        Sales_Contact : newValues.Sales_Contact,
+                        Average_number_of_users_for_this_application : newValues.Average_number_of_users_for_this_application,
+                        FTE_Saved_per_year : newValues.FTE_Saved_per_year,
+                        Hours_saved_per_year : newValues.Hours_saved_per_year,
+                        Savings_revenue : newValues.Savings_revenue,
+                        Compliance_Risk_cost_that_will_be_avoided_by_this_application : newValues.Compliance_Risk_cost_that_will_be_avoided_by_this_application,
+                        Risk_Avoidance : newValues.Risk_Avoidance,
+                        Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : newValues.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
+                        Legacy_System_Infra_and_License_Fee_savings_per_year : newValues.Legacy_System_Infra_and_License_Fee_savings_per_year,
+                        Other_Savings : newValues.Other_Savings,
+                        savedLocally : true,
+                        savedonDB : savedonDB
+                    }
+
+                      // ? Assign New Values to DataSet
+                      projectIntake.businessInformation = Object.assign({}, projectIntake.businessInformation, businessInformation)
+                      console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+
+                }
+
+
+                // ? Set Technical Evaluation
+                if(objectToChange === 'technical') {
+                    let technicalEvaluation = {
+                        Delivery_Team : newValues.Delivery_Team ,
+                        Platform_type : newValues.Platform_type ,
+                        Applications_involved : newValues.Applications_involved ,
+                        Technology : newValues.Technology,
+                        IT_Groups_Required : newValues.IT_Groups_Required ,
+                        Estimated_Effort : newValues.Estimated_Effort ,
+                        Project_Team_Size : newValues.Project_Team_Size ,
+                        Project_Manager : newValues.Project_Manager ,
+                        Target_Start_Date :newValues.Target_Start_Date,
+                        Target_Go_Live_Date :newValues.Target_Go_Live_Date,
+                        IT_FTE_required :newValues.IT_FTE_required,
+                        Approver : newValues.Approver,
+                        Approval_Date :newValues.Approval_Date,
+                        Justification_ROI :newValues.Justification_ROI,
+                        Design_Development_Testing_Effort :newValues.Design_Development_Testing_Effort,
+                        Travel_TE :newValues.Travel_TE,
+                        Consulting :newValues.Consulting,
+                        Training :newValues.Training,
+                        Licenses_Cost_per_year :newValues.Licenses_Cost_per_year,
+                        Hardware_leasing :newValues.Hardware_leasing,
+                        Maintenance_Hardware_hours_per_year :newValues.Maintenance_Hardware_hours_per_year,
+                        Maintenance_Salaries_hours_per_year :newValues.Maintenance_Salaries_hours_per_year,
+                        No_of_Sites :newValues.No_of_Sites,
+                        No_of_Active_users :newValues.No_of_Active_users,
+                        savedLocally : true,
+                        savedonDB : savedonDB
+                    }
+
+                      // ? Assign New Values to DataSet
+                      projectIntake.technicalEvaluation = Object.assign({}, projectIntake.technicalEvaluation, technicalEvaluation)
+                      console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                }
+
+
+                 // ? Set PMO Evaluation Data
+                if(objectToChange === 'pmoEval') {
+                    let pmoEvaluation = {
+                        Expected_total_ROI : newValues.Expected_total_ROI,
+                        Expected_IRR : newValues.Expected_IRR,
+                        ROI_Category : newValues.ROI_Category,
+                        WorkID_PlanView_FlexPM_SN_Ticket : newValues.WorkID_PlanView_FlexPM_SN_Ticket,
+                        Documents : newValues.Documents,
+                        savedLocally : true,
+                        savedonDB : savedonDB
+                        // sharepointFiles : this.getSharepointFilesByProject(projectID, 'PMO')
+                    }
+
+                    // ? Assign New Values to DataSet
+                    projectIntake.pmoEvaluation = Object.assign({}, projectIntake.pmoEvaluation, pmoEvaluation)
+                    console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                }
+
+
+                // ? Set Roi Realized Data
+                if(objectToChange === 'roiRealized') {
+
+                    console.log("TCL: formHolder -> setDataSourceValuesFromDB -> extraValues", extraValues)
+
+                    let roiRealized = {
+                        Implementation_Date : newValues.Implementation_Date,
+                        FTE_Saved_per_year : newValues.FTE_Saved_per_year,
+                        Hours_saved_per_year : newValues.Hours_saved_per_year,
+                        Compliance_Ris_cost_that_was_avoided_by_this_application : newValues.Compliance_Ris_cost_that_was_avoided_by_this_application,
+                        Risk_Avoidance : newValues.Compliance_Ris_cost_that_was_avoided_by_this_application,
+                        Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team :  newValues.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
+                        Legacy_System_Infra_and_License_Fee_savings_per_year : newValues.Legacy_System_Infra_and_License_Fee_savings_per_year,
+                        Other_Savings : newValues.Other_Savings,
+                        Design_Developmen_Testing_Effort_hours : newValues.Design_Developmen_Testing_Effort_hours,
+                        Travel_TE : newValues.Travel_TE,
+                        Consulting : newValues.Consulting,
+                        Training : newValues.Training,
+                        Licenses_Cost_per_year : newValues.Licenses_Cost_per_year,
+                        Hardware_leasing : newValues.Hardware_leasing,
+                        Maintenance_Hardware_hours_per_year : newValues.Maintenance_Hardware_hours_per_year,
+                        Maintenance_Salaries_hours_per_year : newValues.Maintenance_Salaries_hours_per_year,
+                        dynatrace : newValues.dynatrace ,
+                        showDynatrace : newValues.showDynatrace,
+                        savedLocally : true,
+                        savedonDB : savedonDB
+                    }
+
+                    // ? Assign New Values to DataSet
+                    projectIntake.roiRealized = Object.assign({}, projectIntake.roiRealized, roiRealized)
+                    console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+
+
+                    
+                  
+                }
+
+            }
+
+
 
 
 
@@ -659,7 +851,7 @@
                                 exact =  {true}
                                 key =  'route-intakeProjects'
                                 ref = 'route-intakeProjects'
-                                render={(props) => <AllProjectsView projectIntake = {projectIntake}  isPMO = {isPMO} locationData = {this.props}/>}
+                                render={(props) => <AllProjectsView projectIntake = {projectIntake}  isPMO = {isPMO} locationData = {this.props}  />}
                             />
 
 
@@ -669,7 +861,7 @@
                                 exact =  {true}
                                 key =  'route-editRequirementDefinition'
                                 ref = 'route-editRequirementDefinition'
-                                render={(props) => <EditRequirementsDefinition projectIntake = {projectIntake}  isPMO = {isPMO}locationData = {this.props}/>}
+                                render={(props) => <EditRequirementsDefinition projectIntake = {projectIntake}  isPMO = {isPMO}locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues}/>}
                             />
 
                               <Route
@@ -677,7 +869,7 @@
                                  exact =  {true}
                                  key =  'route-editBusinessInformation'
                                  ref = 'route-editBusinessInformation'
-                                 render={(props) => <EditBusinessInformation projectIntake = {projectIntake} isPMO = {isPMO} locationData = {this.props}/>}
+                                 render={(props) => <EditBusinessInformation projectIntake = {projectIntake} isPMO = {isPMO} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues}/>}
                              />
 
                         
@@ -687,7 +879,7 @@
                                  exact =  {true}
                                  key =  'route-editTechnicalEvaluation'
                                  ref = 'route-editTechnicalEvaluation'
-                                 render={(props) => <EditTechnicalEvaluation projectIntake = {projectIntake}  isPMO = {isPMO} locationData = {this.props}/>}
+                                 render={(props) => <EditTechnicalEvaluation projectIntake = {projectIntake}  isPMO = {isPMO} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues}/>}
                              />
 
                         
@@ -696,7 +888,7 @@
                                 exact =  {true}
                                 key =  'route-editPmoEvaluation'
                                 ref = 'route-editPmoEvaluation'
-                                render={(props) => <EditPMOEvaluation projectIntake = {projectIntake} isPMO = {isPMO} locationData = {this.props}/>}
+                                render={(props) => <EditPMOEvaluation projectIntake = {projectIntake} isPMO = {isPMO} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues}/>}
                             />
 
                             
@@ -705,7 +897,7 @@
                                 exact =  {true}
                                 key =  'route-editRoiRealized'
                                 ref = 'route-editRoiRealized'
-                                render={(props) => <EditROIRealized projectIntake = {projectIntake} isPMO = {isPMO} locationData = {this.props}/>}
+                                render={(props) => <EditROIRealized projectIntake = {projectIntake} isPMO = {isPMO} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues}/>}
                             />
 
 
