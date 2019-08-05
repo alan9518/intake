@@ -430,7 +430,7 @@
             // Load All Sites from array
             // --------------------------------------
             loadTechnolgies(techs) {
-                if( techs===undefined || !techs.length)
+                if( techs===undefined || !techs)
                     return [];
 
                 if(Array.isArray(techs) === true)

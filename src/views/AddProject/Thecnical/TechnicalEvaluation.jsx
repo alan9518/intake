@@ -19,6 +19,19 @@
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
     import moment from 'moment';
 
+    import { 
+        saveRequirementsDB, 
+        saveBusinesInformationDB, 
+        saveTechnicalDB,
+        savePMOEvaluationDB,
+        saveROIRealizedDB, 
+        saveDynatraceDB,
+        updateRequirementsDB,
+        updateBusinesInformationDB,
+        updateTechnicalDB,
+        updatePMOEvaluation,
+        updateROIRealizedDB
+    } from '../../../actions';
 
     const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
 
@@ -644,7 +657,7 @@
                                 
                             ],
                             conditionalIT_Groups_Required : [
-                                {"label" : "Select IT Group", "value" : ""},
+                                // {"label" : "Select IT Group", "value" : ""},
                                 {"label" : "Web solutions and enablement", "value" : "Web solutions and enablement"} ,
                                 {"label" : "Brand and Identity", "value" : 'Brand and Identity'} ,
                                 {"label" : "Mobile", "value" : "Mobile"} ,
@@ -1448,13 +1461,15 @@
                 const formData = this.saveFormValues(projectID,null);
                 const nextStep = 'pmo-evaluation';
 
-                this.props.saveLocalTechnical(formData);
-                this.props.saveTechnicalDB(formData).then(()=>{
+                // this.props.saveLocalTechnical(formData);
+                saveTechnicalDB(formData).then((newTechId)=>{
+                console.log("TCL: saveNewTechnicalDB -> newTechId", newTechId)
                     this.createSuccessAlert('Data Saved ');
                     // Check If Action was Success
-                    const newTechnicalEvaluationId = this.props.technicalEvaluation.newTechnicalEvaluationId
-						//console.log('TCL: TechnicalEvaluation -> submitFormDB -> newTechnicalEvaluationId', newTechnicalEvaluationId)
-						
+                    // const newTechnicalEvaluationId = this.props.pro.newTechnicalEvaluationId
+                        
+                    // ? Update Props
+                    this.props.updateProjectIntakeValues('technical',formData, null, true)
 
 
                     // this.setState({sendingData : false}, this.redirectUser(nextStep))
@@ -1464,7 +1479,6 @@
                 })
                 .catch((error)=> {
                     this.createErrorAlert('There was a problem saving the data, please try again ');
-						//console.log('TCL: submitFormDB -> error', error)
                     this.setState({sendingData : false},)
                 })
             }
@@ -1480,20 +1494,22 @@
                 const nextStep = 'pmo-evaluation';
                 const formData = this.saveFormValues(projectID,newTechnicalEvaluationId);
 
-                this.props.updateTechnicalDB(formData).then(()=>{
+                updateTechnicalDB(formData).then((techID)=>{
+                    console.log("TCL: updateCurrentTechnicalDB -> techID", techID)
                     this.createSuccessAlert('Data Updated ');
                     // Check If Action was Success
-                    const newTechnicalEvaluationId = this.props.technicalEvaluation.newTechnicalEvaluationId
-                    //console.log('TCL: TechnicalEvaluation -> submitFormDB -> newTechnicalEvaluationId', newTechnicalEvaluationId)
+                    // const newTechnicalEvaluationId = this.props.technicalEvaluation.newTechnicalEvaluationId
                     
                     
+
+                    // ? Update Props
+                    this.props.updateProjectIntakeValues('technical',formData, null, true)
                     
                     this.setState({sendingData : false}, this.redirectUser(nextStep))
                     
                 })
                 .catch((error)=> {
                     this.createErrorAlert('There was a problem saving the data, please try again ');
-                    //console.log('TCL: submitFormDB -> error', error)
                     this.setState({sendingData : false},)
                 })
 
@@ -1516,7 +1532,13 @@
                 //? Save Business Info
                 //? Save Technical
 
-                if(isPMO === true && !this.props.requirementsDefinition.newProjectID)  {
+                let reqSaved = false
+                if (!this.props.projectIntake.requirementsDefinition.SavedOnDB || this.props.projectIntake.requirementsDefinition.Project_id)
+                    reqSaved = false;
+                else
+                    reqSaved = true
+
+                if(isPMO === true && !reqSaved)  {
                     // this.createErrorAlertTop('You Have to Create First the Requirements Definition');
                     // this.submitFormLocalData(false);
 
@@ -1549,20 +1571,23 @@
 
 
                 // const {requirementsDefinition} = this.props;
-                const {technicalEvaluationSaved, projectID} = this.props;
+                const { Project_id } = this.props.projectIntake.requirementsDefinition;
+                
+
+                const technicalEvaluationSaved = this.props.projectIntake.technicalEvaluation.Tech_eval_id
 
 
                 if(technicalEvaluationSaved) {
                     // Update Project
                     // Get Current Project ID
-                    const newTechnicalEvaluationId = this.props.technicalEvaluation.newTechnicalEvaluationId
+                    const newTechnicalEvaluationId = this.props.projectIntake.technicalEvaluation.Tech_eval_id
 					//console.log('TCL: submitFormDB -> newTechnicalEvaluationId', newTechnicalEvaluationId)
                     
-                    this.updateCurrentTechnicalDB(projectID, newTechnicalEvaluationId);
+                    this.updateCurrentTechnicalDB(Project_id, newTechnicalEvaluationId);
                 }
                 else {
                     // Save New Project
-                    this.saveNewTechnicalDB(projectID);
+                    this.saveNewTechnicalDB(Project_id);
 
                 }     
 
@@ -1580,21 +1605,25 @@
                     // this.props.businessInformation
 
                     console.log("TCL: saveOtherTabs -> this.props", this.props)
-                    console.log("TCL: saveOtherTabs -> this.props.businessInformation", this.props.businessInformation)
+                    
 
                     
+                    const {requirementsDefinition, businessInformation, technicalEvaluation, pmoEvaluation, roiRealized} = this.props.projectIntake;
                     
 
 
                     // ? If theres on Project ID, save first Req, then the others
                     if(projectID === null || projectID === undefined) {
                         // ? Save Business Information
-                        if( !isEmpty(this.props.requirementsDefinition) ) {
-                            this.props.saveRequirementsDB(this.props.requirementsDefinition).then((data)=>{
-                                console.log("TCL: TechnicalEvaluation -> saveOtherTabs -> data", data)
+                        if( !isEmpty(requirementsDefinition) && requirementsDefinition.SavedLocally === true) {
+
+                            // ? Save New Project
+                            saveRequirementsDB(requirementsDefinition).then((newProjectID)=>{
+                                console.log("TCL: TechnicalEvaluation -> saveOtherTabs -> newProjectID", newProjectID)
+                                
 
                                 // ? Create Folder Structure and Upload Files
-                                const projectID = this.props.requirementsDefinition.newProjectID;
+                                const projectID = newProjectID || requirementsDefinition.Request_ID;
     
                                 // Remove the GSD from the ID if theres any
                                 let id = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
@@ -1604,36 +1633,36 @@
     
                                  //! Create Requirements  Folder
     
-                                    window.createFolderStructure('intakeFiles' , reqFolderURL, ()=> {
+                                    // window.createFolderStructure('intakeFiles' , reqFolderURL, ()=> {
         
-                                        // window.uploadFilesToFolder(projectID, filesArray)
+                                    //     // window.uploadFilesToFolder(projectID, filesArray)
         
                                         
         
-                                        this.uploadReqFiles(projectID, reqFolderURL);
+                                    //     this.uploadReqFiles(projectID, reqFolderURL);
                                         
         
-                                        // this.createSuccessAlert('SP Folder Created');
-                                        this.createSuccessAlert(`Data Saved,Project ID : ${projectID}`);
+                                    //     // this.createSuccessAlert('SP Folder Created');
+                                    //     this.createSuccessAlert(`Data Saved,Project ID : ${projectID}`);
         
         
-                                        // this.setState({ Request_ID : projectID , sendingData : false})
+                                    //     // this.setState({ Request_ID : projectID , sendingData : false})
                                         
-                                    }, 
-                                        () => {
-                                            this.createErrorAlert('There was a problem creating the Requirements Definition Folder, please try again ');
-                                            //console.log('fail react')
-                                    });
+                                    // }, 
+                                    //     () => {
+                                    //         this.createErrorAlert('There was a problem creating the Requirements Definition Folder, please try again ');
+                                    //         //console.log('fail react')
+                                    // });
         
                                 //! Creaate PMO Folder
-                                    window.createFolderStructure('intakeFiles' , pmoFolderURL, ()=> {
-                                            //console.log('PMO Creataed')
-                                          // //? setTimeout(()=>{this.redirectUser();},700);
-                                        }, 
-                                            () => {
-                                                this.createErrorAlert('There was a problem creating the PMO Folder, please try again ');
-                                                //console.log('fail react')
-                                        });
+                                    // window.createFolderStructure('intakeFiles' , pmoFolderURL, ()=> {
+                                        //     //console.log('PMO Creataed')
+                                        //   // //? setTimeout(()=>{this.redirectUser();},700);
+                                        // }, 
+                                        //     () => {
+                                        //         this.createErrorAlert('There was a problem creating the PMO Folder, please try again ');
+                                        //         //console.log('fail react')
+                                        // });
     
                                 // ! Save Other Tabs
 
@@ -1644,69 +1673,82 @@
                                         // ? Save Tehnical Evaluation
                                         // if(!isEmpty(this.props.technicalEvaluation)) {
                                              const formData = this.saveFormValues(id);
-                                            this.props.saveLocalTechnical(formData);
-                                            this.props.saveTechnicalDB(this.props.technicalEvaluation, id)
+                                            // this.props.saveLocalTechnical(formData);
+                                            // this.props.saveTechnicalDB(this.props.technicalEvaluation, id)
+
+                                            saveTechnicalDB(formData, id).then((newTechId) => {
+                                                console.log("TCL: saveOtherTabs -> newTechId", newTechId)
+                                                technicalEvaluation.Tech_eval_id = newTechId
+                                            }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+        
+                                        // ? Update Props
+                                            this.props.updateProjectIntakeValues('technical',technicalEvaluation, null, true)
                                         // }
                         
                                     }
 
                                                 
                                     // ? Save Business Information
-                                    if( !isEmpty(this.props.businessInformation) ) {
-                                        console.log("TCL: saveOtherTabs -> this.props.businessInformation", this.props.businessInformation)
-                                        if(this.props.businessInformation.buss_info_id)
-                                            this.props.updateBusinesInformationDB(this.props.businessInformation)
-                                        else
-                                            this.props.saveBusinesInformationDB(this.props.businessInformation, id)
-                                    }
+                                    if( !isEmpty(businessInformation) && businessInformation.SavedLocally === true ) {
+
+                                        console.log("TCL: saveOtherTabs -> businessInformation", businessInformation)
+                                        
+                                        
+                                        if(businessInformation.Buss_info_id)
+                                            updateBusinesInformationDB(businessInformation)
+                                        else {
+                                            saveBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
+                                                console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
+                                                businessInformation.Buss_info_id = newBusinesId
+                                            }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+                                            
+                                        }  
+        
+                                        // ? Update Props
+                                        this.props.updateProjectIntakeValues('business',businessInformation, null, true)
+                                            
                                 
+                                        
+                                    }
+        
 
                                     // ? Save PMO Evaluation
-                                    if(!isEmpty(this.props.pmoEvaluation)) {
-                                        if(this.props.pmoEvaluation.pmo_eval_id) {
-                                            this.props.updatePMOEvaluation(this.props.pmoEvaluation)
+                                    if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
+                                        if(pmoEvaluation.Pmo_eval_id) {
+                                            updatePMOEvaluation(pmoEvaluation)
                                         }
                                         else
-                                            this.props.savePMOEvaluationDB(this.props.pmoEvaluation, id)
+                                            savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
+                                                console.log("TCL: saveOtherTabs -> newPmoId", newPmoId)
+                                                pmoEvaluation.Pmo_eval_id = newPmoId
+                                            }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+        
+                                        // ? Update Props
+                                        this.props.updateProjectIntakeValues('pmoEval',pmoEvaluation, null, true)
                                     }
 
 
 
                                     // ? Save Roi Realized
-                                    if(!isEmpty(this.props.roiRealized)) {
-                                            // ? Look For Roi Relized Data
-                                            if(this.props.roiRealized.roiRealized) {
-                                                
-                                                if(this.props.roiRealized.roiRealized.roi_real_id) {
-                                                    this.props.updateROIRealizedDB(this.props.roiRealized)
-                                                }
-                                                else if(!isEmpty(this.props.roiRealized)){
-                                                    // ? Save New ROI
-                                                    this.props.saveROIRealizedDB(this.props.roiRealized, id).then((data)=>{
-                                                        console.log("TCL: saveOtherTabs -> data", data)
-                                                        console.log("TCL: saveOtherTabs -> this.props.roiRealized", this.props.roiRealized)
-
-                                                        // ? Get New ROI ID
-                                                        let newRoiRealizedID = this.props.roiRealized.newRoiRealizedID;
-                                                        
-                                                        if(!isEmpty(this.props.roiRealized.dynatrace))   
-                                                            this.props.saveDynatraceDB(this.props.roiRealized.dynatrace, id, newRoiRealizedID)
-
-
-                                                    }).catch((error)=> {
-                                                        console.log("TCL: saveNewROI -> error", error)
-                                                        this.createErrorAlert('There was a problem saving the data, please try again ');
-                                                        
-                                                        
-                                                    })
-                                                    
-                                                }
-                                                
-                                            }
-
-                                    
-
-
+                                    if(!isEmpty(roiRealized) && roiRealized.SavedLocally === true) {
+                                        // ? Look For Roi Relized Data
+                                        if(roiRealized.Roi_real_id) {
+                                           updateROIRealizedDB(roiRealized)
+                                        }
+                                         else
+                                            saveROIRealizedDB(roiRealized, id).then((roiID) => {
+                                                console.log("TCL: roiID", roiID)
+                                                roiRealized.Roi_real_id = roiID
+                                                 // ? Look for Dynatrace
+                                                if(!isEmpty (roiRealized.dynatrace))
+                                                    saveDynatraceDB(roiRealized.dynatrace, id,  roiID)
+            
+                                            })
+            
+                                       
+                                        // ? Update Props
+                                        this.props.updateProjectIntakeValues('roiRealized',roiRealized, roiRealized.dynatrace, true)
+                                       
                                     }
 
 
@@ -1734,85 +1776,95 @@
 
                         // let promises = []
 
-                        // ? Save Business Information
-                        if( !isEmpty(this.props.requirementsDefinition) ) {
-                            console.log("TCL: saveOtherTabs -> this.props.businessInformation", this.props.businessInformation)
+                        // ? Save Req Definition
+                        if( !isEmpty(requirementsDefinition) && requirementsDefinition.SavedLocally === true) {
+                            
 
                             // this.validateEmptyRequirements();
 
-                            if(this.props.requirementsDefinition.newProjectID) {
-                                this.props.updateRequirementsDB(this.props.requirementsDefinition);
-                                let reqFolderURL = `${this.props.requirementsDefinition.newProjectID}/RequirementsDefinition`;
-                                this.uploadReqFiles(this.props.requirementsDefinition.newProjectID, reqFolderURL);
+                            if(requirementsDefinition.Project_id) {
+                                updateRequirementsDB(requirementsDefinition);
+                                let reqFolderURL = `${requirementsDefinition.newProjectID}/RequirementsDefinition`;
+                                this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
                             }
                                 
                             else
-                                this.props.saveRequirementsDB(this.props.businessInformation)
+                                saveRequirementsDB(requirementsDefinition)
 
 
 
+                            this.props.updateProjectIntakeValues('requirements',requirementsDefinition, null, true)
 
                         }
 
                         // ? Save Business Information
-                        if( !isEmpty(this.props.businessInformation) ) {
-                            console.log("TCL: saveOtherTabs -> this.props.businessInformation", this.props.businessInformation)
-                            if(this.props.businessInformation.buss_info_id)
-                                this.props.updateBusinesInformationDB(this.props.businessInformation)
-                            else
-                                this.props.saveBusinesInformationDB(this.props.businessInformation, id)
+                        if( !isEmpty(businessInformation) && businessInformation.SavedLocally === true ) {
+
+                            console.log("TCL: saveOtherTabs -> businessInformation", businessInformation)
+                            
+                            
+                            if(businessInformation.Buss_info_id)
+                                updateBusinesInformationDB(businessInformation)
+                            else {
+                                saveBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
+                                    console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
+                                    businessInformation.Buss_info_id = newBusinesId
+                                }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+                                
+                            }  
+
+                            // ? Update Props
+                            this.props.updateProjectIntakeValues('business',businessInformation, null, true)
+                                
+                    
+                            
                         }
                             
 
                         // ? Save PMO Evaluation
-                        if(!isEmpty(this.props.pmoEvaluation)) {
-                            if(this.props.pmoEvaluation.pmo_eval_id) {
-                            this.props.updatePMOEvaluation(this.props.pmoEvaluation)
+                        if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
+                            if(pmoEvaluation.Pmo_eval_id) {
+                                updatePMOEvaluation(pmoEvaluation)
                             }
                             else
-                            this.props.savePMOEvaluationDB(this.props.pmoEvaluation, id)
+                                savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
+                                    console.log("TCL: saveOtherTabs -> newPmoId", newPmoId)
+                                    pmoEvaluation.Pmo_eval_id = newPmoId
+                                }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+
+                            // ? Update Props
+                            this.props.updateProjectIntakeValues('pmoEval',pmoEvaluation, null, true)
                         }
 
 
 
                         // ? Save Roi Realized
-                        if(!isEmpty(this.props.roiRealized)) {
+                        if(!isEmpty(roiRealized) && roiRealized.SavedLocally === true) {
                             // ? Look For Roi Relized Data
-                            if(this.props.roiRealized.roiRealized) {
-                                
-                                if(this.props.roiRealized.roiRealized.roi_real_id) {
-                                    this.props.updateROIRealizedDB(this.props.roiRealized)
-                                }
-                                else {
+                            if(roiRealized.Roi_real_id) {
+                               updateROIRealizedDB(roiRealized).then((roiID) => {
+                                console.log("TCL: roiID", roiID)
+                                    roiRealized.Roi_real_id = roiID
+                                    // ? Look for Dynatrace
+                                    if(!isEmpty (roiRealized.dynatrace))
+                                        saveDynatraceDB(roiRealized.dynatrace, id,  roiID)
 
-                                    if( this.props.roiRealized.roiRealized.roiRealized && isEmpty(this.props.roiRealized.roiRealized))
-                                        return
-
-                                    // ? Save New ROI
-                                    this.props.saveROIRealizedDB(this.props.roiRealized, id).then((data)=>{
-                                        console.log("TCL: saveOtherTabs -> data", data)
-                                        console.log("TCL: saveOtherTabs -> this.props.roiRealized", this.props.roiRealized)
-                                        // ? Get New ROI ID
-                                        let newRoiRealizedID = this.props.roiRealized.newRoiRealizedID;
-                                        
-                                        if(this.props.roiRealized.dynatrace)   
-                                            this.props.saveDynatraceDB(this.props.roiRealized.dynatrace, id, newRoiRealizedID)
-
-
-                                    }).catch((error)=> {
-                                        console.log("TCL: saveNewROI -> error", error)
-                                        this.createErrorAlert('There was a problem saving the data, please try again ');
-                                        
-                                        
-                                    })
-                                    
-                                }
-                                
+                                })
                             }
+                             else
+                                saveROIRealizedDB(roiRealized, id).then((roiID) => {
+                                    console.log("TCL: roiID", roiID)
+                                    roiRealized.Roi_real_id = roiID
+                                     // ? Look for Dynatrace
+                                    if(!isEmpty (roiRealized.dynatrace))
+                                        saveDynatraceDB(roiRealized.dynatrace, id,  roiID)
 
-                        
+                                })
 
-
+                           
+                            // ? Update Props
+                            this.props.updateProjectIntakeValues('roiRealized',roiRealized, roiRealized.dynatrace, true)
+                           
                         }
 
                       
@@ -1839,8 +1891,10 @@
             // Redirect User
             // --------------------------------------
             redirectUser() {
-                const {history} = this.props;
-                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const {history} = this.props.locationData;
+                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+
+                const path = '/intake';
                 
                 history.push(`${path}/add-project/pmo-evaluation`);
             }
@@ -1851,8 +1905,10 @@
             // --------------------------------------
 
             redirectUserPrev() {
-                const {history} = this.props;
-                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const {history} = this.props.locationData;
+                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+
+                const path = '/intake';
                 
                 history.push(`${path}/add-project/business-information`);
             }

@@ -1023,7 +1023,7 @@
                 // --------------------------------------
                 saveNewPMOEvaluation = ()=> {
                     const formData = this.saveFormValues();
-                    //console.log('TCL: submitFormDB -> formData', formData)
+                    
                     // Update State
                     this.props.saveLocalPMOEvaluation(formData);
                     // Save on DB
@@ -1056,7 +1056,7 @@
                     .catch((error)=> {
                         console.log("TCL: saveNewPMOEvaluation -> error", error)
                         this.createErrorAlert('There was a problem saving the data, please try again ');
-						//console.log('TCL: submitFormDB -> error', error)
+						
                         
                     })
                 }
@@ -1067,7 +1067,7 @@
                 updateCurrentPMOEvaluation = ()=> {
                     // const projID =this.props.requirementsDefinition.newProjectID;
                     const formData = this.saveFormValues();
-                    //console.log('TCL: submitFormDB -> formData', formData)
+                    
 				    // //console.log('TCL: updateCurrentPMOEvaluation -> currentPMOID', currentPMOID)
                     this.props.updatePMOEvaluation(formData).then(()=>{
                         this.createSuccessAlert('Data Saved ');
@@ -1083,7 +1083,7 @@
                         this.uploadFiles(pmoFolderURL, formData.Documents)
                         
                         
-                        //console.log('TCL: submitFormDB -> newPMOEvaluationID', newPMOEvaluationID)
+                        
 
                         // this.props.resetPMOEvaluationState();
 
@@ -1099,7 +1099,7 @@
                     .catch((error)=> {
                         console.log("TCL: updateCurrentPMOEvaluation -> error", error)
                         this.createErrorAlert('There was a problem saving the data, please try again ');
-						//console.log('TCL: submitFormDB -> error', error)
+						
                         
                     })
                 }

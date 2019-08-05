@@ -22,6 +22,9 @@
     import 'react-s-alert/dist/s-alert-default.css';
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
     import {Config} from '../../Config';
+
+    import {saveRequirementsDB} from '../../actions';
+
     import moment from "moment";
 
     
@@ -47,6 +50,7 @@
     //! --------------------------------------
     let projectIntake = {
         requirementsDefinition : {
+            Project_id : null,
             Date_Submitted : null,
             Request_Owner : null,
             Request_ID : null,  
@@ -60,12 +64,12 @@
             Deadline_Justification : null,
             Project_Type : null,
             Project_Documents : null,
-            savedLocally : false,
-            savedonDB : false
+            SavedLocally : false,
+            SavedOnDB : false
         },
 
         businessInformation : {
-
+            Buss_info_id : null,
             Business_Objective : null ,
             Outcomes_from_the_Objective : null ,
             Impact : null ,
@@ -96,12 +100,13 @@
             Legacy_System_Infra_and_License_Fee_savings_per_year : null ,
             Other_Savings : null ,
             conditionalSites : [],
-            savedLocally : false,
-            savedonDB : false
+            SavedLocally : false,
+            SavedOnDB : false
             
         },
 
         technicalEvaluation : {
+            Tech_eval_id : null,
             Delivery_Team : null,
             Platform_type : null,
             Applications_involved : null,
@@ -126,19 +131,21 @@
             Maintenance_Salaries_hours_per_year : null,
             No_of_Sites : null,
             No_of_Active_users : null,
-            savedLocally : false,
-            savedonDB : false
+            SavedLocally : false,
+            SavedOnDB : false
         },
         pmoEvaluation : {
+            Pmo_eval_id : null,
             Expected_total_ROI : null,
             Expected_IRR : null,
             ROI_Category : null,
             WorkID_PlanView_FlexPM_SN_Ticket : null,
             Documents : null,
-            savedLocally : false,
-            savedonDB : false
+            SavedLocally : false,
+            SavedOnDB : false
         },
         roiRealized : {
+            Roi_real_id : null,
             Implementation_Date :   moment().format("MM/DD/YYYY") || null,
             FTE_Saved_per_year : null,
             Hours_saved_per_year : null,
@@ -163,8 +170,8 @@
             Usage_FootprintRows : null,
             dynatrace : null,
             showDynatrace : null,
-            savedLocally : false,
-            savedonDB : false
+            SavedLocally : false,
+            SavedOnDB : false
         }
     
     }
@@ -193,6 +200,7 @@
                 this.state = {
                     currentView : 'requirement-definition',
                     isLoaded: false,
+                    resetForm : false
                 }
 
                
@@ -211,16 +219,25 @@
             
             console.log("TCL: formHolder -> componentDidMount -> this.props", this.props)
 
+
+
+            this.setState({resetForm : true})
+
         }
 
 
+
+        // ?--------------------------------------
+        // ? Reset ProjectIntake Object when 
+        // ? User Goes to all Projects View
+        // ?--------------------------------------
         componentWillReceiveProps(nextProps) {
             console.log("TCL: formHolder -> componentWillReceiveProps -> nextProps", nextProps)
 
             
 
             if(this.props.location.pathname === '/intake/add-project/') {
-                if(projectIntake.requirementsDefinition.savedLocally === true || projectIntake.requirementsDefinition.savedLocally === false ) {
+                if(projectIntake.requirementsDefinition.SavedLocally === true || projectIntake.requirementsDefinition.SavedOnDB === false ) {
                     // ? Reset Object
                     console.log("TCL: formHolder -> componentWillReceiveProps -> Reset Object")
                     this.resetProjectIntake()
@@ -231,6 +248,28 @@
                 this.setState({isLoaded : true});
             
         }
+
+
+
+
+        /* ==========================================================================
+        ** API Connection
+        ** ========================================================================== */
+
+
+          // ?--------------------------------------
+          // ? Create New Requirements
+          // ?--------------------------------------
+          createRequirements = () => {
+
+            const {requirementsDefinition} = projectIntake;
+            console.log("TCL: formHolder -> createRequirements -> requirementsDefinition", requirementsDefinition)
+
+            // saveRequirementsDB(requirementsDefinition)
+            
+
+            
+          }
 
 
         /* ==========================================================================
@@ -280,7 +319,7 @@
 
                     let requirementsDefinition = {
                        
-                        project_id: newValues.Project_id || null ,
+                        Project_id: newValues.Project_id || null ,
                         created_by: newValues.Created_by ,
                         Date_Submitted : newValues.Date_submitted,
                         Request_Owner : newValues.Request_Owner,
@@ -294,8 +333,8 @@
                         Project_Type : newValues.Project_Type,
                         Project_Documents : newValues.Project_docs,
                         SPFiles : newValues.SPFiles || [],
-                        savedLocally : true,
-                        savedonDB : savedonDB
+                        SavedLocally : true,
+                        SavedOnDB : savedonDB
                         // this.getSharepointFilesByProject(projectID, 'requirementsDefinition')
                     }     
                     
@@ -312,7 +351,8 @@
                 if(objectToChange === 'business') {
 
                     let businessInformation = {
-                        project_id: newValues.Project_id || null ,
+                        Project_id: newValues.Project_id || null ,
+                        Buss_info_id : newValues.buss_info_id,
                         Business_Objective : newValues.Business_Objective,
                         Outcomes_from_the_Objective : newValues.Outcomes_from_the_Objective,
                         Impact : newValues.Impact,
@@ -342,8 +382,8 @@
                         Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : newValues.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
                         Legacy_System_Infra_and_License_Fee_savings_per_year : newValues.Legacy_System_Infra_and_License_Fee_savings_per_year,
                         Other_Savings : newValues.Other_Savings,
-                        savedLocally : true,
-                        savedonDB : savedonDB
+                        SavedLocally : true,
+                        SavedOnDB : savedonDB
                     }
 
                       // ? Assign New Values to DataSet
@@ -356,6 +396,7 @@
                 // ? Set Technical Evaluation
                 if(objectToChange === 'technical') {
                     let technicalEvaluation = {
+                        Tech_eval_id : newValues.Tech_eval_id || null,
                         Delivery_Team : newValues.Delivery_Team ,
                         Platform_type : newValues.Platform_type ,
                         Applications_involved : newValues.Applications_involved ,
@@ -380,8 +421,8 @@
                         Maintenance_Salaries_hours_per_year :newValues.Maintenance_Salaries_hours_per_year,
                         No_of_Sites :newValues.No_of_Sites,
                         No_of_Active_users :newValues.No_of_Active_users,
-                        savedLocally : true,
-                        savedonDB : savedonDB
+                        SavedLocally : true,
+                        SavedOnDB : savedonDB
                     }
 
                       // ? Assign New Values to DataSet
@@ -393,13 +434,14 @@
                  // ? Set PMO Evaluation Data
                 if(objectToChange === 'pmoEval') {
                     let pmoEvaluation = {
+                        Pmo_eval_id : newValues.pmo_eval_id || null,
                         Expected_total_ROI : newValues.Expected_total_ROI,
                         Expected_IRR : newValues.Expected_IRR,
                         ROI_Category : newValues.ROI_Category,
                         WorkID_PlanView_FlexPM_SN_Ticket : newValues.WorkID_PlanView_FlexPM_SN_Ticket,
                         Documents : newValues.Documents,
-                        savedLocally : true,
-                        savedonDB : savedonDB
+                        SavedLocally : true,
+                        SavedOnDB : savedonDB
                         // sharepointFiles : this.getSharepointFilesByProject(projectID, 'PMO')
                     }
 
@@ -415,6 +457,7 @@
                     console.log("TCL: formHolder -> setDataSourceValuesFromDB -> extraValues", extraValues)
 
                     let roiRealized = {
+                        Roi_real_id : newValues.roi_real_id || null,
                         Implementation_Date : newValues.Implementation_Date,
                         FTE_Saved_per_year : newValues.FTE_Saved_per_year,
                         Hours_saved_per_year : newValues.Hours_saved_per_year,
@@ -433,8 +476,8 @@
                         Maintenance_Salaries_hours_per_year : newValues.Maintenance_Salaries_hours_per_year,
                         dynatrace : newValues.dynatrace ,
                         showDynatrace : newValues.showDynatrace,
-                        savedLocally : true,
-                        savedonDB : savedonDB
+                        SavedLocally : true,
+                        SavedOnDB : savedonDB
                     }
 
                     // ? Assign New Values to DataSet
@@ -458,6 +501,7 @@
                 console.log('reset State');
                 projectIntake = {
                     requirementsDefinition : {
+                        Project_id : null,
                         Date_Submitted : null,
                         Request_Owner : null,
                         Request_ID : null,  
@@ -471,12 +515,12 @@
                         Deadline_Justification : null,
                         Project_Type : null,
                         Project_Documents : null,
-                        savedLocally : false,
-                        savedonDB : false
+                        SavedLocally : false,
+                        SavedOnDB : false
                     },
             
                     businessInformation : {
-            
+                        Buss_info_id : null,
                         Business_Objective : null ,
                         Outcomes_from_the_Objective : null ,
                         Impact : null ,
@@ -507,12 +551,13 @@
                         Legacy_System_Infra_and_License_Fee_savings_per_year : null ,
                         Other_Savings : null ,
                         conditionalSites : [],
-                        savedLocally : false,
-                        savedonDB : false
+                        SavedLocally : false,
+                        SavedOnDB : false
                         
                     },
             
                     technicalEvaluation : {
+                        Tech_eval_id : null,
                         Delivery_Team : null,
                         Platform_type : null,
                         Applications_involved : null,
@@ -537,19 +582,21 @@
                         Maintenance_Salaries_hours_per_year : null,
                         No_of_Sites : null,
                         No_of_Active_users : null,
-                        savedLocally : false,
-                        savedonDB : false
+                         SavedLocally : false,
+                        SavedOnDB : false
                     },
                     pmoEvaluation : {
+                        Pmo_eval_id : null,
                         Expected_total_ROI : null,
                         Expected_IRR : null,
                         ROI_Category : null,
                         WorkID_PlanView_FlexPM_SN_Ticket : null,
                         Documents : null,
-                        savedLocally : false,
-                        savedonDB : false
+                         SavedLocally : false,
+                        SavedOnDB : false
                     },
                     roiRealized : {
+                        Roi_real_id : null,
                         Implementation_Date :   moment().format("MM/DD/YYYY") || null,
                         FTE_Saved_per_year : null,
                         Hours_saved_per_year : null,
@@ -574,8 +621,8 @@
                         Usage_FootprintRows : null,
                         dynatrace : null,
                         showDynatrace : null,
-                        savedLocally : false,
-                        savedonDB : false
+                        SavedLocally : false,
+                        SavedOnDB : false
                     }
                 
                 }
@@ -624,7 +671,12 @@
                             exact =  {true}
                             key =  'route-intakeProjects'
                             ref = 'route-intakeProjects'
-                            render={(props) => <AllProjectsView projectIntake = {projectIntake}  isPMO = {isPMO} locationData = {this.props} resetProjectIntake = {this.resetProjectIntake} />}
+                            render={(props) => <AllProjectsView 
+                                                        projectIntake = {projectIntake}  
+                                                        isPMO = {isPMO} 
+                                                        locationData = {this.props} 
+                                                        resetProjectIntake = {this.resetProjectIntake} 
+                                                />}
                         />
 
 
@@ -632,21 +684,26 @@
                             path = {`${localPath}/add-project/requirement-definition`}
                             key =  'route-addRequirementDefinition'
                             ref = 'route-addRequirementDefinition'
-                            render={(props) => <AddRequirementsDefinition projectIntake = {projectIntake}  isPMO = {isPMO} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
+                            render={(props) => <AddRequirementsDefinition 
+                                                    projectIntake = {projectIntake}  
+                                                    isPMO = {isPMO} 
+                                                    locationData = {this.props} 
+                                                    updateProjectIntakeValues = {this.updateProjectIntakeValues} 
+                                                    createRequirements = {this.createRequirements}/>}
                         />
 
                         <Route
                             path = {`${localPath}/add-project/business-information`}
                             key =  'route-addBusinessInformation'
                             ref = 'route-addBusinessInformation'
-                            render={(props) => <AddBusinessInformation projectIntake = {projectIntake} isPMO = {isPMO} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
+                            render={(props) => <AddBusinessInformation projectIntake = {projectIntake} isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
                         />
 
                         <Route
                             path = {`${localPath}/add-project/technical-evaluation`}
                             key =  'route-addTechnicalEvaluation'
                             ref = 'route-addTechnicalEvaluation'
-                            render={(props) => <AddTechnicalEvaluation projectIntake = {projectIntake}  isPMO = {isPMO} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
+                            render={(props) => <AddTechnicalEvaluation projectIntake = {projectIntake}  isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
                         />
 
 
@@ -654,7 +711,7 @@
                             path = {`${localPath}/add-project/pmo-evaluation`}
                             key =  'route-addPmoEvaluation'
                             ref = 'route-addPmoEvaluation'
-                            render={(props) => <AddPMOEvaluation projectIntake = {projectIntake} isPMO = {isPMO} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
+                            render={(props) => <AddPMOEvaluation projectIntake = {projectIntake} isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
                         />
 
 
@@ -662,7 +719,7 @@
                             path = {`${localPath}/add-project/roi-realized`}
                             key =  'route-addRoiRealized'
                             ref = 'route-addRoiRealized'
-                            render={(props) => <AddROIRealized projectIntake = {projectIntake} isPMO = {isPMO} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
+                            render={(props) => <AddROIRealized projectIntake = {projectIntake} isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
                         />
 
 

@@ -232,21 +232,21 @@
 
                 // ? Check Empty Values and Set New Object Values
 
-                if(reqData.data) {
+                if(reqData.data.length > 0) {
                     this.setDataSourceValuesFromDB('requirements', reqData.data[0], true , projectID)
                     
                 }
                     
-                if(businessData.data)
+                if(businessData.data.length > 0)
                     this.setDataSourceValuesFromDB('business', businessData.data[0], true)
-                if(techData.data)
+                if(techData.data.length > 0)
                     this.setDataSourceValuesFromDB('technical', techData.data[0], true)
-                if(pmoData.data) {
+                if(pmoData.data.length > 0) {
                     this.setDataSourceValuesFromDB('pmoEval', pmoData.data[0], true, projectID)
                     
                 }
                    
-                if(roiData.data)  {
+                if(roiData.data.length > 0)  {
                     
 
                     let roiDataObject = roiData.data[0];
