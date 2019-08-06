@@ -404,10 +404,6 @@
                         ROIReal : newValues.ROIReal,
                         TechEval: newValues.TechEval,
                         business_info: newValues.business_info,
-                        created_by: newValues.created_by ,
-                        created_date: newValues.created_date,
-                        last_modifed_by: newValues.last_modifed_by,
-                        last_modifed_date: newValues.last_modifed_date,
                         project_id: newValues.project_id ,
 
                         Date_Submitted : newValues.date_submitted,
@@ -423,6 +419,10 @@
                         Project_Type : newValues.project_type,
                         Project_Documents : newValues.project_docs,
                         SPFiles : [],
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                         // SavedLocally : true
                         // this.getSharepointFilesByProject(projectID, 'requirementsDefinition')
                     }     
@@ -469,10 +469,10 @@
                         Other_Savings : newValues.other_savings ,
                         conditionalSites : [],
                         Workstage :  projectIntake.requirementsDefinition.Workstage ?  projectIntake.requirementsDefinition.Workstage : null,
-                        created_by: newValues.created_by,
-                        created_date: newValues.created_date,
-                        last_modifed_by: newValues.last_modifed_by,
-                        last_modifed_date: newValues.last_modifed_date,
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                         // SavedLocally : true
                     }
 
@@ -510,6 +510,10 @@
                         Maintenance_Salaries_hours_per_year : newValues.Maintenance_Salaries,
                         No_of_Sites : newValues.No_of_Sites,
                         No_of_Active_users : newValues.No_of_Active_users,
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                         // SavedLocally : true
                         
                     }
@@ -528,8 +532,12 @@
                         ROI_Category : newValues.ROI_Category,
                         WorkID_PlanView_FlexPM_SN_Ticket : newValues.WorkID,
                         Documents : newValues.Documents,
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                         // SavedLocally : true
-                        // sharepointFiles : this.getSharepointFilesByProject(projectID, 'PMO')
+                        //?sharepointFiles : this.getSharepointFilesByProject(projectID, 'PMO')
                     }
 
                     // ? Assign New Values to DataSet
@@ -567,7 +575,10 @@
                         Site_UsageRows : newValues.Site_Usage,
                         Usage_FootprintRows : newValues.Usage_Footprint_week,
                         dynatrace : extraValues !== null ? extraValues : [],
-                        
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                         showDynatrace : extraValues !== null && extraValues.length > 0 ? true : false,
                         // SavedLocally : true
                     }
@@ -605,7 +616,7 @@
                     let requirementsDefinition = {
                        
                         project_id: newValues.Project_id || null ,
-                        created_by: newValues.Created_by ,
+                        created_by: newValues.Created_by ||  newValues.Created_by ,
                         Date_Submitted : newValues.Date_submitted,
                         Request_Owner : newValues.Request_Owner,
                         Request_ID :  newValues.Project_id || null,  
@@ -619,7 +630,11 @@
                         Project_Documents : newValues.Project_docs,
                         SPFiles : newValues.SPFiles || [],
                         SavedLocally : true,
-                        savedOnDB : savedonDB
+                        savedOnDB : savedonDB,
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                         // this.getSharepointFilesByProject(projectID, 'requirementsDefinition')
                     }     
                     
@@ -667,7 +682,11 @@
                         Legacy_System_Infra_and_License_Fee_savings_per_year : newValues.Legacy_System_Infra_and_License_Fee_savings_per_year,
                         Other_Savings : newValues.Other_Savings,
                         SavedLocally : true,
-                        savedOnDB : savedonDB
+                        savedOnDB : savedonDB,
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                     }
 
                       // ? Assign New Values to DataSet
@@ -705,7 +724,11 @@
                         No_of_Sites :newValues.No_of_Sites,
                         No_of_Active_users :newValues.No_of_Active_users,
                         SavedLocally : true,
-                        savedOnDB : savedonDB
+                        savedOnDB : savedonDB,
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                     }
 
                       // ? Assign New Values to DataSet
@@ -723,7 +746,11 @@
                         WorkID_PlanView_FlexPM_SN_Ticket : newValues.WorkID_PlanView_FlexPM_SN_Ticket,
                         Documents : newValues.Documents,
                         SavedLocally : true,
-                        savedOnDB : savedonDB
+                        savedOnDB : savedonDB,
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                         // sharepointFiles : this.getSharepointFilesByProject(projectID, 'PMO')
                     }
 
@@ -758,7 +785,11 @@
                         dynatrace : newValues.dynatrace ,
                         showDynatrace : newValues.showDynatrace,
                         SavedLocally : true,
-                        savedOnDB : savedonDB
+                        savedOnDB : savedonDB,
+                        Created_by: newValues.created_by || newValues.Created_by ,
+                        Created_date: newValues.created_date,
+                        Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
+                        Last_modifed_date: newValues.last_modifed_date,
                     }
 
                     // ? Assign New Values to DataSet

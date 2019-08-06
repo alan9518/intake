@@ -144,222 +144,10 @@
 
 
 
-              // --------------------------------------
-            // Set Initial Values
-            // Look For Project ID
-            // --------------------------------------
-            // componentDidMount() {
-            //     if(this.props.match.params.projectID) {
-            //         const id = this.props.match.params.projectID
-                    
-            //         const requestID = id.substr(id.indexOf('D')+1,id.length);
-
-                    
-            //         // this.props.fetchProjectFiles(id, 'RequirementsDefinition')
-                        
-                    
-            //         // if(!this.props.requirementsDefinition.requirementsDefinition) {
-            //         if(this.props.updateFromState !== true ) {
-            //             this.props.fetchProjectRequirements(requestID)
-
-            //             this.props.fetchProjectFiles(id, 'RequirementsDefinition')
-
-
-                        
-                        
-
-            //             // this.formFields =  this.createFormStructure();
-                        
-            //         }
-            //         else {
-            //             // ? Use Local Redux State as dataSet
-            //             // console.log("TCL: RequirementsDefinition -> componentDidMount -> this.props", this.props.requirementsDefinition)
-            //             // console.log("TCL: componentDidMount -> this.props.requirementsDefinition", this.props.requirementsDefinition)
-
-
-            //             this.setState({
-            //                 Date_Submitted : this.formatDate(this.props.requirementsDefinition.Date_submitted) ,  
-            //                 Date_Submitted_Moment : this.convertStringToMomentObject(this.props.requirementsDefinition.Date_submitted) || moment(),  
-            //                 Request_Owner : this.props.requirementsDefinition.Request_Owner ,  
-            //                 Request_ID : this.props.requirementsDefinition.request_id ||  this.props.requirementsDefinition.Project_id,  
-            //                 // Workstage : {label : this.props.requirementsDefinition.workstage, value : this.props.requirementsDefinition.workstage},  
-            //                 // Workstage : {label : this.props.loadedRequirements.requirementsDefinition.workstage, value : this.props.loadedRequirements.requirementsDefinition.workstage},  
-            //                 Workstage : this.createSelectOption(this.props.requirementsDefinition.Workstage),
-            //                 Project_Name :this.props.requirementsDefinition.Project_Name ,  
-            //                 Description : this.props.requirementsDefinition.Description , 
-            //                 Expected_Start_Date : moment(this.props.requirementsDefinition.Expected_Start_Date )|| moment(),  
-            //                 Expected_Completion_Date : moment(this.props.requirementsDefinition.Expected_Completion_Date) || moment(),   
-            //                 Expected_Start_Date_Moment : this.convertStringToMomentObject(this.props.requirementsDefinition.Expected_Start_Date) || moment(),  
-            //                 Expected_Completion_Date_Moment : this.convertStringToMomentObject(this.props.requirementsDefinition.Expected_Completion_Date) || moment(),   
-            //                 Deadline_Justification : this.props.requirementsDefinition.Deadline_Justification || "",     
-            //                 // Project_Type : {label : this.props.requirementsDefinition.Project_Type, value : this.props.requirementsDefinition.Project_Type},    
-            //                 Project_Type : this.createSelectOption(this.props.requirementsDefinition.Project_Type),
-            //                 Project_Documents : this.props.requirementsDefinition.Project_docs ||  [],  
-            //                 // usersCanEdit : usersCanEdit,
-            //                 sendingData : false,
-            //                 redirectUser : false,
-            //                 isSavedOnDB : false
-            //                 // showFileManager : this.props.requirementsDefinition.requirementsDefinition.project_docs.length > 0 ? true : false
-            //             })
-            //             this.filesArray =  this.props.requirementsDefinition.Project_docs ;
-
-
-            //             this.formFields =  this.createFormStructure();
-            //         }
-
-                   
-            //     }
-            // }
 
 
 
-            // --------------------------------------
-            // Update Props & State
-            // --------------------------------------
-            // componentWillReceiveProps = (nextProps) => {
-				
-            //     console.log('TCL: RequirementsDefinition -> componentWillReceiveProps -> nextProps', nextProps)
-
-            //     console.log("TCL: RequirementsDefinition -> componentWillReceiveProps -> this.props", this.props)
-            //     // this.props.loadedRequirements.requirementsDefinition
-                
-			// 	// nextProps.loadedRequirements.requirementsDefinition
-			// 	//console.log('TCL: RequirementsDefinition -> componentWillReceiveProps -> nextProps.loadedRequirements.requirementsDefinition', nextProps.loadedRequirements)
-            //     const currentUser = window.getCurrentSPUser();
-            //     let usersCanEdit = true;
-
-            //     if( !isEqual(this.props.requirementsDefinition, nextProps.loadedRequirements.requirementsDefinition)) {
-            //         console.log("TCL: componentWillReceiveProps -> nextProps.loadedRequirements.requirementsDefinition", nextProps.loadedRequirements.requirementsDefinition)
-            //         console.log("TCL: componentWillReceiveProps -> this.props.requirementsDefinition", this.props.requirementsDefinition)
-            //         console.log("TCL: RequirementsDefinition -> componentWillReceiveProps -> this.props.", this.props)
-
-            //         if(nextProps.loadedRequirements.requirementsDefinition) {
-                    
-
-            //             if(this.props.updateFromDB ===  true || this.props.updateFromDB ===  undefined) {
-
-
-            //                 if(this.state.isSavedOnDB === true) {
-            //                     // if(prevProps.pmoEvalFiles.length) 
-            //                     const id = this.props.match.params.projectID
-            //                     this.props.fetchProjectFiles(id, 'RequirementsDefinition').then((data)=> {
-            //                         // this.props.requirementsFiles
-            //                         console.log("TCL: RequirementsDefinition -> componentWillReceiveProps -> this.props.requirementsFiles", this.props.requirementsFiles)
-                                    
-            //                     })
-
-            //                     this.setState({isSavedOnDB : false})
-                                
-            //                 }
-                    
-
-            //                 this.setState({
-            //                             Date_Submitted : this.formatDate(nextProps.loadedRequirements.requirementsDefinition.date_submitted) || '',  
-            //                             // Date_Submitted_Moment : this.convertStringToMomentObject(nextProps.loadedRequirements.requirementsDefinition.date_submitted) || moment(),  
-            //                             Request_Owner : nextProps.loadedRequirements.requirementsDefinition.request_owner || '',  
-            //                             Request_ID : nextProps.loadedRequirements.requirementsDefinition.request_id || '',  
-            //                             Workstage : {label : nextProps.loadedRequirements.requirementsDefinition.workstage, value : nextProps.loadedRequirements.requirementsDefinition.workstage} || {"label" : "1 - New" , "value": "New" },  
-            //                             Project_Name :nextProps.loadedRequirements.requirementsDefinition.project_name || "",  
-            //                             Description : nextProps.loadedRequirements.requirementsDefinition.description || "", 
-            //                             Expected_Start_Date : moment(nextProps.loadedRequirements.requirementsDefinition.expectedstart_date )|| moment(),  
-            //                             Expected_Completion_Date : moment(nextProps.loadedRequirements.requirementsDefinition.expected_completion_date) || moment(),   
-            //                             Expected_Start_Date_Moment : this.convertStringToMomentObject(nextProps.loadedRequirements.requirementsDefinition.expectedstart_date) || moment(),  
-            //                             Expected_Completion_Date_Moment : this.convertStringToMomentObject(nextProps.loadedRequirements.requirementsDefinition.expected_completion_date) || moment(),   
-            //                             Deadline_Justification : nextProps.loadedRequirements.requirementsDefinition.deadline_justification || "",     
-            //                             Project_Type : {label : nextProps.loadedRequirements.requirementsDefinition.project_type, value : nextProps.loadedRequirements.requirementsDefinition.project_type} || {label : "Project Type", value : null},    
-            //                             Project_Documents : nextProps.loadedRequirements.requirementsDefinition.project_docs ||  [],  
-            //                             spFiles : this.props.requirementsFiles,
-            //                             sendingData : false,
-            //                             // showFileManager : nextProps.loadedRequirements.requirementsDefinition.project_docs.length > 0 ? true : false
-            //                         })
-
-            //                         // this.filesArray = nextProps.loadedRequirements.requirementsDefinition.project_docs || [];
-            //                         this.filesArray =  nextProps.loadedRequirements.requirementsDefinition.project_docs[0] === "" ? [] : nextProps.loadedRequirements.requirementsDefinition.project_docs ;
-
-            //                         // this.originalFiles = nextProps.loadedRequirements.requirementsDefinition.project_docs[0] === "" ? [] : nextProps.loadedRequirements.requirementsDefinition.project_docs ;
-            //                         //console.log('TCL: RequirementsDefinition -> componentWillReceiveProps -> PRoject TYpe', {label : nextProps.loadedRequirements.requirementsDefinition.project_type, value : nextProps.loadedRequirements.requirementsDefinition.project_type} )
-
-            //                         this.originalFiles =  nextProps.loadedRequirements.requirementsDefinition.project_docs|| [];
-                            
-            //             }
-                    
-            //             else {
-
-            //                 let workstage = '';
-            //                 if( nextProps.loadedRequirements.requirementsDefinition.workstage && nextProps.loadedRequirements.requirementsDefinition.workstage  != "")
-            //                     workstage =  {label : nextProps.loadedRequirements.requirementsDefinition.workstage, value : nextProps.loadedRequirements.requirementsDefinition.workstage}
-            //                 else if(!isEmpty(nextProps.loadedRequirements.Workstage)) 
-            //                     workstage =  {label : nextProps.loadedRequirements.Workstage.label, value : nextProps.loadedRequirements.Workstage.value}
-            //                 else
-            //                     workstage = ''
-
-
-            //                 let docs = [];
-            //                 if( nextProps.loadedRequirements.Project_docs )
-            //                     docs = nextProps.loadedRequirements.Project_docs 
-            //                 else if(nextProps.loadedRequirements.requirementsDefinition.project_docs) 
-            //                     docs = nextProps.loadedRequirements.requirementsDefinition.project_docs
-            //                 else
-            //                     docs = []
-                            
-            //                 this.originalFiles =  docs;
-
-                          
-
-                            
-            //                 if(this.state.isSavedOnDB === true) {
-            //                     // if(prevProps.pmoEvalFiles.length) 
-            //                     const id = this.props.match.params.projectID
-            //                     this.props.fetchProjectFiles(id, 'RequirementsDefinition').then((data)=> {
-            //                         // this.props.requirementsFiles
-            //                         console.log("TCL: RequirementsDefinition -> componentWillReceiveProps -> this.props.requirementsFiles", this.props.requirementsFiles)
-                                    
-            //                     })
-
-            //                     this.setState({isSavedOnDB : false})
-                                
-            //                 }
-
-            //                 this.setState({
-            //                     Date_Submitted : this.formatDate(nextProps.loadedRequirements.Date_submitted) || '',  
-            //                     Date_Submitted_Moment : this.convertStringToMomentObject(nextProps.loadedRequirements.Date_submitted) || moment(),  
-            //                     Request_Owner : nextProps.loadedRequirements.Request_Owner || '',  
-            //                     Request_ID : nextProps.loadedRequirements.Project_id || '',  
-            //                     Workstage : workstage !== '' ? workstage : {"label" : "1 - New" , "value": "New" },  
-            //                     Project_Name :nextProps.loadedRequirements.Project_Name || "",  
-            //                     Description : nextProps.loadedRequirements.Description || "", 
-            //                     Expected_Start_Date : moment(nextProps.loadedRequirements.Expected_Start_Date )|| moment(),  
-            //                     Expected_Completion_Date : moment(nextProps.loadedRequirements.Expected_Completion_Date) || moment(),   
-            //                     Expected_Start_Date_Moment : this.convertStringToMomentObject(nextProps.loadedRequirements.Expected_Start_Date) || moment(),  
-            //                     Expected_Completion_Date_Moment : this.convertStringToMomentObject(nextProps.loadedRequirements.Expected_Completion_Date) || moment(),   
-            //                     Deadline_Justification : nextProps.loadedRequirements.Deadline_Justification || "",     
-            //                     Project_Type : nextProps.loadedRequirements.Project_Type ||  {label : nextProps.loadedRequirements.requirementsDefinition.project_type, value : nextProps.loadedRequirements.requirementsDefinition.project_type} || {label : "Project Type", value : null},    
-            //                     Project_Documents : docs,
-            //                     spFiles : nextProps.requirementsFiles,
-            //                     sendingData : false,
-            //                     // showFileManager : nextProps.loadedRequirements.requirementsDefinition.project_docs.length > 0 ? true : false
-            //                 })
-
-            //                     // this.filesArray = nextProps.loadedRequirements.requirementsDefinition.project_docs || [];
-            //                     // this.filesArray =  nextProps.loadedRequirements.requirementsDefinition.project_docs[0] === "" ? [] : nextProps.loadedRequirements.requirementsDefinition.project_docs ;
-            //                     this.filesArray =  docs[0] === "" ? [] : docs
-            //                     this.originalFiles = docs;
-
-            //                     //console.log('TCL: RequirementsDefinition -> componentWillReceiveProps -> PRoject TYpe', {label : nextProps.loadedRequirements.requirementsDefinition.project_type, value : nextProps.loadedRequirements.requirementsDefinition.project_type} )
-                    
-            //             }
-                        
-                    
-            //         }
-            //     }
-            // }
-
-
-
-            // shouldComponentUpdate = () => {
-            //     return false
-            // }
-
+         
 
 
           
@@ -368,9 +156,16 @@
             // Convert String to Moment Object
             // --------------------------------------
             convertStringToMomentObject(date) {
+                console.log("TCL: RequirementsDefinition -> convertStringToMomentObject -> date", date)
                 let dateObj = new Date(date);
+                console.log("TCL: RequirementsDefinition -> convertStringToMomentObject -> dateObj", dateObj)
+
                 let momentObj = moment(dateObj);
-                let dateFormat = moment(dateObj).format("DD/MM/YYYY");
+
+
+                console.log("TCL: RequirementsDefinition -> convertStringToMomentObject -> momentObj", momentObj)
+                // let dateFormat = moment(dateObj).format("DD/MM/YYYY");
+                
 				//console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> dateFormat', dateFormat)
                 //console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> momentObj', momentObj)
                 
@@ -1384,7 +1179,7 @@
                             
                             // businessInformation.Project_id = id;
                             
-                            if(businessInformation.Buss_info_id)
+                            if(businessInformation.Buss_info_id || businessInformation.buss_info_id )
                                 updateBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
                                     console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
                                     // businessInformation.Buss_info_id = newBusinesId
@@ -1406,8 +1201,8 @@
 
                         // ? Save Tehnical Evaluation
                         if(!isEmpty(technicalEvaluation) && technicalEvaluation.SavedLocally === true) {
-                            if(technicalEvaluation.Tech_eval_id) {
-                                updateTechnicalDB(technicalEvaluation)
+                            if(technicalEvaluation.Tech_eval_id || technicalEvaluation.tech_eval_id) {
+                                updateTechnicalDB(technicalEvaluation, id)
                             }
                             else
                                 saveTechnicalDB(technicalEvaluation, id).then((newTechId) => {
@@ -1422,8 +1217,8 @@
 
                         // ? Save PMO Evaluation
                         if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
-                            if(pmoEvaluation.Pmo_eval_id) {
-                                updatePMOEvaluation(pmoEvaluation)
+                            if(pmoEvaluation.Pmo_eval_id || pmoEvaluation.pmo_eval_id) {
+                                updatePMOEvaluation(pmoEvaluation, id)
                             }
                             else
                                 savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
@@ -1441,8 +1236,8 @@
 
                         if(!isEmpty(roiRealized) && roiRealized.SavedLocally === true) {
                             // ? Look For Roi Relized Data
-                            if(roiRealized.Roi_real_id) {
-                            updateROIRealizedDB(roiRealized)
+                            if(roiRealized.Roi_real_id || roiRealized.roi_real_id ) {
+                                updateROIRealizedDB(roiRealized, id)
                             }
                             else
                                 saveROIRealizedDB(roiRealized, id).then((roiID) => {

@@ -196,12 +196,12 @@
         // @param {formData from Techinical Evaluation View}
         // @returns {Action}
         // -------------------------------------- */
-        export async function updateTechnicalDB(formData) {
+        export async function updateTechnicalDB(formData, id = null) {
             //console.log('TCL: formData', formData)
 
             const updateTechnicalData = {
                 tab3 :{
-                    "project_id" : formData.Project_ID,
+                    "project_id" : formData.Project_ID || null,
                     "tech_eval_id" : formData.Tech_eval_id || formData.tech_eval_id,
                     "Delivery_Team" : formData.Delivery_Team.value === undefined ? removeSpecialCharacters(formData.Delivery_Team) : removeSpecialCharacters(formData.Delivery_Team.value ),
                     "Platform_type" : removeSpecialCharacters(formData.Platform_type.value),
@@ -227,7 +227,7 @@
                     "Maintenance_Salaries" : formData.Maintenance_Salaries_hours_per_year,
                     "No_of_Sites" : formData.No_of_Sites,
                     "No_of_Active_users" : formData.No_of_Active_users,
-                    "last_modifed_by" : formData.Last_modifed_by
+                    "last_modifed_by" : formData.Last_modifed_by || 'alan.medina@flex.com'
                 }
 
             }

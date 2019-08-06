@@ -26,18 +26,45 @@ class DatePicker extends Component {
     // --------------------------------------
     constructor(props) {
         super(props);
+
+        console.log("TCL: DatePicker -> constructor -> rops.initialValue", props)
+
         this.state = {
-            startDate: props.initialValue ||  moment() ,
+            startDate: moment() ,
             focusedInput: null,
         };
+        
     }
 
     // --------------------------------------
     // Set Component TabIndex
     // --------------------------------------
     componentDidMount() {
-        const {name, tabIndex} = this.props;
-        document.getElementById(name).tabIndex = tabIndex;
+        try {
+            const {name, tabIndex, initialValue} = this.props;
+            console.log("TCL: DatePicker -> componentDidMount -> initialValue", initialValue)
+            document.getElementById(name).tabIndex = tabIndex;
+
+            let datePickerDate = initialValue
+
+            if(initialValue._isValid === false)
+                datePickerDate = moment()
+            else
+                datePickerDate = initialValue
+
+            this.setState({
+                startDate : datePickerDate
+            })
+
+
+            console.log("TCL: DatePicker -> constructor -> this.state", this.state)
+        }
+        catch(error) {
+            console.log("TCL: DatePicker -> componentDidMount -> error", error)
+            
+        }
+      
+       
     }
 
     // --------------------------------------

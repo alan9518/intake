@@ -65,12 +65,16 @@
                     Estimated_Effort : props.projectIntake.technicalEvaluation.Estimated_Effort || {label : "Select Estimated Effort", value : null},
                     Project_Team_Size : props.projectIntake.technicalEvaluation.Project_Team_Size || {label : "Select Size", value : null},
                     Project_Manager : props.projectIntake.technicalEvaluation.Project_Manager || {label : "Project_Manager", value : null},
-                    Target_Start_Date :props.projectIntake.technicalEvaluation.Target_Start_Date || "",
-                    Target_Go_Live_Date :props.projectIntake.technicalEvaluation.Target_Go_Live_Date || "",
-                    IT_FTE_required :props.projectIntake.technicalEvaluation.IT_FTE_required || "",
+
+                    Target_Start_Date :  moment(props.projectIntake.technicalEvaluation.Target_Start_Date ) || null,  
+                    Target_Start_Date_Moment : moment(props.projectIntake.technicalEvaluation.Target_Start_Date) || null,  
+                    // Target_Start_Date : moment(props.projectIntake.technicalEvaluation.Target_Start_Date )|| null,
+                    Target_Go_Live_Date : moment(props.projectIntake.technicalEvaluation.Target_Go_Live_Date) || null,
+                    Target_Go_Live_Date_Moment : moment(props.projectIntake.technicalEvaluation.Target_Go_Live_Date) || null,
+                    IT_FTE_required :props.projectIntake.technicalEvaluation.IT_FTE_required || null,
                     Approver : props.projectIntake.technicalEvaluation.Approver || {},
-                    Approval_Date : moment(this.props.projectIntake.technicalEvaluation.Approval_Date) || null,
-                    Approval_Date_Moment : moment(this.props.projectIntake.technicalEvaluation.Approval_Date) || null,  
+                    Approval_Date : moment(props.projectIntake.technicalEvaluation.Approval_Date) || null,
+                    Approval_Date_Moment : moment(props.projectIntake.technicalEvaluation.Approval_Date) || null,  
                     Justification_ROI :props.projectIntake.technicalEvaluation.Justification_ROI || "",
                     Design_Development_Testing_Effort :props.projectIntake.technicalEvaluation.Design_Development_Testing_Effort || "",
                     Travel_TE :props.projectIntake.technicalEvaluation.Travel_TE || "",
@@ -115,7 +119,12 @@
 
                 // this.state
                 console.log("TCL: TechnicalEvaluation -> componentDidMount -> this.state", this.state)
-
+                
+                // ? Set Date Values When They Are empty
+             
+                // let target_Start_Date_Moment = this.props.projectIntake.technicalEvaluation.Target_Start_Date !== null ? moment(this.props.projectIntake.technicalEvaluation.Target_Start_Date)  : moment()
+                // let approval_Date_Moment = this.props.projectIntake.technicalEvaluation.Approval_Date !== null ? moment(this.props.projectIntake.technicalEvaluation.Approval_Date) : moment();
+             
                 this.setState({
                     tech_eval_id : this.props.projectIntake.technicalEvaluation.tech_eval_id || null,
                     // Delivery_Team : {"label" : this.props.projectIntake.technicalEvaluation.Delivery_Team, "value" :this.props.projectIntake.technicalEvaluation.Delivery_Team } || {label : "Select a Delivery Team", value : null},
@@ -128,24 +137,14 @@
                     Estimated_Effort : this.createSelectOption(this.props.projectIntake.technicalEvaluation.Estimated_Effort) || {label : "Select Estimated Effort", value : null},
                     Project_Team_Size : this.prefillSelects(this.props.projectIntake.technicalEvaluation.Project_Team_Size) || {label : "Select Size", value : null},
                     // Project_Manager : this.createSelectOption(this.props.projectIntake.technicalEvaluation.Project_Manager) || this.createSelectOption(""),
-                    Target_Start_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.technicalEvaluation.Target_Start_Date) ,
-                    Target_Go_Live_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.technicalEvaluation.Target_Go_Live_Date),
+                    Target_Start_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.technicalEvaluation.Target_Start_Date) || moment(),
+                    Target_Go_Live_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.technicalEvaluation.Target_Go_Live_Date) || moment(),
                     // Approver : this.createSelectOption(this.props.projectIntake.technicalEvaluation.Approver) || this.createSelectOption(""),
-                    Approval_Date : moment(this.props.projectIntake.technicalEvaluation.Approval_Date) || null,
-                    Approval_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.technicalEvaluation.Approval_Date),
+                    
+                    Approval_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.technicalEvaluation.Approval_Date) || moment(),
                     isLoaded : true,
                     isSavedOnDB : false
                 })
-
-
-                // this.formFields =  this.createFormStructure();    
-
-
-                // this.loadConditionalValues(this.props.projectIntake.technicalEvaluation.Delivery_Team, false)
-
-
-                
-
 
                 this.updateSelectsOnComponentLoad(true);
 
@@ -162,219 +161,13 @@
             componentWillUnmount() {
 
                 
-               
-
+        
                 // let data = this.saveFormValues();
                 // this.props.saveLocalTechnical(data);
             }
 
 
-            // --------------------------------------
-            // Init People Pickers
-            // --------------------------------------
-            // componentDidMount() {
-
-            //     window.addEventListener("resize", this.updateContainerDimensions);
-
-            //     // this.context
-                
-
-            //     if(this.props.match.params.projectID) {
-            //         const id = this.props.match.params.projectID
-            //         const requestID = id.substr(id.indexOf('D')+1,id.length);
-            //         const pickersWidth = '175px';
-
-            //         if( this.props.updateFromState !== true  ) {
-                        
-            //             this.props.fetchProjectTechnical(requestID).then(()=> {
-                            
-                            
-            //                 setTimeout(() => {
-            //                     window.initializePeoplePicker('peoplePickerApprover',pickersWidth );
-            //                     window.initializePeoplePicker('peoplePickerProject_Manager', pickersWidth);
-            //                     this.fillPickers();
-            //                     this.props.loadedtechnicalEvaluation.technicalEvaluation && this.loadConditionalValues(this.props.loadedtechnicalEvaluation.technicalEvaluation.Delivery_Team, true)
-
-            //                     this.updateSelectsOnComponentLoad();
-            //                 }, 0);
-
-
-                            
             
-            //                 // this.setState({
-            //                 //     isLoaded : true
-            //                 // })
-            //             })
-			// 		//console.log('TCL: TechnicalEvaluation -> componentDidMount -> this.props', this.props)
-                    
-            //         }
-            //         else {
-
-            //             // Compare this.props with this.state
-            //             let stringState =  this.state && JSON.stringify(this.state) || "";
-            //             let stringProps =  this.props.technicalEvaluation && JSON.stringify(this.props.technicalEvaluation) || ""
-
-            //             if(stringState !== "" && stringProps !== "") {
-            //                 console.log("TCL: TechnicalEvaluation -> componentDidMount -> stringProps", stringProps)
-            //                 console.log("TCL: TechnicalEvaluation -> componentDidMount -> stringState", stringState)
-            //                 if(stringState === stringProps)
-            //                     console.log('props and state are equal')
-            //             }
-
-
-            //             // ? Use Local Redux State as dataSet
-            //             console.log("TCL: TechnicalEvaluation -> componentDidMount -> this.props", this.props)
-
-            //             setTimeout(() => {
-            //                 this.setState({
-            //                     tech_eval_id : this.props.technicalEvaluation.tech_eval_id || null,
-            //                     // Delivery_Team : {"label" : this.props.technicalEvaluation.Delivery_Team, "value" :this.props.technicalEvaluation.Delivery_Team } || {label : "Select a Delivery Team", value : null},
-            //                     Delivery_Team : this.createSelectOption(this.props.technicalEvaluation.Delivery_Team) || {label : "Select a Delivery Team", value : null},
-            //                     Platform_type : this.createSelectOption(this.props.technicalEvaluation.Platform_type) || {label : "Select Plataform Type", value : null},
-            //                     Applications_involved : this.createSelectOption(this.props.technicalEvaluation.Applications_involved) || {label : "Select Applications Involved", value : null},
-            //                     Technology : this.loadTechnolgies(this.props.technicalEvaluation.Technology) || [],
-            //                     // Technology : this.loadTech(this.props.technicalEvaluation.Technology) || [],
-            //                     IT_Groups_Required : this.createSelectOption(this.props.technicalEvaluation.IT_Groups_Required) || {label : "Select IT Groups Required", value : null},
-            //                     Estimated_Effort : this.createSelectOption(this.props.technicalEvaluation.Estimated_Effort) || {label : "Select Estimated Effort", value : null},
-            //                     Project_Team_Size : this.createSelectOption(this.props.technicalEvaluation.Project_Team_Size) || {label : "Select Size", value : null},
-            //                     Project_Manager : this.createSelectOption(this.props.technicalEvaluation.Project_Manager) || this.createSelectOption(""),
-            //                     Target_Start_Date :this.convertStringToMomentObject(this.props.technicalEvaluation.Target_Start_Date) || moment(),
-            //                     Target_Go_Live_Date :this.convertStringToMomentObject(this.props.technicalEvaluation.Target_Go_Live_Date) || moment(),
-            //                     IT_FTE_required :this.props.technicalEvaluation.IT_FTE_required || "",
-            //                     Approver : this.createSelectOption(this.props.technicalEvaluation.Approver) || this.createSelectOption(""),
-            //                     Approval_Date :this.convertStringToMomentObject(this.props.technicalEvaluation.Approval_Date) || moment(),
-            //                     Justification_ROI :this.props.technicalEvaluation.Justification_ROI || "",
-            //                     Design_Development_Testing_Effort :this.props.technicalEvaluation.Design_Development_Testing_Effort || "",
-            //                     Travel_TE :this.props.technicalEvaluation.Travel_TE || "",
-            //                     Consulting :this.props.technicalEvaluation.Consulting || "",
-            //                     Training :this.props.technicalEvaluation.Training || "",
-            //                     Licenses_Cost_per_year :this.props.technicalEvaluation.Licenses_Cost_per_year || "",
-            //                     Hardware_leasing :this.props.technicalEvaluation.Hardware_leasing || "",
-            //                     Maintenance_Hardware_hours_per_year :this.props.technicalEvaluation.Maintenance_Hardware_hours_per_year || "",
-            //                     Maintenance_Salaries_hours_per_year :this.props.technicalEvaluation.Maintenance_Salaries_hours_per_year || "",
-            //                     No_of_Sites :this.props.technicalEvaluation.No_of_Sites || "",
-            //                     No_of_Active_users :this.props.technicalEvaluation.No_of_Active_users || "",
-            //                     // isLoaded : true
-            //                 })
-            //                 window.initializePeoplePicker('peoplePickerApprover',pickersWidth );
-            //                 window.initializePeoplePicker('peoplePickerProject_Manager', pickersWidth);
-            //                 this.fillPickers();
-                            
-            //                 this.loadConditionalValues(this.props.technicalEvaluation.Delivery_Team, true)
-
-            //                 this.updateSelectsOnComponentLoad();
-            //             }, 0);
-
-                      
-            //         }
-            //     }
-            // }
-
-
-            // componentWillReceiveProps = (nextProps)=> {
-            //     //console.log('TCL: TechnicalEvaluation -> componentWillReceiveProps -> nextProps', nextProps)
-
-                
-            //     if(nextProps.loadedtechnicalEvaluation.technicalEvaluation) { 
-            //         if( !isEqual(this.props.technicalEvaluation, nextProps.loadedtechnicalEvaluation.technicalEvaluation)) {
-            //             if(this.props.updateFromDB ===  true || this.props.updateFromDB ===  undefined) {
-
-            //                 console.log("TCL: TechnicalEvaluation -> componentWillReceiveProps -> nextProps.loadedtechnicalEvaluation.technicalEvaluation", nextProps.loadedtechnicalEvaluation.technicalEvaluation)
-            //                 this.setState({
-            //                     tech_eval_id : nextProps.loadedtechnicalEvaluation.tech_eval_id ||  nextProps.loadedtechnicalEvaluation.technicalEvaluation.tech_eval_id ,
-            //                     Delivery_Team : {"label" : nextProps.loadedtechnicalEvaluation.Delivery_Team, "value" :nextProps.loadedtechnicalEvaluation.Delivery_Team } || {label : "Select a Delivery Team", value : null},
-                                
-            //                     Platform_type : this.prefillSelects(nextProps.loadedtechnicalEvaluation.technicalEvaluation.Platform_type) || {label : "Select Plataform Type", value : null},
-            //                     Applications_involved : this.prefillSelects(nextProps.loadedtechnicalEvaluation.technicalEvaluation.Applications_involved) || {label : "Select Applications Involved", value : null},
-            //                     Technology : this.loadTechnolgies(nextProps.loadedtechnicalEvaluation.technicalEvaluation.Technology) || [],
-            //                     // Technology : this.loadTech(nextProps.loadedtechnicalEvaluation.technicalEvaluation.Technology) || [],
-            //                     IT_Groups_Required : this.prefillSelects(nextProps.loadedtechnicalEvaluation.technicalEvaluation.IT_Groups_Required) || {label : "Select IT Groups Required", value : null},
-            //                     Estimated_Effort : this.prefillSelects(nextProps.loadedtechnicalEvaluation.technicalEvaluation.Estimated_Effort) || {label : "Select Estimated Effort", value : null},
-            //                     Project_Team_Size : this.prefillSelects( nextProps.loadedtechnicalEvaluation.technicalEvaluation.Project_Team_Size || nextProps.loadedtechnicalEvaluation.technicalEvaluation.Project_TShirt_Size) || {label : "Select Size", value : null},
-            //                     Project_Manager : nextProps.loadedtechnicalEvaluation.technicalEvaluation.Project_Manager || "",
-            //                     Target_Start_Date :this.convertStringToMomentObject(nextProps.loadedtechnicalEvaluation.technicalEvaluation.Target_Start_Date) || moment(),
-            //                     Target_Go_Live_Date :this.convertStringToMomentObject(nextProps.loadedtechnicalEvaluation.technicalEvaluation.Target_Go_Live_Date) || moment(),
-            //                     IT_FTE_required :nextProps.loadedtechnicalEvaluation.technicalEvaluation.IT_FTE_required || "",
-            //                     Approver : nextProps.loadedtechnicalEvaluation.technicalEvaluation.Approver || "",
-            //                     Approval_Date :this.convertStringToMomentObject(nextProps.loadedtechnicalEvaluation.technicalEvaluation.Approval_Date) || moment(),
-            //                     Justification_ROI :nextProps.loadedtechnicalEvaluation.technicalEvaluation.Justification_ROI || "",
-            //                     Design_Development_Testing_Effort : nextProps.loadedtechnicalEvaluation.technicalEvaluation.Design_Development_Testing_Effort ||  nextProps.loadedtechnicalEvaluation.technicalEvaluation.DDT_Effort || "",
-            //                     Travel_TE :nextProps.loadedtechnicalEvaluation.technicalEvaluation.Travel_TE || "",
-            //                     Consulting :nextProps.loadedtechnicalEvaluation.technicalEvaluation.Consulting || "",
-            //                     Training :nextProps.loadedtechnicalEvaluation.technicalEvaluation.Training || "",
-            //                     Licenses_Cost_per_year :nextProps.loadedtechnicalEvaluation.technicalEvaluation.Licenses_Cost_per_year || "",
-            //                     Hardware_leasing :nextProps.loadedtechnicalEvaluation.technicalEvaluation.Hardware_leasing || "",
-            //                     Maintenance_Hardware_hours_per_year : nextProps.loadedtechnicalEvaluation.technicalEvaluation.Maintenance_Hardware_hours_per_year || nextProps.loadedtechnicalEvaluation.technicalEvaluation.Maintenance_Hardware || "",
-            //                     Maintenance_Salaries_hours_per_year : nextProps.loadedtechnicalEvaluation.technicalEvaluation.Maintenance_Salaries_hours_per_year || nextProps.loadedtechnicalEvaluation.technicalEvaluation.Maintenance_Salaries || "",
-            //                     No_of_Sites :nextProps.loadedtechnicalEvaluation.technicalEvaluation.No_of_Sites || "",
-            //                     No_of_Active_users :nextProps.loadedtechnicalEvaluation.technicalEvaluation.No_of_Active_users || "",
-            //                     // isLoaded : true
-            //                 })
-            //             }else {
-            //                 console.log("TCL: TechnicalEvaluation -> componentWillReceiveProps -> nextProps.loadedtechnicalEvaluation", nextProps.loadedtechnicalEvaluation)
-                        
-
-                          
-                            
-            //                 this.setState({
-            //                     tech_eval_id : nextProps.loadedtechnicalEvaluation.technicalEvaluation.tech_eval_id ,
-            //                     // Delivery_Team : {"label" : nextProps.loadedtechnicalEvaluation.Delivery_Team, "value" :nextProps.loadedtechnicalEvaluation.Delivery_Team } || {label : "Select a Delivery Team", value : null},
-            //                     Delivery_Team : this.createSelectOption(nextProps.loadedtechnicalEvaluation.Delivery_Team) ||  {label : "Select a Delivery Team", value : null},
-            //                     Platform_type : this.createSelectOption(nextProps.loadedtechnicalEvaluation.Platform_type) || {label : "Select Plataform Type", value : null},
-            //                     Applications_involved : this.createSelectOption(nextProps.loadedtechnicalEvaluation.Applications_involved) || {label : "Select Applications Involved", value : null},
-            //                     Technology : this.loadTechnolgies(nextProps.loadedtechnicalEvaluation.Technology) || [],
-            //                     // Technology : this.loadTech(nextProps.loadedtechnicalEvaluation.Technology) || [],
-            //                     // Technology : nextProps.loadedtechnicalEvaluation.Technology || {label : "Select Technology Used", value : null},
-            //                     IT_Groups_Required : this.createSelectOption(nextProps.loadedtechnicalEvaluation.IT_Groups_Required) || {label : "Select IT Groups Required", value : null},
-            //                     Estimated_Effort : this.createSelectOption(nextProps.loadedtechnicalEvaluation.Estimated_Effort) || {label : "Select Estimated Effort", value : null},
-            //                     Project_Team_Size : this.createSelectOption(nextProps.loadedtechnicalEvaluation.Project_Team_Size) || {label : "Select Size", value : null},
-            //                     Project_Manager : nextProps.loadedtechnicalEvaluation.Project_Manager || this.createSelectOption(""),
-            //                     Target_Start_Date :this.convertStringToMomentObject(nextProps.loadedtechnicalEvaluation.Target_Start_Date) || moment(),
-            //                     Target_Go_Live_Date :this.convertStringToMomentObject(nextProps.loadedtechnicalEvaluation.Target_Go_Live_Date) || moment(),
-            //                     IT_FTE_required :nextProps.loadedtechnicalEvaluation.IT_FTE_required || "",
-            //                     Approver : nextProps.loadedtechnicalEvaluation.Approver || this.createSelectOption(""),
-            //                     Approval_Date :this.convertStringToMomentObject(nextProps.loadedtechnicalEvaluation.Approval_Date) || moment(),
-            //                     Justification_ROI :nextProps.loadedtechnicalEvaluation.Justification_ROI || "",
-            //                     Design_Development_Testing_Effort :nextProps.loadedtechnicalEvaluation.Design_Development_Testing_Effort || "",
-            //                     Travel_TE :nextProps.loadedtechnicalEvaluation.Travel_TE || "",
-            //                     Consulting :nextProps.loadedtechnicalEvaluation.Consulting || "",
-            //                     Training :nextProps.loadedtechnicalEvaluation.Training || "",
-            //                     Licenses_Cost_per_year :nextProps.loadedtechnicalEvaluation.Licenses_Cost_per_year || "",
-            //                     Hardware_leasing :nextProps.loadedtechnicalEvaluation.Hardware_leasing || "",
-            //                     Maintenance_Hardware_hours_per_year :nextProps.loadedtechnicalEvaluation.Maintenance_Hardware_hours_per_year || "",
-            //                     Maintenance_Salaries_hours_per_year :nextProps.loadedtechnicalEvaluation.Maintenance_Salaries_hours_per_year || "",
-            //                     No_of_Sites :nextProps.loadedtechnicalEvaluation.No_of_Sites || "",
-            //                     No_of_Active_users :nextProps.loadedtechnicalEvaluation.No_of_Active_users || "",
-            //                     // isLoaded : true
-            //                 })
-
-            //                 this.loadConditionalValues(this.props.technicalEvaluation.Delivery_Team, true)
-
-            //             }
-                        
-            //         }
-            //     }
-                
-        
-
-            // }
-
-
-            // --------------------------------------
-            // 
-            // --------------------------------------
-            // componentWillUnmount() {
-                
-                
-            //     console.log("TCL: TechnicalEvaluation -> componentWillUnmount -> this.state", this.state)
-                
-                
-            //     console.log("TCL: TechnicalEvaluation -> componentWillUnmount -> this.props", this.props)
-
-            //     const formData = this.saveFormValues();
-                
-            //     this.props.saveLocalTechnical(formData);
-            // }
 
 
             // --------------------------------------
@@ -469,8 +262,8 @@
                 console.log("TCL: TechnicalEvaluation -> convertStringToMomentObject -> date", date)
                 let dateObj = new Date(date);
                 let momentObj = moment(dateObj);
-                let dateFormat = moment(dateObj).format("DD/MM/YYYY");
-				console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> dateFormat', dateFormat)
+                // let dateFormat = moment(dateObj).format("DD/MM/YYYY");
+				// console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> dateFormat', dateFormat)
                 console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> momentObj', momentObj)
                 
                 return momentObj;
@@ -1896,7 +1689,7 @@
                     Created_by : currentUser.userEmail,
                     Last_modifed_by : currentUser.userEmail
                 }
-                //console.log('TCL: TechnicalEvaluation -> saveFormValues -> formData', formData)
+                console.log('TCL: TechnicalEvaluation -> saveFormValues -> formData', formData)
                 return formData;
 				
             }
@@ -2487,43 +2280,49 @@
                 console.log("TCL: checkErrorClass -> id", id)
                 console.log("TCL: checkErrorClass -> target", target)
                
-                if(id) {
-                     //? Check for PeopplePicker
-                    if(id.indexOf('peoplePicker') >= 0) {
-                        let pickerName = id.substring(0, id.indexOf('_EditorInput'))
-                        
-                        console.log("TCL: checkErrorClass -> pickerName", pickerName)
-                    
-                    if(this.state.checkForErrors ===  true) {
-                        if (document.getElementById(`${pickerName}_HiddenInput`).value === "[]" || document.getElementById(`${pickerName}_HiddenInput`).value === "") 
-                            document.getElementById(pickerName).style = 'border: 1px solid #e76c90 !important';
-                        
-
-                        else 
-                            // document.getElementById(pickerName).style = 'border: 1px solid #ced4da !important';
-                            document.getElementById(pickerName).style = 'border: none !important';
-                    }
+               try {
+                    if(id) {
+                        //? Check for PeopplePicker
+                        if(id.indexOf('peoplePicker') >= 0) {
+                            let pickerName = id.substring(0, id.indexOf('_EditorInput'))
                             
+                            console.log("TCL: checkErrorClass -> pickerName", pickerName)
                         
-        
-                        // let stateName = id.substr('')
-                    }
+                            if(this.state.checkForErrors ===  true) {
+                                if (document.getElementById(`${pickerName}_HiddenInput`).value === "[]" || document.getElementById(`${pickerName}_HiddenInput`).value === "") 
+                                document.getElementById(pickerName).style = 'border: 1px solid #e76c90 !important';
+                            
+
+                                else 
+                                // document.getElementById(pickerName).style = 'border: 1px solid #ced4da !important';
+                                    document.getElementById(pickerName).style = 'border: none !important';
+                            }
+                                
+                            
+            
+                            // let stateName = id.substr('')
+                        }
 
                     
 
 
-                    //? Check Select Inputs Fields
-                    else if( (id && this.state[id].value !== "" ) || (id && this.state[id].value !== null ))
-                        this.removeErrorStatus(id)
+                        //? Check Select Inputs Fields
+                        else if( (id && this.state[id].value !== "" ) || (id && this.state[id].value !== null ))
+                            this.removeErrorStatus(id)
 
-                    //? Check Input Text Fields
-                    else if(value.length > 0)
-                        this.removeErrorStatus(id)
-                
-                    //? Puth Back Error Message
-                    else  if(this.state.checkForErrors === true)
-                        this.addErrorStatus(id)
-                }
+                        //? Check Input Text Fields
+                        else if(value.length > 0)
+                            this.removeErrorStatus(id)
+                    
+                        //? Puth Back Error Message
+                        else  if(this.state.checkForErrors === true)
+                            this.addErrorStatus(id)
+                    }
+               }
+               catch (error) {
+                console.log("TCL: checkErrorClass -> error", error)
+                   
+               }
                
                 
             }

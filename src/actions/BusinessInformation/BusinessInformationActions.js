@@ -180,12 +180,13 @@
     // @param {formData from Business Information View}
     // @returns {Action}
     // -------------------------------------- */
-    export async function updateBusinesInformationDB(formData)  {
+    export async function updateBusinesInformationDB(formData, projectID = null)  {
+        console.log("TCL: updateBusinesInformationDB -> projectID", projectID)
         console.log("TCL: updateBusinesInformationDB -> formData", formData)
         // "sites_impacted" : "${formData.Sites_Impacted}", 
         const updateBusinessData = {
             tab2 : {
-                "project_id" : formData.Project_ID, 
+                "project_id" : formData.Project_ID || projectID, 
                 "buss_info_id" : formData.Buss_info_id || formData.buss_info_id,
                 "business_objective" : removeSpecialCharacters(formData.Business_Objective), 
                 "outcomes_objective" : removeSpecialCharacters(formData.Outcomes_from_the_Objective), 
@@ -217,8 +218,8 @@
                 "infra_license_fee_savings" : formData.Legacy_System_Infra_and_License_Fee_savings_per_year, 
                 "other_savings" : formData.Other_Savings, 
                 "workstage" : formData.Workstage,
-                "created_by": formData.Created_by,
-                "last_modifed_by": formData.Last_modifed_by
+                "created_by": formData.Created_by || 'alan.medina@flex.com',
+                "last_modifed_by": formData.Last_modifed_by || 'alan.medina@flex.com'
             }
         }
 

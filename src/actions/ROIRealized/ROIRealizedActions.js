@@ -175,12 +175,12 @@
     // @param {formData from RequirementsDefinition View}
     // @returns {Action}
     // -------------------------------------- */
-    export async function updateROIRealizedDB(formData) {
+    export async function updateROIRealizedDB(formData, id = null) {
         //console.log('TCL: updateROURealizedDB -> formData', formData)
         
         const updateROIRealizedData = {
             tab5 : {
-                "project_id": formData.Project_ID ? parseInt(formData.Project_ID) : parseInt(formData.project_id),
+                "project_id": formData.Project_ID ? parseInt(formData.Project_ID) : parseInt(formData.project_id) || id,
                 "roi_real_id" : formData.Roi_real_id || formData.roi_real_id,
                 "Implementation_Date" : formatDate(formData.Implementation_Date),
                 "FTE_Saved" : formData.FTE_Saved_per_year ? formData.FTE_Saved_per_year : formData.FTE_Saved,
@@ -202,7 +202,7 @@
                 "Usage_Footprint_week" : null ,
                 "Transactions_per_minute" : null ,
                 "ROI_Realized_Date" : formatDate(new Date()) ,
-                "last_modifed_by" : formData.Last_modifed_by,
+                "last_modifed_by" : formData.Last_modifed_by  || 'alan.medina@flex.com', 
             }
         }
 

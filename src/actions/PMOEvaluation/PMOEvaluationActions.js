@@ -163,19 +163,19 @@
     // "Documents": [`"${getFilesNamesArray(formData.Project_ID, formData.Documents)}"`],
     // "Documents": [`${getFilesNamesArray(formData.Project_ID, formData.Documents)}`],
     // -------------------------------------- */
-    export async function updatePMOEvaluation(formData) {
+    export async function updatePMOEvaluation(formData, id = null) {
         
         let dbFiles = formData.Documents.length <= 0 ? '' :  `${getFilesNamesArray(formData.Project_ID, formData.Documents)}`
         const updatePMOEvaluationData = {
             tab4 : {
-                "project_id": parseInt(formData.Project_ID),
+                "project_id": parseInt(formData.Project_ID) || id,
                 "pmo_eval_id" : formData.Pmo_eval_id || formData.pmo_eval_id,
                 "Expected_total_ROI": formData.Expected_total_ROI,
                 "Expected_IRR": formData.Expected_IRR,
                 "ROI_Category": formData.ROI_Category.value,
                 "WorkID": removeSpecialCharacters(formData.WorkID_PlanView_FlexPM_SN_Ticket),
                 "Documents":[`${dbFiles}`],
-                "last_modifed_by": formData.Last_modifed_by
+                "last_modifed_by": formData.Last_modifed_by || 'alan.medina@flex.com'
             }
         }
 

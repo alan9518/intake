@@ -829,21 +829,28 @@
                 // Save NEW ROI
                 // --------------------------------------
                 saveNewROI = () => {
-                    // this.setState({sendingData : true})
+                    
                     const formData = this.saveFormValues();
-                    this.props.saveLocalRoiRealized(formData);
-                    this.props.saveROIRealizedDB(formData).then(()=>{
+                    
+                    saveROIRealizedDB(formData).then((newRoiRealizedID)=>{
+
+
+                        console.log("TCL: saveNewROI -> newRoiRealizedID", newRoiRealizedID)
                         this.createSuccessAlert('Data Saved ');
+
                         // Redirect User
                         // Check If Action was Success
-                        const newRoiRealizedID = this.props.roiRealized.newRoiRealizedID;
+                        // const newRoiRealizedID = this.props.roiRealized.newRoiRealizedID;
                         //console.log('TCL: submitFormDB -> newRoiRealizedID', newRoiRealizedID)
 
 
                         // Update Table, insert Dynatrace Data
-                        const data =  this.setDynatraceData(newRoiRealizedID);
+                        const dynatraceData =  this.setDynatraceData(newRoiRealizedID);
 
-                        this.props.saveDynatraceDB(data);
+                        saveDynatraceDB(dynatraceData);
+
+
+                        this.props.updateProjectIntakeValues('roiRealized',formData, dynatraceData, true)
                         
 
                         // //console.log('TCL: submitFormDB -> newProject', newProjectID)
@@ -879,12 +886,12 @@
 
 
                         // Update Table, insert Dynatrace Data
-                        const data =  this.setDynatraceData(newRoiRealizedID);
+                        const dynatraceData =  this.setDynatracedynatraceData(newRoiRealizedID);
 
-                        saveDynatraceDB(data);
+                        saveDynatraceDB(dynatraceData);
 
 
-                        this.props.updateProjectIntakeValues('roiRealized',formData, null, true)
+                        this.props.updateProjectIntakeValues('roiRealized',formData, dynatraceData, true)
            
                         
                         // this.setState({ Request_ID : newRoiRealizedID , sendingData : false,  isSavedOnDB : true})

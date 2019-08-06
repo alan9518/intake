@@ -162,7 +162,7 @@
                 "expectedstart_date":  formatDate(formData.Expected_Start_Date) ,
                 "expected_completion_date": formData.Expected_completion_date ? formatDate(formData.Expected_completion_date) : formatDate(formData.Expected_Completion_Date),
                 "deadline_justification": removeSpecialCharacters(formData.Deadline_Justification),
-                "last_modifed_by":formData.Last_modifed_by
+                "last_modifed_by":formData.Last_modifed_by || 'alan.medina@flex.com'
             }
         }
 
