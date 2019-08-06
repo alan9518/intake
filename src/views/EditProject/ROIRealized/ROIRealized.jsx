@@ -18,6 +18,20 @@
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
     import moment from "moment";
 
+    import { 
+        saveRequirementsDB, 
+        saveBusinesInformationDB, 
+        saveTechnicalDB,
+        savePMOEvaluationDB,
+        saveROIRealizedDB, 
+        saveDynatraceDB,
+        updateRequirementsDB,
+        updateBusinesInformationDB,
+        updateTechnicalDB,
+        updatePMOEvaluation,
+        updateROIRealizedDB
+    } from '../../../actions';
+
 
     const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
 
@@ -35,14 +49,17 @@
             // --------------------------------------
             constructor(props) {
                 super(props);
+
+                console.log("TCL: constructor -> props.projectIntake.roiRealized.Implementation_Date", props.projectIntake.roiRealized.Implementation_Date)
                 this.state = {
                     isLoaded: false,
                     requestID : 0,
                     responsiveWidth : window.innerWidth,
                     sendingData : false,
                     roi_real_id : props.projectIntake.roiRealized.roi_real_id || null,
-                    Implementation_Date : props.projectIntake.roiRealized.Implementation_Date,
-                    Implementation_Date_Moment : moment(props.projectIntake.roiRealized.Implementation_Date),
+                    Implementation_Date : props.projectIntake.roiRealized.Implementation_Date ||  moment(),
+                    Implementation_Date_Moment : moment(props.projectIntake.roiRealized.Implementation_Date) || moment(),
+                    
                     FTE_Saved_per_year : props.projectIntake.roiRealized.FTE_Saved_per_year,
                     Hours_saved_per_year : props.projectIntake.roiRealized.Hours_saved_per_year,
                     Compliance_Ris_cost_that_was_avoided_by_this_application : props.projectIntake.roiRealized.Compliance_Ris_cost_that_was_avoided_by_this_application,
@@ -66,7 +83,8 @@
                     Usage_FootprintRows : [],
                     dynatrace : props.projectIntake.roiRealized.dynatrace || [],
                     showDynatrace : props.projectIntake.roiRealized.showDynatrace || false,
-                    keepState : false
+                    keepState : false,
+                    isSavedOnDB : false
                 }
                 this.onChangeSelect =  this.onChangeSelect.bind(this);
                 this.onDateChange =  this.onDateChange.bind(this);
@@ -86,10 +104,13 @@
                 
                 console.log("TCL: componentDidMount -> this.props", this.props)
 
+                let implementationDate = this.props.projectIntake.roiRealized.Implementation_Date || moment();
+                let implementationDateObj = this.props.projectIntake.roiRealized.Implementation_Date !== null ? moment(this.props.projectIntake.roiRealized.Implementation_Date)  : moment()
+
                 this.setState({
                     roi_real_id : this.props.projectIntake.roiRealized.roi_real_id || null,
-                    Implementation_Date : this.props.projectIntake.roiRealized.Implementation_Date,
-                    Implementation_Date_Moment : moment(this.props.projectIntake.roiRealized.Implementation_Date),
+                    Implementation_Date : implementationDate,
+                    Implementation_Date_Moment :implementationDateObj,
                     FTE_Saved_per_year : this.props.projectIntake.roiRealized.FTE_Saved_per_year,
                     Hours_saved_per_year : this.props.projectIntake.roiRealized.Hours_saved_per_year,
                     Compliance_Ris_cost_that_was_avoided_by_this_application : this.props.projectIntake.roiRealized.Compliance_Ris_cost_that_was_avoided_by_this_application,
@@ -99,7 +120,7 @@
                     Other_Savings : this.props.projectIntake.roiRealized.Other_Savings,
                     Design_Developmen_Testing_Effort_hours : this.props.projectIntake.roiRealized.Design_Developmen_Testing_Effort_hours,
                     Travel_TE : this.props.projectIntake.roiRealized.Travel_TE,
-                    Consulting : this.props.projectIntake.roiRealized.Consulting_roi,
+                    Consulting : this.props.projectIntake.roiRealized.Consulting,
                     Training : this.props.projectIntake.roiRealized.Training,
                     Licenses_Cost_per_year : this.props.projectIntake.roiRealized.Licenses_Cost_per_year,
                     Hardware_leasing : this.props.projectIntake.roiRealized.Hardware_leasing,
@@ -135,145 +156,7 @@
             }
 
 
-            // --------------------------------------
-            // Set Initial Values
-            // --------------------------------------
-            // componentDidMount() {
-            //     window.addEventListener("resize", this.updateContainerDimensions);
-            //     // window.addEventListener('resize', this.updateContainerDimensions)
-            //     if(this.props.match.params.projectID) {
-            //         const id = this.props.match.params.projectID
-            //         const requestID = id.substr(id.indexOf('D')+1,id.length);
-
-            //         if(this.props.updateFromState !==  true) {
-            //             console.log("TCL: componentDidMount -> this.state", this.state)
-
-            //             // this.setState({requestID})
-            //             if(this.state.keepState !==  true)
-            //                 this.props.fetchProjectROIRealized(requestID)
-            //             // .then((response)=> {
-            //             // 	//console.log('TCL: componentDidMount -> response', response)
-                            
-            //             // })
-            //             // this.props.fetchProjectROIRealizedDynatrace(this.getProjectID(),  nextProps.loadedROIRealized.roiRealized.roi_real_id)
-            //             //console.log('TCL: componentDidMount -> this.props', this.props)
-                        
-            //         }
-
-            //         // else {
-
-            //         // }
-                  
-            //     }
-            // }
-
-
-            // componentWillReceiveProps = (nextProps) => {
-            //     //console.log('TCL: componentWillReceiveProps -> nextProps', nextProps)
-
-            //     if(nextProps.loadedROIRealized.roiRealized) {
-
-            //         console.log("TCL: componentWillReceiveProps -> keepState", this.state.keepState)
-            //         // this.props
-            //         console.log("TCL: componentWillReceiveProps -> this.props", this.props)
-
-            //         // this.props.updateFromState
-            //         console.log("TCL: componentWillReceiveProps -> this.props.updateFromState", this.props.updateFromState)
-            //         console.log("TCL: componentWillReceiveProps -> this.props.updateFromDB", this.props.updateFromDB)
-                    
-            //         if(this.props.updateFromDB === true || this.props.updateFromDB === undefined) {
-                        
-            //             let dynaValues = nextProps.loadedROIRealized.dynatraceData 
-            //             let showDynatrace = false;
-    
-            //             if(dynaValues) {
-            //                 if(dynaValues.length > 0 )
-            //                     showDynatrace = true
-            //             }
-    
-            //             this.setState({
-            //                 roi_real_id : nextProps.loadedROIRealized.roiRealized.roi_real_id,
-            //                 Implementation_Date :moment(nextProps.loadedROIRealized.roiRealized.Implementation_Date),
-            //                 FTE_Saved_per_year : nextProps.loadedROIRealized.roiRealized.FTE_Saved,
-            //                 Hours_saved_per_year : nextProps.loadedROIRealized.roiRealized.Hours_saved,
-            //                 Compliance_Ris_cost_that_was_avoided_by_this_application : nextProps.loadedROIRealized.roiRealized.compliance_risk_cost_roi,
-            //                 Risk_Avoidance : nextProps.loadedROIRealized.roiRealized.risk_avoidance_roi,
-            //                 Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : nextProps.loadedROIRealized.roiRealized.retirement_savings_roi,
-            //                 Legacy_System_Infra_and_License_Fee_savings_per_year : nextProps.loadedROIRealized.roiRealized.infra_license_fee_savings_roi,
-            //                 Other_Savings : nextProps.loadedROIRealized.roiRealized.Other_Savings_roi,
-            //                 Design_Developmen_Testing_Effort_hours : nextProps.loadedROIRealized.roiRealized.DDT_Effort_roi,
-            //                 Travel_TE : nextProps.loadedROIRealized.roiRealized.Travel_TE_roi,
-            //                 Consulting : nextProps.loadedROIRealized.roiRealized.Consulting_roi,
-            //                 Training : nextProps.loadedROIRealized.roiRealized.Training_roi,
-            //                 Licenses_Cost_per_year : nextProps.loadedROIRealized.roiRealized.Licenses_Cost_per_year_roi,
-            //                 Hardware_leasing : nextProps.loadedROIRealized.roiRealized.Hardware_leasing_roi,
-            //                 Maintenance_Hardware_hours_per_year : nextProps.loadedROIRealized.roiRealized.Maintenance_Hardware_roi,
-            //                 Maintenance_Salaries_hours_per_year : nextProps.loadedROIRealized.roiRealized.Maintenance_Salaries_roi,
-            //                 Site_Usage : nextProps.loadedROIRealized.roiRealized.Site_Usage,
-            //                 Usage_Footprint_1_week : nextProps.loadedROIRealized.roiRealized.Usage_Footprint_week,
-            //                 Transactions_per_minute_TPM : nextProps.loadedROIRealized.roiRealized.Transactions_per_minute,
-            //                 // ROI_Realized_Date : moment(nextProps.loadedROIRealized.roiRealized.ROI_Realized_Date),
-            //                 // ROI_Realized_Date : moment(),
-            //                 // dynatrace : nextProps.loadedROIRealized.dynatraceData,
-            //                 // showDynatrace : nextProps.loadedROIRealized.dynatraceData.length > 0 ? true : false
-            //                 dynatrace : dynaValues || [],
-            //                 showDynatrace : showDynatrace || false
-            //                 // Site_UsageRows : nextProps.loadedROIRealized.roiRealized.Site_UsageRows,
-            //                 // Usage_FootprintRows : nextProps.loadedROIRealized.roiRealized.Usage_FootprintRows,
-            //             })
-            //         }
-
-
-            //         else {
-            //             let dynaValues = nextProps.loadedROIRealized.dynatraceData 
-            //             let showDynatrace = false;
-    
-            //             if(dynaValues) {
-            //                 if(dynaValues.length > 0 )
-            //                     showDynatrace = true
-            //             }
-    
-            //             this.setState({
-            //                 roi_real_id : nextProps.loadedROIRealized.roi_real_id,
-            //                 Implementation_Date :moment(nextProps.loadedROIRealized.Implementation_Date),
-            //                 FTE_Saved_per_year : nextProps.loadedROIRealized.FTE_Saved_per_year,
-            //                 Hours_saved_per_year : nextProps.loadedROIRealized.Hours_saved_per_year,
-            //                 Compliance_Ris_cost_that_was_avoided_by_this_application : nextProps.loadedROIRealized.Compliance_Ris_cost_that_was_avoided_by_this_application,
-            //                 Risk_Avoidance : nextProps.loadedROIRealized.Risk_Avoidance,
-            //                 Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : nextProps.loadedROIRealized.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
-            //                 Legacy_System_Infra_and_License_Fee_savings_per_year : nextProps.loadedROIRealized.Legacy_System_Infra_and_License_Fee_savings_per_year,
-            //                 Other_Savings : nextProps.loadedROIRealized.Other_Savings,
-            //                 Design_Developmen_Testing_Effort_hours : nextProps.loadedROIRealized.Design_Developmen_Testing_Effort_hours,
-            //                 Travel_TE : nextProps.loadedROIRealized.Travel_TE,
-            //                 Consulting : nextProps.loadedROIRealized.Consulting,
-            //                 Training : nextProps.loadedROIRealized.Training_roi,
-            //                 Licenses_Cost_per_year : nextProps.loadedROIRealized.Licenses_Cost_per_year,
-            //                 Hardware_leasing : nextProps.loadedROIRealized.Hardware_leasing,
-            //                 Maintenance_Hardware_hours_per_year : nextProps.loadedROIRealized.Maintenance_Hardware_hours_per_year,
-            //                 Maintenance_Salaries_hours_per_year : nextProps.loadedROIRealized.Maintenance_Salaries_hours_per_year,
-            //                 Site_Usage : nextProps.loadedROIRealized.Site_Usage,
-            //                 Usage_Footprint_1_week : nextProps.loadedROIRealized.Usage_Footprint_week,
-            //                 Transactions_per_minute_TPM : nextProps.loadedROIRealized.Transactions_per_minute,
-            //                 // ROI_Realized_Date : moment(nextProps.loadedROIRealized.ROI_Realized_Date),
-            //                 // ROI_Realized_Date : moment(),
-            //                 // dynatrace : nextProps.loadedROIRealized.dynatraceData,
-            //                 // showDynatrace : nextProps.loadedROIRealized.dynatraceData.length > 0 ? true : false
-            //                 dynatrace : dynaValues || [],
-            //                 showDynatrace : showDynatrace || false
-            //                 // Site_UsageRows : nextProps.loadedROIRealized.roiRealized.Site_UsageRows,
-            //                 // Usage_FootprintRows : nextProps.loadedROIRealized.roiRealized.Usage_FootprintRows,
-            //             })
-            //         }
-
-                 
-                
-
-                  
-            //     }
-                
-                
-                
-            // }
+          
 
             // --------------------------------------
             // Window Resizing
@@ -725,30 +608,7 @@
             }
 
             
-            // saveDynatrace = ()=> {
-            //     const {Usage_Footprint_1_week, Site_Usage, Transactions_per_minute_TPM, ROI_Realized_Date, dynatrace} = this.state;
-            //     let dynatraceArray = dynatrace;
-            //     let index =  dynatrace.length + 1
-
-            //     let dynatraceObject = {index, Usage_Footprint_1_week, Site_Usage, Transactions_per_minute_TPM, ROI_Realized_Date : ROI_Realized_Date || moment()} 
-            //     // let dynatraceArray = [...dynatrace, dynatraceObject];
-            //     dynatraceArray.push(dynatraceObject);
-				
-            //     //console.log('TCL: saveDynatrace -> dynatraceObject', dynatraceObject)
-                
-            //     //console.log('TCL: saveDynatrace -> dynatraceArray', dynatraceArray)
-            //     // dynatraceArray.push({})
-            //     this.setState({
-            //         dynatrace : dynatraceArray,
-            //         Usage_Footprint_1_week : "",
-            //         Site_Usage : "",
-            //         Transactions_per_minute_TPM : "",
-            //         ROI_Realized_Date : "",
-            //         dynatrac : ""
-            //     })
-
-            //     //console.log('TCL: saveDynatrace -> this.state', this.state)
-            // }
+          
 
             // --------------------------------------
             // Remove Item from Dynatrace Array
@@ -781,21 +641,7 @@
             }   
 
 
-            
-            // --------------------------------------
-            // Reset State
-            // If PMO, DOnt
-            // Normal User, reset Req && Bus
-            // --------------------------------------
-            resetState() {
-              
-                this.props.resetRequirementsState(); 
-                this.props.resetBusinessState();
-                this.props.resetTechnicalState();
-                this.props.resetPMOEvaluationState();
-                this.props.resetROIRealizedState();
-  
-            }
+        
 
 
             // --------------------------------------
@@ -928,10 +774,7 @@
                 // --------------------------------------
                 setDynatraceData(roiID) {
                     const {dynatrace} = this.state;
-					//console.log('TCL: setDynatraceData -> dynatrace', dynatrace)
-                    // const {Usage_Footprint_1_week, Site_Usage, Transactions_per_minute_TPM, ROI_Realized_Date} = dynatrace[0];
-                    // const projId = this.props.projectID || this.props.requirementsDefinition.newProjectID;
-                    // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
+					
 
                     const requestID = this.getProjectID();
                     //! const currentUser = window.getCurrentSPUser();
@@ -958,21 +801,28 @@
                 // --------------------------------------
                 // Submit Form
                 // --------------------------------------
-                submitFormLocalData = (event, saveFormValues) => {
-
-                    if(saveFormValues) {
-                        const formData =  this.saveFormValues();
-
-                        this.props.saveLocalRoiRealized(formData);
+                submitFormLocalData = (exitFromMenu =  false) => {
+                    
+                    // if(this.validateFormInputs() === false) {
+                    //     this.createErrorAlertTop('Please Fill all the Required Fields');
+                    //     this.setState({checkForErrors: true})
+                    //     return;
+                    // }
     
-                        // Show Sucess Message 
-                            this.createSuccessAlert('Data Saved Locally');
-                    }
+                    this.renderLoader(true);
+    
+                    const formData = this.saveFormValues();
 
-                   
-                    // Redirect User
-                        // setTimeout(()=>{this.redirectUser();},700);
-                
+    
+                    if(this.state.isSavedOnDB === true)
+                        this.props.updateProjectIntakeValues('roiRealized',formData, null, true)
+                    else
+                        this.props.updateProjectIntakeValues('roiRealized',formData)
+    
+                    if(exitFromMenu !== true) {
+                        this.createSuccessAlert('Data Saved Locally');
+                        this.redirectUser();
+                    }
                 }
 
                 // --------------------------------------
@@ -998,7 +848,7 @@
 
                         // //console.log('TCL: submitFormDB -> newProject', newProjectID)
                         
-                        this.setState({ Request_ID : newRoiRealizedID , sendingData : false, keepState : true})
+                        this.setState({ Request_ID : newRoiRealizedID , sendingData : false, })
                         // setTimeout(()=>{this.redirectUser();},700);
                         
                     })
@@ -1016,14 +866,14 @@
                 // --------------------------------------
                 updateROIRealizedDB = ()=> {
                     const formData = this.saveFormValues();
-                    
-                    this.props.saveLocalRoiRealized(formData);
 
-                    this.props.updateROIRealizedDB(formData).then(()=>{
+                    updateROIRealizedDB(formData).then(()=>{
+
                         this.createSuccessAlert('Data Saved ');
                         // Redirect User
                         // Check If Action was Success
-                        const newRoiRealizedID = this.props.roiRealized.roi_real_id;
+
+                        const newRoiRealizedID = this.props.projectIntake.roiRealized.roi_real_id;
                         console.log("TCL: updateROIRealizedDB -> newRoiRealizedID", newRoiRealizedID)
                         
 
@@ -1031,23 +881,15 @@
                         // Update Table, insert Dynatrace Data
                         const data =  this.setDynatraceData(newRoiRealizedID);
 
-                        this.props.saveDynatraceDB(data);
-                        
+                        saveDynatraceDB(data);
 
-                        this.props.resetROIRealizedState();
 
+                        this.props.updateProjectIntakeValues('roiRealized',formData, null, true)
+           
                         
+                        // this.setState({ Request_ID : newRoiRealizedID , sendingData : false,  isSavedOnDB : true})
                         
-
-                        this.props.fetchProjectROIRealized(newRoiRealizedID)
-                        console.log("TCL: updateROIRealizedDB -> this.props", this.props)
-                        this.setState({ Request_ID : newRoiRealizedID , sendingData : false, keepState : true})
-                        // setTimeout(()=>{this.redirectUser();},700);
-                        
-                        
-
-                        // this,
-
+                
 
 
                     })
@@ -1063,126 +905,146 @@
                 // !--------------------------------------
                 submitFormDB = () => {
 
+                    this.setState({sendingData : true, })
 
-                    // ? Test Save Values
+                    // Check if is Update or New ROI
+
+                    // const {roiRealized} =  this.props.loadedROIRealized;
+
+                    // ? Check whetther to update or create new ROI 
+                    const {roi_real_id} = this.props.projectIntake.roiRealized;
+                    const {projectID} = this.props.locationData.match.params;
+
+                    if(roi_real_id) {
+                        // Update Current ROI
+                        this.updateROIRealizedDB();
+                    }
+                    else {
+                        // Create New ROI
+                        this.saveNewROI();
+                    }
+
+
+                    this.saveOtherTabs(projectID);
+
+                    this.setState({ sendingData : false})
+
                     
-                    // ? Test Save Values
 
-                    const formData = this.saveFormValues();
-                    console.log("TCL: submitFormDB -> formData", formData)
-                    this.props.updateProjectIntakeValues('roiRealized',formData,formData.dynatrace )
-
-                    this.createSuccessAlert('Data Saved ');
-
-
-                    return;
-
-
-                    // !
-                    // Validate Empty Fields
-                    // if(this.validateFormInputs() === false) {
-                    //     this.createErrorAlertTop('Please Fill all the Required Fields');
-                    //     return;
-                    // }
-
-                    // this.setState({sendingData : true, keepState : true})
-
-                    // // Check if is Update or New ROI
-
-                    // // const {roiRealized} =  this.props.loadedROIRealized;
-
-                    // if(!isEmpty(this.props.loadedROIRealized.roiRealized)) {
-                    //     // Update Current ROI
-                    //     this.updateROIRealizedDB();
-                    // }
-                    // else {
-                    //     // Create New ROI
-                    //     this.saveNewROI();
-                    // }
-
-
-                    // this.setState({ sendingData : false})
-
-                    // this.saveOtherTabs();
-
-
-                    // this.componentDidMount();
-
-                    // !
-
-
-                    // const formData = this.saveFormValues();
-                    // this.props.saveLocalRoiRealized(formData);
-                    // this.props.updateROIRealizedDB(formData).then(()=>{
-                    //     this.createSuccessAlert('Data Saved ');
-                    //     // Redirect User
-                    //     // Check If Action was Success
-                    //     const newRoiRealizedID = this.props.roiRealized.newRoiRealizedID;
-					// 	//console.log('TCL: submitFormDB -> newRoiRealizedID', newRoiRealizedID)
-                    //     // //console.log('TCL: submitFormDB -> newProject', newProjectID)
-                        
-                    //     this.setState({ Request_ID : newRoiRealizedID , sendingData : false})
-                    //     setTimeout(()=>{this.redirectUser();},700);
-                        
-                    // })
-                    // .catch((error)=> {
-                    //     this.createErrorAlert('There was a problem saving the data, please try again ');
-					// 	//console.log('TCL: submitFormDB -> error', error)
-                        
-                    // })
                 }
 
                 // !--------------------------------------
                 // ! Save Other Tabs
                 // !--------------------------------------
-                saveOtherTabs = async () => {
+                saveOtherTabs = async (projectID) => {
                     // this.props.businessInformation
 
                     console.log("TCL: saveOtherTabs -> this.props", this.props)
-                    console.log("TCL: saveOtherTabs -> this.props.businessInformation", this.props.businessInformation)
+
+                    const {requirementsDefinition, businessInformation, technicalEvaluation, pmoEvaluation, roiRealized} = this.props.projectIntake;
+                    const id = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
+
+                    try {
+
+                        
+                        // ? Save Req Definition
+                        if( !isEmpty(requirementsDefinition) && requirementsDefinition.SavedLocally === true) {
+                            
+
+                            // this.validateEmptyRequirements();
+
+                            if(requirementsDefinition.Project_id) {
+                                updateRequirementsDB(requirementsDefinition);
+                                let reqFolderURL = `${requirementsDefinition.Request_ID}/RequirementsDefinition`;
+                                this.uploadReqFiles(requirementsDefinition.Request_ID, reqFolderURL);
+                            }
+                                
+                            else
+                                saveRequirementsDB(requirementsDefinition)
 
 
-                    // let promises = []
 
-                     // ? Save Req Definition
-                    if( !isEmpty(this.props.requirementsDefinition) ) {
-                        console.log("TCL: saveOtherTabs -> this.props.requirementsDefinition", this.props.requirementsDefinition)
-                    
-                        this.props.updateRequirementsDB(this.props.requirementsDefinition);
-                        let reqFolderURL = `GSD${this.props.requirementsDefinition.Project_id}/RequirementsDefinition`;
-                        this.uploadReqFiles(this.props.requirementsDefinition.Project_id, reqFolderURL);
-                    }
+                            this.props.updateProjectIntakeValues('requirements',requirementsDefinition, null, true)
 
-
-                    // ? Save Business Information
-                    if( !isEmpty(this.props.businessInformation) ) {
-                        console.log("TCL: saveOtherTabs -> this.props.businessInformation", this.props.businessInformation)
-                        if(this.props.businessInformation.buss_info_id)
-                           this.props.updateBusinesInformationDB(this.props.businessInformation)
-                        else
-                           this.props.saveBusinesInformationDB(this.props.businessInformation)
-                    }
-
-                    // ? Save Tehnical Evaluation
-                    if(!isEmpty(this.props.technicalEvaluation)) {
-                        if(this.props.technicalEvaluation.tech_eval_id) {
-                           this.props.updateTechnicalDB(this.props.technicalEvaluation)
                         }
-                        else
-                           this.props.saveTechnicalDB(this.props.businessInformation)
-                    }
+
+
+                        // ? Save Business Information
+                        if( !isEmpty(businessInformation) && businessInformation.SavedLocally === true) {
+
+                            console.log("TCL: saveOtherTabs -> businessInformation", businessInformation)
+                            
+                            // businessInformation.Project_id = id;
+                            
+                            if(businessInformation.Buss_info_id)
+                                updateBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
+                                    console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
+                                    // businessInformation.Buss_info_id = newBusinesId
+                                }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+                            else {
+                                saveBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
+                                    console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
+                                    businessInformation.Buss_info_id = newBusinesId
+                                }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+                                
+                            }  
+
+                            // ? Update Props
+                            this.props.updateProjectIntakeValues('business',businessInformation, null, true)
+                                
+                    
+                            
+                        }
+
+                        // ? Save Tehnical Evaluation
+                        if(!isEmpty(technicalEvaluation) && technicalEvaluation.SavedLocally === true) {
+                            if(technicalEvaluation.Tech_eval_id) {
+                                updateTechnicalDB(technicalEvaluation)
+                            }
+                            else
+                                saveTechnicalDB(technicalEvaluation, id).then((newTechId) => {
+                                    console.log("TCL: saveOtherTabs -> newTechId", newTechId)
+                                    technicalEvaluation.Tech_eval_id = newTechId
+                                }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+
+                            // ? Update Props
+                            this.props.updateProjectIntakeValues('technical',technicalEvaluation, null, true)
+                        }
                         
 
-                    // ? Save PMO Evaluation
-                    if(!isEmpty(this.props.pmoEvaluation)) {
-                        if(this.props.pmoEvaluation.pmo_eval_id) {
-                           this.props.updatePMOEvaluation(this.props.pmoEvaluation)
+                     
+
+
+                        // ? Save PMO Evaluation
+                        if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
+                            if(pmoEvaluation.Pmo_eval_id) {
+                                updatePMOEvaluation(pmoEvaluation)
+                            }
+                            else
+                                savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
+                                    console.log("TCL: saveOtherTabs -> newPmoId", newPmoId)
+                                    pmoEvaluation.Pmo_eval_id = newPmoId
+                                }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+
+                            // ? Update Props
+                            this.props.updateProjectIntakeValues('pmoEval',pmoEvaluation, null, true)
                         }
-                        else
-                           this.props.savePMOEvaluationDB(this.props.pmoEvaluation)
+
+
+
+
+
+                        console.log("TCL: pmoEvaluation", pmoEvaluation)
+                        console.log("TCL: technicalEvaluation", technicalEvaluation)
+                        console.log("TCL: businessInformation", businessInformation)
+
+                    }   
+                    catch(error) {
+                        console.log("TCL: error", error)
+                        this.createErrorAlert('An error ocurred while saving the data, please try again');
+                        
                     }
 
-                    this.componentDidMount();
 
 
                     

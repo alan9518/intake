@@ -156,7 +156,7 @@
                 "project_name": removeSpecialCharacters(formData.Project_Name),
                 "description":  removeSpecialCharacters(formData.Description),
                 "project_type": formData.Project_Type.value,
-                "date_submitted": formData.Date_submitted,
+                "date_submitted": formData.Date_Submitted || formData.Date_submitted,
                 "request_owner": formData.Request_Owner,
                 "workstage": formData.Workstage.value,
                 "expectedstart_date":  formatDate(formData.Expected_Start_Date) ,

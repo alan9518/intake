@@ -20,6 +20,20 @@
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
     import moment from 'moment';
 
+    import { 
+        saveRequirementsDB, 
+        saveBusinesInformationDB, 
+        saveTechnicalDB,
+        savePMOEvaluationDB,
+        saveROIRealizedDB, 
+        saveDynatraceDB,
+        updateRequirementsDB,
+        updateBusinesInformationDB,
+        updateTechnicalDB,
+        updatePMOEvaluation,
+        updateROIRealizedDB
+    } from '../../../actions';
+
 
     const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
 
@@ -119,7 +133,8 @@
                     // Approver : this.createSelectOption(this.props.projectIntake.technicalEvaluation.Approver) || this.createSelectOption(""),
                     Approval_Date : moment(this.props.projectIntake.technicalEvaluation.Approval_Date) || null,
                     Approval_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.technicalEvaluation.Approval_Date),
-                    isLoaded : true
+                    isLoaded : true,
+                    isSavedOnDB : false
                 })
 
 
@@ -1890,26 +1905,31 @@
             // --------------------------------------
             // Submit Form
             // --------------------------------------
-            submitFormLocalData = (event) => {
-            
-                
-                // this.props.saveLocalTechnical(formData);
+            submitFormLocalData = (exitFromMenu =  false) => {
+
 
                 if(this.validateFormInputs() === false) {
                     this.createErrorAlertTop('Please Fill all the Required Fields');
-                    this.setState({checkForErrors : true})
+                    this.setState({checkForErrors: true})
                     return;
                 }
 
-                const formData = this.saveFormValues();
-                this.props.updateProjectIntakeValues('technical',formData)
-                
+                this.renderLoader(true);
 
-                // Show Sucess Message 
-                this.createSuccessAlert('Data Saved Locally');
-                // Redirect User
-                    setTimeout(()=>{this.redirectUser();},700);
-                // this.redirectUser();
+                const formData = this.saveFormValues();
+
+                if(this.state.isSavedOnDB === true)
+                    this.props.updateProjectIntakeValues('technical',formData, null, true)
+                else
+                    this.props.updateProjectIntakeValues('technical',formData)
+
+                if(exitFromMenu !== true) {
+                    this.createSuccessAlert('Data Saved Locally');
+                    this.redirectUser();
+                }
+            
+                
+             
             
             }
 
@@ -1967,19 +1987,10 @@
                 const formData = this.saveFormValues();
                 const nextStep = 'pmo-evaluation';
                 // this.props.saveLocalTechnical(formData);
-                this.props.updateTechnicalDB(formData).then(()=>{
-                
-                    this.createSuccessAlert('Data Saved ');
-                    // Check If Action was Success
-                    // const newTechnicalEvaluationId = this.props.technicalEvaluation.newTechnicalEvaluationId
-						
-						
-                        // this.props.resetTechnicalState()
+                updateTechnicalDB(formData).then((response)=>{
 
-                        
-                        
 
-                    // this.setState({sendingData : false}, this.redirectUser(nextStep))
+                    console.log("TCL: updateCurrentTechnicalDB -> response", response)
 
                     console.log("TCL: TechnicalEvaluation -> updateCurrentTechnicalDB -> formData", formData)
 
@@ -1987,7 +1998,9 @@
 
                     this.del =  this.createSelectOption(formData.Delivery_Team)
 
-                    this.props.saveLocalTechnical(formData);
+                    this.props.updateProjectIntakeValues('technical',formData, null, true)
+
+                    this.createSuccessAlert('Data Saved ');
 
                 })
                 .catch((error)=> {
@@ -2025,9 +2038,9 @@
                 this.setState({sendingData : true})
 
                 // Check if New Technical or Update Current
-                const {technicalEvaluation} = this.props.loadedtechnicalEvaluation;
+                const {tech_eval_id} = this.props.projectIntake.technicalEvaluation;
 
-                if(technicalEvaluation) {
+                if(tech_eval_id) {
                     // Update
                     this.updateCurrentTechnicalDB();
                 }

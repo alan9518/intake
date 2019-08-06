@@ -16,11 +16,6 @@
     import {appRoutes} from '../../routes/routes';
     import {Endpoints} from '../../services/Endpoints';
     import axios from 'axios';
-import { async } from 'q';
-    // import {fetchProjects, fetchProjectsByUser, resetRequirementsState, resetBusinessState, resetPMOEvaluationState, resetROIRealizedState, resetTechnicalState} from '../../actions'
-    // import { TablePagination } from 'react-pagination-table';
-    // import {connect} from 'react-redux'
-
 
 
 // --------------------------------------
@@ -44,7 +39,7 @@ import { async } from 'q';
                     currentPage : 1,
                     numberOfPages : 0,
                     numberPerPage : 4,
-                    currentFilter : ''
+                    currentFilter : '',
                 }
 
                 this.allProjects = [];
@@ -312,9 +307,9 @@ import { async } from 'q';
                 })
             }
 
-            
-            
 
+            
+    
         /* ==========================================================================
         ** Render Methods
         ** ========================================================================== */
@@ -477,7 +472,10 @@ import { async } from 'q';
             // --------------------------------------
             renderProjects() {
                 
-				const {isLoaded} = this.state;
+                const {isLoaded, createNewProject} = this.state;
+
+                
+
 				
                 return (
                         <FormBody>
@@ -490,7 +488,7 @@ import { async } from 'q';
 
 
                             <ProjectLink route = {"add-project"}>
-                                <AppButton buttonText = {'Add Project'} buttonClass = {'continueButton'}></AppButton>
+                                <AppButton buttonText = {'Add Project'} buttonClass = {'continueButton'} ></AppButton>
                             </ProjectLink>
                             
                         </FormBody>
@@ -505,6 +503,9 @@ import { async } from 'q';
             // --------------------------------------
             renderHome() {
                 const {isLoaded} = this.state;
+
+            
+
                 return (
                     <Fragment>
                         {this.renderNavigation()}
@@ -536,22 +537,10 @@ import { async } from 'q';
 // -------------------------------------- 
 // Define PropTypes 
 // -------------------------------------- 
-    Home.propTypes = {
-        props: PropTypes
-    };
+    // Home.propTypes = {
+    //     props: PropTypes
+    // };
 
-
-/* ==========================================================================
-** Redux Functions
-** ========================================================================== */
-    // const mapStateToProps = (state) => {
-	// 	//console.log('TCL: mapStateToProps -> state', state)
-    //     return {
-    //         allProjects : state.allProjects.userProjects,
-    //         isLoaded : state.allProjects.areProjectsLoaded,
-    //         isPMO : state.sharepoint.isPMO,
-    //     }
-    // }
 
 
 

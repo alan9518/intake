@@ -214,14 +214,19 @@
             // const pmos = this.props.sharepoint;
 
 
+            this.resetProjectIntake()
             this.setState({isLoaded : true});
+
+            
+            console.log("TCL: formHolder -> componentDidMount -> this.props.resetProjectIntake", this.props.resetProjectIntake)
+
 
             
             console.log("TCL: formHolder -> componentDidMount -> this.props", this.props)
 
 
 
-            this.setState({resetForm : true})
+            // this.setState({resetForm : true})
 
         }
 
@@ -319,11 +324,11 @@
 
                     let requirementsDefinition = {
                        
-                        Project_id: newValues.Project_id || null ,
+                        Project_id: newValues.Project_id || newValues.Project_ID  ||null ,
                         created_by: newValues.Created_by ,
                         Date_Submitted : newValues.Date_submitted,
                         Request_Owner : newValues.Request_Owner,
-                        Request_ID :  newValues.Project_id || null,  
+                        Request_ID :  newValues.Project_id || newValues.Project_ID  ||null ,
                         Workstage : newValues.Workstage,
                         Project_Name : newValues.Project_Name,
                         Description : newValues.Description,
@@ -351,8 +356,8 @@
                 if(objectToChange === 'business') {
 
                     let businessInformation = {
-                        Project_id: newValues.Project_id || null ,
-                        Buss_info_id : newValues.buss_info_id,
+                        Project_id: newValues.Project_id || newValues.Project_ID  ||null ,
+                        Buss_info_id : newValues.buss_info_id || newValues.Buss_info_id || null,
                         Business_Objective : newValues.Business_Objective,
                         Outcomes_from_the_Objective : newValues.Outcomes_from_the_Objective,
                         Impact : newValues.Impact,
@@ -396,7 +401,7 @@
                 // ? Set Technical Evaluation
                 if(objectToChange === 'technical') {
                     let technicalEvaluation = {
-                        Tech_eval_id : newValues.Tech_eval_id || null,
+                        Tech_eval_id : newValues.Tech_eval_id || newValues.tech_eval_id || null,
                         Delivery_Team : newValues.Delivery_Team ,
                         Platform_type : newValues.Platform_type ,
                         Applications_involved : newValues.Applications_involved ,
@@ -434,7 +439,7 @@
                  // ? Set PMO Evaluation Data
                 if(objectToChange === 'pmoEval') {
                     let pmoEvaluation = {
-                        Pmo_eval_id : newValues.pmo_eval_id || null,
+                        Pmo_eval_id : newValues.Pmo_eval_id ||  newValues.pmo_eval_id || null,
                         Expected_total_ROI : newValues.Expected_total_ROI,
                         Expected_IRR : newValues.Expected_IRR,
                         ROI_Category : newValues.ROI_Category,
@@ -457,7 +462,7 @@
                     console.log("TCL: formHolder -> setDataSourceValuesFromDB -> extraValues", extraValues)
 
                     let roiRealized = {
-                        Roi_real_id : newValues.roi_real_id || null,
+                        Roi_real_id : newValues.roi_real_id || newValues.Roi_real_id || null,
                         Implementation_Date : newValues.Implementation_Date,
                         FTE_Saved_per_year : newValues.FTE_Saved_per_year,
                         Hours_saved_per_year : newValues.Hours_saved_per_year,
@@ -626,6 +631,7 @@
                     }
                 
                 }
+                console.log("TCL: formHolder -> resetProjectIntake -> projectIntake", projectIntake)
             }
 
 
@@ -689,14 +695,22 @@
                                                     isPMO = {isPMO} 
                                                     locationData = {this.props} 
                                                     updateProjectIntakeValues = {this.updateProjectIntakeValues} 
-                                                    createRequirements = {this.createRequirements}/>}
+                                                    createRequirements = {this.createRequirements}
+                                                    resetProjectIntake = {this.resetProjectIntake}
+                                                    />}
                         />
 
                         <Route
                             path = {`${localPath}/add-project/business-information`}
                             key =  'route-addBusinessInformation'
                             ref = 'route-addBusinessInformation'
-                            render={(props) => <AddBusinessInformation projectIntake = {projectIntake} isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
+                            render={(props) => <AddBusinessInformation 
+                                                        projectIntake = {projectIntake}
+                                                        isPMO = {isPMO} 
+                                                        resetForm = {this.state.resetForm} 
+                                                        locationData = {this.props} 
+                                                        updateProjectIntakeValues = {this.updateProjectIntakeValues} 
+                                                        />}
                         />
 
                         <Route

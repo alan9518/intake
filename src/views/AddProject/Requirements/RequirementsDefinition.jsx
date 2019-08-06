@@ -105,6 +105,14 @@
                 })
             }
 
+
+            componentWillReceiveProps (nextProps) {
+                // if(nextProps)
+                console.log("TCL: RequirementsDefinition -> componentWillReceiveProps -> nextProps", nextProps)
+            }
+
+
+
             // --------------------------------------
             // Save Form Values before the component
             // unloads by the menu navigation
@@ -903,6 +911,7 @@
                             this.saveOtherTabs(newProjectID);
 
 
+                            this.setState({sendingData : false})
                             
 
                         
@@ -969,7 +978,6 @@
                     .catch((error)=> {
                         console.log("TCL: updateCurrentProjectDB -> error", error)
                         this.createErrorAlert('There was a problem saving the data, please try again ' + error);
-                        //console.log('TCL: submitFormDB -> error', error)
                         // this.setState({sendingData : false})}
                         
                     })
@@ -1009,7 +1017,7 @@
                     //console.log('TCL: submitFormDB -> this.props.requirementsDefinition.newProjectID', this.props.requirementsDefinition.newProjectID)
 
 
-                    if(requirementsDefinition.SavedOnDB === true || requirementsDefinition.Project_id !== null) {
+                    if(requirementsDefinition.SavedOnDB === true || requirementsDefinition.Project_id !== null ||  requirementsDefinition.Request_ID !== null ) {
                         // Update Project
                         // Get Current Project ID
                         const newProjectID = requirementsDefinition.Project_id
@@ -1156,7 +1164,7 @@
                   
 
                 
-
+                    this.setState({sendingData : false}, this.redirectUser())
 
                     
                 }
@@ -1272,8 +1280,13 @@
             // Redirect User to HomePage
             // --------------------------------------
             cancelRequirementsDefinition = () => {
-                const {history} = this.props;
-                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const {history} = this.props.locationData;
+                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+
+                this.props.resetProjectIntake();
+
+                const path = '/intake'
+
                 history.push(`${path}/intake-projects/`);
             }
 

@@ -70,6 +70,11 @@
     // Generate Sites Impacted String
     // --------------------------------------
     const formatSitesImpacted = (sitesArray) => {
+
+        // ? Check if the sites are already in string format
+        if(sitesArray.indexOf('||') >= 0)
+            return sitesArray
+
         let sitesArrayString = [];
         for (let site of sitesArray) {
             sitesArrayString.push(site.value);
@@ -176,11 +181,12 @@
     // @returns {Action}
     // -------------------------------------- */
     export async function updateBusinesInformationDB(formData)  {
+        console.log("TCL: updateBusinesInformationDB -> formData", formData)
         // "sites_impacted" : "${formData.Sites_Impacted}", 
         const updateBusinessData = {
             tab2 : {
                 "project_id" : formData.Project_ID, 
-                "buss_info_id" : formData.Buss_info_id  || formData.buss_info_id,
+                "buss_info_id" : formData.Buss_info_id || formData.buss_info_id,
                 "business_objective" : removeSpecialCharacters(formData.Business_Objective), 
                 "outcomes_objective" : removeSpecialCharacters(formData.Outcomes_from_the_Objective), 
                 "impact" : removeSpecialCharacters(formData.Impact), 
@@ -216,7 +222,7 @@
             }
         }
 
-        //console.log('TCL: updateBusinesInformationDB -> updateBusinessData', updateBusinessData)
+        console.log('TCL: updateBusinesInformationDB -> updateBusinessData', updateBusinessData)
 
 
             try {

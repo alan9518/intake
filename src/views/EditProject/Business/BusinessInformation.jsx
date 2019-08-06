@@ -19,6 +19,21 @@
  
     import { FieldsGenerator, AppLoader, SectionHeader, FormBody, FormFooter, AppButton } from '../../../components';
 
+     import { 
+        saveRequirementsDB, 
+        saveBusinesInformationDB, 
+        saveTechnicalDB,
+        savePMOEvaluationDB,
+        saveROIRealizedDB, 
+        saveDynatraceDB,
+        updateRequirementsDB,
+        updateBusinesInformationDB,
+        updateTechnicalDB,
+        updatePMOEvaluation,
+        updateROIRealizedDB
+    } from '../../../actions';
+
+
     const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
 
 // --------------------------------------
@@ -112,6 +127,7 @@
                     IT_Vector : this.createSelectOption(this.props.projectIntake.businessInformation.IT_Vector) || this.createSelectOption(""),
                     RPA : this.createSelectOption(this.props.projectIntake.businessInformation.RPA)  || this.createSelectOption(""),
                     Region : this.createSelectOption(this.props.projectIntake.businessInformation.Region)  || this.createSelectOption(""),
+                    Customer : this.createSelectOption(this.props.projectIntake.businessInformation.Customer) || this.createSelectOption(""),
                     Requested_by_Customer : this.createSelectOption(this.props.projectIntake.businessInformation.Requested_by_Customer)  || this.createSelectOption(""),
                     Customer_Priority : this.createSelectOption(this.props.projectIntake.businessInformation.Customer_Priority)  || this.createSelectOption("") ,
                     isLoaded : true
@@ -129,7 +145,7 @@
             // --------------------------------------
             componentWillUnmount() {
                 
-                this.submitFormLocalData(true)
+                // this.submitFormLocalData(true)
 
                 // this.props.updateLocalBusinesInformation(data);
                 
@@ -1650,7 +1666,8 @@
                 // --------------------------------------
                 // Save Form Values
                 // --------------------------------------
-                saveFormValues (projectID) {
+                saveFormValues (projectID = null) {
+                    console.log("TCL: BusinessInformation -> saveFormValues -> projectID", projectID)
                     //! const currentUser = window.getCurrentSPUser();
 
 
@@ -1663,18 +1680,21 @@
 
 
                     
-    
+                    // this.props.projectIntake.requirementsDefinition
+                    console.log("TCL: BusinessInformation -> saveFormValues -> this.props.projectIntake.requirementsDefinition", this.props.projectIntake.requirementsDefinition)
                             
                     // }
 
                     let reqWorkstage = ''
                     try {
+
                         // if( this.props.requirementsDefinition !== undefined ||  !isEmpty(this.props.requirementsDefinition))
-                        // reqWorkstage =  this.props.requirementsDefiniton.Workstage.value || this.props.requirementsDefinition.requirementsDefinition.workstage
+                        //     reqWorkstage =  this.props.requirementsDefiniton.Workstage.value || this.props..requirementsDefinition.workstage
 
                         if(this.props.projectIntake.requirementsDefinition) {
+                        
 
-                            if(this.props.requirementsDefinition.requirementsDefinition &&  this.props.requirementsDefinition.requirementsDefinition.workstage !== "")
+                            if(this.props.projectIntake.requirementsDefinition &&  this.props.projectIntake.requirementsDefinition.Workstage !== "")
                                 reqWorkstage =  reqWorkstage = this.props.projectIntake.requirementsDefinition.Workstage  
                             else if(this.props.projectIntake.requirementsDefinition.Workstage.value)
                                 reqWorkstage = this.props.requirementsDefinition.Workstage.value
@@ -1684,6 +1704,8 @@
                        
                     }
                     catch(error) {
+                    console.log("TCL: BusinessInformation -> //componentDidMount -> error", error)
+                        
                         reqWorkstage = ''
                     }
                     
@@ -1693,9 +1715,18 @@
                     console.log("TCL: saveFormValues -> reqWorkstage", reqWorkstage)
 
                     const requestID = this.getProjectID();
+                    const businessID = this.state.buss_info_id || this.props.projectIntake.businessInformation.Buss_info_id || this.props.projectIntake.businessInformation.buss_info_id
+                    console.log("TCL: BusinessInformation -> //componentDidMount -> businessID", businessID)
+
+                    // const { Workstage } = this.props.projectIntake.requirementsDefinition
+                    
+                    
+                    
+
+
                     const formData = {
                         Project_ID : requestID,
-                        buss_info_id : this.state.buss_info_id,
+                        buss_info_id : businessID,
                         Business_Objective :  this.state.Business_Objective,
                         Outcomes_from_the_Objective :  this.state.Outcomes_from_the_Objective,
                         Impact :  this.state.Impact,
@@ -1703,7 +1734,7 @@
                         Dependencies :  this.state.Dependencies,
                         Constrains :  this.state.Constrains,
                         Business_Model :  this.state.Business_Model,
-                        Business_lead :  this.getPeoplePickerData('Business_lead') || '',
+                        Business_lead :  this.getPeoplePickerData('Business_lead') || 'alan.medina@flex.com',
                         Project_Purpose :  this.state.Project_Purpose,
                         Project_Risks :  this.state.Project_Risks,
                         Line_of_Business :  this.state.Line_of_Business,
@@ -1715,7 +1746,7 @@
                         Requested_by_Customer :  this.state.Requested_by_Customer,
                         Customer_Priority :  this.state.Customer_Priority,
                         Estimated_Annual_Revenue :  this.state.Estimated_Annual_Revenue,
-                        Sales_Contact :  this.getPeoplePickerData('Sales_Contact') || '',
+                        Sales_Contact :  this.getPeoplePickerData('Sales_Contact') || 'alan.medina@flex.com',
                         Average_number_of_users_for_this_application :  this.state.Average_number_of_users_for_this_application,
                         FTE_Saved_per_year :  this.state.FTE_Saved_per_year,
                         Hours_saved_per_year :  this.state.Hours_saved_per_year,
@@ -1730,6 +1761,7 @@
                         
                         Last_modifed_by : currentUser.userEmail
                     }
+                    console.log("TCL: BusinessInformation -> //componentDidMount -> formData", formData)
 
                     return formData;
                 }
@@ -1795,12 +1827,13 @@
                 updateCurrentBusiness = () => {
                     const formData = this.saveFormValues();
                     
-                    this.props.saveLocalBusiness(formData);
+                    console.log("TCL: BusinessInformation -> updateCurrentBusiness -> formData before", formData)
 
-                    this.props.updateBusinesInformationDB(formData).then(()=>{
+                    updateBusinesInformationDB(formData).then(()=>{
+                    console.log("TCL: BusinessInformation -> updateCurrentBusiness -> formData after", formData)
                         this.createSuccessAlert('Data Updated ');
                         // Check If Action was Success
-                        const response = this.props.businessInformation.businessInformationId;
+                        // const response = this.props.businessInformation.businessInformationId;
 						//console.log('TCL: submitFormDB -> response', response)
                         
                         
@@ -1809,9 +1842,13 @@
                         this.setState({sendingData : false})
 
 
-                        this.props.resetBusinessState();
+                        // this.props.resetBusinessState();
 
-                        this.props.updateLocalBusinesInformation(formData);
+                        // this.props.updateLocalBusinesInformation(formData);
+
+                         // ? Update Props
+                         this.props.updateProjectIntakeValues('business',formData, null, true)
+                                
                         
                     })
                     .catch((error)=> {
@@ -1923,21 +1960,21 @@
 
                     // Check if is Update or New Business
 
-                    const { businessInformation} = this.props.loadedBusinessInformation;
-                    const {requirementsDefinition} = this.props;
-                    const {isSaved} = requirementsDefinition;
+                    const { Buss_info_id } = this.props.projectIntake.businessInformation;
+                    const {requirementsDefinition} = this.props.projectIntake;
+                    const { savedOnDB } = requirementsDefinition;
 
-                    if(businessInformation) {
+                    if(Buss_info_id) {
 						
                         //  Update Current Business
                         //console.log('TCL: BusinessInformation -> submitFormDB -> businessInformation UPdate', businessInformation)
                         this.updateCurrentBusiness();
-                        this.setState({checkForErrors: false})
+                        // this.setState({checkForErrors: false})
                     }
                     else {
                         //console.log('TCL: BusinessInformation -> submitFormDB -> businessInformation Create', businessInformation)
                         // Add New Business
-                        this.saveNewBusinessDB(isSaved, requirementsDefinition);
+                        this.saveNewBusinessDB(savedOnDB, requirementsDefinition);
                         this.setState({checkForErrors: false})
                     }
 
@@ -3271,7 +3308,7 @@
                 console.log("TCL: renderBusinessInformation -> this.props", this.props)
                 
                 console.log("TCL: renderBusinessInformation -> this.props.requirementsDefinition", this.props.projectIntake.requirementsDefinition)
-                console.log("TCL: renderBusinessInformation -> this.props.requirementsDefinition.requirementsDefinition", this.props.projectIntake.requirementsDefinition.requirementsDefinition)
+                
 
 
                 // ? Look for the workstage
