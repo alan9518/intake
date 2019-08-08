@@ -34,7 +34,7 @@
 // Define PropTypes 
 // -------------------------------------- 
     FormBody.propTypes = {
-        props: PropTypes
+        children: PropTypes.any
     };
 // --------------------------------------
 // Export Component

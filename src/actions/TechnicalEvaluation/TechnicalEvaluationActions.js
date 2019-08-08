@@ -20,6 +20,14 @@
     // Formart Date
     // --------------------------------------            
     const formatDate = (dateToFormat) => {
+    
+        console.log("TCL: formatDate -> dateToFormat", dateToFormat)
+        console.log("TCL: formatDate ->  empty date",  moment().format("DD/MM/YYYY"))
+
+        if(!dateToFormat ||  dateToFormat === "")
+            return moment().format("DD/MM/YYYY") 
+            
+
         return  moment(dateToFormat).format("DD/MM/YYYY")  
     }
 
@@ -201,7 +209,7 @@
 
             const updateTechnicalData = {
                 tab3 :{
-                    "project_id" : formData.Project_ID || null,
+                    "project_id" : formData.Project_id || formData.Project_ID || id || null,
                     "tech_eval_id" : formData.Tech_eval_id || formData.tech_eval_id,
                     "Delivery_Team" : formData.Delivery_Team.value === undefined ? removeSpecialCharacters(formData.Delivery_Team) : removeSpecialCharacters(formData.Delivery_Team.value ),
                     "Platform_type" : removeSpecialCharacters(formData.Platform_type.value),

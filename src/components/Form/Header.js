@@ -26,7 +26,7 @@
 // Define PropTypes 
 // -------------------------------------- 
     Header.propTypes = {
-        props: PropTypes
+        title: PropTypes.string
     };
 // --------------------------------------
 // Export Component

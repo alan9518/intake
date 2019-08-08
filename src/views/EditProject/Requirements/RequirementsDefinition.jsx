@@ -58,7 +58,7 @@
                 //? const currentUser = window.getCurrentSPUser();
 
                 // const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
-                const projectID = props.projectIntake.requirementsDefinition.newProjectID || props.projectIntake.requirementsDefinition.Request_ID;
+                const projectID = props.projectIntake.requirementsDefinition.Project_id || props.projectIntake.requirementsDefinition.Request_ID;
                 console.log("TCL: RequirementsDefinition -> constructor -> props", props)
 				
                 this.state = {
@@ -198,6 +198,8 @@
                 // this.props.loadedRequirements.requirementsDefinition
                 let usersCanEdit = false;
                 if(this.state.Workstage.value === "Requested" && this.props.isPMO === false)
+                    usersCanEdit = false;
+                else if(this.state.Workstage.value !== "Requested" && this.props.isPMO === false)
                     usersCanEdit = false;
                 else
                     usersCanEdit = true;
@@ -962,7 +964,7 @@
                     this.filesArray = this.state.Project_Documents;
 
                     // const projId = this.props.projectIntake.requirementsDefinition ? this.props.projectIntake.requirementsDefinition.Request_ID : this.props.loadedRequirements.Project_id
-                    const projId = this.props.projectIntake.requirementsDefinition.Request_ID 
+                    const projId = (this.props.projectIntake.requirementsDefinition.Request_ID ).toString()
                     const requestID =  projId.indexOf('D') >= 0 ?  projId.substr(projId.indexOf('D')+1,projId.length) : projId;
 
 
@@ -1164,7 +1166,7 @@
                     
 
 
-                    // let promises = []
+                    
                     const id = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
                     console.log("TCL: id", id)
                     const {businessInformation, technicalEvaluation, pmoEvaluation, roiRealized} = this.props.projectIntake;
@@ -1237,9 +1239,16 @@
                         if(!isEmpty(roiRealized) && roiRealized.SavedLocally === true) {
                             // ? Look For Roi Relized Data
                             if(roiRealized.Roi_real_id || roiRealized.roi_real_id ) {
-                                updateROIRealizedDB(roiRealized, id)
+                                updateROIRealizedDB(roiRealized, id).then((roiID) => {
+                                    console.log("TCL: roiID", roiID)
+                                    roiRealized.Roi_real_id = roiID
+                                    // ? Look for Dynatrace
+                                    if(!isEmpty (roiRealized.dynatrace))
+                                        saveDynatraceDB(roiRealized.dynatrace, id,  roiID)
+
+                                })
                             }
-                            else
+                            else {
                                 saveROIRealizedDB(roiRealized, id).then((roiID) => {
                                     console.log("TCL: roiID", roiID)
                                     roiRealized.Roi_real_id = roiID
@@ -1249,6 +1258,8 @@
 
                                 })
 
+                            }
+                                
                         
                             // ? Update Props
                             this.props.updateProjectIntakeValues('roiRealized',roiRealized, roiRealized.dynatrace, true)

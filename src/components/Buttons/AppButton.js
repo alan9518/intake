@@ -27,7 +27,11 @@
 // Define PropTypes 
 // -------------------------------------- 
     AppButton.propTypes = {
-        props: PropTypes
+        buttonText : PropTypes.string, 
+        buttonClass : PropTypes.string, 
+        onClick : PropTypes.func, 
+        disabled : PropTypes.bool, 
+        buttonNam : PropTypes.string 
     };
 // --------------------------------------
 // Export Component

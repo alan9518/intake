@@ -238,9 +238,15 @@
     // @param {formData from RequirementsDefinition View}
     // @returns {Action}
     // -------------------------------------- */
-    export async function saveDynatraceDB(formData, projectID = null, newRoiRealizedID = null) {
+    export async function saveDynatraceDB(formData, projectID = null, newRoiRealizedID = null, roiData = null) {
         
-        const saveDynatraceObject =  createDynatraceData(formData, projectID, newRoiRealizedID);
+        console.log("TCL: saveDynatraceDB -> formData", formData)
+
+        let roi_id = newRoiRealizedID;
+        if(roiData && newRoiRealizedID === null)
+            roi_id = roiData.roi_real_id ||  roiData.Roi_real_id
+        
+        const saveDynatraceObject =  createDynatraceData(formData, projectID, roi_id);
 
         const saveDynatraceData = {
             roitrac : saveDynatraceObject

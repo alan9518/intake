@@ -183,6 +183,15 @@
     export async function updateBusinesInformationDB(formData, projectID = null)  {
         console.log("TCL: updateBusinesInformationDB -> projectID", projectID)
         console.log("TCL: updateBusinesInformationDB -> formData", formData)
+
+        // ? Set value fow Workstage
+        let workstage = null;
+        if(formData.Workstage.value)
+            workstage = formData.Workstage.value
+        else    
+            workstage =  formData.Workstage
+
+
         // "sites_impacted" : "${formData.Sites_Impacted}", 
         const updateBusinessData = {
             tab2 : {
@@ -217,7 +226,7 @@
                 "retirement_savings" : formData.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team, 
                 "infra_license_fee_savings" : formData.Legacy_System_Infra_and_License_Fee_savings_per_year, 
                 "other_savings" : formData.Other_Savings, 
-                "workstage" : formData.Workstage,
+                "workstage" : workstage,
                 "created_by": formData.Created_by || 'alan.medina@flex.com',
                 "last_modifed_by": formData.Last_modifed_by || 'alan.medina@flex.com'
             }

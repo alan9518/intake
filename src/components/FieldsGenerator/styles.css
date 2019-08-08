@@ -30,6 +30,7 @@ input[readonly] {
     font-weight: 700;
     flex-grow: 1;
     font-size: 16px;
+    margin-top: 12px;
 }
 
 .bordered {

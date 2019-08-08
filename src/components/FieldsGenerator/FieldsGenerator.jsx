@@ -156,7 +156,22 @@ import './styles.css';
 // Define PropTypes 
 // -------------------------------------- 
     FieldsGenerator.propTypes = {
-        props: PropTypes
+        fieldsData : PropTypes.array ,
+        renderBorder : PropTypes.bool,
+        onChangeInputs : PropTypes.func,
+        onChangeSelect : PropTypes.func,
+        onDateChange : PropTypes.func,
+        onFileAdded : PropTypes.func,
+        onFileRemoved : PropTypes.func,
+        preloadFiles : PropTypes.func,
+        showError : PropTypes.bool,
+        onClick : PropTypes.func,
+        multipleRows : PropTypes.bool,
+        blockFileZone : PropTypes.bool,
+        showFileManager : PropTypes.bool,
+        currentView : PropTypes.string,
+        currentProject : PropTypes.string,
+        checkErrorClass : PropTypes.func
     };
 // --------------------------------------
 // Export Component

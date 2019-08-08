@@ -38,7 +38,10 @@
 // Define PropTypes 
 // -------------------------------------- 
     NavItem.propTypes = {
-        props: PropTypes
+        title: PropTypes.string,
+        activeRoute : PropTypes.bool,
+        route : PropTypes.string ,
+        disabled : PropTypes.bool
     };
 
 

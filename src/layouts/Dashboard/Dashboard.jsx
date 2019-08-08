@@ -14,7 +14,7 @@
     import React, { Component, Fragment } from 'react';
     import PropTypes from 'prop-types';
     import {appRoutes} from '../../routes/routes';
-    import { withRouter } from 'react-router';
+    import { withRouter, Prompt } from 'react-router';
     import {Endpoints} from '../../services/Endpoints';
     import { Switch, Route,  Redirect, BrowserRouter,  } from "react-router-dom";
     import axios from 'axios';
@@ -188,6 +188,9 @@
                     return (
                         <div className = "int-mainContainer" style = {{maxWidth:responsiveWidth}}>
                             <BrowserRouter history={this.props.history}>
+
+                         
+
                                 <Switch>
                                     {appRoutes.map((prop,key) => {
                                         console.log("TCL: Dashboard -> renderDashboard -> prop", prop)
@@ -222,23 +225,11 @@
 // -------------------------------------- 
 // Define PropTypes 
 // -------------------------------------- 
-    Dashboard.propTypes = {
-        props: PropTypes
-    };
+    // Dashboard.propTypes = {
+    //     props: PropTypes
+    // };
 
 
-
-/* ==========================================================================
-** Redux Functions
-** ========================================================================== */
-    // const mapStateToProps = (state) => {
-		
-    //     return {
-    //         pmos : state.sharepoint,
-    //         pmosData:state.sharepoint.pmos,
-    //         isLoaded : state.sharepoint.pmosLoaded
-    //     }
-    // }
 
 
 

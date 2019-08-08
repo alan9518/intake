@@ -14,7 +14,7 @@
     import {  NavBar, Header, FormBody, AppButton} from '../../components';
     import {  Switch, Route, Link, Redirect } from "react-router-dom";
     // import { connect } from 'react-redux';
-    import { withRouter } from 'react-router';
+    import { withRouter, Prompt } from 'react-router';
     // import { fetchSitePMOS } from '../../actions'
     import { newProjectRoutes } from '../../routes/routes';
     import '../styles.css'
@@ -314,7 +314,7 @@
             // ? With New Values
             // ?--------------------------------------
 
-            updateProjectIntakeValues(objectToChange,  newValues , extraValues = null, savedonDB = false) {
+            updateProjectIntakeValues(objectToChange,  newValues , extraValues = null, savedonDB = false, savedLocally = true) {
                 console.log("TCL: formHolder -> updateProjectIntakeValues -> newValues", newValues)
                 console.log("TCL: formHolder -> updateProjectIntakeValues -> currentView", objectToChange)
 
@@ -338,7 +338,7 @@
                         Project_Type : newValues.Project_Type,
                         Project_Documents : newValues.Project_docs,
                         SPFiles : newValues.SPFiles || [],
-                        SavedLocally : true,
+                        SavedLocally : savedLocally,
                         SavedOnDB : savedonDB
                         // this.getSharepointFilesByProject(projectID, 'requirementsDefinition')
                     }     
@@ -387,7 +387,7 @@
                         Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : newValues.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
                         Legacy_System_Infra_and_License_Fee_savings_per_year : newValues.Legacy_System_Infra_and_License_Fee_savings_per_year,
                         Other_Savings : newValues.Other_Savings,
-                        SavedLocally : true,
+                        SavedLocally : savedLocally,
                         SavedOnDB : savedonDB
                     }
 
@@ -426,7 +426,7 @@
                         Maintenance_Salaries_hours_per_year :newValues.Maintenance_Salaries_hours_per_year,
                         No_of_Sites :newValues.No_of_Sites,
                         No_of_Active_users :newValues.No_of_Active_users,
-                        SavedLocally : true,
+                        SavedLocally : savedLocally,
                         SavedOnDB : savedonDB
                     }
 
@@ -445,7 +445,7 @@
                         ROI_Category : newValues.ROI_Category,
                         WorkID_PlanView_FlexPM_SN_Ticket : newValues.WorkID_PlanView_FlexPM_SN_Ticket,
                         Documents : newValues.Documents,
-                        SavedLocally : true,
+                        SavedLocally : savedLocally,
                         SavedOnDB : savedonDB
                         // sharepointFiles : this.getSharepointFilesByProject(projectID, 'PMO')
                     }
@@ -481,7 +481,7 @@
                         Maintenance_Salaries_hours_per_year : newValues.Maintenance_Salaries_hours_per_year,
                         dynatrace : newValues.dynatrace ,
                         showDynatrace : newValues.showDynatrace,
-                        SavedLocally : true,
+                        SavedLocally : savedLocally,
                         SavedOnDB : savedonDB
                     }
 
@@ -753,8 +753,12 @@
             // Render Projects
             // --------------------------------------
             renderformHolder() {
+                let showPrompt = true
                 return (
                         <Fragment>
+
+                        
+
                             {this.renderNavigation()}
                             <div className="int-projectsContainer">
                                 

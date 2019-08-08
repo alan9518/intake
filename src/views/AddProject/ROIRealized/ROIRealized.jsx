@@ -11,6 +11,8 @@
     import { FieldsGenerator, AppLoader, SectionHeader, FormBody, FormFooter, AppButton } from  '../../../components';
     import { isEmpty } from 'lodash';
     import { withRouter } from 'react-router';
+    import { Prompt } from 'react-router'
+
     import {Redirect} from 'react-router-dom';
     import PropTypes from 'prop-types';
     import Alert from 'react-s-alert';
@@ -99,7 +101,7 @@
             // --------------------------------------
             componentWillUnmount() {
                 // let formData =  this.saveFormValues(null, null);
-                // this.submitFormLocalData(true)
+                this.submitFormLocalData(true)
                 // this.props.saveLocalRoiRealized(formData);
                 window.removeEventListener("resize", this.updateContainerDimensions);
             }
@@ -728,16 +730,22 @@
                 // Submit Form
                 // --------------------------------------
                 submitFormLocalData = (redirect) => {
-                    const formData =  this.saveFormValues(null, null);
+                    // const formData =  this.saveFormValues(null, null);
 
-                    this.props.saveLocalRoiRealized(formData);
+                    // this.props.saveLocalRoiRealized(formData);
 
-                    if(redirect) {
-                        // Show Sucess Message 
-                        this.createSuccessAlert('Data Saved Locally');
-                        // Redirect User
-                        // setTimeout(()=>{this.redirectUser();},700);
-                    }
+                    // if(redirect) {
+                    //     // Show Sucess Message 
+                    //     this.createSuccessAlert('Data Saved Locally');
+                    //     // Redirect User
+                    //     // setTimeout(()=>{this.redirectUser();},700);
+                    // }
+
+                    const formData = this.saveFormValues();
+                        
+                    this.props.updateProjectIntakeValues('roiRealized',formData,formData.dynatrace )
+
+                    
                 
                 }
 
@@ -751,11 +759,15 @@
 
                     const formData = this.saveFormValues(projectID, null);
                     
-                        saveROIRealizedDB(formData).then(()=>{
-                        this.createSuccessAlert('Data Saved ');
-                        // Redirect User
-                        // Check If Action was Success
-                        const newRoiRealizedID = this.props.projectIntake.roiRealized.Roi_real_id;
+                        saveROIRealizedDB(formData).then((newRoiRealizedID)=>{
+
+
+                            formData.Roi_real_id = newRoiRealizedID
+
+                            // this.createSuccessAlert('Data Saved ');
+                            // Redirect User
+                            // Check If Action was Success
+                            // const newRoiRealizedID = this.props.projectIntake.roiRealized.Roi_real_id;
                         
 
 
@@ -763,19 +775,25 @@
                         const data =  this.setDynatraceData(newRoiRealizedID);
                         console.log("TCL: saveNewROI -> data", data)
 
-                        let projId = projectID || this.props.projectIntake.requirementsDefinition.Request_ID
-                        this.props.saveDynatraceDB(data, projectID, newRoiRealizedID);
-                        
+                        // let projId = projectID || this.props.projectIntake.requirementsDefinition.Request_ID
 
-                        
-                        
-                        this.setState({ Request_ID : newRoiRealizedID , sendingData : false})
 
-                        this.createSuccessAlert('Data saved successfully ');
+                        saveDynatraceDB(data, projectID, newRoiRealizedID).then((result) => {
+                            this.props.updateProjectIntakeValues('roiRealized',formData, data, true)
+                        
+                        
+                            this.setState({ Request_ID : newRoiRealizedID , sendingData : false})
+    
+    
+                            this.createSuccessAlert('Data saved successfully ');
+                        })
+                        
+                      
                         // setTimeout(()=>{this.redirectUser();},700);
                         
                     })
                     .catch((error)=> {
+                    console.log("TCL: saveNewROI -> error", error)
                         this.createErrorAlert('There was a problem saving the data, please try again ');
 						
                         
@@ -801,7 +819,7 @@
                 // ?--------------------------------------
                 // ? Update Current ROI
                 // ?--------------------------------------
-                updateCurrentROIRealzed(projectID , roiID) {
+                updateCurrentROIRealzed(projectID , roiID = null) {
                     const formData = this.saveFormValues(projectID,roiID);
                     const {roiRealized} =  this.props.projectIntake
 
@@ -844,8 +862,11 @@
                  
                     // !
                     let reqSaved = false
-                    if (!this.props.projectIntake.requirementsDefinition.SavedOnDB || this.props.projectIntake.requirementsDefinition.Project_id)
+                    if (this.props.projectIntake.requirementsDefinition.isSavedOnDB === false || !this.props.projectIntake.requirementsDefinition.Project_id)
                         reqSaved = false;
+
+                    else if (this.props.projectIntake.requirementsDefinition.Project_id)
+                        reqSaved = true
                     else
                         reqSaved = true
     
@@ -870,55 +891,32 @@
 
                     // Check if is new ROI or updated
 
-                    const {roiRealizedSaved, projectID} = this.props;
+                    const {Roi_real_id} = this.props.projectIntake.roiRealized;
+                    const {Project_id} = this.props.projectIntake.requirementsDefinition;
                     
-                    this.saveNewROI(projectID)
-                    this.saveOtherTabs(projectID);
+                    // this.saveNewROI(projectID)
+                    // this.saveOtherTabs(projectID);
 
                     // !
 
 
-                    if(roiRealizedSaved) {
-                        const newRoiRealizedID = this.props.projectIntake.roiRealized.Roi_real_id
+                    if(Roi_real_id) {
+                        // const newRoiRealizedID = this.props.projectIntake.roiRealized.Roi_real_id || this.props.projectIntake.roiRealized.roi_real_id
 
-                        this.updateCurrentROIRealzed(projectID,newRoiRealizedID)
+                        this.updateCurrentROIRealzed(Project_id, Roi_real_id)
 
                         // this.updateROIRealizedDB()
                         // this.props.updateProjectIntakeValues('roiRealized',formData,formData.dynatrace )
 						
                     }
                     else{
-                        this.saveNewROI(projectID)
+                        this.saveNewROI(Project_id)
                     }
 
-
-                    // this.setState({sendingData : true})
-                    // const formData = this.saveFormValues();
-                    // this.props.saveLocalRoiRealized(formData);
-                    // this.props.saveROIRealizedDB(formData).then(()=>{
-                    //     this.createSuccessAlert('Data Saved ');
-                    //     // Redirect User
-                    //     // Check If Action was Success
-                    //     const newRoiRealizedID = this.props.roiRealized.newRoiRealizedID;
-                    
+                    this.saveOtherTabs(Project_id);
 
 
-                    //     // Update Table, insert Dynatrace Data
-                    //     const data =  this.setDynatraceData(newRoiRealizedID);
 
-                    //     this.props.saveDynatraceDB(data);
-                        
-
-                    
-                        
-                    //     this.setState({ Request_ID : newRoiRealizedID , sendingData : false})
-                    //     setTimeout(()=>{this.redirectUser();},700);
-                        
-                    // })
-                    // .catch((error)=> {
-                    //     this.createErrorAlert('There was a problem saving the data, please try again ');
-					
-                        
                     // })
                 }
 
@@ -952,6 +950,9 @@
                                 let reqFolderURL = `${projectID}/RequirementsDefinition`;
                                 let pmoFolderURL = `${projectID}/PMO`;
 
+                                // ? Update Data
+                                requirementsDefinition.Project_id = newProjectID;
+                                this.props.updateProjectIntakeValues('requirements',requirementsDefinition, null, true)
 
                                 //! Create Requirements  Folder
 
@@ -1113,10 +1114,10 @@
 
                             // this.validateEmptyRequirements();
 
-                            if(requirementsDefinition.Project_id) {
+                            if(requirementsDefinition.Project_id || requirementsDefinition.Project_id) {
                                 updateRequirementsDB(requirementsDefinition);
                                 let reqFolderURL = `${requirementsDefinition.newProjectID}/RequirementsDefinition`;
-                                this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                                //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
                             }
                                 
                             else
@@ -1137,7 +1138,7 @@
                             console.log("TCL: saveOtherTabs -> businessInformation", businessInformation)
                             
                             
-                            if(businessInformation.Buss_info_id)
+                            if(businessInformation.Buss_info_id || businessInformation.buss_info_id )
                                 updateBusinesInformationDB(businessInformation)
                             else {
                                 saveBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
@@ -1157,7 +1158,7 @@
 
                         // ? Save Tehnical Evaluation
                         if(!isEmpty(technicalEvaluation) && technicalEvaluation.SavedLocally === true) {
-                            if(technicalEvaluation.Tech_eval_id) {
+                            if(technicalEvaluation.Tech_eval_id || technicalEvaluation.tech_eval_id ) {
                                 updateTechnicalDB(technicalEvaluation)
                             }
                             else
@@ -1173,7 +1174,7 @@
 
                         // ? Save PMO Evaluation
                         if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
-                            if(pmoEvaluation.Pmo_eval_id) {
+                            if(pmoEvaluation.Pmo_eval_id || pmoEvaluation.pmo_eval_id) {
                                 updatePMOEvaluation(pmoEvaluation)
                             }
                             else
@@ -1202,23 +1203,8 @@
                 }
 
 
-                // --------------------------------------
-                // Reset State
-                // If PMO, DOnt
-                // Normal User, reset Req && Bus
-                // --------------------------------------
-                resetState() {
-                    const {isPMO} = this.props;
-                    if(isPMO === false) {
-                        this.props.resetRequirementsState(); 
-                        this.props.resetBusinessState();
-                        this.props.resetTechnicalState();
-                        this.props.resetPMOEvaluationState();
-                        this.props.resetROIRealizedState();
-                        // this.props.rset
-                    }
-                }
-
+             
+               
             // --------------------------------------
             // Redirect User
             // --------------------------------------
@@ -1247,8 +1233,10 @@
             // --------------------------------------
             
             redirectUserPrev() {
-                const {history} = this.props;
-                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const {history} = this.props.locationData;
+                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+
+                const path = '/intake'
                 
                 history.push(`${path}/add-project/pmo-evaluation`);
             }
@@ -1266,7 +1254,7 @@
                 // --------------------------------------*/
                 uploadReqFiles (folderName, foldertoUpload) {
                     this.setState({currentMessage : 'Saving Files'})
-                    const filesArray = this.props.requirementsDefinition.Project_docs;
+                    const filesArray = this.props.projectIntake.requirementsDefinition.Project_docs;
                     
 
                     const folderURL = `intakeFiles/${foldertoUpload}`;
@@ -1580,10 +1568,13 @@
             // Render Projects
             // --------------------------------------
             renderROIRealized() {
-                const {sendingData, showDynatrace} = this.state;
+                const {sendingData, showDynatrace, isSavedOnDB} = this.state;
                 const {isPMO} = this.props;
+
+                // let showPrompt = isSavedOnDB === false ? true : false
                 if (isPMO === false ) 
-                return (<Redirect to={'/'}/>)
+                    return (<Redirect to={'/'}/>)
+
                 const formContainer =  <form>
                                             <div className="int-container">
                                                 <div className="int-row">
@@ -1741,7 +1732,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div className="int-row">
+                                                        <div className="int-row" style = {{justifyContent : 'center', marginTop:15}}>
                                                             <button onClick = {this.saveDynatrace} className = "int-singleButton" type = "button">Save Values</button>
                                                         </div>
 
@@ -1756,6 +1747,8 @@
                                         </form>
                 return (
                     <Fragment>
+
+                       
                     
                         <FormBody>
                             {sendingData && this.renderLoader(true)}

@@ -189,7 +189,7 @@
         componentDidMount() {
             // const pmos = this.props.sharepoint;
             // this.setState({isLoaded : true});
-
+            this.resetProjectIntake()
             this.loadAPI();
 
         }
@@ -404,8 +404,8 @@
                         ROIReal : newValues.ROIReal,
                         TechEval: newValues.TechEval,
                         business_info: newValues.business_info,
-                        project_id: newValues.project_id ,
-
+                        Project_id: newValues.project_id ,
+                        project_id: newValues.Project_id ,
                         Date_Submitted : newValues.date_submitted,
                         Request_Owner : newValues.request_owner,
                         Request_ID : newValues.request_id,  
@@ -605,19 +605,19 @@
             // ? With New Values
             // ?--------------------------------------
 
-            updateProjectIntakeValues(objectToChange,  newValues , extraValues = null, savedonDB = false) {
+            updateProjectIntakeValues(objectToChange,  newValues , extraValues = null, savedonDB = false, SavedLocally = true) {
                 console.log("TCL: formHolder -> updateProjectIntakeValues -> newValues", newValues)
                 console.log("TCL: formHolder -> updateProjectIntakeValues -> currentView", objectToChange)
 
 
-                  // ? Set Requirements Definition
+                // ? Set Requirements Definition
                 if(objectToChange === 'requirements') {
 
                     let requirementsDefinition = {
-                       
-                        project_id: newValues.Project_id || null ,
+                        project_id: newValues.Project_id || newValues.project_id || null ,
+                        Project_id: newValues.Project_id || newValues.project_id || null ,
                         created_by: newValues.Created_by ||  newValues.Created_by ,
-                        Date_Submitted : newValues.Date_submitted,
+                        Date_Submitted : newValues.Date_submitted || newValues.Date_Submitted,
                         Request_Owner : newValues.Request_Owner,
                         Request_ID :  newValues.Project_id || null,  
                         Workstage : newValues.Workstage,
@@ -629,7 +629,7 @@
                         Project_Type : newValues.Project_Type,
                         Project_Documents : newValues.Project_docs,
                         SPFiles : newValues.SPFiles || [],
-                        SavedLocally : true,
+                        SavedLocally : SavedLocally,
                         savedOnDB : savedonDB,
                         Created_by: newValues.created_by || newValues.Created_by ,
                         Created_date: newValues.created_date,
@@ -651,7 +651,10 @@
                 if(objectToChange === 'business') {
 
                     let businessInformation = {
-                        project_id: newValues.Project_id || null ,
+                        project_id: newValues.Project_id || newValues.project_id || null ,
+                        Project_id: newValues.Project_id || newValues.project_id || null ,
+                        buss_info_id : newValues.buss_info_id || newValues.Buss_info_id,
+                        Buss_info_id : newValues.buss_info_id || newValues.Buss_info_id,
                         Business_Objective : newValues.Business_Objective,
                         Outcomes_from_the_Objective : newValues.Outcomes_from_the_Objective,
                         Impact : newValues.Impact,
@@ -681,7 +684,7 @@
                         Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : newValues.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
                         Legacy_System_Infra_and_License_Fee_savings_per_year : newValues.Legacy_System_Infra_and_License_Fee_savings_per_year,
                         Other_Savings : newValues.Other_Savings,
-                        SavedLocally : true,
+                        SavedLocally : SavedLocally,
                         savedOnDB : savedonDB,
                         Created_by: newValues.created_by || newValues.Created_by ,
                         Created_date: newValues.created_date,
@@ -698,7 +701,14 @@
 
                 // ? Set Technical Evaluation
                 if(objectToChange === 'technical') {
+
+                    let approvalDate = newValues.Approval_Date._isValid === false ? moment() : newValues.Approval_Date;
+                    let TargetStartDate = newValues.Target_Start_Date._isValid === false ? moment() : newValues.Target_Start_Date;
+                    let TargetGoLiveDate = newValues.Target_Go_Live_Date._isValid === false ? moment() : newValues.Target_Go_Live_Date;
+
                     let technicalEvaluation = {
+                        Tech_eval_id : newValues.Tech_eval_id || newValues.tech_eval_id  ,
+                        tech_eval_id : newValues.Tech_eval_id || newValues.tech_eval_id, 
                         Delivery_Team : newValues.Delivery_Team ,
                         Platform_type : newValues.Platform_type ,
                         Applications_involved : newValues.Applications_involved ,
@@ -707,11 +717,11 @@
                         Estimated_Effort : newValues.Estimated_Effort ,
                         Project_Team_Size : newValues.Project_Team_Size ,
                         Project_Manager : newValues.Project_Manager ,
-                        Target_Start_Date :newValues.Target_Start_Date,
-                        Target_Go_Live_Date :newValues.Target_Go_Live_Date,
+                        Target_Start_Date : TargetStartDate,
+                        Target_Go_Live_Date : TargetGoLiveDate,
                         IT_FTE_required :newValues.IT_FTE_required,
                         Approver : newValues.Approver,
-                        Approval_Date :newValues.Approval_Date,
+                        Approval_Date : approvalDate,
                         Justification_ROI :newValues.Justification_ROI,
                         Design_Development_Testing_Effort :newValues.Design_Development_Testing_Effort,
                         Travel_TE :newValues.Travel_TE,
@@ -723,7 +733,7 @@
                         Maintenance_Salaries_hours_per_year :newValues.Maintenance_Salaries_hours_per_year,
                         No_of_Sites :newValues.No_of_Sites,
                         No_of_Active_users :newValues.No_of_Active_users,
-                        SavedLocally : true,
+                        SavedLocally : SavedLocally,
                         savedOnDB : savedonDB,
                         Created_by: newValues.created_by || newValues.Created_by ,
                         Created_date: newValues.created_date,
@@ -740,12 +750,14 @@
                  // ? Set PMO Evaluation Data
                 if(objectToChange === 'pmoEval') {
                     let pmoEvaluation = {
+                        pmo_eval_id : newValues.Pmo_eval_id ||  newValues.pmo_eval_id,
+                        Pmo_eval_id : newValues.Pmo_eval_id ||  newValues.pmo_eval_id,
                         Expected_total_ROI : newValues.Expected_total_ROI,
                         Expected_IRR : newValues.Expected_IRR,
                         ROI_Category : newValues.ROI_Category,
                         WorkID_PlanView_FlexPM_SN_Ticket : newValues.WorkID_PlanView_FlexPM_SN_Ticket,
                         Documents : newValues.Documents,
-                        SavedLocally : true,
+                        SavedLocally : SavedLocally,
                         savedOnDB : savedonDB,
                         Created_by: newValues.created_by || newValues.Created_by ,
                         Created_date: newValues.created_date,
@@ -766,6 +778,8 @@
                     console.log("TCL: formHolder -> setDataSourceValuesFromDB -> extraValues", extraValues)
 
                     let roiRealized = {
+                        roi_real_id : newValues.roi_real_id || newValues.Roi_real_id,
+                        Roi_real_id : newValues.roi_real_id || newValues.Roi_real_id,
                         Implementation_Date : newValues.Implementation_Date,
                         FTE_Saved_per_year : newValues.FTE_Saved_per_year,
                         Hours_saved_per_year : newValues.Hours_saved_per_year,
@@ -782,9 +796,9 @@
                         Hardware_leasing : newValues.Hardware_leasing,
                         Maintenance_Hardware_hours_per_year : newValues.Maintenance_Hardware_hours_per_year,
                         Maintenance_Salaries_hours_per_year : newValues.Maintenance_Salaries_hours_per_year,
-                        dynatrace : newValues.dynatrace ,
-                        showDynatrace : newValues.showDynatrace,
-                        SavedLocally : true,
+                        dynatrace : extraValues ? extraValues : [] ,
+                        showDynatrace : extraValues ? extraValues.length > 0 ? true : false : false,
+                        SavedLocally : SavedLocally,
                         savedOnDB : savedonDB,
                         Created_by: newValues.created_by || newValues.Created_by ,
                         Created_date: newValues.created_date,
@@ -807,6 +821,145 @@
 
 
 
+            // ?--------------------------------------
+            // ? Reset Project Intake state
+            // ?--------------------------------------
+            resetProjectIntake() {
+                console.log('reset State');
+                projectIntake = {
+                    requirementsDefinition : {
+                        Project_id : null,
+                        project_id : null,
+                        Date_Submitted : null,
+                        Request_Owner : null,
+                        Request_ID : null,  
+                        Workstage : null,
+                        Project_Name : null,
+                        Description : null,
+                        Expected_Start_Date : null,
+                        Expected_Completion_Date : null,
+                        Expected_Start_Date_Moment : null,
+                        Expected_Completion_Date_Moment : null,
+                        Deadline_Justification : null,
+                        Project_Type : null,
+                        Project_Documents : null,
+                        SavedLocally : false,
+                        SavedOnDB : false
+                    },
+            
+                    businessInformation : {
+                        Buss_info_id : null,
+                        buss_info_id : null,
+                        Business_Objective : null ,
+                        Outcomes_from_the_Objective : null ,
+                        Impact : null ,
+                        Background : null ,
+                        Dependencies : null ,
+                        Constrains : null ,
+                        Business_Model : null ,
+                        Business_lead : null ,
+                        Project_Purpose : null ,
+                        Project_Risks : null ,
+                        Line_of_Business : null ,
+                        IT_Vector : null ,
+                        RPA : null ,
+                        Region : null ,           
+                        Sites_Impacted : null ,
+                        Customer : null ,
+                        Requested_by_Customer : null ,
+                        Customer_Priority : null ,
+                        Estimated_Annual_Revenue : null ,
+                        Sales_Contact : null ,
+                        Average_number_of_users_for_this_application : null ,
+                        FTE_Saved_per_year : null ,
+                        Hours_saved_per_year : null ,
+                        Savings_revenue : null ,
+                        Compliance_Risk_cost_that_will_be_avoided_by_this_application : null ,
+                        Risk_Avoidance : null ,
+                        Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : null ,
+                        Legacy_System_Infra_and_License_Fee_savings_per_year : null ,
+                        Other_Savings : null ,
+                        conditionalSites : [],
+                        SavedLocally : false,
+                        SavedOnDB : false
+                        
+                    },
+            
+                    technicalEvaluation : {
+                        Tech_eval_id : null,
+                        tech_eval_id : null,
+                        Delivery_Team : null,
+                        Platform_type : null,
+                        Applications_involved : null,
+                        Technology : null,
+                        IT_Groups_Required : null,
+                        Estimated_Effort : null,
+                        Project_Team_Size : null,
+                        Project_Manager : null,
+                        Target_Start_Date : null,
+                        Target_Go_Live_Date : null,
+                        IT_FTE_required : null,
+                        Approver : null,
+                        Approval_Date : null,
+                        Justification_ROI : null,
+                        Design_Development_Testing_Effort : null,
+                        Travel_TE : null,
+                        Consulting : null,
+                        Training : null,
+                        Licenses_Cost_per_year : null,
+                        Hardware_leasing : null,
+                        Maintenance_Hardware_hours_per_year : null,
+                        Maintenance_Salaries_hours_per_year : null,
+                        No_of_Sites : null,
+                        No_of_Active_users : null,
+                        SavedLocally : false,
+                        SavedOnDB : false
+                    },
+                    pmoEvaluation : {
+                        Pmo_eval_id : null,
+                        pmo_eval_id : null,
+                        Expected_total_ROI : null,
+                        Expected_IRR : null,
+                        ROI_Category : null,
+                        WorkID_PlanView_FlexPM_SN_Ticket : null,
+                        Documents : null,
+                         SavedLocally : false,
+                        SavedOnDB : false
+                    },
+                    roiRealized : {
+                        Roi_real_id : null,
+                        roi_real_id : null,
+                        Implementation_Date :   moment().format("MM/DD/YYYY") || null,
+                        FTE_Saved_per_year : null,
+                        Hours_saved_per_year : null,
+                        Compliance_Ris_cost_that_was_avoided_by_this_application : null,
+                        Risk_Avoidance : null,
+                        Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : null,
+                        Legacy_System_Infra_and_License_Fee_savings_per_year : null,
+                        Other_Savings : null,
+                        Design_Developmen_Testing_Effort_hours : null,
+                        Travel_TE : null,
+                        Consulting : null,
+                        Training : null,
+                        Licenses_Cost_per_year : null,
+                        Hardware_leasing : null,
+                        Maintenance_Hardware_hours_per_year : null,
+                        Maintenance_Salaries_hours_per_year : null,
+                        Site_Usage : null,
+                        Usage_Footprint_1_week : null,
+                        Transactions_per_minute_TPM : null,
+                        ROI_Realized_Date :  null,
+                        Site_UsageRows : null,
+                        Usage_FootprintRows : null,
+                        dynatrace : null,
+                        showDynatrace : null,
+                        SavedLocally : false,
+                        SavedOnDB : false
+                    }
+                
+                }
+                console.log("TCL: formHolder -> resetProjectIntake -> projectIntake", projectIntake)
+            }
 
 
 
@@ -1009,9 +1162,9 @@
 // -------------------------------------- 
 // Define PropTypes 
 // -------------------------------------- 
-    formHolder.propTypes = {
-        props: PropTypes
-    };
+    // formHolder.propTypes = {
+    //     props: PropTypes
+    // };
 
 
 

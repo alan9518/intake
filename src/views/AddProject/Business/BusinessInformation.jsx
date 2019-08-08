@@ -1933,12 +1933,36 @@
                         Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team :  this.state.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team,
                         Legacy_System_Infra_and_License_Fee_savings_per_year :  this.state.Legacy_System_Infra_and_License_Fee_savings_per_year,
                         Other_Savings :  this.state.Other_Savings,
-                        workstage : this.props.projectIntake.requirementsDefinition.Workstage,
+                        Workstage :   this.setWorkstageValue(this.props.projectIntake.requirementsDefinition.Workstage),
                         Created_by : currentUser.userEmail,
                         Last_modifed_by : currentUser.userEmail
                     }
 
                     return formData;
+                }
+
+
+                setWorkstageValue(workstage) {
+                    let workstageToReturn = null
+                    if(!workstage)
+                        return {"label" : "1 - New" , "value": "New" }
+                    
+                    else if (workstage.value) {
+                        if(workstage.value === 'New')
+                            workstageToReturn = {"label" : "2 - Requested" , "value": "Requested" }
+                        else
+                            workstageToReturn = workstage
+                    }
+                    else {
+                        if(workstage === 'New')
+                            workstageToReturn = {"label" : "2 - Requested" , "value": "Requested" }
+                        else
+                            workstageToReturn = workstage
+                    }
+
+
+                    return workstageToReturn;
+
                 }
                 
 
@@ -1959,7 +1983,7 @@
                         }
    
                            this.createSuccessAlert('Data Saved Locally');
-                        //    this.redirectUser();
+                           this.redirectUser();
                     }
 
                 
@@ -1972,11 +1996,11 @@
                         const {Project_ID, Buss_info_id} = this.state
 
                         formData = this.saveFormValues(Project_ID , Buss_info_id);
-                        this.props.updateProjectIntakeValues('business',formData, null, true)
+                        this.props.updateProjectIntakeValues('business',formData, null, true, true)
                     }
                     else {
                         formData = this.saveFormValues();
-                        this.props.updateProjectIntakeValues('business',formData)
+                        this.props.updateProjectIntakeValues('business',formData, null, false , true)
                     }
                         
 
@@ -1984,7 +2008,7 @@
 
                    
                    
-                    this.redirectUser(nextStep);
+                    // this.redirectUser(nextStep);
                     
                 }
 

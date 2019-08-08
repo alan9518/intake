@@ -68,7 +68,7 @@
 
                     Target_Start_Date :  moment(props.projectIntake.technicalEvaluation.Target_Start_Date ) || null,  
                     Target_Start_Date_Moment : moment(props.projectIntake.technicalEvaluation.Target_Start_Date) || null,  
-                    // Target_Start_Date : moment(props.projectIntake.technicalEvaluation.Target_Start_Date )|| null,
+                    
                     Target_Go_Live_Date : moment(props.projectIntake.technicalEvaluation.Target_Go_Live_Date) || null,
                     Target_Go_Live_Date_Moment : moment(props.projectIntake.technicalEvaluation.Target_Go_Live_Date) || null,
                     IT_FTE_required :props.projectIntake.technicalEvaluation.IT_FTE_required || null,
@@ -103,17 +103,11 @@
             }
 
 
+            
+
             // --------------------------------------
-            // Create Form Fields to be rendered
+            // Set value of dybamic controls
             // --------------------------------------
-            componentWillMount() {
-                
-
-                // this.unregisterLeaveHook = this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
-                // this.unregisterLeaveHook = this.props.router.setRouteLeaveHook(_.last(this.props.router.routes), this.routerWillLeave);
-            }
-
-
             componentDidMount() {
 
 
@@ -146,8 +140,9 @@
                     isSavedOnDB : false
                 })
 
-                this.updateSelectsOnComponentLoad(true);
+                this.props.projectIntake.technicalEvaluation && this.updateSelectsOnComponentLoad(true);
 
+                this.props.projectIntake.technicalEvaluation && this.loadConditionalValues(this.props.projectIntake.technicalEvaluation.Delivery_Team, true);
                 
 
             }
@@ -822,8 +817,15 @@
             // Remove Special Characters from Strings
             // --------------------------------------
             removeSpecialCharacters(stringToChange) {
-                if(stringToChange)
+                console.log("TCL: TechnicalEvaluation -> removeSpecialCharacters -> stringToChange", stringToChange)
+                
+                if(stringToChange.value)
+                    return  stringToChange.value.replace(/amp;/g, '')
+
+                else if(stringToChange)
                     return stringToChange.replace(/amp;/g, '')
+                else
+                    return;
             }
             
 
@@ -889,6 +891,9 @@
             // --------------------------------------
             loadConditionalValues(selectedOption, preloadData) {
 
+                if(!selectedOption) 
+                    return;
+
                 let switchOption = selectedOption.value ? selectedOption.value : selectedOption
                 console.log("TCL: TechnicalEvaluation -> loadConditionalValues -> switchOption", switchOption)
                 
@@ -926,38 +931,38 @@
                         })
                         break;
                         // ? When loading data from state
-                        case "Platform Solution - Ben Web´s Org" :
-                            this.setState({
-                                // Technology : {label : "Select Technology Used", value : null},
-                                // Applications_involved :  {label : "Select Applications Involved", value : null},
-                                conditionalApplications : [
-                                    // {"label" : "Select Application", "value" : ""},
-                                    {"label" : "Sharepoint", "value" : "Sharepoint"} ,
-                                    {"label" : "Corporate Marketing", "value" : 'Corporate Marketing'} ,
-                                    {"label" : "Mobile Apps", "value" : "Mobile Apps"} ,
-                                    {"label" : "Medical Quality", "value" : "Medical Quality"} ,
-                                    {"label" : "UX/UI", "value" : "UX/UI"} 
-                                ],
-                                conditionalTechnologies : [
-                                    // {label : "Select Technology", "value" : ""},
-                                    {"label" : ".Net", "value" : ".Net"} ,
-                                    {"label" : "C#", "value" : 'C#'} ,
-                                    {"label" : "JavaScript", "value" : "JavaScript"} ,
-                                    {"label" : "SQL", "value" : "SQL"} ,
-                                    
-                                ],
-                                conditionalIT_Groups_Required : [
-                                    // {"label" : "Select IT Group", "value" : ""},
-                                    {"label" : "Web solutions and enablement", "value" : "Web solutions and enablement"} ,
-                                    {"label" : "Brand and Identity", "value" : 'Brand and Identity'} ,
-                                    {"label" : "Mobile", "value" : "Mobile"} ,
-                                    {"label" : "UX-UI", "value" : "UX-UI"} 
-                                ]
+                    case "Platform Solution - Ben Web´s Org" :
+                        this.setState({
+                            // Technology : {label : "Select Technology Used", value : null},
+                            // Applications_involved :  {label : "Select Applications Involved", value : null},
+                            conditionalApplications : [
+                                // {"label" : "Select Application", "value" : ""},
+                                {"label" : "Sharepoint", "value" : "Sharepoint"} ,
+                                {"label" : "Corporate Marketing", "value" : 'Corporate Marketing'} ,
+                                {"label" : "Mobile Apps", "value" : "Mobile Apps"} ,
+                                {"label" : "Medical Quality", "value" : "Medical Quality"} ,
+                                {"label" : "UX/UI", "value" : "UX/UI"} 
+                            ],
+                            conditionalTechnologies : [
+                                // {label : "Select Technology", "value" : ""},
+                                {"label" : ".Net", "value" : ".Net"} ,
+                                {"label" : "C#", "value" : 'C#'} ,
+                                {"label" : "JavaScript", "value" : "JavaScript"} ,
+                                {"label" : "SQL", "value" : "SQL"} ,
+
+                            ],
+                            conditionalIT_Groups_Required : [
+                                // {"label" : "Select IT Group", "value" : ""},
+                                {"label" : "Web solutions and enablement", "value" : "Web solutions and enablement"} ,
+                                {"label" : "Brand and Identity", "value" : 'Brand and Identity'} ,
+                                {"label" : "Mobile", "value" : "Mobile"} ,
+                                {"label" : "UX-UI", "value" : "UX-UI"} 
+                            ]
     
-                            })
-                            break;
+                        })
+                        break;
                         // ? Data from DB
-                        case "2.- Global Ops - Sujit Gopinath´s Org":    
+                    case "2.- Global Ops - Sujit Gopinath´s Org":    
                             this.setState({
                                 // Technology : {},
                                 // Applications_involved :  {},
@@ -1018,7 +1023,7 @@
                             
                         break;
                         // ? When loading data from state
-                        case "Global Ops - Sujit Gopinath´s Org":    
+                    case "Global Ops - Sujit Gopinath´s Org":    
                             this.setState({
                                 // Technology : {},
                                 // Applications_involved :  {},
@@ -1078,7 +1083,7 @@
                             });
                             break;
                         // ? Data from DB
-                        case "3.- GSS & Sales & Quality - Sapan Parikh´s Org" :
+                    case "3.- GSS & Sales & Quality - Sapan Parikh´s Org" :
                             this.setState({
                                 // Technology : {},
                                 // Applications_involved :  {},
@@ -1127,7 +1132,7 @@
                             })
                             break;
                         // ? When loading data from state
-                        case "GSS & Sales & Quality - Sapan Parikh´s Org" :
+                    case "GSS & Sales & Quality - Sapan Parikh´s Org" :
                                 this.setState({
                                     // Technology : {},
                                     // Applications_involved :  {},
@@ -1313,7 +1318,7 @@
                                         
                                     ]
                                 })
-                            break;
+                        break;
                    
                     default : this.setState({conditionalApplications : []}); 
                 }
@@ -1333,7 +1338,7 @@
                         if(sel1) sel1.textContent = "Select Applications Involved";
                         else document.getElementById('Applications_involved').getElementsByClassName('react-select-wide__placeholder')[0].textContent = "Select Applications Involved"
 
-                        let sel2 = document.getElementById('Technology').querySelectorAll('.react-select-wide__multi-value')
+                        // let sel2 = document.getElementById('Technology').querySelectorAll('.react-select-wide__multi-value')
                         // document.querySelectorAll('.react-select-wide__multi-value')
                         // sel2.textContent = "Select Technology";
     
@@ -1354,21 +1359,7 @@
             }
 
 
-            // --------------------------------------
-            // Load All Sites from array
-            // --------------------------------------
-            // loadTech(technology) {
-            //     if( technology===undefined || !technology.length)
-            //         return [];
-            //     const technologyArray = technology.indexOf('||') > -1  ?  technology.split('||')  : [technology];
-            //     let technologyData = [];
-            //     for(let technologyCounter = 0; technologyCounter<technologyArray.length; technologyCounter++) {
-            //         technologyData.push({'label' : technologyArray[technologyCounter], 'value' : technologyArray[technologyCounter]})
-            //     }
-
-            //     return technologyData;
-            // }
-
+           
 
             
             // --------------------------------------
@@ -1633,11 +1624,6 @@
             saveFormValues() {
                 //! const currentUser = window.getCurrentSPUser();
             
-                // const projectID = this.props.requirementsDefinition.requirementsDefinition.newProjectID || this.props.loadedtechnicalEvaluation.technicalEvaluation.project_id;
-                // const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
-
-
-                // console.log("TCL: TechnicalEvaluation -> saveFormValues -> this.props.loadedtechnicalEvaluation.technicalEvaluation.Delivery_Team", this.props.loadedtechnicalEvaluation.technicalEvaluation.Delivery_Team)
                 let delTeam = null;
                 try {
 
@@ -1657,6 +1643,10 @@
                     delTeam = null;
                 }
 
+                let approvalDate = this.state.Approval_Date._isValid === false ? moment() : this.state.Approval_Date;
+                let TargetStartDate = this.state.Target_Start_Date._isValid === false ? moment() : this.state.Target_Start_Date;
+                let TargetGoLiveDate = this.state.Target_Go_Live_Date._isValid === false ? moment() : this.state.Target_Go_Live_Date;
+
                 const requestID = this.getProjectID();
                 const formData = {
                     Project_ID : requestID,
@@ -1670,11 +1660,11 @@
                     Estimated_Effort : this.state.Estimated_Effort,
                     Project_Team_Size : this.state.Project_Team_Size,
                     Project_Manager : this.getPeoplePickerData('Project_Manager') || '',
-                    Target_Start_Date: this.state.Target_Start_Date || moment(),
-                    Target_Go_Live_Date: this.state.Target_Go_Live_Date || moment(),
+                    Target_Start_Date: TargetStartDate,
+                    Target_Go_Live_Date: TargetGoLiveDate,
                     IT_FTE_required : this.state.IT_FTE_required,
                     Approver : this.getPeoplePickerData('Approver') || '',
-                    Approval_Date : this.state.Approval_Date || moment(),
+                    Approval_Date : approvalDate,
                     Justification_ROI : this.state.Justification_ROI,
                     Design_Development_Testing_Effort : this.state.Design_Development_Testing_Effort,
                     Travel_TE : this.state.Travel_TE,
@@ -1742,21 +1732,20 @@
                 const nextStep = 'pmo-evaluation';
 
                 // this.props.saveLocalTechnical(formData);
-                this.props.saveTechnicalDB(formData).then(()=>{
+                saveTechnicalDB(formData).then((newTechnicalEvaluationId)=>{
+                console.log("TCL: saveNewTechnicalDB -> newTechnicalEvaluationId", newTechnicalEvaluationId)
                     this.createSuccessAlert('Data Saved ');
                     // Check If Action was Success
-                    const newTechnicalEvaluationId = this.props.technicalEvaluation.newTechnicalEvaluationId
+                    // const newTechnicalEvaluationId = this.props.technicalEvaluation.newTechnicalEvaluationId
 						
-                        
-                        // this.props.resetTechnicalState()
 
-                        this.props.saveLocalTechnical(formData);
-                        console.log("TCL: saveNewTechnicalDB -> this.props", this.props)
+                        formData.tech_eval_id = newTechnicalEvaluationId
 
+                        this.props.updateProjectIntakeValues('technical',formData, null, true)
 
                     // this.setState({sendingData : false}, this.redirectUser(nextStep))
 
-                    this.setState({sendingData : false})
+                    this.setState({sendingData : false, isSavedOnDB : true})
                     // this.setState({sendingData : false})
 
                     
@@ -1832,6 +1821,7 @@
 
                 // Check if New Technical or Update Current
                 const {tech_eval_id} = this.props.projectIntake.technicalEvaluation;
+                const {projectID} = this.props.locationData.match.params;
 
                 if(tech_eval_id) {
                     // Update
@@ -1852,7 +1842,8 @@
 
                 // this.formFields = this.createFormStructure();
 
-                this.saveOtherTabs();
+
+                this.saveOtherTabs(projectID);
 
                 // this.componentDidMount();
 
@@ -1860,84 +1851,120 @@
             }
 
 
-                // !--------------------------------------
-                // ! Save Other Tabs
-                // !--------------------------------------
-                saveOtherTabs = async () => {
-                    // this.props.businessInformation
+            // !--------------------------------------
+            // ! Save Other Tabs
+            // !--------------------------------------
+            saveOtherTabs = async (projectID) => {
+                
 
-                    console.log("TCL: saveOtherTabs -> this.props", this.props)
-                    console.log("TCL: saveOtherTabs -> this.props.businessInformation", this.props.businessInformation)
+                const {requirementsDefinition, businessInformation, technicalEvaluation, pmoEvaluation, roiRealized} = this.props.projectIntake;
+                const id = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
 
 
                     // let promises = []
 
                     // ? Save Req Definition
-                    if( !isEmpty(this.props.requirementsDefinition) ) {
-                        console.log("TCL: saveOtherTabs -> this.props.requirementsDefinition", this.props.requirementsDefinition)
-                    
-                        this.props.updateRequirementsDB(this.props.requirementsDefinition);
-                        let reqFolderURL = `GSD${this.props.requirementsDefinition.Project_id}/RequirementsDefinition`;
-                        this.uploadReqFiles(this.props.requirementsDefinition.Project_id, reqFolderURL);
-                  
-                    }
+                    if( !isEmpty(requirementsDefinition) && requirementsDefinition.SavedLocally === true) {
+                        
 
+                        // this.validateEmptyRequirements();
+
+                      
+                        if(requirementsDefinition.Project_id || requirementsDefinition.project_id) {
+                            updateRequirementsDB(requirementsDefinition, id);
+                            let reqFolderURL = `${requirementsDefinition.newProjectID}/RequirementsDefinition`;
+                            //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                        }
+
+                        else 
+                            saveRequirementsDB(requirementsDefinition).then((newRequirementsID) => {
+                                requirementsDefinition.Project_id = newRequirementsID;
+                                let reqFolderURL = `${newRequirementsID}/RequirementsDefinition`;
+                                //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                            })
+
+
+
+
+                        this.props.updateProjectIntakeValues('requirements',requirementsDefinition, null, true)
+
+                    }
 
                     // ? Save Business Information
-                    if( !isEmpty(this.props.businessInformation) ) {
-                        console.log("TCL: saveOtherTabs -> this.props.businessInformation", this.props.businessInformation)
-                        if(this.props.businessInformation.buss_info_id)
-                           this.props.updateBusinesInformationDB(this.props.businessInformation)
-                        else
-                           this.props.saveBusinesInformationDB(this.props.businessInformation)
-                    }
+                    if( !isEmpty(businessInformation) && businessInformation.SavedLocally === true ) {
 
-                  
+                        console.log("TCL: saveOtherTabs -> businessInformation", businessInformation)
+                        
+                        
+                        if(businessInformation.Buss_info_id || businessInformation.buss_info_id)
+                            updateBusinesInformationDB(businessInformation, id)
+                        else {
+                            saveBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
+                                console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
+                                businessInformation.Buss_info_id = newBusinesId
+                                businessInformation.buss_info_id = newBusinesId
+                            }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+                            
+                        }  
+
+                        // ? Update Props
+                        this.props.updateProjectIntakeValues('business',businessInformation, null, true)
+                            
+                
+                        
+                    }
+                        
 
                     // ? Save PMO Evaluation
-                    if(!isEmpty(this.props.pmoEvaluation)) {
-                        if(this.props.pmoEvaluation.pmo_eval_id) {
-                           this.props.updatePMOEvaluation(this.props.pmoEvaluation);
+                    if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
+                        if(pmoEvaluation.Pmo_eval_id || pmoEvaluation.pmo_eval_id  ) {
+                            updatePMOEvaluation(pmoEvaluation)
                         }
                         else
-                           this.props.savePMOEvaluationDB(this.props.pmoEvaluation);
+                            savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
+                                console.log("TCL: saveOtherTabs -> newPmoId", newPmoId)
+                                pmoEvaluation.Pmo_eval_id = newPmoId
+                                pmoEvaluation.pmo_eval_id = newPmoId
+                            }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+
+                        // ? Update Props
+                        this.props.updateProjectIntakeValues('pmoEval',pmoEvaluation, null, true)
                     }
 
 
 
                     // ? Save Roi Realized
+                    if(!isEmpty(roiRealized) && roiRealized.SavedLocally === true) {
+                        // ? Look For Roi Relized Data
+                        if(roiRealized.Roi_real_id || roiRealized.roi_real_id) {
+                           updateROIRealizedDB(roiRealized, id).then((roiID) => {
+                            console.log("TCL: roiID", roiID)
+                                roiRealized.Roi_real_id = roiID
+                                // ? Look for Dynatrace
+                                if(!isEmpty (roiRealized.dynatrace))
+                                    saveDynatraceDB(roiRealized.dynatrace, id,  roiID)
 
-
-                    if(!isEmpty(this.props.roiRealized)){
-                    //    roiRealized not empty && roi.roi has data
-                        if(!isEmpty(this.props.roiRealized) && !isEmpty(this.props.roiRealized.roiRealized)) {
-                            //? Look for Id to Update
-                            if(this.props.roiRealized.roiRealized.roi_real_id) { 
-                                this.props.updateROIRealizedDB(this.props.roiRealized);
-                            }
-                            else
-                                this.props.saveROIRealizedDB(this.props.roiRealized, this.props.requirementsDefinition.Project_id);
-
-
-                            //? look for dynatrace
-
-                            if(!isEmpty(this.props.roiRealized.dynatrace))   
-                                this.props.saveDynatraceDB(this.props.roiRealized.dynatrace, this.props.requirementsDefinition.Project_id.id, this.props.roiRealized.roiRealized.roi_real_id)
-
+                            })
                         }
+                         else
+                            saveROIRealizedDB(roiRealized, id).then((roiID) => {
+                                console.log("TCL: roiID", roiID)
+                                roiRealized.Roi_real_id = roiID
+                                 // ? Look for Dynatrace
+                                if(!isEmpty (roiRealized.dynatrace))
+                                    saveDynatraceDB(roiRealized.dynatrace, id,  roiID)
 
-                        
+                            })
+
                        
-                        
+                        // ? Update Props
+                        this.props.updateProjectIntakeValues('roiRealized',roiRealized, roiRealized.dynatrace, true)
+                       
                     }
 
-
-
-
-                    // this.componentDidMount();
-                }
-            
-
+                
+            }
+                
 
 
             

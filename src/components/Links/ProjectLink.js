@@ -19,7 +19,7 @@
 
         const {route, itemKey, disabled} = props;
         const routePath =  `${route}`; 
-        const disabledClass = disabled &&  'int-disabledLink';
+        const disabledClass = disabled ? 'int-disabledLink' : '';
         return (
             <NavLink to= {routePath} key = {itemKey} activeClassName = {'int-active'} className = {disabledClass}>
                 {props.children}

@@ -67,7 +67,7 @@
                     currentMessage : 'Saving Values',
                     Date_Submitted : props.projectIntake.requirementsDefinition.Date_Submitted || moment().format("MM/DD/YYYY"),  
                     Request_Owner : props.projectIntake.requirementsDefinition.Request_Owner || currentUser.userEmail,  
-                    Request_ID : props.projectIntake.requirementsDefinition.projectID || '',  
+                    Request_ID : props.projectIntake.requirementsDefinition.Request_ID || props.projectIntake.requirementsDefinition.Project_id || '',  
                     Workstage : props.projectIntake.requirementsDefinition.Workstage || {"label" : "1 - New" , "value": "New" },  
                     Project_Name :props.projectIntake.requirementsDefinition.Project_Name || "",  
                     Description : props.projectIntake.requirementsDefinition.Description || "", 
@@ -180,7 +180,7 @@
                     },
                     {
                         "Field_Name": "Request ID",
-                        "value": this.state.Request_ID,
+                        "value": this.setRequestIDValue(this.state.Request_ID),
                         "Field_State_Name": "Request_ID",
                         "group": "firstHalf2",
                         "Mandatory": false,
@@ -864,10 +864,12 @@
 
                         // ? Update Project Intake Object with New ID
                         formData.Project_id = newProjectID
+                        console.log("TCL: saveNewProjectDB -> formData", formData)
 
                         
                         // requirementsDefinition =  Object.assign({}, this.props.projectIntake.requirementsDefinition, requirementsDefinition)
                         // ? object to update, newData, extraValues (files), saveValuesonDB
+                        this.setState({Request_ID : newProjectID})
                         this.props.updateProjectIntakeValues('requirements',formData, null, true)
 
 
@@ -1293,6 +1295,20 @@
         /* ==========================================================================
         ** Render Methods
         ** ========================================================================== */
+
+
+            // --------------------------------------
+            // Set Request ID Value
+            // Check if ID has GSD
+            // --------------------------------------
+            setRequestIDValue(request_id) {
+                if (!request_id || request_id === '')
+                    return ''
+
+                let request = request_id.indexOf('GSD') >= 0 ? request_id : `GSD${request_id}`;
+
+                return request
+            }
 
 
             // --------------------------------------

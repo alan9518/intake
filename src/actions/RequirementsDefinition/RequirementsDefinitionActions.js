@@ -144,15 +144,17 @@
     // @param {formData from RequirementsDefinition View}
     // @returns {Action}
     // --------------------------------------*/
-    export async function updateRequirementsDB(formData) {
+    export async function updateRequirementsDB(formData, id = null) {
 
-        let projectID = formData.Project_id || formData.Request_ID
-            projectID = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
+        let projectID = formData.Request_ID || formData.Project_id || id
+            console.log("TCL: updateRequirementsDB -> projectID", projectID)
+        let Request_ID = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
+        console.log("TCL: updateRequirementsDB -> Request_ID", Request_ID)
 
         const updateRequirementData =  {
             tab1: { 
                 // "project_id": formData.Project_id || formData.newProjectID,
-                "project_id": projectID,
+                "project_id": Request_ID,
                 "project_name": removeSpecialCharacters(formData.Project_Name),
                 "description":  removeSpecialCharacters(formData.Description),
                 "project_type": formData.Project_Type.value,

@@ -47,8 +47,10 @@ class DatePicker extends Component {
 
             let datePickerDate = initialValue
 
-            if(initialValue._isValid === false)
+            if(initialValue && initialValue._isValid === false)
                 datePickerDate = moment()
+            else if (!initialValue)
+                datePickerDate =  moment()
             else
                 datePickerDate = initialValue
 
@@ -92,6 +94,7 @@ class DatePicker extends Component {
         return (
                 <SingleDatePicker
                     date={this.state.startDate} // momentPropTypes.momentObj or null
+                    startDate = {moment()}
                     // onDateChange={startDate => this.setState({ startDate })} // PropTypes.func.isRequired
                     onDateChange = {this.handleChange}
                     focused={this.state.focused} // PropTypes.bool
@@ -117,7 +120,10 @@ class DatePicker extends Component {
 // Define PropTypes 
 // -------------------------------------- 
 DatePicker.propTypes = {
-    props: PropTypes
+    name : PropTypes.string,
+    initialValue : PropTypes.object,
+    readOnly : PropTypes.bool,
+    tabIndex : PropTypes.any
 };
 // --------------------------------------
 // Export Component

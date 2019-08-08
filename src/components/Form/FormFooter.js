@@ -24,7 +24,7 @@
 // Define PropTypes 
 // -------------------------------------- 
     FormFooter.propTypes = {
-        props: PropTypes
+        children: PropTypes.any
     };
 // --------------------------------------
 // Export Component

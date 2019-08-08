@@ -847,7 +847,7 @@
                         // Update Table, insert Dynatrace Data
                         const dynatraceData =  this.setDynatraceData(newRoiRealizedID);
 
-                        saveDynatraceDB(dynatraceData);
+                        saveDynatraceDB(dynatraceData, null, newRoiRealizedID);
 
 
                         this.props.updateProjectIntakeValues('roiRealized',formData, dynatraceData, true)
@@ -855,7 +855,7 @@
 
                         // //console.log('TCL: submitFormDB -> newProject', newProjectID)
                         
-                        this.setState({ Request_ID : newRoiRealizedID , sendingData : false, })
+                        this.setState({sendingData : false, showDynatrace : dynatraceData.length > 0 ? true : false, isSavedOnDB  : true})
                         // setTimeout(()=>{this.redirectUser();},700);
                         
                     })
@@ -880,21 +880,22 @@
                         // Redirect User
                         // Check If Action was Success
 
-                        const newRoiRealizedID = this.props.projectIntake.roiRealized.roi_real_id;
+                        const newRoiRealizedID = this.props.projectIntake.roiRealized.roi_real_id || this.props.projectIntake.roiRealized.Roi_real_id;
                         console.log("TCL: updateROIRealizedDB -> newRoiRealizedID", newRoiRealizedID)
                         
 
 
                         // Update Table, insert Dynatrace Data
-                        const dynatraceData =  this.setDynatracedynatraceData(newRoiRealizedID);
+                        const dynatraceData =  this.setDynatraceData(newRoiRealizedID);
+                        console.log("TCL: updateROIRealizedDB -> dynatraceData", dynatraceData)
 
-                        saveDynatraceDB(dynatraceData);
+                        saveDynatraceDB(dynatraceData, null, newRoiRealizedID, formData);
 
 
                         this.props.updateProjectIntakeValues('roiRealized',formData, dynatraceData, true)
            
                         
-                        // this.setState({ Request_ID : newRoiRealizedID , sendingData : false,  isSavedOnDB : true})
+                        this.setState({sendingData : false, showDynatrace : dynatraceData.length > 0 ? true : false, isSavedOnDB  : true})
                         
                 
 
@@ -902,7 +903,7 @@
                     })
                     .catch((error)=> {
                         this.createErrorAlert('There was a problem saving the data, please try again ');
-						//console.log('TCL: submitFormDB -> error', error)
+						console.log('TCL: submitFormDB -> error', error)
                         this.setState({sendingData : false},)
                     })
                 }
@@ -919,10 +920,10 @@
                     // const {roiRealized} =  this.props.loadedROIRealized;
 
                     // ? Check whetther to update or create new ROI 
-                    const {roi_real_id} = this.props.projectIntake.roiRealized;
+                    const {roi_real_id, Roi_real_id} = this.props.projectIntake.roiRealized;
                     const {projectID} = this.props.locationData.match.params;
 
-                    if(roi_real_id) {
+                    if(roi_real_id || Roi_real_id || this.state.isSavedOnDB) {
                         // Update Current ROI
                         this.updateROIRealizedDB();
                     }
@@ -960,14 +961,18 @@
 
                             // this.validateEmptyRequirements();
 
-                            if(requirementsDefinition.Project_id) {
-                                updateRequirementsDB(requirementsDefinition);
+                            if(requirementsDefinition.Project_id || requirementsDefinition.project_id ) {
+                                updateRequirementsDB(requirementsDefinition, id);
                                 let reqFolderURL = `${requirementsDefinition.Request_ID}/RequirementsDefinition`;
-                                this.uploadReqFiles(requirementsDefinition.Request_ID, reqFolderURL);
+                                // ? this.uploadReqFiles(requirementsDefinition.Request_ID, reqFolderURL);
                             }
                                 
                             else
-                                saveRequirementsDB(requirementsDefinition)
+                                saveRequirementsDB(requirementsDefinition).then((newRequirementsID) => {
+                                    requirementsDefinition.Project_id = newRequirementsID;
+                                    let reqFolderURL = `${newRequirementsID}/RequirementsDefinition`;
+                                    //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                                })
 
 
 
@@ -983,11 +988,13 @@
                             
                             // businessInformation.Project_id = id;
                             
-                            if(businessInformation.Buss_info_id)
+                            if(businessInformation.Buss_info_id || businessInformation.buss_info_id  )
+
                                 updateBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
                                     console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
                                     // businessInformation.Buss_info_id = newBusinesId
                                 }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+
                             else {
                                 saveBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
                                     console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
@@ -1005,8 +1012,8 @@
 
                         // ? Save Tehnical Evaluation
                         if(!isEmpty(technicalEvaluation) && technicalEvaluation.SavedLocally === true) {
-                            if(technicalEvaluation.Tech_eval_id) {
-                                updateTechnicalDB(technicalEvaluation)
+                            if(technicalEvaluation.Tech_eval_id || technicalEvaluation.tech_eval_id) {
+                                updateTechnicalDB(technicalEvaluation, id)
                             }
                             else
                                 saveTechnicalDB(technicalEvaluation, id).then((newTechId) => {
@@ -1024,8 +1031,8 @@
 
                         // ? Save PMO Evaluation
                         if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
-                            if(pmoEvaluation.Pmo_eval_id) {
-                                updatePMOEvaluation(pmoEvaluation)
+                            if(pmoEvaluation.Pmo_eval_id || pmoEvaluation.pmo_eval_id) {
+                                updatePMOEvaluation(pmoEvaluation, id)
                             }
                             else
                                 savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
@@ -1261,9 +1268,9 @@
             renderHeaderSection(title) {
                 if(title === "Dynatrace") {
                     return (
-                        <SectionHeader title = {title}>
+                        <SectionHeader title = {title} style = {{justifyContent : 'center', marginTop:10}}>
                             {/*<SingleButton  buttonText = {"Add"} onClick = {this.addDynatrace} />*/}
-                            <button  onClick = {this.addDynatrace} className = "int-singleButton" type = "button"> Add </button>
+                            <button  onClick = {this.addDynatrace} className = "int-singleButton" type = "button" style = {{marginRight: 15}}> Add </button>
                             {this.state.showDynatrace && <button  onClick = {this.removeDynatrace} className = "int-singleButton" type = "button"> Remove All </button>}
 
                         </SectionHeader>)
@@ -1284,6 +1291,7 @@
                 
                 return (
                     <FieldsGenerator 
+                        Key = 'roi-fields'
                         fieldsData={formData} 
                         renderBorder={renderBorder} 
                         onChangeInputs = {this.onChangeInputs}
@@ -1392,20 +1400,28 @@
                                             dynatrace && dynatrace.map((item, index)=> {
 
                                                 // {moment(item.ROI_Realized_Date).format("DD/MM/YYYY")  || moment(item.roi_date).format("DD/MM/YYYY") } </td> 
-                                                let fDate = item.ROI_Realized_Date && (item.ROI_Realized_Date).format("DD/MM/YYYY")
-                                                console.log("TCL: renderDynatraceTable -> fDate ROI_", fDate)
-                                                let fDate2 = item.roi_date &&  moment(item.roi_date).format("DD/MM/YYYY")
-                                                console.log("TCL: renderDynatraceTable -> fDate2 roi_", fDate2)
+                                                // let fDate = item.ROI_Realized_Date && (item.ROI_Realized_Date).format("DD/MM/YYYY")
+                                                // console.log("TCL: renderDynatraceTable -> fDate ROI_", fDate)
+                                                // let fDate2 = item.roi_date &&  moment(item.roi_date).format("DD/MM/YYYY")
+                                                // console.log("TCL: renderDynatraceTable -> fDate2 roi_", fDate2)
 
                                                 // <td style = {{padding: '10px 5px'}}>  {moment(item.ROI_Realized_Date).format("DD/MM/YYYY")  || moment(item.roi_date).format("DD/MM/YYYY") } </td> 
 
 
                                                 // Set Roi Trace Date
                                                 let roiTraceDate = null
-                                                if(item.ROI_Realized_Date)
-                                                    roiTraceDate = (item.ROI_Realized_Date).format("DD/MM/YYYY")
-                                                else if (item.roi_date)
-                                                    roiTraceDate =  moment(item.roi_date).format("DD/MM/YYYY")
+                                                try {
+                                                    
+                                                    console.log("TCL: renderDynatraceTable -> item", item)
+                                                    if(item.ROI_Realized_Date)
+                                                        roiTraceDate = moment(item.ROI_Realized_Date).format("DD/MM/YYYY")
+                                                    else if (item.roi_date)
+                                                        roiTraceDate =  moment(item.roi_date).format("DD/MM/YYYY")
+                                                }
+                                                catch(error) {
+                                                    console.log("TCL: renderDynatraceTable -> error", error)
+                                                    
+                                                }
                                                 
                                                 if(item.site_usage !== "" ) {
                                                     return (
@@ -1609,7 +1625,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div className="int-row">
+                                                        <div className="int-row" style = {{justifyContent : 'center', marginTop:15}}>
                                                             <button onClick = {this.saveDynatrace} className = "int-singleButton" type = "button">Save Values</button>
                                                         </div>
 
@@ -1648,7 +1664,10 @@
 // Define PropTypes 
 // -------------------------------------- 
     ROIRealized.propTypes = {
-        props: PropTypes
+        projectIntake : PropTypes.object,
+        isPMO : PropTypes.bool,
+        locationData : PropTypes.object,
+        updateProjectIntakeValues : PropTypes.func
     };
 
 

@@ -57,7 +57,7 @@
                     responsiveWidth : window.innerWidth,
                     showSitesImpacted : false,
                     sendingData : false,
-                    buss_info_id : props.projectIntake.businessInformation.buss_info_id || null,
+                    buss_info_id : props.projectIntake.businessInformation.buss_info_id || props.projectIntake.businessInformation.Buss_info_id || null,
                     Business_Objective : props.projectIntake.businessInformation.Business_Objective || "",
                     Outcomes_from_the_Objective : props.projectIntake.businessInformation.Outcomes_from_the_Objective || "",
                     Impact : props.projectIntake.businessInformation.Impact || "",
@@ -135,6 +135,8 @@
 
                 this.formFields =  this.createFormStructure();
 
+                this.loadConditionalValues(this.props.projectIntake.businessInformation.Region);
+
 
             }
 
@@ -152,262 +154,13 @@
             }
 
 
-            // --------------------------------------
-            // Set Initial Values
-            // Get JSON Local
-            // --------------------------------------
-            // componentDidMount() {
-            //     window.addEventListener("resize", this.updateContainerDimensions);
-            //     const pickersWidth = '175px';
-
-            //     console.log("TCL: BusinessInformation -> componentDidMount -> this.props", this.props)
-
-            //     if(this.props.locationData.match.params.projectID) {
 
 
-					
-            //         const id = this.props.locationData.match.params.projectID
-            //         const requestID = id.substr(id.indexOf('D')+1,id.length);
-            //         // if((!this.props.businessInformation.businessInformation && this.props.updateFromState !== true)  ) {
-            //         if( this.props.updateFromState !== true ) {
-            //             this.props.fetchProjectBusiness(requestID).then(()=> {
-                            
-            //                 let region = this.props.businessInformation.businessInformation.region ||  this.props.businessInformation.Region
-            //                 region && this.loadConditionalValues(region)
-            //                 setTimeout(() => {
-                                
-            //                     window.initializePeoplePicker('peoplePickerBusiness_lead', pickersWidth);
-            //                     window.initializePeoplePicker('peoplePickerSales_Contact', pickersWidth);
-            //                     this.fillPickers();
-            //                     this.disablePickers();
-            //                     //console.log('TCL: BUS -> componentDidMount -> state', this.state)
-                                
-
-            //                     // this.props.businessInformation.Sites_Impacted && this.loadImpactedSites(this.props.businessInformation.Sites_Impacted)
-            //                     // this.props.businessInformation.Region && this.loadConditionalValues(this.props.businessInformation.Region)
-            //                     this.updateSelectsOnComponentLoad();
-            //                 }, 0);
-            //                 //console.log('TCL: componentDidMount -> this.props', this.props)
-            //             })
-            //         }else {
-            //             // Just Load Pickers
-            //             setTimeout(() => {
-            //                 // ? Use Local Redux State as dataSet
-            //                 this.setState({
-            //                     buss_info_id : this.props.businessInformation.buss_info_id || null,
-            //                     Business_Objective : this.props.businessInformation.Business_Objective === "null" ? "" : this.props.businessInformation.Business_Objective  || "" ,
-            //                     Outcomes_from_the_Objective : this.props.businessInformation.Outcomes_from_the_Objective === "null" ? "" : this.props.businessInformation.Outcomes_from_the_Objective || "" ,
-            //                     Impact : this.props.businessInformation.Impact === "null" ? "" : this.props.businessInformation.Impact || "" ,
-            //                     Background : this.props.businessInformation.Background === "null" ? "" :  this.props.businessInformation.Background ||  "",
-            //                     Dependencies : this.props.businessInformation.Dependencies === "null"  ? "" : this.props.businessInformation.Dependencies || "" ,
-            //                     Constrains : this.props.businessInformation.Constrains === "null" ? "" : this.props.businessInformation.Constrains ||  "",
-            //                     Business_Model : this.createSelectOption(this.props.businessInformation.Business_Model) || this.createSelectOption(""),
-            //                     Business_lead : this.props.businessInformation.Business_lead,   
-            //                     Project_Purpose : this.props.businessInformation.Project_Purpose === "null" ? "" : this.props.businessInformation.Project_Purpose ||  "",
-            //                     Project_Risks : this.props.businessInformation.Project_Risks === "null" ? "" : this.props.businessInformation.Project_Risks ||  "",
-            //                     Line_of_Business : this.createSelectOption(this.props.businessInformation.Line_of_Business)  || this.createSelectOption(""),
-            //                     IT_Vector : this.createSelectOption(this.props.businessInformation.IT_Vector) || this.createSelectOption(""),
-            //                     RPA : this.createSelectOption(this.props.businessInformation.RPA)  || this.createSelectOption(""),
-            //                     Region : this.createSelectOption(this.props.businessInformation.Region)  || this.createSelectOption(""),
-            //                     // Sites_Impacted : this.loadImpactedSites(this.props.businessInformation.Sites_Impacted) || [],
-            //                     Sites_Impacted : this.props.businessInformation.businessInformation ? this.loadImpactedSites(this.props.businessInformation.businessInformation.sites_impacted) : [],
-            //                     Customer : this.createSelectOption(this.props.businessInformation.Customer)  || this.createSelectOption(""),
-            //                     Requested_by_Customer : this.createSelectOption(this.props.businessInformation.Requested_by_Customer)  || this.createSelectOption(""),
-            //                     Customer_Priority : this.createSelectOption(this.props.businessInformation.Customer_Priority)  || this.createSelectOption("") ,
-            //                     Estimated_Annual_Revenue : this.props.businessInformation.Estimated_Annual_Revenue ||  "",
-            //                     Sales_Contact : this.props.businessInformation.Sales_Contact,
-            //                     Average_number_of_users_for_this_application : this.props.businessInformation.Average_number_of_users_for_this_application === "null" ?  "" : this.props.businessInformation.Average_number_of_users_for_this_application ||  "",
-            //                     FTE_Saved_per_year : this.props.businessInformation.FTE_Saved_per_year === "null" ? "" : this.props.businessInformation.FTE_Saved_per_year ||  "",
-            //                     Hours_saved_per_year : this.props.businessInformation.Hours_saved_per_year === "null" ? "" : this.props.businessInformation.Hours_saved_per_year  ||  "",
-            //                     Savings_revenue : this.props.businessInformation.Savings_revenue === "null" ? "" : this.props.businessInformation.Savings_revenue ||  "",
-            //                     Compliance_Risk_cost_that_will_be_avoided_by_this_application : this.props.businessInformation.Compliance_Risk_cost_that_will_be_avoided_by_this_application ||  "",
-            //                     Risk_Avoidance : this.props.businessInformation.Risk_Avoidance === "null" ? "" : this.props.businessInformation.Risk_Avoidance ||  "",
-            //                     Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : this.props.businessInformation.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team === "null"  ? "" : this.props.businessInformation.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team ||  "",
-            //                     Legacy_System_Infra_and_License_Fee_savings_per_year : this.props.businessInformation.Legacy_System_Infra_and_License_Fee_savings_per_year === "null" ? "" : this.props.businessInformation.Legacy_System_Infra_and_License_Fee_savings_per_year  ||  "",
-            //                     Other_Savings : this.props.businessInformation.Other_Savings === "null" ? "" : this.props.businessInformation.Other_Savings ||  "",
-            //                     // conditionalSites : this.loadImpactedSites(this.props.businessInformation.Sites_impacted) ||  this.loadImpactedSites(this.props.businessInformation.Sites_Impacted) ||[],
-            //                     // conditionalSites : this.loadConditionalValues(this.props.businessInformation.Region) || [],
-            //                     showSitesImpacted : this.props.businessInformation.region && true
-            //                 });
-
-                            
-            //                 window.initializePeoplePicker('peoplePickerBusiness_lead', pickersWidth);
-            //                 window.initializePeoplePicker('peoplePickerSales_Contact', pickersWidth);
-            //                 this.fillPickers();
-            //                 this.disablePickers();
-
-            //                 // this.loadConditionalValues(this.props.businessInformation.Region)
-            //                 this.updateSelectsOnComponentLoad();
-            //                 // this.updateSelectsOnComponentLoad(this.props.businessInformation);
-            //                 //console.log('TCL: BUS -> componentDidMount -> state', this.state)
-                            
-            //             }, 0);
-            //         }
-                    
-                    
-                    
-            //         // if(this.prop)
-                    
-
-            //     }
-            
-
-            //     //console.log('TCL: componentDidMount -> this.props', this.props)
-            // }
-
-
-            // --------------------------------------
-            // Update Props & State
-            // --------------------------------------
-
-            // componentWillReceiveProps = (nextProps) => {
-            //     console.log('TCL: componentWillMount -> nextProps', nextProps);
-            //     console.log("TCL: BusinessInformation -> componentDidMount -> this.props", this.props)
-            //     //console.log('TCL: componentWillMount -> nextProps', nextProps.loadedBusinessInformation)
-
-            //     if(nextProps.loadedBusinessInformation.businessInformation) {
-
-            //         if( !isEqual(this.props.businessInformation, nextProps.loadedBusinessInformation.businessInformation)) {
-
-            //             if(this.props.updateFromDB ===  true || this.props.updateFromDB ===  undefined)  {
-            //                 console.log("TCL: componentWillReceiveProps -> this.props on true", this.props)
-            //                 console.log("TCL: componentWillReceiveProps -> nextProps.loadedBusinessInformation.businessInformation.sites_impacted", nextProps.loadedBusinessInformation.businessInformation.sites_impacted)
-
-
-                           
-
-
-            //                 setTimeout(() => {
-            //                     this.setState({
-            //                             buss_info_id : nextProps.loadedBusinessInformation.businessInformation.buss_info_id || null,
-            //                             Business_Objective : nextProps.loadedBusinessInformation.businessInformation.business_objective || "",
-            //                             Outcomes_from_the_Objective : nextProps.loadedBusinessInformation.businessInformation.outcomes_objective || "",
-            //                             Impact : nextProps.loadedBusinessInformation.businessInformation.impact || "" ,
-            //                             Background : nextProps.loadedBusinessInformation.businessInformation.background ||  "",
-            //                             Dependencies : nextProps.loadedBusinessInformation.businessInformation.dependencies || "" ,
-            //                             Constrains : nextProps.loadedBusinessInformation.businessInformation.constrains ||  "",
-            //                             Business_Model : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.business_model) || this.prefillSelects(""),
-            //                             Business_lead : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.business_lead)  || this.prefillSelects(""),  
-            //                             Project_Purpose : nextProps.loadedBusinessInformation.businessInformation.project_purpose ||  "",
-            //                             Project_Risks : nextProps.loadedBusinessInformation.businessInformation.project_risks ||  "",
-            //                             Line_of_Business : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.line_of_business)  || this.prefillSelects(""),
-            //                             IT_Vector : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.it_vector) || this.prefillSelects(""),
-            //                             RPA : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.rpa)  || this.prefillSelects(""),
-            //                             Region : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.region)  || this.prefillSelects(""),
-            //                             Sites_Impacted : this.loadImpactedSites(nextProps.loadedBusinessInformation.businessInformation.sites_impacted) || [],
-                                        
-            //                             Customer : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.customer)  || this.prefillSelects(""),
-            //                             Requested_by_Customer : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.requested_by)  || this.prefillSelects(""),
-            //                             Customer_Priority : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.customer_priority)  || this.prefillSelects("") ,
-            //                             Estimated_Annual_Revenue : nextProps.loadedBusinessInformation.businessInformation.estimated_annual_revenue ||  "",
-            //                             Sales_Contact : this.prefillSelects(nextProps.loadedBusinessInformation.businessInformation.sales_contact)  || this.prefillSelects(""),
-            //                             Average_number_of_users_for_this_application : nextProps.loadedBusinessInformation.businessInformation.users_average ||  "",
-            //                             FTE_Saved_per_year : nextProps.loadedBusinessInformation.businessInformation.fte_saved ||  "",
-            //                             Hours_saved_per_year : nextProps.loadedBusinessInformation.businessInformation.hours_saved ||  "",
-            //                             Savings_revenue : nextProps.loadedBusinessInformation.businessInformation.savings_revenue ||  "",
-            //                             Compliance_Risk_cost_that_will_be_avoided_by_this_application : nextProps.loadedBusinessInformation.businessInformation.compliance_risk_cost ||  "",
-            //                             Risk_Avoidance : nextProps.loadedBusinessInformation.businessInformation.risk_avoidance ||  "",
-            //                             Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : nextProps.loadedBusinessInformation.businessInformation.retirement_savings ||  "",
-            //                             Legacy_System_Infra_and_License_Fee_savings_per_year : nextProps.loadedBusinessInformation.businessInformation.infra_license_fee_savings ||  "",
-            //                             Other_Savings : nextProps.loadedBusinessInformation.businessInformation.other_savings ||  "",
-            //                             // conditionalSites : this.loadImpactedSites(nextProps.loadedBusinessInformation.businessInformation.sites_impacted) || [],
-            //                             // conditionalSites : this.loadConditionalValues(nextProps.loadedBusinessInformation.businessInformation.region) || [],
-            //                             showSitesImpacted : nextProps.loadedBusinessInformation.businessInformation.region && true,
-            //                             // isLoadedLocal : true
-            //                     })
-
-                                
-
-
-            //                     this.loadConditionalValues(nextProps.loadedBusinessInformation.businessInformation.region);
-
-            //                     // this.formFields = this.createFormStructure();
-
-            //                     window.initializePeoplePicker('peoplePickerBusiness_lead', '175px');
-            //                     window.initializePeoplePicker('peoplePickerSales_Contact', '175px');
-            //                     this.fillPickers();
-            //                     this.disablePickers();
-
-            //                     // this.loadConditionalValues(this.props.businessInformation.Region)
-            //                     this.updateSelectsOnComponentLoad();
-                                
-            //                 }, 0);
-
-                            
-
-                            
-            //             }
-            //             else  {
-            //                 console.log("TCL: componentWillReceiveProps -> this.props on false", this.props)
-            //                 console.log("TCL: componentWillReceiveProps -> nextProps.loadedBusinessInformation.Sites_Impacted", nextProps.loadedBusinessInformation.Sites_Impacted)
-            //                 setTimeout(() => {
-            //                     this.setState({
-            //                         buss_info_id : nextProps.loadedBusinessInformation.buss_info_id || null,
-            //                         Business_Objective : nextProps.loadedBusinessInformation.Business_Objective || "",
-            //                         Outcomes_from_the_Objective : nextProps.loadedBusinessInformation.Outcomes_from_the_Objective || "",
-            //                         Impact : nextProps.loadedBusinessInformation.Impact || "" ,
-            //                         Background : nextProps.loadedBusinessInformation.Background ||  "",
-            //                         Dependencies : nextProps.loadedBusinessInformation.Dependencies || "" ,
-            //                         Constrains : nextProps.loadedBusinessInformation.Constrains ||  "",
-            //                         Business_Model : this.createSelectOption(nextProps.loadedBusinessInformation.Business_Model) || this.createSelectOption(nextProps.loadedBusinessInformation.businessInformation.business_model),
-            //                         Business_lead : nextProps.loadedBusinessInformation.Business_lead  || nextProps.loadedBusinessInformation.businessInformation.business_lead,  
-            //                         Project_Purpose : nextProps.loadedBusinessInformation.Project_Purpose ||  "",
-            //                         Project_Risks : nextProps.loadedBusinessInformation.Project_Risks ||  "",
-            //                         Line_of_Business : this.createSelectOption(nextProps.loadedBusinessInformation.Line_of_Business)  || this.createSelectOption(nextProps.loadedBusinessInformation.businessInformation.line_of_business),
-            //                         IT_Vector : this.createSelectOption(nextProps.loadedBusinessInformation.IT_Vector) || this.createSelectOption(""),
-            //                         RPA : this.createSelectOption(nextProps.loadedBusinessInformation.RPA)  || this.createSelectOption(""),
-            //                         Region : this.createSelectOption(nextProps.loadedBusinessInformation.Region)  || this.createSelectOption(""),
-            //                         Sites_Impacted : this.loadImpactedSites(nextProps.loadedBusinessInformation.Sites_Impacted) || [],
-                                    
-            //                         Customer : this.createSelectOption(nextProps.loadedBusinessInformation.Customer)  || this.createSelectOption(""),
-            //                         Requested_by_Customer : this.createSelectOption(nextProps.loadedBusinessInformation.Requested_by_Customer)  || this.createSelectOption(""),
-            //                         Customer_Priority : this.createSelectOption(nextProps.loadedBusinessInformation.Customer_Priority)  || this.createSelectOption("") ,
-            //                         Estimated_Annual_Revenue : nextProps.loadedBusinessInformation.Estimated_Annual_Revenue ||  "",
-            //                         Sales_Contact : nextProps.loadedBusinessInformation.sales_contact,
-            //                         Average_number_of_users_for_this_application : nextProps.loadedBusinessInformation.Average_number_of_users_for_this_application ||  "",
-            //                         FTE_Saved_per_year : nextProps.loadedBusinessInformation.FTE_Saved_per_year ||  "",
-            //                         Hours_saved_per_year : nextProps.loadedBusinessInformation.Hours_saved_per_year ||  "",
-            //                         Savings_revenue : nextProps.loadedBusinessInformation.Savings_revenue ||  "",
-            //                         Compliance_Risk_cost_that_will_be_avoided_by_this_application : nextProps.loadedBusinessInformation.Compliance_Risk_cost_that_will_be_avoided_by_this_application ||  "",
-            //                         Risk_Avoidance : nextProps.loadedBusinessInformation.Risk_Avoidance ||  "",
-            //                         Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team : nextProps.loadedBusinessInformation.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team ||  "",
-            //                         Legacy_System_Infra_and_License_Fee_savings_per_year : nextProps.loadedBusinessInformation.Legacy_System_Infra_and_License_Fee_savings_per_year ||  "",
-            //                         Other_Savings : nextProps.loadedBusinessInformation.Other_Savings ||  "",
-            //                         // conditionalSites : this.loadImpactedSites(nextProps.loadedBusinessInformation.Sites_Impacted) || [],
-            //                         // conditionalSites : this.loadConditionalValues(nextProps.loadedBusinessInformation.Region) ||  [],
-            //                         showSitesImpacted : nextProps.loadedBusinessInformation.region && true,
-            //                         // isLoadedLocal : true
-            //                     })
-
-            //                        this.loadConditionalValues(nextProps.loadedBusinessInformation.Region);
-
-            //                         // this.formFields = this.createFormStructure();
-                            
-
-            //                         window.initializePeoplePicker('peoplePickerBusiness_lead', '175px');
-            //                         window.initializePeoplePicker('peoplePickerSales_Contact', '175px');
-            //                         this.fillPickers();
-            //                         this.disablePickers();
-            //                 }, 0);
-                            
-
-                         
-
-                            
-                            
-            //             }
-            //         }
                         
                      
                    
 
-                    
-
-            //     }
-                
-            // }
-
-
+          
             
 
             
@@ -424,23 +177,6 @@
             // --------------------------------------
             // Load All Sites from array
             // --------------------------------------
-            // loadImpactedSites(sites) {
-            //     if( sites===undefined || !sites.length)
-            //         return [];
-
-            //     if(Array.isArray(sites) === true)
-            //         return sites;
-                
-            //     const sitesArray = sites.indexOf('||') > -1  ?  sites.split('||')  : [sites];
-            //     let sitesData = [];
-            //     for(let sitesCounter = 0; sitesCounter<sitesArray.length; sitesCounter++) {
-            //         if(sitesArray[sitesCounter] !== "")
-            //             sitesData.push({'label' : sitesArray[sitesCounter], 'value' : sitesArray[sitesCounter]})
-            //     }
-
-            //     return sitesData;
-            // }
-
             loadImpactedSites(sites) {
                 if( sites===undefined || !sites.length)
                     return [];
@@ -1059,10 +795,6 @@
                         "Sequence": "25",
                         "Type": "Combo",
                         "General_Value": [
-                            // {
-                            //     "label": "Select Region",
-                            //     "value": ""
-                            // },
                             {
                                 "label": "Americas",
                                 "value": "Americas"
@@ -1830,11 +1562,11 @@
                     console.log("TCL: BusinessInformation -> updateCurrentBusiness -> formData before", formData)
 
                     updateBusinesInformationDB(formData).then(()=>{
-                    console.log("TCL: BusinessInformation -> updateCurrentBusiness -> formData after", formData)
+                        console.log("TCL: BusinessInformation -> updateCurrentBusiness -> formData after", formData)
                         this.createSuccessAlert('Data Updated ');
                         // Check If Action was Success
                         // const response = this.props.businessInformation.businessInformationId;
-						//console.log('TCL: submitFormDB -> response', response)
+						
                         
                         
                         // this.setState({sendingData : false}, this.redirectUser())
@@ -1852,8 +1584,9 @@
                         
                     })
                     .catch((error)=> {
+                    console.log("TCL: updateCurrentBusiness -> error", error)
                         this.createErrorAlert('There was a problem saving the data, please try again ');
-						//console.log('TCL: submitFormDB -> error', error)
+						
                         this.setState({sendingData : false},)
                     })
                 }
@@ -1867,7 +1600,25 @@
                     // Look if Requirements Were Saved
 
                     if(isRequirementViewSaved === false) {
-                        this.props.saveRequirementsDB(requirementsDefinition).then(()=>{
+
+
+                        let reqToSave = null;
+
+                        // ? Set New Workstage Value
+                        if(requirementsDefinition.Workstage === 'New' || requirementsDefinition.Workstage.value === 'New' ) {
+                               // ? Change Workstage from Req Object
+                               reqToSave = Object.assign({},requirementsDefinition , {
+                                Workstage : {"label" : "2 - Requested" , "value": "Requested" }
+                            }) 
+                        }
+                        else
+                            reqToSave = requirementsDefinition
+
+
+
+                        saveRequirementsDB(reqToSave).then((newRequirementsID)=>{
+
+                            console.log("TCL: BusinessInformation -> saveNewBusinessDB -> newRequirementsID", newRequirementsID)
                         
                             // Check If Action was Success
                                 // Get Project ID and Then Save Second Tab
@@ -1875,51 +1626,69 @@
                                 const formData = this.saveFormValues();
                                     // const newProjectID = this.props.requirementsDefinition.newProjectID
                                     
-                                    this.props.saveLocalBusiness(formData);
+                                    // ? Save Business
 
-                                    this.props.saveBusinesInformationDB(formData).then(()=>{
+                                    saveBusinesInformationDB(formData).then(()=>{
                                         this.createSuccessAlert('Data Saved ');
                                         // Check If Action was Success
-                                        const response = this.props.businessInformation.businessInformationId;
-                                        //console.log('TCL: submitFormDB -> response', response)
+                                        // const response = this.props.businessInformation.businessInformationId;
                                         
+                                        
+
+                                        this.props.updateProjectIntakeValues('business',formData, null, true)
+
                                         this.setState({sendingData : false})
                                         this.setState({sendingData : false}, this.redirectUser())
 
 
-                                        this.props.resetBusinessState();
+                                        // this.props.resetBusinessState();
 
-                                        this.props.updateLocalBusinesInformation(formData);
+                                        // ? Update Req Props
+                                        let reqWithID = Object.assign({}, reqToSave , {
+                                            Project_id : newRequirementsID.indexOf('D') >= 0 ?  newRequirementsID.substr(newRequirementsID.indexOf('D')+1,newRequirementsID.length) : newRequirementsID ,
+                                            Request_ID : newRequirementsID,
+                                            updateWorkstage : true
+                                        }) 
+                                        this.props.updateProjectIntakeValues('requirements',reqWithID, null, true)
+
+                                        
                                         
                                     })
                                     .catch((error)=> {
+                                        console.log("TCL: saveNewBusinessDB -> error", error)
                                         this.createErrorAlert('There was a problem saving the data, please try again ');
-                                        console.log('TCL: submitFormDB -> error', error)
+                                        
                                         this.setState({sendingData : false},)
                                     })
                             })
                             .catch((error)=> {
+                            console.log("TCL: error", error)
                                 this.createErrorAlert('There was a problem saving the data, please try again ');
-                                console.log('TCL: submitFormDB -> error', error)
+                                
                                 this.setState({sendingData : false})
                             })
                     }
                     else {
-                        // Just Save Second Tab
+                        //? Just Save Business Info
                         const formData = this.saveFormValues();
                         // const projectID = this.props.requirementsDefinition.newProjectID;
                         
-                        this.props.saveLocalBusiness(formData);
+                        
 
-                        this.props.saveBusinesInformationDB(formData).then(()=>{
-                            this.createSuccessAlert('Data Saved ');
-                            // Check If Action was Success
-                            const response = this.props.businessInformation.businessInformationId;
-                            //console.log('TCL: submitFormDB -> response', response)
+                        saveBusinesInformationDB(formData).then((newBusinessID)=>{
+
+                            //? Check If Action was Success
                             
-                            this.props.resetBusinessState();
+                            console.log("TCL: BusinessInformation -> saveNewBusinessDB -> newBusinessID", newBusinessID)
 
-                            this.props.updateLocalBusinesInformation(formData);
+                            formData.buss_info_id = newBusinessID;
+                            
+                            
+                            this.props.updateProjectIntakeValues('business',formData, null, true)
+
+
+                            this.createSuccessAlert('Data Saved ');
+                            
                             
                             this.setState({sendingData : false}, this.redirectUser())
 
@@ -1930,7 +1699,7 @@
                         })
                         .catch((error)=> {
                             this.createErrorAlert('There was a problem saving the data, please try again ');
-                            //console.log('TCL: submitFormDB -> error', error)
+                            
                             this.setState({sendingData : false},)
                         })
                     }
@@ -1960,25 +1729,26 @@
 
                     // Check if is Update or New Business
 
-                    const { Buss_info_id } = this.props.projectIntake.businessInformation;
+                    const { Buss_info_id, buss_info_id } = this.props.projectIntake.businessInformation;
                     const {requirementsDefinition} = this.props.projectIntake;
                     const { savedOnDB } = requirementsDefinition;
+                    const { projectID } = this.props.locationData.match.params;
 
-                    if(Buss_info_id) {
+                    if(Buss_info_id || buss_info_id || this.state.isSavedonDB === true) {
 						
-                        //  Update Current Business
-                        //console.log('TCL: BusinessInformation -> submitFormDB -> businessInformation UPdate', businessInformation)
+                        // ? Update Current Business
+                        
                         this.updateCurrentBusiness();
                         // this.setState({checkForErrors: false})
                     }
                     else {
-                        //console.log('TCL: BusinessInformation -> submitFormDB -> businessInformation Create', businessInformation)
-                        // Add New Business
+                        
+                        //? Add New Business
                         this.saveNewBusinessDB(savedOnDB, requirementsDefinition);
                         this.setState({checkForErrors: false})
                     }
 
-                    this.saveOtherTabs();
+                    this.saveOtherTabs(projectID);
 
 
                   
@@ -1987,92 +1757,107 @@
                 // !--------------------------------------
                 // ! Save Other Tabs
                 // !--------------------------------------
-                saveOtherTabs = async () => {
-                    // this.props.businessInformation
-
-                    console.log("TCL: saveOtherTabs -> this.props", this.props)
-                    console.log("TCL: saveOtherTabs -> this.props.businessInformation", this.props.businessInformation)
+                saveOtherTabs = async (projectID) => {
 
 
-                    let promises = []
+                    const {requirementsDefinition, technicalEvaluation, pmoEvaluation, roiRealized} = this.props.projectIntake;
+                    const id = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
 
-                    // ? Save Business Information
-                    if( !isEmpty(this.props.requirementsDefinition) ) {
-                            console.log("TCL: saveOtherTabs -> this.props.requirementsDefinition", this.props.requirementsDefinition)
-                        
-                            this.props.updateRequirementsDB(this.props.requirementsDefinition);
-                      
-                    }
 
-                    // ? Save Tehnical Evaluation
-                    if(!isEmpty(this.props.technicalEvaluation)) {
-                        if(this.props.technicalEvaluation.tech_eval_id) {
-                            this.props.updateTechnicalDB(this.props.technicalEvaluation)
-                        }
-                        else
-                            this.props.update(this.props.businessInformation);
-                    }
+                        // let promises = []
+
+                        // ? Save Req Definition
+                        if( !isEmpty(requirementsDefinition) && requirementsDefinition.SavedLocally === true) {
                         
 
-                    // ? Save PMO Evaluation
-                    // if(!isEmpty(this.props.pmoEvaluation)) {
-                    //     if(this.props.pmoEvaluation.pmo_eval_id) {
-                    //         this.props.updatePMOEvaluation(this.props.pmoEvaluation)
-                    //     }
-                    //     else
-                    //         this.props.savePMOEvaluationDB(this.props.pmoEvaluation)
-                    // }
+                                // this.validateEmptyRequirements();
+
+                                if(requirementsDefinition.Project_id || requirementsDefinition.project_id) {
+                                    updateRequirementsDB(requirementsDefinition, id);
+                                    let reqFolderURL = `${requirementsDefinition.newProjectID}/RequirementsDefinition`;
+                                    //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                                }
+
+                                else 
+                                    saveRequirementsDB(requirementsDefinition).then((newRequirementsID) => {
+                                        requirementsDefinition.Project_id = newRequirementsID;
+                                        let reqFolderURL = `${newRequirementsID}/RequirementsDefinition`;
+                                        //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                                    })
 
 
 
-                    // ? Save Roi Realized
-                    if(!isEmpty(this.props.roiRealized)) {
-                        // ? Look For Roi Relized Data
-                        if(this.props.roiRealized.roiRealized) {
+                                this.props.updateProjectIntakeValues('requirements',requirementsDefinition, null, true)
 
-                            // Roi realized object is empty and child object as well, so dont save
-                            if( !this.props.roiRealized.roi_real_id && isEmpty(this.props.roiRealized.roiRealized)) {
-                                return
-                            }
-                            
-                            else if( (!isEmpty(this.props.roiRealized.roiRealized) &&  this.props.roiRealized.roi_real_id) ||  (!isEmpty(this.props.roiRealized.roiRealized) &&  this.props.roiRealized.roiRealized.roi_real_id)) {
-                                this.props.updateROIRealizedDB(this.props.roiRealized);
-                            }
-                            else if (!isEmpty(this.props.roiRealized.roiRealized))
-                                this.props.saveROIRealizedDB(this.props.roiRealized);
                         }
 
-                         // ? Look for Dynatrace
-                        if(!isEmpty(this.props.roiRealized.dynatrace)) 
-                            this.props.saveDynatraceDB(this.props.roiRealized.dynatrace)
-                        // else if(this.props.roiRealized.dynatraceData)   
-                        //  this.props.saveDynatraceDB(this.props.roiRealized.dynatrace)
 
-                    }
-                   
+                          // ? Save Tehnical Evaluation
+                          if(!isEmpty(technicalEvaluation) && technicalEvaluation.SavedLocally === true) {
+                            if(technicalEvaluation.Tech_eval_id || technicalEvaluation.tech_eval_id) {
+                                updateTechnicalDB(technicalEvaluation, id)
+                            }
+                            else
+                                saveTechnicalDB(technicalEvaluation, id).then((newTechId) => {
+                                    console.log("TCL: saveOtherTabs -> newTechId", newTechId)
+                                    technicalEvaluation.Tech_eval_id = newTechId
+                                    technicalEvaluation.tech_eval_id = newTechId
+                                }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+
+                            // ? Update Props
+                            this.props.updateProjectIntakeValues('technical',technicalEvaluation, null, true)
+                        }
+
                         
-                        
-                        
-                    console.log("TCL: saveOtherTabs -> promises", promises)
+
+                        // ? Save PMO Evaluation
+                        if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
+                                if(pmoEvaluation.Pmo_eval_id || pmoEvaluation.pmo_eval_id  ) {
+                                    updatePMOEvaluation(pmoEvaluation)
+                                }
+                                else
+                                    savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
+                                        console.log("TCL: saveOtherTabs -> newPmoId", newPmoId)
+                                        pmoEvaluation.Pmo_eval_id = newPmoId
+                                        pmoEvaluation.pmo_eval_id = newPmoId
+                                    }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
+
+                                // ? Update Props
+                                this.props.updateProjectIntakeValues('pmoEval',pmoEvaluation, null, true)
+                        }
 
 
 
-                    // if(promises.length > 0) {
-                        
-                    //     Promise.all(promises).then((data) => {
-                    //         console.log("TCL: saveOtherTabs -> data", data)
-                    //     })
-                    //     .catch((error)=>{
-                    //         console.log("TCL: saveOtherTabs -> error", error)
-                            
-                    //     })
+                        // ? Save Roi Realized
+                        if(!isEmpty(roiRealized) && roiRealized.SavedLocally === true) {
+                                // ? Look For Roi Relized Data
+                                if(roiRealized.Roi_real_id || roiRealized.roi_real_id ) {
+                                   updateROIRealizedDB(roiRealized, id).then((roiID) => {
+                                    console.log("TCL: roiID", roiID)
+                                        roiRealized.Roi_real_id = roiID
+                                        // ? Look for Dynatrace
+                                        if(!isEmpty (roiRealized.dynatrace))
+                                                saveDynatraceDB(roiRealized.dynatrace, id,  roiID)
 
-                    // }
+                                    })
+                                }
+                                 else
+                                    saveROIRealizedDB(roiRealized, id).then((roiID) => {
+                                        console.log("TCL: roiID", roiID)
+                                        roiRealized.Roi_real_id = roiID
+                                         // ? Look for Dynatrace
+                                        if(!isEmpty (roiRealized.dynatrace))
+                                                saveDynatraceDB(roiRealized.dynatrace, id,  roiID)
 
-                    // this.resetState();
+                                    })
 
 
-                    
+                                // ? Update Props
+                                this.props.updateProjectIntakeValues('roiRealized',roiRealized, roiRealized.dynatrace, true)
+
+                        }
+
+
                 }
 
             
@@ -2101,16 +1886,16 @@
             // --------------------------------------
             
             redirectUserPrev() {
-                // const {history} = this.props;
+                const {history, location} =   this.props.locationData;
                 // ? const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                 const path = '/intake'
                 
-                let pathArray = this.props.locationData.location.pathname.split('/');
+                let pathArray = location.pathname.split('/');
                 let projectIndex = pathArray[pathArray.length - 2];
 				
                 
-                this.props.locationData.history.push(`${path}/project/${projectIndex}/requirement-definition`);
+                history.push(`${path}/project/${projectIndex}/requirement-definition`);
                 
             }
 
@@ -2121,6 +1906,9 @@
             // --------------------------------------
             loadConditionalValues(selectedOption) {
                 console.log("TCL: loadConditionalValues -> selectedOption", selectedOption)
+
+                if(!selectedOption)
+                    return;
 
                 switch(selectedOption) {
                     case "Americas" :
@@ -3488,7 +3276,7 @@
         projectIntake : PropTypes.object,
         isPMO : PropTypes.bool,
         locationData : PropTypes.object,
-        updateProjectIntakeValue : PropTypes.func
+        updateProjectIntakeValues : PropTypes.func
     };
 
 

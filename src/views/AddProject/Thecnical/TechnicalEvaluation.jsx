@@ -1225,6 +1225,11 @@
                 // --------------------------------------
                 validatePeoplePicker(pickerName) {
                     let isValid = true;
+
+                    // TODO : Remove this
+                    if (!document.getElementById(`peoplePicker${pickerName}_TopSpan_HiddenInput`))
+                        return true
+                    
                     if (document.getElementById(`peoplePicker${pickerName}_TopSpan_HiddenInput`).value === "[]" || document.getElementById(`peoplePicker${pickerName}_TopSpan_HiddenInput`).value === "") {
                         isValid = false;
                         document.getElementById(`peoplePicker${pickerName}_TopSpan`).style = 'border: 1px solid #e76c90 !important';
@@ -1434,7 +1439,7 @@
                     this.createSuccessAlert('Data Saved Locally');
                     // Redirect User
                     // setTimeout(()=>{this.redirectUser();},700);
-                    // this.redirectUser();
+                    this.redirectUser();
                 }
                 
             
@@ -1463,16 +1468,18 @@
 
                 // this.props.saveLocalTechnical(formData);
                 saveTechnicalDB(formData).then((newTechId)=>{
-                console.log("TCL: saveNewTechnicalDB -> newTechId", newTechId)
+                    console.log("TCL: saveNewTechnicalDB -> newTechId", newTechId)
                     this.createSuccessAlert('Data Saved ');
                     // Check If Action was Success
                     // const newTechnicalEvaluationId = this.props.pro.newTechnicalEvaluationId
+
+                    formData.Tech_eval_id = newTechId
                         
                     // ? Update Props
                     this.props.updateProjectIntakeValues('technical',formData, null, true)
 
 
-                    // this.setState({sendingData : false}, this.redirectUser(nextStep))
+                    this.saveOtherTabs(projectID)
 
                     this.setState({sendingData : false})
 
@@ -1533,8 +1540,10 @@
                 //? Save Technical
 
                 let reqSaved = false
-                if (!this.props.projectIntake.requirementsDefinition.SavedOnDB || this.props.projectIntake.requirementsDefinition.Project_id)
+                if (this.props.projectIntake.requirementsDefinition.isSavedOnDB === false || !this.props.projectIntake.requirementsDefinition.Project_id)
                     reqSaved = false;
+                else if (this.props.projectIntake.requirementsDefinition.Project_id)
+                    reqSaved = true
                 else
                     reqSaved = true
 
@@ -1629,9 +1638,14 @@
                                 let id = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
                                 let reqFolderURL = `${projectID}/RequirementsDefinition`;
                                 let pmoFolderURL = `${projectID}/PMO`;
+
+                                requirementsDefinition.Project_id = newProjectID;
+
+                                
+                                this.props.updateProjectIntakeValues('requirements',requirementsDefinition, null, true)
     
     
-                                 //! Create Requirements  Folder
+                                //! Create Requirements  Folder
     
                                     // window.createFolderStructure('intakeFiles' , reqFolderURL, ()=> {
         
@@ -1782,20 +1796,27 @@
 
                             // this.validateEmptyRequirements();
 
-                            if(requirementsDefinition.Project_id) {
-                                updateRequirementsDB(requirementsDefinition);
-                                let reqFolderURL = `${requirementsDefinition.newProjectID}/RequirementsDefinition`;
-                                this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                            if(requirementsDefinition.Project_id || requirementsDefinition.project_id) {
+                                updateRequirementsDB(requirementsDefinition, id);
+                                let reqFolderURL = `${requirementsDefinition.Request_ID}/RequirementsDefinition`;
+                                //? this.uploadReqFiles(requirementsDefinition.Request_ID, reqFolderURL);
                             }
                                 
                             else
-                                saveRequirementsDB(requirementsDefinition)
+                                saveRequirementsDB(requirementsDefinition).then((newRequirementsID) => {
+                                    console.log("TCL: newRequirementsID", newRequirementsID)
+                                    requirementsDefinition.Project_id = newRequirementsID;
+                                    let reqFolderURL = `${newRequirementsID}/RequirementsDefinition`;
+                                    //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                                })
 
 
 
                             this.props.updateProjectIntakeValues('requirements',requirementsDefinition, null, true)
 
                         }
+
+
 
                         // ? Save Business Information
                         if( !isEmpty(businessInformation) && businessInformation.SavedLocally === true ) {
@@ -1927,7 +1948,7 @@
                 // --------------------------------------*/
                 uploadReqFiles (folderName, foldertoUpload) {
                     this.setState({currentMessage : 'Saving Files'})
-                    const filesArray = this.props.requirementsDefinition.Project_docs;
+                    const filesArray = this.props.projectIntake.requirementsDefinition.Project_docs;
                     
 
                     const folderURL = `intakeFiles/${foldertoUpload}`;

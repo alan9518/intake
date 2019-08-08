@@ -1041,10 +1041,12 @@
                     // Update State
                     
                     // Save on DB
-                    this.props.savePMOEvaluationDB(formData).then((newPMOEvaluationID)=>{
+                    savePMOEvaluationDB(formData).then((newPMOEvaluationID)=>{
 
                         
-                        // Redirect User
+                        formData.pmo_eval_id = newPMOEvaluationID;
+                        formData.Pmo_eval_id = newPMOEvaluationID;
+                        this.props.updateProjectIntakeValues('pmoEval',formData, null, true)
 
                         // Check If Action was Success
                         // const {pmo_eval_id} = this.props.projectIntake.pmoEvaluation/
@@ -1063,7 +1065,7 @@
 
                         this.createSuccessAlert('Data Saved ');
                         
-                        this.setState({ Request_ID : newPMOEvaluationID , sendingData : false, SavedOnDB : true});
+                        this.setState({ sendingData : false, isSavedOnDB : true});
 
                         // setTimeout(()=>{this.redirectUser();},700);
 
@@ -1113,7 +1115,7 @@
 
                         this.createSuccessAlert('Data Saved ');
 
-                        this.setState({ Request_ID : pmo_eval_id , sendingData : false, showFileManager : false, SavedOnDB : true})
+                        this.setState({ sendingData : false, showFileManager : false, SavedOnDB : true})
                         
                     })
                     .catch((error)=> {
@@ -1140,9 +1142,9 @@
                     this.setState({sendingData : true})
 
                     // Check if is New PMO Eval or Update Current
-                    const {pmo_eval_id} = this.props.projectIntake.pmoEvaluation;
+                    const {pmo_eval_id, Pmo_eval_id} = this.props.projectIntake.pmoEvaluation;
 
-                    if(pmo_eval_id) {
+                    if(pmo_eval_id || Pmo_eval_id || this.state.SavedOnDB === true) {
                         // Update Current
                         this.updateCurrentPMOEvaluation();
                     }
@@ -1189,14 +1191,18 @@
 
                             // this.validateEmptyRequirements();
 
-                            if(requirementsDefinition.Project_id) {
-                                updateRequirementsDB(requirementsDefinition);
+                            if(requirementsDefinition.Project_id || requirementsDefinition.project_id) {
+                                updateRequirementsDB(requirementsDefinition, id);
                                 let reqFolderURL = `${requirementsDefinition.Request_ID}/RequirementsDefinition`;
                                 this.uploadReqFiles(requirementsDefinition.Request_ID, reqFolderURL);
                             }
                                 
                             else
-                                saveRequirementsDB(requirementsDefinition)
+                                saveRequirementsDB(requirementsDefinition).then((newRequirementsID) => {
+                                    requirementsDefinition.Project_id = newRequirementsID;
+                                    let reqFolderURL = `${newRequirementsID}/RequirementsDefinition`;
+                                    //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                                })
 
 
 
@@ -1212,7 +1218,7 @@
                             
                             // businessInformation.Project_id = id;
                             
-                            if(businessInformation.Buss_info_id)
+                            if(businessInformation.Buss_info_id ||  businessInformation.buss_info_id )
                                 updateBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
                                     console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
                                     // businessInformation.Buss_info_id = newBusinesId
@@ -1234,7 +1240,7 @@
 
                         // ? Save Tehnical Evaluation
                         if(!isEmpty(technicalEvaluation) && technicalEvaluation.SavedLocally === true) {
-                            if(technicalEvaluation.Tech_eval_id) {
+                            if(technicalEvaluation.Tech_eval_id || technicalEvaluation.tech_eval_id) {
                                 updateTechnicalDB(technicalEvaluation)
                             }
                             else
@@ -1255,8 +1261,8 @@
 
                         if(!isEmpty(roiRealized) && roiRealized.SavedLocally === true) {
                             // ? Look For Roi Relized Data
-                            if(roiRealized.Roi_real_id) {
-                            updateROIRealizedDB(roiRealized)
+                            if(roiRealized.Roi_real_id || roiRealized.roi_real_id) {
+                                updateROIRealizedDB(roiRealized)
                             }
                             else
                                 saveROIRealizedDB(roiRealized, id).then((roiID) => {
