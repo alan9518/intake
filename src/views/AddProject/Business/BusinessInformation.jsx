@@ -124,9 +124,9 @@
                 window.addEventListener("resize", this.updateContainerDimensions);
                 setTimeout(() => {
                     
-                    //! window.initializePeoplePicker('peoplePickerBusiness_lead', pickersWidth, 19);
-                    //! window.initializePeoplePicker('peoplePickerSales_Contact', pickersWidth, 31);
-                    //! this.fillPickers();
+                     window.initializePeoplePicker('peoplePickerBusiness_lead', pickersWidth, 19);
+                     window.initializePeoplePicker('peoplePickerSales_Contact', pickersWidth, 31);
+                     this.fillPickers();
                   
                     if(this.state.Sites_Impacted.length > 0)
                         this.setState({showSitesImpacted : true})
@@ -140,6 +140,7 @@
 				
             }
 
+         
 
             // --------------------------------------
             // Save Form Values before the component
@@ -1005,7 +1006,7 @@
             // Load Default PeoplePicker Value
             // --------------------------------------
             fillPickers() {
-                const {Business_lead, Sales_Contact} = this.props.businessInformation;
+                const {Business_lead, Sales_Contact} = this.props.projectIntake.businessInformation;
 				//console.log('TCL: fillPickers -> this.props.businessInformation', this.props.businessInformation)
                 if(Business_lead)
                     window.fillPeoplePicker(Business_lead, 'Business_lead');

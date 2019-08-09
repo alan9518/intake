@@ -112,15 +112,17 @@
             // --------------------------------------
             componentDidMount() {
 
-
-                // this.state
+                const pickersWidth = '175px';
+                window.addEventListener("resize", this.updateContainerDimensions);
+                 setTimeout(() => {
+                     window.initializePeoplePicker('peoplePickerApprover',pickersWidth );
+                     window.initializePeoplePicker('peoplePickerProject_Manager', pickersWidth);
+                     this.fillPickers();
+                 }, 0);
+              
                 console.log("TCL: TechnicalEvaluation -> componentDidMount -> this.state", this.state)
                 
-                // ? Set Date Values When They Are empty
-             
-                // let target_Start_Date_Moment = this.props.projectIntake.technicalEvaluation.Target_Start_Date !== null ? moment(this.props.projectIntake.technicalEvaluation.Target_Start_Date)  : moment()
-                // let approval_Date_Moment = this.props.projectIntake.technicalEvaluation.Approval_Date !== null ? moment(this.props.projectIntake.technicalEvaluation.Approval_Date) : moment();
-             
+              
                 this.setState({
                     tech_eval_id : this.props.projectIntake.technicalEvaluation.tech_eval_id || null,
                     // Delivery_Team : {"label" : this.props.projectIntake.technicalEvaluation.Delivery_Team, "value" :this.props.projectIntake.technicalEvaluation.Delivery_Team } || {label : "Select a Delivery Team", value : null},
@@ -1413,8 +1415,8 @@
             // --------------------------------------
             fillPickers() {
                 
-                if(this.props.loadedtechnicalEvaluation.technicalEvaluation !== undefined) {
-                    const {Approver, Project_Manager} = this.props.loadedtechnicalEvaluation.technicalEvaluation ;
+                if(this.props.projectIntake.technicalEvaluation !== undefined) {
+                    const {Approver, Project_Manager} = this.props.projectIntake.technicalEvaluation ;
 
                     if(Approver)
                         window.fillPeoplePicker(Approver, 'Approver');
@@ -1439,8 +1441,8 @@
             }
 
             disablePickers() {
-                if (this.props.loadedBusinessInformation.businessInformation !== undefined) {
-                    if(this.props.requirementsDefinition.workstage === 'Requested' && this.props.isPMO === false) {
+                if (this.props.projectIntake.businessInformation !== undefined) {
+                    if(this.props.projectIntake.requirementsDefinition.workstage === 'Requested' && this.props.isPMO === false) {
                         window.disablePickers();
                     }
                 }

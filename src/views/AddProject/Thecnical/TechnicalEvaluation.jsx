@@ -92,11 +92,11 @@
             componentDidMount() {
                 const pickersWidth = '175px';
                 window.addEventListener("resize", this.updateContainerDimensions);
-                //! setTimeout(() => {
-                //!     window.initializePeoplePicker('peoplePickerApprover',pickersWidth );
-                //!     window.initializePeoplePicker('peoplePickerProject_Manager', pickersWidth);
-                //!     this.fillPickers();
-                //! }, 0);
+                 setTimeout(() => {
+                     window.initializePeoplePicker('peoplePickerApprover',pickersWidth );
+                     window.initializePeoplePicker('peoplePickerProject_Manager', pickersWidth);
+                     this.fillPickers();
+                 }, 0);
 
                 this.setState({
                     isLoaded : true
@@ -1202,7 +1202,7 @@
             // Load Default PeoplePicker Value
             // --------------------------------------
             fillPickers() {
-                const {Approver, Project_Manager} = this.props.technicalEvaluation;
+                const {Approver, Project_Manager} = this.props.projectIntake.technicalEvaluation;
 				//console.log('TCL: TechnicalEvaluation -> fillPickers -> this.props.technicalEvaluation', this.props.technicalEvaluation)
 
                 if(Approver)

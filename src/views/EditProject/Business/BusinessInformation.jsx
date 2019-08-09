@@ -122,18 +122,32 @@
 
 
             componentDidMount() {
+                const pickersWidth = '175px';
+                setTimeout(() => {
+                    
+                    window.initializePeoplePicker('peoplePickerBusiness_lead', pickersWidth, 19);
+                    window.initializePeoplePicker('peoplePickerSales_Contact', pickersWidth, 31);
+                    this.fillPickers();
+                 
+                   if(this.state.Sites_Impacted.length > 0)
+                       this.setState({showSitesImpacted : true})
+                   
+               }, 0);
 
-                this.setState({
-                    Business_Model : this.createSelectOption(this.props.projectIntake.businessInformation.Business_Model) || this.createSelectOption(""),
-                    Line_of_Business : this.createSelectOption(this.props.projectIntake.businessInformation.Line_of_Business)  || this.createSelectOption(""),
-                    IT_Vector : this.createSelectOption(this.props.projectIntake.businessInformation.IT_Vector) || this.createSelectOption(""),
-                    RPA : this.createSelectOption(this.props.projectIntake.businessInformation.RPA)  || this.createSelectOption(""),
-                    Region : this.createSelectOption(this.props.projectIntake.businessInformation.Region)  || this.createSelectOption(""),
-                    Customer : this.createSelectOption(this.props.projectIntake.businessInformation.Customer) || this.createSelectOption(""),
-                    Requested_by_Customer : this.createSelectOption(this.props.projectIntake.businessInformation.Requested_by_Customer)  || this.createSelectOption(""),
-                    Customer_Priority : this.createSelectOption(this.props.projectIntake.businessInformation.Customer_Priority)  || this.createSelectOption("") ,
-                    isLoaded : true
-                })
+
+               this.setState({
+                Business_Model : this.createSelectOption(this.props.projectIntake.businessInformation.Business_Model) || this.createSelectOption(""),
+                Line_of_Business : this.createSelectOption(this.props.projectIntake.businessInformation.Line_of_Business)  || this.createSelectOption(""),
+                IT_Vector : this.createSelectOption(this.props.projectIntake.businessInformation.IT_Vector) || this.createSelectOption(""),
+                RPA : this.createSelectOption(this.props.projectIntake.businessInformation.RPA)  || this.createSelectOption(""),
+                Region : this.createSelectOption(this.props.projectIntake.businessInformation.Region)  || this.createSelectOption(""),
+                Customer : this.createSelectOption(this.props.projectIntake.businessInformation.Customer) || this.createSelectOption(""),
+                Requested_by_Customer : this.createSelectOption(this.props.projectIntake.businessInformation.Requested_by_Customer)  || this.createSelectOption(""),
+                Customer_Priority : this.createSelectOption(this.props.projectIntake.businessInformation.Customer_Priority)  || this.createSelectOption("") ,
+                isLoaded : true
+            })
+
+               
 
                 this.formFields =  this.createFormStructure();
 
@@ -1243,13 +1257,13 @@
             // --------------------------------------
             fillPickers() {
                try {
-                    if (this.props.loadedBusinessInformation.businessInformation !== undefined) {
-                        const {business_lead, sales_contact} = this.props.loadedBusinessInformation.businessInformation;
+                    if (this.props.projectIntake.businessInformation !== undefined) {
+                        const {Business_lead, Sales_Contact} = this.props.projectIntake.businessInformation;
                     
-                        if(business_lead)
-                            window.fillPeoplePicker(business_lead, 'Business_lead');
-                        if(sales_contact)
-                            window.fillPeoplePicker(sales_contact, 'Sales_Contact');
+                        if(Business_lead)
+                            window.fillPeoplePicker(Business_lead, 'Business_lead');
+                        if(Sales_Contact)
+                            window.fillPeoplePicker(Sales_Contact, 'Sales_Contact');
                     }
 
                     // Add Tab Index
@@ -1268,7 +1282,7 @@
 
 
             disablePickers() {
-                if (this.props.loadedBusinessInformation.businessInformation !== undefined) {
+                if (this.props.projectIntake.businessInformation !== undefined) {
                     if(this.props.requirementsDefinition.workstage === 'Requested' && this.props.isPMO === false) {
                         window.disablePickers();
                     }
