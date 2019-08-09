@@ -1271,9 +1271,9 @@
             // --------------------------------------
             redirectUser() {
                 const {history} = this.props.locationData;
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake'
+                //const path = '/intake'
                 
                 history.push(`${path}/add-project/business-information`);
             }
@@ -1283,11 +1283,11 @@
             // --------------------------------------
             cancelRequirementsDefinition = () => {
                 const {history} = this.props.locationData;
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
                 this.props.resetProjectIntake();
 
-                const path = '/intake'
+                //const path = '/intake'
 
                 history.push(`${path}/intake-projects/`);
             }

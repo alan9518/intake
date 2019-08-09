@@ -26,7 +26,7 @@
             
                 openLightbox === true 
                 ?
-                <span data-tip = {tipText}  onClick = {(e) => { window.openDialog('https://flextronics365.sharepoint.com/sites/gsd/intake_process/IntakeProcess/itVectorTip.aspx', 'IT Vector Help') }} >
+                <span data-tip = {tipText}  onClick = {(e) => { window.openDialog('https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/itVectorTip.aspx', 'IT Vector Help') }} >
                     {isButton  === true ? <FontAwesomeIcon icon={faPlus}  /> : <FontAwesomeIcon icon={faQuestionCircle} />}
                 </span>
                 :

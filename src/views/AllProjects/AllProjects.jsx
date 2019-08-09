@@ -18,6 +18,8 @@
     import axios from 'axios';
 
 
+    const currentUser = window.getCurrentSPUser();
+
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -57,7 +59,7 @@
 
 
             componentWillReceiveProps(nextProps) {
-            console.log("TCL: Home -> componentWillReceiveProps -> nextProps", nextProps)
+                console.log("TCL: Home -> componentWillReceiveProps -> nextProps", nextProps)
                 
             }
 
@@ -153,9 +155,9 @@
             // Get Projects By User
             // --------------------------------------
             fetchProjectsByUser = () => {
-                //? const currentUser = window.getCurrentSPUser();
+                // const currentUser = window.getCurrentSPUser();
 
-                const currentUser = {userEmail : 'alan.medina@flex.com'}
+                // const currentUser = {userEmail : 'alan.medina@flex.com'}
                 
                 const params = {created_by : currentUser.userEmail}
 

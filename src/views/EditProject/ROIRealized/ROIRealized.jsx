@@ -33,7 +33,9 @@
     } from '../../../actions';
 
 
-    const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+    // const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+
+    const currentUser = window.getCurrentSPUser();
 
 
 // --------------------------------------
@@ -1072,10 +1074,11 @@
                     // const {isPMO} = this.props;
                     // const step = '/intake-projects'
                     // const {history} = this.props;
-                    // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                    // const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
                     // history.push(`${path}/${step}`);
+                    // https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/itVectorTip.aspx
 
-                    window.location.href = 'https://flextronics365.sharepoint.com/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx/intake-projects';
+                    window.location.href = 'https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx/intake-projects';
                 }
 
 
@@ -1085,9 +1088,9 @@
                 
                 redirectUserPrev =() => {
                     const {history,location} = this.props.locationData;
-                    //? const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                    const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                    const path = '/intake';
+                    //const path = '/intake';
 
                     let pathArray = location.pathname.split('/');
                     let projectIndex = pathArray[pathArray.length - 2];

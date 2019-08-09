@@ -29,7 +29,7 @@
 
     // --------------------------------------
     // Edit Project
-    // https://flextronics365.sharepoint.com/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx
+    // https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx
     // --------------------------------------
 
 
@@ -1037,7 +1037,7 @@
                         <Switch>
 
                             <Route
-                                path = {`${localPath}/intake-projects`}
+                                path = {`${relativePath}/intake-projects`}
                                 exact =  {true}
                                 key =  'route-intakeProjects'
                                 ref = 'route-intakeProjects'
@@ -1047,7 +1047,7 @@
 
 
                             <Route
-                                path = {`${localPath}/project/:projectID/requirement-definition`}
+                                path = {`${relativePath}/project/:projectID/requirement-definition`}
                                 exact =  {true}
                                 key =  'route-editRequirementDefinition'
                                 ref = 'route-editRequirementDefinition'
@@ -1061,7 +1061,7 @@
                             />
 
                               <Route
-                                 path = {`${localPath}/project/:projectID/business-information`}
+                                 path = {`${relativePath}/project/:projectID/business-information`}
                                  exact =  {true}
                                  key =  'route-editBusinessInformation'
                                  ref = 'route-editBusinessInformation'
@@ -1071,7 +1071,7 @@
                         
                              
                              <Route
-                                 path = {`${localPath}/project/:projectID/technical-evaluation`}
+                                 path = {`${relativePath}/project/:projectID/technical-evaluation`}
                                  exact =  {true}
                                  key =  'route-editTechnicalEvaluation'
                                  ref = 'route-editTechnicalEvaluation'
@@ -1080,7 +1080,7 @@
 
                         
                             <Route
-                                path = {`${localPath}/project/:projectID/pmo-evaluation`}
+                                path = {`${relativePath}/project/:projectID/pmo-evaluation`}
                                 exact =  {true}
                                 key =  'route-editPmoEvaluation'
                                 ref = 'route-editPmoEvaluation'
@@ -1089,7 +1089,7 @@
 
                             
                             <Route
-                                path = {`${localPath}/project/:projectID/roi-realized`}
+                                path = {`${relativePath}/project/:projectID/roi-realized`}
                                 exact =  {true}
                                 key =  'route-editRoiRealized'
                                 ref = 'route-editRoiRealized'
@@ -1097,7 +1097,7 @@
                             />
 
 
-                           <Redirect from = {`${localPath}/project/:projectID/`} to = {`${localPath}/project/:projectID/requirement-definition`} ></Redirect> 
+                           <Redirect from = {`${relativePath}/project/:projectID/`} to = {`${relativePath}/project/:projectID/requirement-definition`} ></Redirect> 
 
                         </Switch>
                    
@@ -1163,26 +1163,11 @@
 // Define PropTypes 
 // -------------------------------------- 
     // formHolder.propTypes = {
-    //     props: PropTypes
+    //      projectIntake : PropTypes.object,
+    //     isPMO : PropTypes.bool,
+    //     locationData : PropTypes.object,
+    //     updateProjectIntakeValues : PropTypes.func
     // };
-
-
-
-
-/* ==========================================================================
-** Redux Functions
-** ========================================================================== */
-    // const mapStateToProps = (state) => {
-    // //console.log('TCL: mapStateToProps -> state', state)
-    //     return {
-    //         pmos : state.sharepoint,
-    //         pmosData:state.sharepoint.pmos,
-    //         isPMO : state.sharepoint.isPMO,
-    //         isLoaded : state.sharepoint.pmosLoaded,
-    //         // currentProjectID : state.requirementsDefinition.requirementsDefinition.request_id
-    //     }
-    // }
-
 
 
 

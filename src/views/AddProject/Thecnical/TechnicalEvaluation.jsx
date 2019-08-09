@@ -33,7 +33,8 @@
         updateROIRealizedDB
     } from '../../../actions';
 
-    const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
+    // const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
+    const currentUser = window.getCurrentSPUser();  
 
 
 // --------------------------------------
@@ -1913,9 +1914,9 @@
             // --------------------------------------
             redirectUser() {
                 const {history} = this.props.locationData;
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake';
+                //const path = '/intake';
                 
                 history.push(`${path}/add-project/pmo-evaluation`);
             }
@@ -1927,9 +1928,9 @@
 
             redirectUserPrev() {
                 const {history} = this.props.locationData;
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake';
+                //const path = '/intake';
                 
                 history.push(`${path}/add-project/business-information`);
             }
@@ -2458,7 +2459,10 @@
 // Define PropTypes 
 // -------------------------------------- 
     TechnicalEvaluation.propTypes = {
-        props: PropTypes
+        projectIntake : PropTypes.object,
+        isPMO : PropTypes.bool,
+        locationData : PropTypes.object,
+        updateProjectIntakeValues : PropTypes.func
     };
 
 

@@ -36,7 +36,8 @@
     
 
 
-    const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+    // const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+    const currentUser = window.getCurrentSPUser();
 
 
 // --------------------------------------
@@ -555,8 +556,6 @@
 
                 // --------------------------------------
                 // Handle Remove Fxile to Dropzone
-                // "sites/gsd/intake_process/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intake_process/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intakeFiles/GSD00272/RequirementsDefinition/Transition Status Items2.xlsx"
-                // "sites/gsd/intake_process/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intake_process/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intakeFiles/GSD00272/RequirementsDefinition/Transition Status Items2.xlsx"
                 // --------------------------------------
                 handleFileRemoved = (file) => {
                
@@ -580,8 +579,7 @@
 
 
 
-                    // "sites/gsd/intake_process/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intake_process/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intakeFiles/GSD00272/RequirementsDefinition/logo.png"
-                    // "sites/gsd/intake_process/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intake_process/intakeFiles/GSD00272/RequirementsDefinition/sites/gsd/intakeFiles/GSD00272/RequirementsDefinition/logo.png"
+                    
 
 
                 }
@@ -1383,9 +1381,9 @@
             redirectUser() {
                 const {history} = this.props.locationData;
                 const id = this.props.locationData.match.params.projectID
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake'
+                //const path = '/intake'
                 
                 history.push(`${path}/project/${id}/business-information`);
             }
@@ -1393,7 +1391,7 @@
 
             cancelRequirementsDefinition = () => {
                 const {history} = this.props.locationData;
-                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
                 history.push(`${path}/intake-projects/`);
             }
 

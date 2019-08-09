@@ -34,7 +34,8 @@
     } from '../../../actions';
 
 
-    const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
+    // const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
+    const currentUser = window.getCurrentSPUser();
 
 
 // --------------------------------------
@@ -1186,9 +1187,9 @@
             // --------------------------------------
             redirectUser() {
                 const {history} = this.props.locationData;
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake';
+                //const path = '/intake';
                 
                 history.push(`${path}/add-project/roi-realized`);
             }
@@ -1199,9 +1200,9 @@
             
             redirectUserPrev() {
                 const {history, location} = this.props.locationData;
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake';
+                //const path = '/intake';
 
                 let pathArray = location.pathname.split('/');
                 let projectIndex = pathArray[pathArray.length - 2];
@@ -1550,7 +1551,10 @@
 // Define PropTypes 
 // -------------------------------------- 
     PMOEvaluation.propTypes = {
-        props: PropTypes
+        projectIntake : PropTypes.object,
+        isPMO : PropTypes.bool,
+        locationData : PropTypes.object,
+        updateProjectIntakeValues : PropTypes.func
     };
 
 

@@ -34,7 +34,8 @@
 
 
 
-    const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
+    // const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
+    const currentUser = window.getCurrentSPUser();
 
 // --------------------------------------
 // Create Component Class
@@ -1212,12 +1213,12 @@
                 // const {isPMO} = this.props;
                 // const step = '/intake-projects'
                 // const {history} = this.props;
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                // const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
                 // history.push(`${path}/${step}`);
 
                 if(newPath) {
                     
-                    const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                    const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
                     this.props.history.push(`${path}/${newPath}`);
                 }
 
@@ -1225,7 +1226,7 @@
 
                 
 
-                // window.location.href = 'https://flextronics365.sharepoint.com/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx/intake-projects';
+                // window.location.href = 'https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx/intake-projects';
             }
 
             // --------------------------------------
@@ -1234,9 +1235,9 @@
             
             redirectUserPrev() {
                 const {history} = this.props.locationData;
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake'
+                //const path = '/intake'
                 
                 history.push(`${path}/add-project/pmo-evaluation`);
             }
@@ -1770,7 +1771,10 @@
 // Define PropTypes 
 // -------------------------------------- 
     ROIRealized.propTypes = {
-        props: PropTypes
+        projectIntake : PropTypes.object,
+        isPMO : PropTypes.bool,
+        locationData : PropTypes.object,
+        updateProjectIntakeValues : PropTypes.func
     };
 
 

@@ -34,7 +34,8 @@
     } from '../../../actions';
 
 
-    const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
+    // const currentUser = {userEmail : 'alan.medina@flex.com', userName : 'alan medina'};
+    const currentUser = window.getCurrentSPUser();
 
 // --------------------------------------
 // Create Component Class
@@ -1065,8 +1066,8 @@
 
                 }
                 // nextStep = isPMO ? '' : '';
-                // const path =  '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
-                const path = '/intake';
+                const path =  '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+                //const path = '/intake';
                 history.push(`${path}/${nextStep}`);
             }
 
@@ -1077,9 +1078,9 @@
 
             redirectUserPrev() {
                 const {history} = this.props.locationData;
-                // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake';
+                //const path = '/intake';
                 
                 history.push(`${path}/add-project/requirement-definition`);
             }
@@ -2966,49 +2967,18 @@
 // Define PropTypes 
 // -------------------------------------- 
     BusinessInformation.propTypes = {
-        props: PropTypes
+        projectIntake : PropTypes.object,
+        isPMO : PropTypes.bool,
+        locationData : PropTypes.object,
+        updateProjectIntakeValues : PropTypes.func
     };
 
 
-/* ==========================================================================
-** Redux Functions
-** ========================================================================== */
-    // const mapStateToProps = (state) => {
-	// 	//console.log('TCL: mapStateToProps -> state', state)
-    //     return {
-    //         businessInformation : state.businessInformation,
-    //         projectID : state.requirementsDefinition.newProjectID,
-    //         pmos : state.sharepoint.pmos,
-    //         isPMO : state.sharepoint.isPMO,
-    //         businessInformationSaved : state.businessInformation.businessInformationSaved,
-    //         requirementsDefinition : state.requirementsDefinition,
-    //         technicalEvaluation : state.technicalEvaluation,
-    //         pmoEvaluation : state.pmoEvaluation,
-    //         roiRealized : state.roiRealized,
 
-    //     }
-    // }
 
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
     export default (BusinessInformation);
-    // export default compose(withRouter, connect (mapStateToProps, {
-    //                                                                 saveLocalBusiness, 
-    //                                                                 saveBusinesInformationDB, 
-    //                                                                 saveLocalRequirements, 
-    //                                                                 updateRequirementsDB, 
-    //                                                                 saveRequirementsDB, 
-    //                                                                 updateBusinesInformationDB, 
-    //                                                                 resetRequirementsState, 
-    //                                                                 resetBusinessState, 
-    //                                                                 saveProjectFiles,
-    //                                                                 updateTechnicalDB,
-    //                                                                 saveTechnicalDB,
-    //                                                                 savePMOEvaluationDB,
-    //                                                                 updatePMOEvaluation,
-    //                                                                 updateROIRealizedDB,
-    //                                                                 saveROIRealizedDB,
-    //                                                                 saveDynatraceDB,
-    //                                                             })) (BusinessInformation);
+  

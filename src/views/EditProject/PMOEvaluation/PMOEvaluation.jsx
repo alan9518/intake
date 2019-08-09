@@ -33,7 +33,9 @@
     } from '../../../actions';
 
 
-    const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+    // const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+
+    const currentUser = window.getCurrentSPUser();
 
 // --------------------------------------
 // Create Component Class
@@ -1308,7 +1310,7 @@
             // // --------------------------------------
             // redirectUser() {
             //     const {history} = this.props;
-            //     const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+            //     const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
                 
             //     history.push(`${path}/add-project/roi-realized`);
             // }
@@ -1319,9 +1321,9 @@
             redirectUser() {
                 const {history, location, match} = this.props.locationData;
                 const id = match.params.projectID
-                //? const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+               const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake';
+                //const path = '/intake';
                 
                 history.push(`${path}/project/${id}/roi-realized`);
                 
@@ -1333,9 +1335,9 @@
             
             redirectUserPrev =() => {
                 const {history, location} = this.props.locationData;
-                //? const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
+               const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
 
-                const path = '/intake';
+                //const path = '/intake';
 
                 let pathArray = location.pathname.split('/');
                 let projectIndex = pathArray[pathArray.length - 2];
@@ -1656,7 +1658,10 @@
 // Define PropTypes 
 // -------------------------------------- 
     PMOEvaluation.propTypes = {
-        props: PropTypes
+        projectIntake : PropTypes.object,
+        isPMO : PropTypes.bool,
+        locationData : PropTypes.object,
+        updateProjectIntakeValues : PropTypes.func
     };
 
 

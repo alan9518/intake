@@ -19,31 +19,22 @@
     import formHolder from '../layouts/Projects/FormHolder';
     import AddRequirementsDefinition from '../views/AddProject/Requirements/RequirementsDefinition';
     import AddBusinessInformation from '../views/AddProject/Business/BusinessInformation';
-    // import AddTechnicalEvaluation from '../views/AddProject/Thecnical/TechnicalEvaluation';
-    // import AddPMOEvaluation from '../views/AddProject/PMOEvaluation/PMOEvaluation';
-    // import AddROIRealized from '../views/AddProject/ROIRealized/ROIRealized';
+  
 
     // --------------------------------------
     // Edit Project
-    // https://flextronics365.sharepoint.com/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx
+    // https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx
     // --------------------------------------
     import editformHolder from '../layouts/Projects/EditFormHolder';
-    // import EditRequirementsDefinition from '../views/EditProject/Requirements/RequirementsDefinition';
-    // import EditBusinessInformation from '../views/EditProject/Business/BusinessInformation';
-    // import EditTechnicalEvaluation from '../views/EditProject/Thecnical/TechnicalEvaluation';
-    // import EditPMOEvaluation from '../views/EditProject/PMOEvaluation/PMOEvaluation';
-    // import EditROIRealized from '../views/EditProject/ROIRealized/ROIRealized';
+
 
     import ProcessEndedView from '../views/ProcessEnded/ProcessEnded';
-    // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
-    // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
-    
-    
+   
 
 
       
     import {Config} from '../Config';
-    const {relativePath, localPath} = Config
+    const {relativePath, localPath, spPath} = Config
 
 
 // --------------------------------------
@@ -53,7 +44,7 @@
 // --------------------------------------
     export const appRoutes = [
         {
-            path: `${localPath}/intake-projects`,
+            path: `${relativePath}/intake-projects`,
             exact: true,
             key: 'route-intakeProjects',
             menuTitle: 'All \n Projects',
@@ -61,14 +52,14 @@
         },
 
         {
-            path: `${localPath}/add-project/`,
+            path: `${relativePath}/add-project/`,
             exact: false,
             key: 'route-addProject',
             menuTitle: 'Add \n Project',
             component: formHolder
         },
         {
-            path: `${localPath}/proccess-ended/:projId`,
+            path: `${relativePath}/proccess-ended/:projId`,
             exact: false,
             key: 'route-processEnded',
             // menuTitle: 'Add \n Project',
@@ -76,7 +67,7 @@
         },
 
         {
-            path: `${localPath}/project/:projectID/`,
+            path: `${relativePath}/project/:projectID/`,
             exact: false,
             key: 'route-editProject',
             // menuTitle: 'Add \n Project',
@@ -84,9 +75,9 @@
 
         },
 
-        { redirect: true, path: '/', to: `${localPath}/intake-projects`, key: 'indexRedirect-route' },
+        { redirect: true, path: '/', to: `${relativePath}/intake-projects`, key: 'indexRedirect-route' },
         { redirect: true, path: '/project/:projectID', to: `/project/:projectID/requirement-definition`, key: 'eidtProjectRedirect-route' },
-        { redirect: true, path: `/add-project/`, to: `${localPath}/add-project/requirement-definition`, key: 'addProjectRedirect-route' }
+        { redirect: true, path: `/add-project/`, to: `${relativePath}/add-project/requirement-definition`, key: 'addProjectRedirect-route' }
         
 
 
@@ -102,7 +93,7 @@
 // --------------------------------------
     export const newProjectRoutes = [
         {
-            path: `${localPath}/intake-projects`,
+            path: `${relativePath}/intake-projects`,
             exact: true,
             key: 'route-intakeProjects',
             menuTitle: 'All \n Projects',
@@ -112,7 +103,7 @@
         },
         {
             // path: `/add-project/requirement-definition`,
-            path: `${localPath}/add-project/requirement-definition`,
+            path: `${relativePath}/add-project/requirement-definition`,
             exact: false,
             key: 'route-addRequirementDefinition',
             menuTitle: 'Requirements \n Definition',
@@ -122,7 +113,7 @@
         },
         {
             // path: `/add-project/business-information`,
-            path: `${localPath}/add-project/business-information`,
+            path: `${relativePath}/add-project/business-information`,
             exact: true,
             key: 'route-addBusinessInformation',
             menuTitle: 'Business \n Information',
@@ -131,7 +122,7 @@
         },
         {
             // path: `/add-project/technical-evaluation`,
-            path: `${localPath}/add-project/technical-evaluation`,
+            path: `${relativePath}/add-project/technical-evaluation`,
             exact: true,
             key: 'route-addTechnicalEvaluation',
             menuTitle: 'Technical \n Evaluation',
@@ -140,7 +131,7 @@
         },
         {
             // path: `/add-project/pmo-evaluation`,
-            path: `${localPath}/add-project/pmo-evaluation`,
+            path: `${relativePath}/add-project/pmo-evaluation`,
             exact: true,
             key: 'route-addPmoEvaluation',
             menuTitle: 'PMO \n Evaluation',
@@ -149,14 +140,14 @@
         },
         {
             // path: `/add-project/roi-realized`,
-            path: `${localPath}/add-project/roi-realized`,
+            path: `${relativePath}/add-project/roi-realized`,
             exact: true,
             key: 'route-addPoiRealized',
             menuTitle: 'ROI \n Realized',
             // component: AddROIRealized,
             allowNormalUser : false,
         },
-        { redirect: true, path: `${localPath}/add-project/`, to: `${localPath}/add-project/requirement-definition`, key: 'addProjectRedirect-route' }
+        { redirect: true, path: `${relativePath}/add-project/`, to: `${relativePath}/add-project/requirement-definition`, key: 'addProjectRedirect-route' }
     ]
 
 
@@ -167,7 +158,7 @@
 
 export const editProjectRoutes = [
     {
-        path: `${localPath}/intake-projects`,
+        path: `${relativePath}/intake-projects`,
         exact: true,
         key: 'route-intakeProjects',
         menuTitle: 'All \n Projects',
@@ -177,7 +168,7 @@ export const editProjectRoutes = [
     },
 
     {
-        path: `${localPath}/project/:projectID/requirement-definition`,
+        path: `${relativePath}/project/:projectID/requirement-definition`,
         exact: true,
         key: 'route-requirementDefinition',
         menuTitle: 'Requirements \n Definition',
@@ -188,7 +179,7 @@ export const editProjectRoutes = [
     },
     {
         // path: `/add-project/business-information`,
-        path: `${localPath}/project/:projectID/business-information`,
+        path: `${relativePath}/project/:projectID/business-information`,
         exact: true,
         key: 'route-editPusinessInformation',
         menuTitle: 'Business \n Information',
@@ -198,7 +189,7 @@ export const editProjectRoutes = [
     },
     {
         // path: `/edit-project/technical-evaluation`,
-        path: `${localPath}/project/:projectID/technical-evaluation`,
+        path: `${relativePath}/project/:projectID/technical-evaluation`,
         exact: true,
         key: 'route-editPechnicalEvaluation',
         menuTitle: 'Technical \n Evaluation',
@@ -208,7 +199,7 @@ export const editProjectRoutes = [
     },
     {
         // path: `/edit-project/pmo-evaluation`,
-        path: `${localPath}/project/:projectID/pmo-evaluation`,
+        path: `${relativePath}/project/:projectID/pmo-evaluation`,
         exact: true,
         key: 'route-editPmoEvaluation',
         menuTitle: 'PMO \n Evaluation',
@@ -218,7 +209,7 @@ export const editProjectRoutes = [
     },
     {
         // path: `/edit-project/roi-realized`,
-        path: `${localPath}/project/:projectID/roi-realized`,
+        path: `${relativePath}/project/:projectID/roi-realized`,
         exact: true,
         key: 'route-editPoiRealized',
         menuTitle: 'ROI \n Realized',
@@ -226,7 +217,7 @@ export const editProjectRoutes = [
         allowNormalUser : false,
         editRoute : true
     },
-    { redirect: true, path: `${localPath}/project/`, to: `${localPath}/intake-projects`, key: 'editProjectRedirect-route' }
+    { redirect: true, path: `${relativePath}/project/`, to: `${relativePath}/intake-projects`, key: 'editProjectRedirect-route' }
 ]
 
 

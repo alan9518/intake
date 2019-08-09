@@ -111,10 +111,10 @@
             // Load All API GET Requests
             // --------------------------------------
             async loadAPI() {
-                const sitePMOsPromise =  this.fetchSitePMOS();
-                // const sitePMOS =   await  sitePMOsPromise.data ?  sitePMOsPromise.data.value : this.users.value
+                const sitePMOsPromise =  await this.fetchSitePMOS();
+                const sitePMOS =   await  sitePMOsPromise.data ?  sitePMOsPromise.data.value : this.users.value
 
-                const sitePMOS = this.users.value
+                // const sitePMOS = this.users.value
                 console.log("TCL: Dashboard -> loadAPI -> sitePMOS", sitePMOS)
                 let isPMO = false
 

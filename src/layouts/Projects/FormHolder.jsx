@@ -207,52 +207,52 @@
             
             }
         
-        // --------------------------------------
-        // Set Initial Values
-        // --------------------------------------
-        componentDidMount() {
-            // const pmos = this.props.sharepoint;
+            // --------------------------------------
+            // Set Initial Values
+            // --------------------------------------
+            componentDidMount() {
+                // const pmos = this.props.sharepoint;
 
 
-            this.resetProjectIntake()
-            this.setState({isLoaded : true});
-
-            
-            console.log("TCL: formHolder -> componentDidMount -> this.props.resetProjectIntake", this.props.resetProjectIntake)
-
-
-            
-            console.log("TCL: formHolder -> componentDidMount -> this.props", this.props)
-
-
-
-            // this.setState({resetForm : true})
-
-        }
-
-
-
-        // ?--------------------------------------
-        // ? Reset ProjectIntake Object when 
-        // ? User Goes to all Projects View
-        // ?--------------------------------------
-        componentWillReceiveProps(nextProps) {
-            console.log("TCL: formHolder -> componentWillReceiveProps -> nextProps", nextProps)
-
-            
-
-            if(this.props.location.pathname === '/intake/add-project/') {
-                if(projectIntake.requirementsDefinition.SavedLocally === true || projectIntake.requirementsDefinition.SavedOnDB === false ) {
-                    // ? Reset Object
-                    console.log("TCL: formHolder -> componentWillReceiveProps -> Reset Object")
-                    this.resetProjectIntake()
-                    this.setState({isLoaded : true});
-                }
-            }
-            else 
+                this.resetProjectIntake()
                 this.setState({isLoaded : true});
-            
-        }
+
+                
+                console.log("TCL: formHolder -> componentDidMount -> this.props.resetProjectIntake", this.props.resetProjectIntake)
+
+
+                
+                console.log("TCL: formHolder -> componentDidMount -> this.props", this.props)
+
+
+
+                // this.setState({resetForm : true})
+
+            }
+
+
+
+            // ?--------------------------------------
+            // ? Reset ProjectIntake Object when 
+            // ? User Goes to all Projects View
+            // ?--------------------------------------
+            componentWillReceiveProps(nextProps) {
+                console.log("TCL: formHolder -> componentWillReceiveProps -> nextProps", nextProps)
+
+                
+
+                if(this.props.location.pathname === '/intake/add-project/') {
+                    if(projectIntake.requirementsDefinition.SavedLocally === true || projectIntake.requirementsDefinition.SavedOnDB === false ) {
+                        // ? Reset Object
+                        console.log("TCL: formHolder -> componentWillReceiveProps -> Reset Object")
+                        this.resetProjectIntake()
+                        this.setState({isLoaded : true});
+                    }
+                }
+                else 
+                    this.setState({isLoaded : true});
+                
+            }
 
 
 
@@ -673,7 +673,7 @@
 
 
                         <Route
-                            path = {`${localPath}/intake-projects`}
+                            path = {`${relativePath}/intake-projects`}
                             exact =  {true}
                             key =  'route-intakeProjects'
                             ref = 'route-intakeProjects'
@@ -687,7 +687,7 @@
 
 
                         <Route
-                            path = {`${localPath}/add-project/requirement-definition`}
+                            path = {`${relativePath}/add-project/requirement-definition`}
                             key =  'route-addRequirementDefinition'
                             ref = 'route-addRequirementDefinition'
                             render={(props) => <AddRequirementsDefinition 
@@ -701,7 +701,7 @@
                         />
 
                         <Route
-                            path = {`${localPath}/add-project/business-information`}
+                            path = {`${relativePath}/add-project/business-information`}
                             key =  'route-addBusinessInformation'
                             ref = 'route-addBusinessInformation'
                             render={(props) => <AddBusinessInformation 
@@ -714,7 +714,7 @@
                         />
 
                         <Route
-                            path = {`${localPath}/add-project/technical-evaluation`}
+                            path = {`${relativePath}/add-project/technical-evaluation`}
                             key =  'route-addTechnicalEvaluation'
                             ref = 'route-addTechnicalEvaluation'
                             render={(props) => <AddTechnicalEvaluation projectIntake = {projectIntake}  isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
@@ -722,7 +722,7 @@
 
 
                         <Route
-                            path = {`${localPath}/add-project/pmo-evaluation`}
+                            path = {`${relativePath}/add-project/pmo-evaluation`}
                             key =  'route-addPmoEvaluation'
                             ref = 'route-addPmoEvaluation'
                             render={(props) => <AddPMOEvaluation projectIntake = {projectIntake} isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
@@ -730,14 +730,14 @@
 
 
                         <Route
-                            path = {`${localPath}/add-project/roi-realized`}
+                            path = {`${relativePath}/add-project/roi-realized`}
                             key =  'route-addRoiRealized'
                             ref = 'route-addRoiRealized'
                             render={(props) => <AddROIRealized projectIntake = {projectIntake} isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
                         />
 
 
-                        <Redirect from = {`${localPath}/add-project/`} to = {`${localPath}/add-project/requirement-definition`} ></Redirect>
+                        <Redirect from = {`${relativePath}/add-project/`} to = {`${relativePath}/add-project/requirement-definition`} ></Redirect>
 
 
                     </Switch>
