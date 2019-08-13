@@ -12,6 +12,7 @@
     import moment from 'moment';
 
 
+    const currentUser = window.getCurrentSPUser();
 
 
 
@@ -83,13 +84,13 @@
         const dynatraceData = formData.map((data)=>{
             // if(data.project_id === null)
             let newData = {
-                "project_id": parseInt( projectID !== null ? projectID : data.project_id ),
-                "roi_real_id": parseInt(newRoiRealizedID !== null ? newRoiRealizedID :  data.roi_real_id),
+                "project_id":  projectID !== null ? projectID : data.project_id ,
+                "roi_real_id": newRoiRealizedID !== null ? newRoiRealizedID :  data.roi_real_id,
                 "site_usage":  data.Usage_Footprint_1_week ? removeSpecialCharacters(data.Usage_Footprint_1_week) : removeSpecialCharacters(data.site_usage) ,
                 "usage_footprint": data.Site_Usage ?  removeSpecialCharacters(data.Site_Usage) : removeSpecialCharacters(data.usage_footprint),
                 "tpm": data.Transactions_per_minute_TPM ? removeSpecialCharacters(data.Transactions_per_minute_TPM) : removeSpecialCharacters(data.tpm),
                 "roi_date": data.ROI_Realized_Date ? formatDate(data.ROI_Realized_Date) : formatDate(data.roi_date),
-                "created_by": data.Created_by
+                "created_by": currentUser.userEmail || data.Created_by
             }
             return newData;
         })
@@ -138,8 +139,8 @@
                                                         "Usage_Footprint_week" : "${formData.Usage_Footprint_1_week}",
                                                         "Transactions_per_minute" : "${formData.Transactions_per_minute_TPM}",
                                                         "ROI_Realized_Date" : "${moment().format("DD/MM/YYYY")}",
-                                                        "created_by": "${formData.Created_by}",
-                                                        "last_modifed_by": "${formData.Last_modifed_by}"
+                                                        "created_by": "${currentUser.userEmail || formData.Created_by}",
+                                                        "last_modifed_by": "${currentUser.userEmail || formData.Last_modifed_by}"
                                                     }
                                                 </roireal>
                                             </insertROIReal>
@@ -180,7 +181,7 @@
         
         const updateROIRealizedData = {
             tab5 : {
-                "project_id": formData.Project_ID ? parseInt(formData.Project_ID) : parseInt(formData.project_id) || id,
+                "project_id": formData.Project_ID ? (formData.Project_ID) : (formData.project_id) || id,
                 "roi_real_id" : formData.Roi_real_id || formData.roi_real_id,
                 "Implementation_Date" : formatDate(formData.Implementation_Date),
                 "FTE_Saved" : formData.FTE_Saved_per_year ? formData.FTE_Saved_per_year : formData.FTE_Saved,
@@ -202,7 +203,7 @@
                 "Usage_Footprint_week" : null ,
                 "Transactions_per_minute" : null ,
                 "ROI_Realized_Date" : formatDate(new Date()) ,
-                "last_modifed_by" : formData.Last_modifed_by  || 'alan.medina@flex.com', 
+                "last_modifed_by" : currentUser.userEmail || formData.Last_modifed_by  
             }
         }
 
@@ -216,7 +217,9 @@
                         body : JSON.stringify(updateROIRealizedData)
                 })
 
-                const updateROIRealizedResponse =  await updateROIRealizedPromise.text();
+                
+                const updateROIRealizedResponse = await handlePOSTResponse(updateROIRealizedPromise);
+                // const updateROIRealizedResponse =  await updateROIRealizedPromise.text();
 				console.log('TCL: updateROIRealizedsDB -> updateROIRealizedResponse', updateROIRealizedResponse)
                 // dispatch(updateROIRealized(updateROIRealizedData));
 

@@ -11,6 +11,8 @@
     import { Endpoints } from '../../services/Endpoints';
     import moment from 'moment';
 
+    const currentUser = window.getCurrentSPUser();
+
 /* ==========================================================================
 ** Local Functions
 ** ========================================================================== */
@@ -162,8 +164,8 @@
                                                                 "Maintenance_Salaries" : "${formData.Maintenance_Salaries_hours_per_year}",
                                                                 "No_of_Sites" : "${formData.No_of_Sites}",
                                                                 "No_of_Active_users" : "${formData.No_of_Active_users}",
-                                                                "created_by": "${formData.Created_by}",
-                                                                "last_modifed_by": "${formData.Last_modifed_by}" 
+                                                                "created_by": "${currentUser.userEmail ||  formData.Created_by}",
+                                                                "last_modifed_by": "${currentUser.userEmail ||  formData.Last_modifed_by}" 
                                                             }
                                                         </techeval>
                                                     </insertTechEval>
@@ -209,7 +211,7 @@
 
             const updateTechnicalData = {
                 tab3 :{
-                    "project_id" : formData.Project_id || formData.Project_ID || id || null,
+                    "project_id" :  id  || formData.Project_id || formData.Project_ID || null,
                     "tech_eval_id" : formData.Tech_eval_id || formData.tech_eval_id,
                     "Delivery_Team" : formData.Delivery_Team.value === undefined ? removeSpecialCharacters(formData.Delivery_Team) : removeSpecialCharacters(formData.Delivery_Team.value ),
                     "Platform_type" : removeSpecialCharacters(formData.Platform_type.value),
@@ -235,7 +237,7 @@
                     "Maintenance_Salaries" : formData.Maintenance_Salaries_hours_per_year,
                     "No_of_Sites" : formData.No_of_Sites,
                     "No_of_Active_users" : formData.No_of_Active_users,
-                    "last_modifed_by" : formData.Last_modifed_by || 'alan.medina@flex.com'
+                    "last_modifed_by" : currentUser.userEmail ||  formData.Last_modifed_by 
                 }
 
             }
@@ -249,7 +251,9 @@
                             body : JSON.stringify(updateTechnicalData)
                     })
 
-                    const updateTechnicalResponse =  await updateTechnicalPromise.text();
+                    // const updateTechnicalResponse =  await updateTechnicalPromise.text();
+
+                    const updateTechnicalResponse = await handlePOSTResponse(updateTechnicalPromise);
                     console.log('TCL: updateTechnicalsDB -> updateTechnicalResponse', updateTechnicalResponse)
 
                     return updateTechnicalResponse;

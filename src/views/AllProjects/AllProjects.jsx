@@ -254,29 +254,45 @@
             // On CHange for FIlter
             // --------------------------------------
             onChange = (event)=> {
-               
-                const filterValue =  String(event.target.value) ;
-                const filteredProjects = this.allProjects.filter((project)=>{
-					
-                    return (
-                            // project.project_id.indexOf(filterValue) > -1  ||
-                            (project.project_name.toLowerCase().indexOf(filterValue.toLowerCase())) > -1  ||
-                            (project.request_owner.toLowerCase().indexOf(filterValue.toLowerCase())) > -1 ||
-                            (project.request_id.toLowerCase().indexOf(filterValue.toLowerCase())) > -1 ||
-                            (project.workstage.toLowerCase().indexOf(filterValue.toLowerCase())) > -1
-                    )   
-                });
 
-                console.log("TCL: Home -> onChange -> filteredProjects", filteredProjects)
-
-                this.setState({
-                    tableData : filterValue === '' ? this.allProjects : filteredProjects,
-                    filteredTable :  filterValue === '' ? this.allProjects : filteredProjects,
-					tableFiltered : filteredProjects.length > 0 ? true : false,
-                    numberOfPages : this.setNumberOfPages(filteredProjects.length),
-                    currentPage : 1
+                if (this.state.tableData.length <= 0) {
+                    this.setState({
+                        tableData :  this.allProjects,
+                        filteredTable:  this.allProjects ,
+                        tableFiltered : this.allProjects.length > 0 ? true : false,
+                        numberOfPages : this.setNumberOfPages(this.allProjects.length),
+                        currentPage : 1
+                        
+                    })
+                }
                     
-                })
+                else {
+                    const filterValue =  String(event.target.value) ;
+                    const filteredProjects = this.allProjects.filter((project)=>{
+                        
+                        return (
+                                // project.project_id.indexOf(filterValue) > -1  ||
+                                (project.project_name.toLowerCase().indexOf(filterValue.toLowerCase())) > -1  ||
+                                (project.request_owner.toLowerCase().indexOf(filterValue.toLowerCase())) > -1 ||
+                                (project.request_id.toLowerCase().indexOf(filterValue.toLowerCase())) > -1 ||
+                                (project.workstage.toLowerCase().indexOf(filterValue.toLowerCase())) > -1
+                        )   
+                    });
+    
+                    console.log("TCL: Home -> onChange -> filteredProjects", filteredProjects)
+    
+                    this.setState({
+                        tableData : filterValue === '' ? this.allProjects : filteredProjects,
+                        filteredTable :  filterValue === '' ? this.allProjects : filteredProjects,
+                        tableFiltered : filteredProjects.length > 0 ? true : false,
+                        numberOfPages : this.setNumberOfPages(filteredProjects.length),
+                        currentPage : 1
+                        
+                    })
+                }
+               
+               
+               
             }
 
 
@@ -352,7 +368,8 @@
                         <div className="int-container">
                             <div className="int-row">
                                 <div className="int-column ">
-                                    { this.state.tableData.length > 0 && <Search onChange = {this.onChange} onSubmit = {this.onSubmitFilter}/>}
+                {/* this.state.tableData.length > 0 && <Search onChange = {this.onChange} onSubmit = {this.onSubmitFilter}/> */}
+                                    <Search onChange = {this.onChange} onSubmit = {this.onSubmitFilter}/>
                                 </div>
                             </div>
                         </div>

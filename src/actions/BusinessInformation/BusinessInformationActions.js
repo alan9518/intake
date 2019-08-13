@@ -8,10 +8,12 @@
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
-    import axios from 'axios';
+    
     import { Endpoints } from '../../services/Endpoints';
-    import moment from 'moment';
+    
 
+
+    const currentUser = window.getCurrentSPUser();
 
 
 /* ==========================================================================
@@ -141,8 +143,8 @@
                                                         "retirement_savings" : "${formData.Savings_from_Retirement_of_Legacy_application_in_hours_per_year_by_Maintenance_Team}", 
                                                         "infra_license_fee_savings" : "${formData.Legacy_System_Infra_and_License_Fee_savings_per_year}", 
                                                         "other_savings" : "${formData.Other_Savings}", 
-                                                        "created_by": "${formData.Created_by}",
-                                                        "last_modifed_by": "${formData.Last_modifed_by}" 
+                                                        "created_by": "${ currentUser.userEmail ||  formData.Created_by}",
+                                                        "last_modifed_by": "${ currentUser.userEmail ||  formData.Last_modifed_by}" 
                                                     }
                                                 </bussinfo>
                                             </insertBussInfo>
@@ -186,10 +188,15 @@
 
         // ? Set value fow Workstage
         let workstage = null;
-        if(formData.Workstage.value)
-            workstage = formData.Workstage.value
-        else    
-            workstage =  formData.Workstage
+
+        if(formData.Workstage) {
+            if(formData.Workstage.value)
+                workstage = formData.Workstage.value
+            else    
+                workstage =  formData.Workstage
+        }
+
+      
 
 
         // "sites_impacted" : "${formData.Sites_Impacted}", 
@@ -227,8 +234,8 @@
                 "infra_license_fee_savings" : formData.Legacy_System_Infra_and_License_Fee_savings_per_year, 
                 "other_savings" : formData.Other_Savings, 
                 "workstage" : workstage,
-                "created_by": formData.Created_by || 'alan.medina@flex.com',
-                "last_modifed_by": formData.Last_modifed_by || 'alan.medina@flex.com'
+                "created_by":  currentUser.userEmail ||  formData.Created_by ,
+                "last_modifed_by":  currentUser.userEmail ||  formData.Last_modifed_by 
             }
         }
 
@@ -245,7 +252,8 @@
 
                 //console.log('updateBusinessPromise: fetchSitePMOS -> response', updateBusinessPromise);
                 
-                const updateBusinessReponse =  await updateBusinessPromise.text();
+                const updateBusinessReponse = await handlePOSTResponse(updateBusinessPromise);
+                // const updateBusinessReponse =  await updateBusinessPromise.text();
 				
                 //console.log('TCL: saveBusinesInformationDB -> updateBusinessReponse', updateBusinessReponse)
                 

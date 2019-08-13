@@ -7,8 +7,10 @@
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
-    import axios from 'axios';
+    
     import { Endpoints } from '../../services/Endpoints';
+
+    const currentUser = window.getCurrentSPUser();
 
 
 
@@ -32,6 +34,9 @@
     // Remove & from values
     // --------------------------------------
     const removeSpecialCharacters = (stringToFormat) => {
+
+        if(!stringToFormat)
+            return 
         
         if(stringToFormat ===  null || stringToFormat === "")
             return "";
@@ -52,11 +57,12 @@
         if(filesArray === [] || filesArray.length <= 0)
             return '';
 
+        let folderURL = Project_ID.indexOf('GSD') >= 0  ? Project_ID :`GSD${Project_ID}`;
         
         const filesNamesArray = filesArray.map((file) => {
             console.log("TCL: getFilesNamesArray -> file", file)    
             if(file.name && file.accepted === true) {
-                let fileURL = `sites/gsd/intake_process/intakeFiles/GSD${Project_ID}/PMO`;
+                let fileURL = `sites/gsd/intake_process/intakeFiles/${folderURL}/PMO`;
                 return `${fileURL}/${file.name}` 
             }
                 
@@ -69,7 +75,8 @@
 
         console.log("TCL: getFilesNamesArray -> filesString", filesString)
         return filesString.replace(/'/g, '');
-
+        
+        // .replace(/ /g,'');
         // return (filesNamesArray).join();
     }
 
@@ -107,7 +114,11 @@
     // -------------------------------------- */
     export async function savePMOEvaluationDB(formData, projectID = null) {
 
-        let dbFiles = formData.Documents.length <= 0 ? '' :  `'${getFilesNamesArray(formData.Project_ID, formData.Documents)}'`
+        let id = projectID !== null ? projectID : formData.Project_ID || formData.project_id;
+        let dbFiles = formData.Documents.length <= 0 ? '' :  `'${getFilesNamesArray(id, formData.Documents)}'`
+        
+        id = (id.indexOf('GSD')) >= 0  ? id.substr((id.indexOf('GSD'))+3,id.length) : id;
+        console.log("TCL: savePMOEvaluationDB -> id", id)
         const newPMOEvaluationtData = `<?xml version='1.0' encoding='utf-8'?>
 		
                                         <soap12:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap12='http://www.w3.org/2003/05/soap-envelope'>
@@ -115,21 +126,21 @@
                                                 <insertPMOEval xmlns='http://tempuri.org/'>
                                                     <pmoeval>
                                                         {
-                                                            "project_id": "${ projectID !== null ? projectID : formData.Project_ID}", 
+                                                            "project_id": "${ id }", 
                                                             "Expected_total_ROI": "${formData.Expected_total_ROI}",
                                                             "Expected_IRR": "${formData.Expected_IRR}",
                                                             "ROI_Category": "${formData.ROI_Category.value}",
                                                             "WorkID": "${removeSpecialCharacters(formData.WorkID_PlanView_FlexPM_SN_Ticket)}",
                                                             "Documents":[${dbFiles}],
-                                                            "created_by": "${formData.Created_by}",
-                                                            "last_modifed_by": "${formData.Last_modifed_by}"
+                                                            "created_by": "${ currentUser.userEmail || formData.Created_by}",
+                                                            "last_modifed_by": "${currentUser.userEmail || formData.Last_modifed_by}"
                                                         }
                                                     </pmoeval>
                                                 </insertPMOEval>
                                             </soap12:Body>
                                         </soap12:Envelope>`;
 
-        //console.log('TCL: savePMOEvaluationDB -> newPMOEvaluationtData', newPMOEvaluationtData);
+        console.log('TCL: savePMOEvaluationDB -> newPMOEvaluationtData', newPMOEvaluationtData);
 
 
         
@@ -165,21 +176,27 @@
     // -------------------------------------- */
     export async function updatePMOEvaluation(formData, id = null) {
         
-        let dbFiles = formData.Documents.length <= 0 ? '' :  `${getFilesNamesArray(formData.Project_ID, formData.Documents)}`
+        // let id = projectID !== null ? projectID : formData.Project_ID || formData.project_id;
+       
+        // let dbFiles = formData.Documents.length <= 0 ? '' :  `${getFilesNamesArray(formData.Project_ID, formData.Documents)}`
+        let project_id = id !== null ?  id : formData.Project_ID || formData.project_idx
+        let dbFiles = formData.Documents.length <= 0 ? '' :  `'${getFilesNamesArray(project_id, formData.Documents)}'`
+
+            project_id = (project_id.indexOf('GSD')) >= 0  ? project_id.substr((project_id.indexOf('GSD'))+3,project_id.length) : project_id;
         const updatePMOEvaluationData = {
             tab4 : {
-                "project_id": parseInt(formData.Project_ID) || id,
+                "project_id": project_id  ,
                 "pmo_eval_id" : formData.Pmo_eval_id || formData.pmo_eval_id,
                 "Expected_total_ROI": formData.Expected_total_ROI,
                 "Expected_IRR": formData.Expected_IRR,
                 "ROI_Category": formData.ROI_Category.value,
                 "WorkID": removeSpecialCharacters(formData.WorkID_PlanView_FlexPM_SN_Ticket),
-                "Documents":[`${dbFiles}`],
-                "last_modifed_by": formData.Last_modifed_by || 'alan.medina@flex.com'
+                "Documents":[`${dbFiles.replace(/'/g, '')}`],
+                "last_modifed_by": currentUser.userEmail || formData.Last_modifed_by 
             }
         }
 
-        //console.log('TCL: updatePMOEvaluation -> updatePMOEvaluationData', updatePMOEvaluationData)
+        console.log('TCL: updatePMOEvaluation -> updatePMOEvaluationData', updatePMOEvaluationData)
 
         
 
@@ -190,7 +207,8 @@
                         body : JSON.stringify(updatePMOEvaluationData)
                 })
 
-                const updatePMOEvaluationResponse =  await updatePMOEvaluationPromise.text();
+                const updatePMOEvaluationResponse = await handlePOSTResponse(updatePMOEvaluationPromise);
+                // const updatePMOEvaluationResponse =  await updatePMOEvaluationPromise.text();
                 console.log('TCL: updatePMOEvaluationsDB -> updatePMOEvaluationResponse', updatePMOEvaluationResponse)
                 
                 return updatePMOEvaluationResponse;

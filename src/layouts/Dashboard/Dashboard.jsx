@@ -75,7 +75,7 @@
                 window.addEventListener("resize", this.updateContainerDimensions);
                 // ? Check if user is PMO
                 try {
-                    console.log("TCL: Dashboard -> componentDidMount -> DidMount", )    
+                        
                     this.loadAPI();
                 }
                 catch(error) {
@@ -180,11 +180,6 @@
                 const {responsiveWidth} = this.state;
                 // const history = createBrowserHistory();
 
-                console.log("TCL: Dashboard -> renderDashboard -> this.props", this.props)
-
-                // console.log("TCL: Dashboard -> renderDashboard -> this.props.route", this.props.route)
-
-
                     return (
                         <div className = "int-mainContainer" style = {{maxWidth:responsiveWidth}}>
                             <BrowserRouter history={this.props.history}>
@@ -193,7 +188,7 @@
 
                                 <Switch>
                                     {appRoutes.map((prop,key) => {
-                                        console.log("TCL: Dashboard -> renderDashboard -> prop", prop)
+                                        
                                         if (prop.redirect)
                                             return <Redirect from={prop.path} to={prop.to} key={key} />;
                                         

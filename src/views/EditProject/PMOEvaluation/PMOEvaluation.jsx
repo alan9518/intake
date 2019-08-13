@@ -25,6 +25,7 @@
         savePMOEvaluationDB,
         saveROIRealizedDB, 
         saveDynatraceDB,
+        saveProjectFiles,
         updateRequirementsDB,
         updateBusinesInformationDB,
         updateTechnicalDB,
@@ -59,15 +60,14 @@
                     Expected_total_ROI : props.projectIntake.pmoEvaluation.Expected_total_ROI || "",
                     Expected_IRR : props.projectIntake.pmoEvaluation.Expected_IRR || "",
                     ROI_Category : props.projectIntake.pmoEvaluation.ROI_Category || {label : "Select Category", value : null}, 
-                    WorkID_PlanView_FlexPM_SN_Ticket : props.projectIntake.pmoEvaluation.WorkID_PlanView_FlexPM_SN_Ticket || "",
-                    // Project_Documents : props.requirementsDefinition.Project_Documents ||  [],  
+                    WorkID_PlanView_FlexPM_SN_Ticket : props.projectIntake.pmoEvaluation.WorkID_PlanView_FlexPM_SN_Ticket || "", 
                     Documents : props.projectIntake.pmoEvaluation.Documents || [],
-                    spFiles : [],
+                    spFiles : props.projectIntake.pmoEvaluation.SPFiles,
                     showFileManager : false,
                     checkForErrors : false,
                     SavedOnDB : false
                 }
-                this.project_Documents =  props.projectIntake.pmoEvaluation.Documents || [];
+                this.projectPMO_Documents =  props.projectIntake.pmoEvaluation.Documents || [];
                 this.originalFiles = [];
                 this.onChangeSelect =  this.onChangeSelect.bind(this);
                 this.onDateChange =  this.onDateChange.bind(this);
@@ -90,6 +90,7 @@
                     ROI_Category : this.createSelectOption(this.props.projectIntake.pmoEvaluation.ROI_Category) || this.createSelectOption("") ,
                     isLoaded : true
                 })
+                this.projectPMO_Documents = this.props.projectIntake.pmoEvaluation.Documents
             }
 
 
@@ -102,155 +103,6 @@
                 // let data = this.saveFormValues();
                 // this.props.saveLocalPMOEvaluation(data);
             }
-
-
-            // --------------------------------------
-            // Set Initial Values
-            // --------------------------------------
-            // componentDidMount() {
-            //     if(this.props.match.params.projectID) {
-            //         const id = this.props.match.params.projectID
-            //         const requestID = id.substr(id.indexOf('D')+1,id.length);
-
-
-            //         if(this.props.updateFromState !== true ) {
-            //             this.props.fetchProjectPMOEvaluation(requestID)
-            //             this.props.fetchProjectFiles(id, 'PMO')
-            //             // this.updateSelectsOnComponentLoad();
-            //         }
-            //         else {
-
-            //             // let docs = 
-
-            //             let docs = [];
-            //             if( this.props.pmoEvaluation.Documents )
-            //                 docs = this.props.pmoEvaluation.Documents[0] === "" ? [] : this.props.pmoEvaluation.Documents
-            //             else if(this.props.loadedPMOEvaluation.pmoEvaluation.Documents) 
-            //                     docs = this.props.loadedPMOEvaluation.pmoEvaluation.Documents[0]  === "" ? [] :  this.props.loadedPMOEvaluation.pmoEvaluation.Documents
-            //             else
-            //                 docs = []
-
-
-            //             this.setState({
-            //                 Expected_total_ROI : this.props.pmoEvaluation.Expected_total_ROI || "",
-            //                 pmo_eval_id : this.props.pmoEvaluation.pmo_eval_id,
-            //                 Expected_IRR : this.props.pmoEvaluation.Expected_IRR || "",
-            //                 ROI_Category : this.createSelectOption(this.props.pmoEvaluation.ROI_Category) || this.createSelectOption("") ,
-            //                 WorkID_PlanView_FlexPM_SN_Ticket : this.props.pmoEvaluation.WorkID_PlanView_FlexPM_SN_Ticket || "",
-            //                 Documents : docs ,
-            //                 // Documents : this.props.pmoEvaluation.Documents[0] === "" ? [] : this.props.loadedPMOEvaluation.pmoEvaluation.Documents,
-            //                 // Documents : this.props.pmoEvaluation.Documents || this.props.loadedPMOEvaluation.pmoEvaluation.Documents || [],
-            //                 spFiles : this.props.pmoEvalFiles || [],
-            //                 sendingData : false,
-            //                 SavedOnDB : false
-                            
-            //             })
-
-            //             this.Project_Documents = docs
-            //             this.updateSelectsOnComponentLoad(this.props.pmoEvaluation.ROI_Category);
-            //         }
-
-			// 		//console.log('TCL: componentDidMount -> this.props', this.props)
-            //     }
-            // }
-            // ROI_Category
-            // ROI_Category
-
-
-            // --------------------------------------
-            // Update Props & State
-            // --------------------------------------
-            // componentWillReceiveProps = (nextProps) => { 
-            //     //console.log('TCL: componentWillReceiveProps -> nextProps', nextProps)
-
-
-            //     // this.props
-            //     console.log("TCL: componentWillReceiveProps -> this.props", this.props)
-            //     if(nextProps.loadedPMOEvaluation.pmoEvaluation) {
-            //         if( !isEqual(this.props.pmoEvaluation, nextProps.loadedPMOEvaluation.pmoEvaluation)) {
-            //             console.log("TCL: componentWillReceiveProps -> this.props.updateFromDB", this.props.updateFromDB)
-            //             if(this.props.updateFromDB === true || this.props.updateFromDB === undefined) {
-            //                 this.setState({
-            //                     Expected_total_ROI : nextProps.pmoEvaluation.pmoEvaluation.Expected_total_ROI || "",
-            //                     pmo_eval_id : nextProps.pmoEvaluation.pmoEvaluation.pmo_eval_id,
-            //                     Expected_IRR : nextProps.pmoEvaluation.pmoEvaluation.Expected_IRR || "",
-            //                     ROI_Category : this.createSelectOption(nextProps.pmoEvaluation.pmoEvaluation.ROI_Category) || this.createSelectOption("") ,
-            //                     WorkID_PlanView_FlexPM_SN_Ticket : nextProps.pmoEvaluation.pmoEvaluation.WorkID || "",
-            //                     Documents : nextProps.pmoEvaluation.pmoEvaluation.Documents[0] === "" ? [] : nextProps.loadedPMOEvaluation.pmoEvaluation.Documents,
-            //                     spFiles : this.props.pmoEvalFiles || [],
-            //                     sendingData : false
-            //                 })
-
-            //                 this.project_Documents = nextProps.pmoEvaluation.Documents
-            //                 this.originalFiles = nextProps.pmoEvaluation.pmoEvaluation.Documents[0] === "" ? [] : nextProps.loadedPMOEvaluation.pmoEvaluation.Documents;
-            //                 this.updateSelectsOnComponentLoad(nextProps.pmoEvaluation.pmoEvaluation.ROI_Category);
-            //             }
-            //             else {
-
-            //                 let docs = [];
-            //                     // if( this.props.pmoEvaluation.Documents )
-            //                     //     docs = this.props.pmoEvaluation.Documents[0] === "" ? [] : this.props.pmoEvaluation.Documents
-            //                     // else 
-            //                     if(nextProps.loadedPMOEvaluation.Documents) 
-            //                         docs = nextProps.loadedPMOEvaluation.Documents[0]  === "" ? [] :  nextProps.loadedPMOEvaluation.Documents
-            //                     else
-            //                         docs = []
-
-
-            //                     // if(!(this.props.pmoEvaluation.Documents.length === docs.length)) {
-            //                     //     console.log("TCL: componentWillReceiveProps -> this.props", this.props)
-                                    
-            //                     // }
-
-                               
-            //                     console.log("TCL: componentWillReceiveProps -> nextProps.pmoEvalFiles", nextProps.pmoEvalFiles)
-
-
-            //                     if(this.state.SavedOnDB === true) {
-            //                         // if(prevProps.pmoEvalFiles.length) 
-            //                         const id = this.props.match.params.projectID
-            //                         this.props.fetchProjectFiles(id, 'PMO').then((data)=> {
-            //                             console.log("TCL: componentDidUpdate -> data", data)
-            //                             // console.log("TCL: componentDidUpdate -> prevProps", prevProps)
-            //                             console.log("TCL: componentDidUpdate -> this.props.pmoEvalFiles", this.props.pmoEvalFiles)
-            //                         })
-
-            //                         this.setState({SavedOnDB : false})
-            //                     }
-
-    
-            //                     this.setState({
-            //                         Expected_total_ROI : nextProps.loadedPMOEvaluation.Expected_total_ROI || "",
-            //                         pmo_eval_id : nextProps.loadedPMOEvaluation.pmoEvaluation.pmo_eval_id,
-            //                         Expected_IRR : nextProps.loadedPMOEvaluation.Expected_IRR || "",
-            //                         ROI_Category : this.createSelectOption(nextProps.loadedPMOEvaluation.ROI_Category) || this.createSelectOption("") ,
-            //                         WorkID_PlanView_FlexPM_SN_Ticket : nextProps.loadedPMOEvaluation.WorkID_PlanView_FlexPM_SN_Ticket || "",
-            //                         // Documents : nextProps.loadedPMOEvaluation.pmoEvaluation.Documents[0] === "" ? [] : nextProps.loadedPMOEvaluation.pmoEvaluation.Documents,
-            //                         Documents : docs,
-            //                         spFiles : nextProps.pmoEvalFiles,
-                                    
-            //                         sendingData : false
-            //                     })
-    
-            //                     this.project_Documents = docs
-            //                     // this.
-            //                     this.updateSelectsOnComponentLoad(nextProps.loadedPMOEvaluation.ROI_Category);
-
-                           
-
-                          
-                        
-            //             }
-            //         }
-
-            //         // this.project_Documents =  nextProps.loadedPMOEvaluation.pmoEvaluation.Documents[0] === "" ? [] : nextProps.loadedPMOEvaluation.pmoEvaluation.Documents;
-
-                    
-
-                    
-            //     }
-
-            // }
 
 
 
@@ -283,7 +135,7 @@
             // --------------------------------------
             createFormStructure() {
 
-                console.log("TCL: createFormStructure -> this.props.pmoEvalFiles", this.props.pmoEvalFiles)
+                // console.log("TCL: createFormStructure -> this.props.pmoEvalFiles", this.props.pmoEvalFiles)
 
                 
                 console.log("TCL: createFormStructure -> this.state", this.state)
@@ -371,7 +223,7 @@
                             "Sequence": "68",
                             "Type": "filesPicker",
                             "General_Value": this.state.Documents,
-                            "spDocs" : this.props.pmoEvalFiles || [],
+                            "spDocs" : this.props.projectIntake.pmoEvaluation.SPFiles || [],
                             
                             "hasToolTip" : true,
                             "toolTipText" : "Attach ROI Excel Spread Sheet document ",
@@ -535,7 +387,7 @@
 
                 const {projectID} = this.props.locationData.match.params;
                 
-                const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
+                const requestID = projectID.substr(projectID.indexOf('GSD')+3,projectID.length);
 
                 return requestID
             }
@@ -557,7 +409,7 @@
                     Documents.push(file);
 
                     this.setState({Documents})
-                    this.project_Documents = Documents;
+                    this.projectPMO_Documents = Documents;
                     
                     if( file.type.indexOf('image/') < 0 )
                         this.createPreviewImageDropzone(null, file);
@@ -583,7 +435,7 @@
                     })
 
                     this.setState({Documents: newproject_Documents})
-                    this.project_Documents = newproject_Documents;
+                    this.projectPMO_Documents = newproject_Documents;
                 }
 
               
@@ -594,15 +446,14 @@
                 // Preload Files on Dropzone
                 // --------------------------------------
                 preloadFiles = (dropzone)=> {
-                    // const {project_docs} = this.props.loadedRequirements.requirementsDefinition;
                     let mockFile = null;
-                    // const project_docs = this.project_Documents
-                    const project_docs = this.state.Documents;
+                    // const project_docs = this.projectPMO_Documents
+                    const project_docs = this.state.Documents || this.projectPMO_Documents;
                     
 
                     // Check IF has Values, or an empty string, in yes reset array
                     if (project_docs === null || project_docs === undefined || project_docs[0] === "") {
-                        // this.project_Documents = [];
+                        // this.projectPMO_Documents = [];
                         return;
                     }
                         
@@ -638,7 +489,7 @@
 
                         //console.log('mockFile', mockFile);
                         dropzone.files.push(mockFile);
-						// this.project_Documents = dropzone.files;
+						// this.projectPMO_Documents = dropzone.files;
 
 
                         // Set width and height of Thumbnail
@@ -676,7 +527,7 @@
                         
                     });
 
-                    this.project_Documents = mockFiles;
+                    this.projectPMO_Documents = mockFiles;
                     this.setState({Documents : mockFiles})
                 }
 
@@ -754,8 +605,8 @@
                     let imageContainer = null
                     if(index !== null)
                         imageContainer = document.getElementsByClassName('dz-image')[index];
-                    else if(this.project_Documents.length > 0)
-                        imageContainer = document.getElementsByClassName('dz-image')[this.project_Documents.length - 1];
+                    else if(this.projectPMO_Documents.length > 0)
+                        imageContainer = document.getElementsByClassName('dz-image')[this.projectPMO_Documents.length - 1];
                     else
                         imageContainer = document.getElementsByClassName('dz-image')
                         
@@ -882,22 +733,15 @@
                 // @param {folderToUpload} RequirementsDefinition
                 // on Each Child of filesArray
                 // --------------------------------------*/
-                uploadFiles (foldertoUpload, filesArray) {
-                    // this.setState({currentMessage : 'Saving Files'})
-                    // const {Documents} = this.state;
-                    
-                    // console.log("TCL: uploadFiles -> Documents", Documents)
-                    // const folderURL = `https://flextronics365.sharepoint.com/sites/gsd/intake_process/intakeFiles/${folderName}`
-                    // const folderURL = `${Endpoints.getProjectFolder}('intakeFiles/${folderName}')/Files`
-                    // const folderURL = `intakeFiles/RequirementsDefinition/${folderName}`;
-
+                uploadFiles (foldertoUpload, filesData) {
+                  
 
 
 
                     const folderURL = `intakeFiles/${foldertoUpload}`;
                     let filesToUploadDBArray = [];
                    
-
+                    const filesArray = this.projectPMO_Documents || this.state.Documents || filesData
 
                      if(filesArray ) {
                          // ? Iterate Files
@@ -941,7 +785,7 @@
                 saveFormValues() {
                     //! const currentUser = window.getCurrentSPUser();
                     // const projId = this.props.projectID || 'GSD67';
-                    // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
+                    // const requestID = projId.substr(projId.indexOf('GSD')+3,projId.length);
 
                     const {Documents} = this.state;
                     console.log("TCL: saveFormValues -> this", this)
@@ -955,7 +799,8 @@
                         Expected_IRR : this.state.Expected_IRR ,
                         ROI_Category : this.state.ROI_Category ,
                         WorkID_PlanView_FlexPM_SN_Ticket : this.state.WorkID_PlanView_FlexPM_SN_Ticket ,
-                        Documents :  Documents || this.project_Documents  || [],
+                        Documents :  Documents || this.projectPMO_Documents  || [],
+                        SPFiles : this.state.spFiles || [],
                         Created_by : currentUser.userEmail,
                         Last_modifed_by : currentUser.userEmail
                     } 
@@ -982,18 +827,18 @@
                 // Save Files on DB
                 // --------------------------------------
                 saveFilesonDB(folderName,filesToUploadDBArray ) {
-					//console.log('TCL: saveFilesonDB -> folderName', folderName)
-                    //console.log('TCL: saveFilesonDB -> filesToUploadDBArray', filesToUploadDBArray)
-                    // const id = this.props.requirementsDefinition.newProjectID
-                    // 
+                    console.log("TCL: saveFilesonDB -> folderName", folderName)                    
+                    console.log("TCL: saveFilesonDB -> filesToUploadDBArray", filesToUploadDBArray)
+				
 
-                    const {projectID} = this.props.match.params;
-                    const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
+                    // const {projectID} = this.props.match.params;
+                    const requestID =  this.props.projectIntake.requirementsDefinition.Project_id ||  this.props.projectIntake.requirementsDefinition.Request_ID
+                    // const requestID = projectID.substr(projectID.indexOf('GSD')+3,projectID.length);
                     const filesString = filesToUploadDBArray.join(',');
-                    const currentUser = window.getCurrentSPUser();
+                    // const currentUser = window.getCurrentSPUser();
 
                     // Loomk For Files on SP FOlder
-                    this.props.saveProjectFiles(requestID, filesString, currentUser.userEmail).then((data)=>{
+                    saveProjectFiles(requestID, filesString, currentUser.userEmail).then((data)=>{
                         console.log('TCL: saveFilesonDB -> data', data);
                         
 
@@ -1057,8 +902,8 @@
 
 
                         //! Upload Files to Sharepoint
-                        //! this.project_Documents.length > 0 && this.uploadFiles(pmoFolderURL)
-                        // this.uploadFiles(pmoFolderURL)
+                        this.projectPMO_Documents.length > 0 && this.uploadFiles(pmoFolderURL)
+                            // this.uploadFiles(pmoFolderURL)
                         
 
                         this.saveOtherTabs(projectID);
@@ -1088,21 +933,24 @@
                 updateCurrentPMOEvaluation = ()=> {
                     // const projID =this.props.requirementsDefinition.newProjectID;
                     const formData = this.saveFormValues();
+                    const {projectID} = this.props.locationData.match.params;
                     
 				    // //console.log('TCL: updateCurrentPMOEvaluation -> currentPMOID', currentPMOID)
-                    updatePMOEvaluation(formData).then(()=>{
+                    updatePMOEvaluation(formData,projectID ).then(()=>{
+
+                        console.log("TCL: updateCurrentPMOEvaluation -> formData", formData)
 
                         
                         // Redirect User
                         // Check If Action was Success
                         
-                        const {projectID} = this.props.locationData.match.params;
+                      
                         const pmoFolderURL = `${projectID}/PMO`;
-                        const {pmo_eval_id} = this.props.projectIntake.pmoEvaluation;
+                        const {pmo_eval_id, Pmo_eval_id} = this.props.projectIntake.pmoEvaluation;
 
                         // Upload Files to Sharepoint
-                        // this.project_Documents.length > 0 && this.uploadFiles(pmoFolderURL)
-                        //! this.uploadFiles(pmoFolderURL, formData.Documents)
+                        this.projectPMO_Documents.length > 0 && this.uploadFiles(pmoFolderURL,formData.Documents)
+                            // this.uploadFiles(pmoFolderURL, formData.Documents)
                         
                         
                         
@@ -1182,7 +1030,7 @@
                     
 
                     const {requirementsDefinition, businessInformation, technicalEvaluation, pmoEvaluation, roiRealized} = this.props.projectIntake;
-                    const id = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
+                    const id = projectID.indexOf('GSD') >= 0  ? projectID.substr(projectID.indexOf('GSD')+3,projectID.length) : projectID;
                     
                     try {
 
@@ -1203,7 +1051,7 @@
                                 saveRequirementsDB(requirementsDefinition).then((newRequirementsID) => {
                                     requirementsDefinition.Project_id = newRequirementsID;
                                     let reqFolderURL = `${newRequirementsID}/RequirementsDefinition`;
-                                    //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                                    this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
                                 })
 
 
@@ -1243,7 +1091,7 @@
                         // ? Save Tehnical Evaluation
                         if(!isEmpty(technicalEvaluation) && technicalEvaluation.SavedLocally === true) {
                             if(technicalEvaluation.Tech_eval_id || technicalEvaluation.tech_eval_id) {
-                                updateTechnicalDB(technicalEvaluation)
+                                updateTechnicalDB(technicalEvaluation, id)
                             }
                             else
                                 saveTechnicalDB(technicalEvaluation, id).then((newTechId) => {
@@ -1264,7 +1112,7 @@
                         if(!isEmpty(roiRealized) && roiRealized.SavedLocally === true) {
                             // ? Look For Roi Relized Data
                             if(roiRealized.Roi_real_id || roiRealized.roi_real_id) {
-                                updateROIRealizedDB(roiRealized)
+                                updateROIRealizedDB(roiRealized, id)
                             }
                             else
                                 saveROIRealizedDB(roiRealized, id).then((roiID) => {
@@ -1361,15 +1209,17 @@
                 // --------------------------------------*/
                 uploadReqFiles (folderName, foldertoUpload) {
                     this.setState({currentMessage : 'Saving Files'})
-                    const filesArray = this.props.requirementsDefinition.Project_docs;
+                    const filesArray = this.props.projectIntake.requirementsDefinition.Project_Documents || [];
                     
 
-                    const folderURL = `intakeFiles/${foldertoUpload}`;
+                    let projectFolder = foldertoUpload.indexOf('GSD')>= 0 ? foldertoUpload : `GSD${foldertoUpload}`
+
+                    const folderURL = `intakeFiles/${projectFolder}`;
                     let filesToUploadDBArray = [];
-                    // if(filesArray.length <= 0)
-                    //     return;
+                    if(filesArray.length <= 0)
+                        return;
                     
-                    // Iterate Files
+                    //? Iterate Files
                     for(let file of filesArray) {
                         let saveFile = null
                         let fileURL = '';
@@ -1409,7 +1259,7 @@
                 uploadFilesToSPWithoutSavingDB = (event)=> {
                     console.log("TCL: RequirementsDefinition -> uploadFilesToSPWithoutSavingDB -> event", event)
 
-                    const {Project_Documents} = this.state;
+                    const {Documents} = this.state;
 
                   
 
@@ -1423,11 +1273,11 @@
 
                         if(this.state.fileRemoved === false) {
                              // ?Filter Object type File
-                             orignaldocs = Project_Documents.filter((file)=>{return !file.upload})
+                             orignaldocs = Documents.filter((file)=>{return !file.upload})
                              console.log("TCL: RequirementsDefinition -> uploadFilesToSPWithoutSavingDB -> orignaldocs", orignaldocs)
                         }
                         else {
-                            orignaldocs =  this.originalFiles;
+                            orignaldocs =  this.props.projectIntake.pmoEvaluation.Documents;
                             console.log("TCL: RequirementsDefinition -> uploadFilesToSPWithoutSavingDB -> orignaldocs", orignaldocs)
                         }
                             
@@ -1440,9 +1290,11 @@
 
                         this.setState({
                             showFileManager : false,
-                            Project_Documents : orignaldocs,
+                            Documents : orignaldocs,
                             newFilesCancelled : true
                         })
+
+                        this.projectPMO_Documents = orignaldocs
 
 
                         // this.setState({ state: this.state });

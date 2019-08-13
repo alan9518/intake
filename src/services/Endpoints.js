@@ -15,6 +15,8 @@
 // --------------------------------------
     const {spPath} = Config
 
+    // const path = 'http://wsprojectintakenewstg.azurewebsites.net/projectintake.asmx'
+    const path = 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx'
 
 // --------------------------------------
 // Create Endpoints Object
@@ -32,51 +34,51 @@
         // --------------------------------------
         // Get All Projects Form The PMO
         // --------------------------------------
-            getAllProjects : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getAllProjectList',
+            getAllProjects : `${path}/getAllProjectList`,
 
         /** --------------------------------------
         // Get All Projects By Owner
         // @param {created_by <Email>} abc@flex.com
         // --------------------------------------*/
-            getProjectsByUser : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getProjectList',
+            getProjectsByUser : `${path}/getProjectList`,
             
         /** --------------------------------------
         // Save Requirements
         // @param {op <String>} insertMainTab
         // --------------------------------------*/
-            saveRequirements : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx?op=insertMainTab',
+            saveRequirements : `${path}?op=insertMainTab`,
 
         /** --------------------------------------
         // Save BusinessInfo
         // @param {op <String>} insertBussInfo
         // --------------------------------------*/
-            saveBusinessInfo : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx?op=insertBussInfo',
+            saveBusinessInfo : `${path}?op=insertBussInfo`,
         
 
         /** --------------------------------------
         // Save BusinessInfo
         // @param {op <String>} insertTechEval
         // --------------------------------------*/
-            saveTechincalEvaluation : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx?op=insertTechEval',
+            saveTechincalEvaluation : `${path}?op=insertTechEval`,
 
         /** --------------------------------------
         // Save PMO Evaluation
         // @param {op <String>} insertPMOEval
         // --------------------------------------*/
-            savePMOEvaluation : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx?op=insertPMOEval',
+            savePMOEvaluation : `${path}?op=insertPMOEval`,
 
         /** --------------------------------------
         // Save ROI Realized
         // @param {op <String>} insertROIReal
         // --------------------------------------*/
-            saveROIRealized : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx?op=insertROIReal',
+            saveROIRealized : `${path}?op=insertROIReal`,
 
 
           /** --------------------------------------
         // Save ROI Realized
         // @param {op <String>} insertROIReal
         // --------------------------------------*/
-            saveDynatrace : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/setROITrace',
+            saveDynatrace : `${path}/setROITrace`,
 
     /* ==========================================================================
     ** READ
@@ -86,47 +88,47 @@
         // Get Requirements By ID
         // @param {project_id <String>} 88
         // --------------------------------------*/
-            getRequirements : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getMainTab',
+            getRequirements : `${path}/getMainTab`,
 
 
         /** --------------------------------------
         // Get Requirements Docs By ID
         // @param {project_id <String>} 88
         // --------------------------------------*/
-            getRequirementsFiles : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getProjDocs',
+            getRequirementsFiles : `${path}/getProjDocs`,
 
         
         /** --------------------------------------
         // Get Business By ID
         // @param {project_id <String>} 88
         // --------------------------------------*/
-            getBusiness : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getBussInfo',
+            getBusiness : `${path}/getBussInfo`,
 
         /** --------------------------------------
         // Get getTechEval By ID
         // @param {project_id <String>} 88
         // --------------------------------------*/
-            getTechnical : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getTechEval',
+            getTechnical : `${path}/getTechEval`,
 
         /** --------------------------------------
         // Get PMO Evaluation By ID
         // @param {project_id <String>} 88
         // --------------------------------------*/
-            getPMOEvaluation : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getPMOEval',
+            getPMOEvaluation : `${path}/getPMOEval`,
 
         
          /** --------------------------------------
         // Get PMO Evaluation Docs By ID
         // @param {project_id <String>} 88
         // --------------------------------------*/
-            getPMOEvaluationFiles : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getPMODocs',
+            getPMOEvaluationFiles : `${path}/getPMODocs`,
 
 
         /** --------------------------------------
         // Get Requirements By ID
         // @param {project_id <String>} 88
         // --------------------------------------*/
-            getROIRealized : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getROIReal',
+            getROIRealized : `${path}/getROIReal`,
 
         /** --------------------------------------
         // Get Requirements By ID
@@ -134,7 +136,7 @@
         // @param {roi_id <String>} 12
         // --------------------------------------*/
             // getROITrace : 'http://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getROITrace?project_id=146&roi_id=12',
-            getROITrace : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/getROITrace',
+            getROITrace : `${path}/getROITrace`,
 
     /* ==========================================================================
     ** UPDATES
@@ -144,32 +146,32 @@
         // Update Requirements
         // @param {op <String>} insertMainTab
         // --------------------------------------*/
-            updateRequirements : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/updateMainTab',
+            updateRequirements : `${path}/updateMainTab`,
         
         /** --------------------------------------
         // Update Business Info
         // @param {op <String>} insertMainTab
         // --------------------------------------*/
-            updateBusiness : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/updateBussInfo',
+            updateBusiness : `${path}/updateBussInfo`,
 
         /** --------------------------------------
         // Update Business Info
         // @param {op <String>} insertMainTab
         // --------------------------------------*/
-            updateTechnical : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/updateTechEval',
+            updateTechnical : `${path}/updateTechEval`,
 
         /** --------------------------------------
         // Update Business Info
         // @param {op <String>} insertMainTab
         // --------------------------------------*/
-            updatePMOEvaluation : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/updatePMOEval',
+            updatePMOEvaluation : `${path}/updatePMOEval`,
 
 
         /** --------------------------------------
         // Update Business Info
         // @param {op <String>} insertMainTab
         // --------------------------------------*/
-            updateROIRealized : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/updateROIReal',
+            updateROIRealized : `${path}/updateROIReal`,
 
 
         
@@ -180,8 +182,8 @@
         // @param {project_docs <String>} test.pdf,abc.docx
         // @param {last_by <String>} mail@flex.com
         // --------------------------------------*/
-            uploadRequirementsFiles : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/setProjDocs',
-            // uploadRequirementsFiles : 'https://wsprojectintakenew.azurewebsites.net/projectintake.asmx/setProjectDocs?project_id=8&project_docs=test.pdf,abc.docx&last_by=abc@flex.com'
+            uploadRequirementsFiles : `${path}/setProjDocs`,
+            // uploadRequirementsFiles : `${path}/setProjectDocs?project_id=8&project_docs=test.pdf,abc.docx&last_by=abc@flex.co`'
 
 
 

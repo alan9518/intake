@@ -336,7 +336,7 @@
                         Expected_Completion_Date : newValues.Expected_Completion_Date,
                         Deadline_Justification : newValues.Deadline_Justification,
                         Project_Type : newValues.Project_Type,
-                        Project_Documents : newValues.Project_docs,
+                        Project_Documents : newValues.Project_docs || newValues.Project_Documents,
                         SPFiles : newValues.SPFiles || [],
                         SavedLocally : savedLocally,
                         SavedOnDB : savedonDB

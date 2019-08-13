@@ -1,118 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="theme-color" content="#000000" />
-  <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  <!-- <link href="https://fonts.googleapis.com/css?family=Asap:400,600" rel="stylesheet"> -->
-
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Mono:400,500" rel="stylesheet">
-
-  <title>Project Intake</title>
-
-  <!--Remove Sharepoint Styles -->
-  <style>
-    .modal-backdrop {
-      display: none
-    }
-
-    #s4-bodyContainer,
-    #s4-workspace {
-      padding-bottom: 0 !important;
-      width: 100%;
-      height: 100%;
-      min-height: 100vh;
-      background-image: url(/sites/gsd/intake_process/IntakeProcess/static/media/bg.389c3075.jpg);
-      background-position: top;
-      background-size: cover;
-    }
-
-    #flexFooter,
-    #s4-ribbonrow,
-    div#s4-titlerow,
-    div#sideNavBox,
-    span#DeltaSPWebPartManager,
-    span#DeltaDelegateControls,
-    #DeltaPageInstrumentation,
-    #DeltaHelpPanel,
-    #DeltaPlaceHolderUtilityContent {
-      display: none !important
-    }
-
-    #contentBox {
-      margin-right: 0 !important;
-      margin-left: 0 !important;
-      width: 100% !important
-    }
-
-    #contentRow {
-      padding-top: 0
-    }
-
-    #s4-bodyContainer {
-      padding-bottom: 0 !important
-    }
-
-    #containerParallax {
-      padding-left: 0 !important;
-      padding-right: 0 !important
-    }
-
-    .container .jumbotron,
-    .container-fluid .jumbotron {
-      border-radius: 0 !important
-    }
-  </style>
-
-
-</head>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-
-
-  <!-- 
-      
-      -->
-
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script> -->
-
-  <script>
-
-    /* ==========================================================================
+<%@ Page Inherits="Microsoft.SharePoint.WebPartPages.WebPartPage, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" MasterPageFile="~masterurl/default.master" Language="C#" meta:progid="SharePoint.WebPartPage.Document" %>
+<asp:Content ContentPlaceHolderID="PlaceHolderAdditionalPageHead" runat="server">
+  <WebPartPages:AllowFraming runat="server" />
+  <SharePoint:ScriptLink name="clientforms.js" runat="server" LoadAfterUI="true" Localizable="false" />
+  <SharePoint:ScriptLink name="clientpeoplepicker.js" runat="server" LoadAfterUI="true" Localizable="false" />
+  <SharePoint:ScriptLink name="autofill.js" runat="server" LoadAfterUI="true" Localizable="false" />
+  <SharePoint:ScriptLink name="sp.js" runat="server" LoadAfterUI="true" Localizable="false" />
+  <SharePoint:ScriptLink name="sp.runtime.js" runat="server" LoadAfterUI="true" Localizable="false" />
+  <SharePoint:ScriptLink name="sp.core.js" runat="server" LoadAfterUI="true" Localizable="false" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
+  <head><meta charset="utf-8"/><link rel="shortcut icon" href="https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/><meta name="theme-color" content="#000000"/><link rel="manifest" href="https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/manifest.json"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"><link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Mono:400,500" rel="stylesheet"><title>Project Intake</title><style>.modal-backdrop{display:none}#s4-bodyContainer,#s4-workspace{padding-bottom:0!important;width:100%;height:100%;min-height:100vh;background-image:url(/sites/gsd/intake_process/IntakeProcess/static/media/bg.389c3075.jpg);background-position:top;background-size:cover}#DeltaHelpPanel,#DeltaPageInstrumentation,#DeltaPlaceHolderUtilityContent,#flexFooter,#s4-ribbonrow,div#s4-titlerow,div#sideNavBox,span#DeltaDelegateControls,span#DeltaSPWebPartManager{display:none!important}#contentBox{margin-right:0!important;margin-left:0!important;width:100%!important}#contentRow{padding-top:0}#s4-bodyContainer{padding-bottom:0!important}#containerParallax{padding-left:0!important;padding-right:0!important}.container .jumbotron,.container-fluid .jumbotron{border-radius:0!important}</style><link href="https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/static/css/2.2fc614db.chunk.css" rel="stylesheet"><link href="https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/static/css/main.496d10f6.chunk.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><script>/* ==========================================================================
     ** Sharepoint Methods
     ** ========================================================================== */
 
@@ -418,13 +315,10 @@
         height: height
       };
       SP.SOD.execute('sp.ui.dialog.js', 'SP.UI.ModalDialog.showModalDialog', options);
-    }
+    }</script><script>!function(l){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,f=[];i<n.length;i++)t=n[i],p[t]&&f.push(p[t][0]),p[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(l[r]=o[r]);for(s&&s(e);f.length;)f.shift()();return c.push.apply(c,u||[]),a()}function a(){for(var e,r=0;r<c.length;r++){for(var t=c[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==p[u]&&(n=!1)}n&&(c.splice(r--,1),e=i(i.s=t[0]))}return e}var t={},p={1:0},c=[];function i(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return l[e].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.m=l,i.c=t,i.d=function(e,r,t){i.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(r,e){if(1&e&&(r=i(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(i.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)i.d(t,n,function(e){return r[e]}.bind(null,n));return t},i.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(r,"a",r),r},i.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},i.p="https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/";var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;a()}([])</script><script src="https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/static/js/2.6aa544bf.chunk.js"></script><script src="https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/static/js/main.5b31cd8e.chunk.js"></script></body>
+
+
+</asp:Content>
 
 
 
-  </script>
-
-
-</body>
-
-</html>

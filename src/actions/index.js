@@ -13,7 +13,7 @@
 //? --------------------------------------
 
         
-    import { saveRequirementsDB, updateRequirementsDB } from './RequirementsDefinition/RequirementsDefinitionActions'
+    import { saveRequirementsDB, updateRequirementsDB, saveProjectFiles, getSharepointReqFiles } from './RequirementsDefinition/RequirementsDefinitionActions'
 
     import { saveBusinesInformationDB,updateBusinesInformationDB } from './BusinessInformation/BusinessInformationActions';
 
@@ -40,6 +40,8 @@
         savePMOEvaluationDB,
         saveROIRealizedDB, 
         saveDynatraceDB,
+        saveProjectFiles,
+        getSharepointReqFiles,
 
         // --------------------------------------
         // Update Values

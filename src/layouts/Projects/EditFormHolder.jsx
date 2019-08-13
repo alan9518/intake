@@ -27,6 +27,12 @@
     import '../styles.css'
 
 
+    // import { 
+      
+    //     getSharepointReqFiles,
+     
+    // } from '../../../actions';
+
     // --------------------------------------
     // Edit Project
     // https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx
@@ -207,7 +213,7 @@
                 console.log("TCL: formHolder -> loadAPI -> this.props", this.props)
                 const {projectID} = this.props.match.params;
 
-                const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
+                const requestID = projectID.substr(projectID.indexOf('GSD')+3,projectID.length);
 
                 console.log("TCL: formHolder -> loadAPI -> projectID", requestID)
 
@@ -217,10 +223,12 @@
                 const getTechPromise = this.handleGetRequestsForData('technical', requestID)
                 const getPmoPromise = this.handleGetRequestsForData('pmoEval', requestID)
                 const getRoiPromise = this.handleGetRequestsForData('roiRealized', requestID)
+                const reqFilesPromise = this.getSharepointFilesByProject(projectID, 'RequirementsDefinition');
+                const pmoFilesPromise = this.getSharepointFilesByProject(projectID, 'PMO');
                 
 
-                const [reqData, businessData, techData, pmoData, roiData] = await Promise.all([getReqPromise, getBussPromise, getTechPromise, getPmoPromise, getRoiPromise]);
-
+                const [reqData, businessData, techData, pmoData, roiData, reqFiles, pmoFiles] = await Promise.all([getReqPromise, getBussPromise, getTechPromise, getPmoPromise, getRoiPromise, reqFilesPromise, pmoFilesPromise]);
+               
 
                 
                 console.log("TCL: formHolder -> loadAPI -> roiData", roiData)
@@ -229,22 +237,23 @@
                 console.log("TCL: formHolder -> loadAPI -> businessData", businessData)
                 console.log("TCL: formHolder -> loadAPI -> reqData", reqData)
 
+                console.log("TCL: formHolder -> loadAPI -> reqFiles", reqFiles)
+
+                console.log("TCL: formHolder -> loadAPI -> pmoFiles", pmoFiles)
+
+
 
                 // ? Check Empty Values and Set New Object Values
 
-                if(reqData.data.length > 0) {
-                    this.setDataSourceValuesFromDB('requirements', reqData.data[0], true , projectID)
-                    
-                }
-                    
+                if(reqData.data.length > 0) 
+                    this.setDataSourceValuesFromDB('requirements', reqData.data[0], true , projectID, reqFiles.data.value)
                 if(businessData.data.length > 0)
                     this.setDataSourceValuesFromDB('business', businessData.data[0], true)
                 if(techData.data.length > 0)
                     this.setDataSourceValuesFromDB('technical', techData.data[0], true)
-                if(pmoData.data.length > 0) {
-                    this.setDataSourceValuesFromDB('pmoEval', pmoData.data[0], true, projectID)
-                    
-                }
+                if(pmoData.data.length > 0) 
+                    this.setDataSourceValuesFromDB('pmoEval', pmoData.data[0], true, projectID, pmoFiles.data.value)                    
+               
                    
                 if(roiData.data.length > 0)  {
                     
@@ -349,27 +358,17 @@
             // ? GET Current Project Files FROM SP
             // ?--------------------------------------
             async getSharepointFilesByProject(currentProject , folderName) {
-                let folderURL = `intakeFiles/${currentProject}/${folderName}`
+
+                let projectIDFolder = currentProject.indexOf('GSD') >= 0 ? currentProject : `GSD${currentProject}`
+                console.log("TCL: formHolder -> getSharepointFilesByProject -> projectIDFolder", projectIDFolder)
+
+                let folderURL = `intakeFiles/${projectIDFolder}/${folderName}`
                 let serviceUrl = `${Endpoints.getProjectFolder}('${folderURL}')/Files?$expand=LinkingUri`;
-                let projectFiles = [];
+                // let projectFiles = [];
                 console.log("TCL: fetchProjectFiles -> serviceUrl", serviceUrl)
 
-                 axios.get(serviceUrl).then((reponse) => {
-                    projectFiles =  reponse.data.value
-
-                    return projectFiles
-
-                 }).catch((error) => {
-                    console.log("TCL: formHolder -> getSharepointFilesByProject -> error", error)
-                    projectFiles = []
-
-                    return projectFiles;
-
-                 })
-
-
-
-
+                return axios.get(serviceUrl)
+                
             }
 
 
@@ -377,7 +376,7 @@
             // ?--------------------------------------
             // ? Get Roi Realized Dynatrace
             // ?--------------------------------------
-            getProjectDynatrace(projectID, roiID) {
+            async getProjectDynatrace(projectID, roiID) {
                 const params = {project_id : projectID, roi_id : roiID};
 
                 console.log("TCL: formHolder -> getProjectDynatrace -> params", params)
@@ -418,7 +417,7 @@
                         Deadline_Justification : newValues.deadline_justification,
                         Project_Type : newValues.project_type,
                         Project_Documents : newValues.project_docs,
-                        SPFiles : [],
+                        SPFiles :  extraValues !== null ? extraValues : [],
                         Created_by: newValues.created_by || newValues.Created_by ,
                         Created_date: newValues.created_date,
                         Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
@@ -532,6 +531,7 @@
                         ROI_Category : newValues.ROI_Category,
                         WorkID_PlanView_FlexPM_SN_Ticket : newValues.WorkID,
                         Documents : newValues.Documents,
+                        SPFiles :  extraValues !== null ? extraValues : [],
                         Created_by: newValues.created_by || newValues.Created_by ,
                         Created_date: newValues.created_date,
                         Last_modifed_by: newValues.last_modifed_by || newValues.Last_modifed_by ,
@@ -627,8 +627,8 @@
                         Expected_Completion_Date : newValues.Expected_Completion_Date,
                         Deadline_Justification : newValues.Deadline_Justification,
                         Project_Type : newValues.Project_Type,
-                        Project_Documents : newValues.Project_docs,
-                        SPFiles : newValues.SPFiles || [],
+                        Project_Documents : newValues.Project_docs || newValues.Project_Documents || [],
+                        SPFiles : newValues.SPFiles || newValues.spFiles ||  [],
                         SavedLocally : SavedLocally,
                         savedOnDB : savedonDB,
                         Created_by: newValues.created_by || newValues.Created_by ,
@@ -757,6 +757,7 @@
                         ROI_Category : newValues.ROI_Category,
                         WorkID_PlanView_FlexPM_SN_Ticket : newValues.WorkID_PlanView_FlexPM_SN_Ticket,
                         Documents : newValues.Documents,
+                        SPFiles : newValues.SPFiles || newValues.spFiles ||  [],
                         SavedLocally : SavedLocally,
                         savedOnDB : savedonDB,
                         Created_by: newValues.created_by || newValues.Created_by ,
@@ -963,6 +964,46 @@
 
 
 
+            // ?--------------------------------------
+            // ? Update Intake 
+            // ? After Project Insert or Update
+            // ?--------------------------------------
+            updateSPFiles = async (projectID) =>  {
+
+
+                console.log("TCL: formHolder -> updateSPFiles ->  projectIntake.requirementsDefinition.SPFiles before",  projectIntake.requirementsDefinition.SPFiles)
+
+                console.log("TCL: formHolder -> updateSPFiles ->  projectIntake.pmoEvaluation.SPFiles before",  projectIntake.pmoEvaluation.SPFiles)
+
+                const reqFilesPromise = this.getSharepointFilesByProject(projectID, 'RequirementsDefinition');
+                const pmoFilesPromise = this.getSharepointFilesByProject(projectID, 'PMO');
+
+
+                const [reqFiles, pmoFiles] = await Promise.all([reqFilesPromise, pmoFilesPromise]);
+
+
+
+                console.log("TCL: formHolder -> updateSPFiles -> pmoFiles", pmoFiles)
+
+                
+                console.log("TCL: formHolder -> updateSPFiles -> reqFiles", reqFiles)
+
+                projectIntake.requirementsDefinition.SPFiles = reqFiles.data.value
+
+                projectIntake.pmoEvaluation.SPFiles = Object.assign({}, projectIntake.pmoEvaluation.SPFiles, pmoFiles.data.value)
+
+
+
+
+                console.log("TCL: formHolder -> updateSPFiles ->  projectIntake.requirementsDefinition.SPFiles after",  projectIntake.requirementsDefinition.SPFiles)
+
+                console.log("TCL: formHolder -> updateSPFiles ->  projectIntake.pmoEvaluation.SPFiles after",  projectIntake.pmoEvaluation.SPFiles)
+
+
+                
+            }
+
+
             // --------------------------------------
             // Set Enabled Routes based on User role
             // --------------------------------------
@@ -1056,6 +1097,7 @@
                                                         isPMO = {isPMO}
                                                         locationData = {this.props} 
                                                         updateProjectIntakeValues = {this.updateProjectIntakeValues}
+                                                        updateSPFiles = {this.updateSPFiles}
                                                     />
                                         }
                             />

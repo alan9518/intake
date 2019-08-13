@@ -7,9 +7,12 @@
     // --------------------------------------
     // Imports
     // --------------------------------------
-    import axios from 'axios';
+    
     import {Endpoints} from '../../services/Endpoints';
     import moment from 'moment';
+    import axios from 'axios';
+
+    const currentUser = window.getCurrentSPUser();
 
 
 
@@ -42,6 +45,10 @@
     // Remove & from values
     // --------------------------------------
     const removeSpecialCharacters = (stringToFormat) => {
+
+        if(!stringToFormat)
+            return 
+
         let newString = stringToFormat.replace(/&/g, '&amp;')
         return newString;        
     }
@@ -83,7 +90,7 @@
     // @returns {Action}
     // -------------------------------------- */
     export async function saveRequirementsDB(formData) {
-    console.log("TCL: saveRequirementsDB -> formData", formData)
+        console.log("TCL: saveRequirementsDB -> formData", formData)
 
         const newRequirementData = `<?xml version='1.0' encoding='utf-8'?>
         
@@ -102,8 +109,8 @@
                                                         "expected_completion_date": "${formatDate(formData.Expected_completion_date)}",
                                                         "deadline_justification": "${removeSpecialCharacters(formData.Deadline_Justification)}",
                                                         "project_docs": [],
-                                                        "created_by": "${formData.Created_by}",
-                                                        "last_modifed_by": "${formData.Last_modifed_by}"
+                                                        "created_by": "${ currentUser.userEmail ||  formData.created_by || formData.Created_by }",
+                                                        "last_modifed_by": "${ currentUser.userEmail || formData.last_modifed_by || formData.created_by ||  formData.Created_by  }"
                                                     }
                                                 </maintab>
                                             </insertMainTab>
@@ -148,7 +155,7 @@
 
         let projectID = formData.Request_ID || formData.Project_id || id
             console.log("TCL: updateRequirementsDB -> projectID", projectID)
-        let Request_ID = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
+        let Request_ID = projectID.indexOf('GSD') >= 0  ? projectID.substr(projectID.indexOf('GSD')+3,projectID.length) : projectID;
         console.log("TCL: updateRequirementsDB -> Request_ID", Request_ID)
 
         const updateRequirementData =  {
@@ -164,7 +171,7 @@
                 "expectedstart_date":  formatDate(formData.Expected_Start_Date) ,
                 "expected_completion_date": formData.Expected_completion_date ? formatDate(formData.Expected_completion_date) : formatDate(formData.Expected_Completion_Date),
                 "deadline_justification": removeSpecialCharacters(formData.Deadline_Justification),
-                "last_modifed_by":formData.Last_modifed_by || 'alan.medina@flex.com'
+                "last_modifed_by":  currentUser.userEmail ||  formData.Last_modifed_by 
             }
         }
 
@@ -181,7 +188,8 @@
                         body : JSON.stringify(updateRequirementData)
                 })
 
-                const updateRequirementResponse =  await updateRequirementPromise.text();
+                const updateRequirementResponse = await handlePOSTResponse(updateRequirementPromise);
+                // const updateRequirementResponse =  await updateRequirementPromise.text();
                 console.log('TCL: updateRequirementsDB -> updateRequirementResponse', updateRequirementResponse)
 
                 return updateRequirementResponse;
@@ -204,6 +212,93 @@
 
 
 
+
+
+    /** --------------------------------------
+    // Save Files
+    // @param {formData from RequirementsDefinition View}
+    // @returns {Action}
+    // --------------------------------------*/
+
+    export async function saveProjectFiles(projectID, docs, currentUser) {
+        let project_id = projectID.indexOf('GSD') >= 0 ? projectID.substr(projectID.indexOf('GSD')+3,projectID.length) : projectID;
+        const params = {project_id :project_id, project_docs : docs, last_by: currentUser}
+       
+            try {
+                // const uploadDocsPromise = await axios.post(Endpoints.uploadRequirementsFiles, {params});
+                const uploadDocsPromise =  await fetch(Endpoints.uploadRequirementsFiles, {
+                        method: 'POST',
+                        body : JSON.stringify(params),
+                        headers: {"Content-Type": "application/json; charset=utf-8"}
+                });
+                const uploadDocsResponse = await uploadDocsPromise.data;
+
+                return uploadDocsResponse
+				//console.log('TCL: saveProjectFiles -> uploadDocsResponse', uploadDocsResponse)
+
+            }
+            catch (error) {
+				//console.log('TCL: catch -> error', error)
+                
+                throw (error);
+            }
+        
+    }
+
+
+    
+    /** --------------------------------------
+    // Get Files From Sharepoint after 
+    // The project is updated 
+    // Or Created
+    // @param {formData from RequirementsDefinition View}
+    // @returns {Action}
+    // --------------------------------------*/
+
+    export async function getSharepointReqFiles(currentProject , folderName = 'RequirementsDefinition') {
+
+        let projectIDFolder = currentProject.indexOf('GSD') >= 0 ? currentProject : `GSD${currentProject}`
+        console.log("TCL: formHolder -> getSharepointFilesByProject -> projectIDFolder", projectIDFolder)
+
+        let folderURL = `intakeFiles/${projectIDFolder}/${folderName}`
+        let serviceUrl = `${Endpoints.getProjectFolder}('${folderURL}')/Files?$expand=LinkingUri`;
+        // let projectFiles = [];
+        console.log("TCL: fetchProjectFiles -> serviceUrl", serviceUrl)
+
+     
+        try {
+            // const reqFilesPromise = await fetch(serviceUrl, {
+            //         headers: { "Content-Type": "application/json; charset=utf-8" ,  "Accept": "text/plain"},
+            //         method: 'GET',
+            //         // body : (updateRequirementData)
+            //         // body : JSON.stringify(updateRequirementData)
+            // })
+
+            // const reqFilesData = await handlePOSTResponse(reqFilesPromise);
+            // // const reqFilesData =  await reqFilesPromise.text();
+            // console.log('TCL: updateRequirementsDB -> reqFilesData', reqFilesData)
+
+            // return reqFilesData;
+
+
+            // const reqFilesPromise = await axios.get(serviceUrl);
+            // const reqFilesData =  await reqFilesPromise.data.value
+            // console.log("TCL: getSharepointReqFiles -> reqFilesData", reqFilesData)
+
+
+            // return reqFilesData
+
+            return axios.get(serviceUrl);
+
+            // dispatch(updateRequirements(updateRequirementData));
+
+        }
+        catch (error) {
+            //console.log('TCL: fetchSitePMOS -> error', error);
+            throw (error);
+        }
+        
+    }
 
 
 

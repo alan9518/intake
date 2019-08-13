@@ -27,6 +27,8 @@
         savePMOEvaluationDB,
         saveROIRealizedDB, 
         saveDynatraceDB,
+        saveProjectFiles,
+        getSharepointReqFiles,
         updateRequirementsDB,
         updateBusinesInformationDB,
         updateTechnicalDB,
@@ -123,6 +125,8 @@
 
             componentDidMount() {
 
+               
+                
               
 
                 this.setState({
@@ -132,8 +136,11 @@
                     Expected_Completion_Date_Moment : this.convertStringToMomentObject(this.props.projectIntake.requirementsDefinition.Expected_Completion_Date) || moment(),   
                     Project_Type : this.createSelectOption(this.props.projectIntake.requirementsDefinition.Project_Type),
                     Workstage : this.createSelectOption(this.props.projectIntake.requirementsDefinition.Workstage),
+                    spFiles : this.props.projectIntake.requirementsDefinition.SPFiles,
                     isLoaded : true
                 })
+
+                this.filesArray = this.props.projectIntake.requirementsDefinition.Project_Documents
 
                 this.formFields =  this.createFormStructure();
             }
@@ -142,6 +149,9 @@
                 
             
 
+
+
+            
 
 
 
@@ -236,7 +246,7 @@
                     },
                     {
                         "Field_Name": "Request ID",
-                        "value": this.state.Request_ID,
+                        "value": this.setRequestIDValue(this.props.projectIntake.requirementsDefinition.Request_ID || this.state.Request_ID),
                         "Field_State_Name": "Request_ID",
                         "group": "firstHalf2",
                         "Mandatory": false,
@@ -798,13 +808,7 @@
                 // on Each Child of filesArary
                 // --------------------------------------*/
                 uploadFiles (folderName, foldertoUpload, filesArray, saveOnDB = true) {
-                    // this.setState({currentMessage : 'Saving Files'}) 
-                    // const {filesArray} = this;
-
-                    // this.props.sharepoint
-                    // console.log("TCL: uploadFiles -> this.props.sharepoint", this.props.sharepoint)
-                    
-                    
+                  
                     
 
                     const folderURL = `intakeFiles/${foldertoUpload}`;
@@ -829,7 +833,7 @@
                         else {
                             // ? Create new URl and the just upload the new file
                             fileURL = `sites/gsd/intake_process/${folderURL}/${saveFile.name}`;
-                            window.uploadFilesToFolder(folderURL, saveFile.name, saveFile, filesArray.length);
+                            window.uploadFilesToFolder(folderURL, saveFile.name, saveFile, filesArray.length, this.props.updateSPFiles(folderName) );
                         }
                             
 
@@ -845,9 +849,22 @@
                     }
 
                    if(saveOnDB === true) 
-                    // if(filesToUploadDBArray.length > 0)
                         this.saveFilesonDB(folderName, filesToUploadDBArray)
-                    //    }
+
+
+
+                    // ? GET Updated Files
+
+                    // this.props.updateSPFiles(folderName).then((response) => {
+                       
+                    //     console.log("TCL: submitFormDB -> response", response)
+                               
+                    // })
+                    // .catch((error) => {
+                    
+                    //  console.log("TCL: submitFormDB -> error", error)
+    
+                    // })
                     
                 }
 
@@ -855,18 +872,22 @@
                 // Save Files on DB
                 // --------------------------------------
                 saveFilesonDB(folderName,filesToUploadDBArray ) {
-					//console.log('TCL: saveFilesonDB -> folderName', folderName)
-                    //console.log('TCL: saveFilesonDB -> filesToUploadDBArray', filesToUploadDBArray)
-                    // const id = this.props.requirementsDefinition.newProjectID
-                    // 
+				
 
-                    const {projectID} = this.props.match.params;
-                    const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
+                    const {projectID} = this.props.locationData.match.params;
+
+                    
+                    // let projectFolder = foldertoUpload.indexOf('GSD')>= 0 ? foldertoUpload : `GSD${foldertoUpload}`
+
+                    // const folderURL = `intakeFiles/${projectFolder}`;
+
+                    const id = projectID || this.props.projectIntake.requirementsDefinition.Request_ID || this.props.projectIntake.requirementsDefinition.Project_id ;
+                    const requestID = id.substr(id.indexOf('GSD')+3,id.length);
                     const filesString = filesToUploadDBArray.join(',');
-                    const currentUser = window.getCurrentSPUser();
+                    // const currentUser = window.getCurrentSPUser();
 
                     // Loomk For Files on SP FOlder
-                    this.props.saveProjectFiles(requestID, filesString, currentUser.userEmail).then((data)=>{
+                    saveProjectFiles(requestID, filesString, currentUser.userEmail).then((data)=>{
                         console.log('TCL: saveFilesonDB -> data', data);
                         
 
@@ -878,6 +899,65 @@
 
 
                     
+                }
+
+
+
+
+
+                /**  --------------------------------------
+                // Call SP Function to Upload File
+                // @param {folderName}  GSD126
+                // @param {folderToUpload} RequirementsDefinition
+                // on Each Child of filesArray
+                // --------------------------------------*/
+                uploadPMOFiles (foldertoUpload, folderName) {
+                    console.log("TCL: uploadPMOFiles -> folderName", folderName)
+                  
+
+                    // const folderURL = `intakeFiles/${foldertoUpload}`;
+
+                    let projectFolder = foldertoUpload.indexOf('GSD')>= 0 ? foldertoUpload : `GSD${foldertoUpload}`
+
+                    const folderURL = `intakeFiles/${projectFolder}/PMO`;
+
+                    // let filesToUploadDBArray = [];
+                   
+                    const filesArray = this.props.projectIntake.pmoEvaluation.Documents
+                     if(filesArray ) {
+                         // ? Iterate Files
+                            for(let file of filesArray) {
+                                let saveFile = null
+                                let fileURL = '';
+
+                                if(!file.name) 
+                                    saveFile =  this.createMockFile(file )
+                                else
+                                    saveFile = file;
+                                
+                                // //console.log('TCL: uploadFiles -> file', file)
+                                //? Set File URL to Save on DB
+                                if(saveFile.name.indexOf('sites/') >= 0) 
+                                    fileURL = saveFile.name
+                                else {
+                                    // ? Create new URl and the just upload the new file
+                                    // ? Dont save here. Thats on the Update Method
+                                    fileURL = `sites/gsd/intake_process/${folderURL}/${saveFile.name}`;
+                                    window.uploadFilesToFolder(folderURL, saveFile.name, saveFile, filesArray.length);
+                                }
+
+
+                                
+                                
+                                    
+                            }
+                     }
+                     else
+                        return
+
+                   
+                    
+                 
                 }
 
 
@@ -963,7 +1043,7 @@
 
                     // const projId = this.props.projectIntake.requirementsDefinition ? this.props.projectIntake.requirementsDefinition.Request_ID : this.props.loadedRequirements.Project_id
                     const projId = (this.props.projectIntake.requirementsDefinition.Request_ID ).toString()
-                    const requestID =  projId.indexOf('D') >= 0 ?  projId.substr(projId.indexOf('D')+1,projId.length) : projId;
+                    const requestID =  projId.indexOf('GSD') >= 0 ?  projId.substr(projId.indexOf('GSD')+3,projId.length) : projId;
 
 
                     console.log("TCL: RequirementsDefinition -> saveFormValues -> this.originalFiles", this.originalFiles)
@@ -988,7 +1068,7 @@
                         Expected_Start_Date : this.state.Expected_Start_Date || moment(),
                         Expected_Completion_Date : this.state.Expected_Completion_Date || moment(),
                         Deadline_Justification : this.state.Deadline_Justification,
-                        // Project_docs : this.filesArray || [],
+                        SPFiles : this.state.spFiles,
                         Project_docs : this.state.Project_Documents || [],
                         Created_by : currentUser.userEmail,
                         Last_modifed_by : currentUser.userEmail
@@ -1085,6 +1165,7 @@
                     this.setState({sendingData : true})
                     const formData = this.saveFormValues();
                     const {filesArray} = this;
+                    let spFiles = [];
 					//console.log('TCL: submitFormDB -> filesArray', filesArray)
                     // this.props.saveLocalRequirements(formData);
                     
@@ -1111,16 +1192,17 @@
                         
 
                         
-                        //? this.uploadFiles(projectID, reqFolderURL, filesArray);
+                        this.uploadFiles(projectID, reqFolderURL, filesArray);
 
 
 
-                        // this.props.resetRequirementsState();
+                       
+                       
 
-                        // this.setState({})
 
+                        console.log("TCL: submitFormDB -> spFiles", spFiles)
 
-                        // this.props.saveLocalRequirements(formData);
+                   
 
                         this.props.updateProjectIntakeValues('requirements',formData, null, true)
 
@@ -1128,18 +1210,18 @@
 
                         this.saveOtherTabs(projectID);
 
+                      
+                        
+
+                      
 
                         this.setState({ Request_ID : Request_ID , sendingData : false, checkForErrors: false, showFileManager : false, isSavedOnDB : true})
 
 
-                        // this.redirectUser();
 
-                        // this.componentDidMount();
 
-                        
-                        // this.setState(this.state)
-                        
-                        
+
+    
                         
                     })
                     .catch((error)=> {
@@ -1147,6 +1229,10 @@
                         this.createErrorAlert('There was a problem saving the data, please try again ');
 						
                     })
+
+
+                  
+                     
                     
                 }
 
@@ -1165,7 +1251,7 @@
 
 
                     
-                    const id = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
+                    const id = projectID.indexOf('GSD') >= 0  ? projectID.substr(projectID.indexOf('GSD')+3,projectID.length) : projectID;
                     console.log("TCL: id", id)
                     const {businessInformation, technicalEvaluation, pmoEvaluation, roiRealized} = this.props.projectIntake;
                    
@@ -1219,11 +1305,18 @@
                         if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
                             if(pmoEvaluation.Pmo_eval_id || pmoEvaluation.pmo_eval_id) {
                                 updatePMOEvaluation(pmoEvaluation, id)
+                                let reqFolderURL = `${id}/PMO`;
+                                this.uploadPMOFiles(id, reqFolderURL)
+
                             }
                             else
                                 savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
                                     console.log("TCL: saveOtherTabs -> newPmoId", newPmoId)
                                     pmoEvaluation.Pmo_eval_id = newPmoId
+                                    let reqFolderURL = `${id}/PMO`;
+                                    
+                                    this.uploadPMOFiles(id, reqFolderURL)
+
                                 }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
 
                             // ? Update Props
@@ -1314,11 +1407,10 @@
 
                   
 
-                    // this.setState({showFileManager : !showFileManager})
 
                     //! Cancel Last changes
 
-                    if(event.target.textContent == 'Discard Changes') {
+                    if(event.target.textContent === 'Discard Changes') {
 
                         let orignaldocs = []
 
@@ -1328,23 +1420,31 @@
                              console.log("TCL: RequirementsDefinition -> uploadFilesToSPWithoutSavingDB -> orignaldocs", orignaldocs)
                         }
                         else {
-                            orignaldocs =  this.originalFiles;
+                            // orignaldocs =  this.originalFiles;
+                            orignaldocs = this.props.projectIntake.requirementsDefinition.Project_Documents
                             console.log("TCL: RequirementsDefinition -> uploadFilesToSPWithoutSavingDB -> orignaldocs", orignaldocs)
                         }
+
+
+                        //  const {projectID} = this.props.locationData.match.params
+                        // getSharepointReqFiles(projectID).then((reqFilesPromise) => {
+                        //     const reqFilesData =   reqFilesPromise.data.value
+                        //     console.log("TCL: submitFormDB -> reqFilesData", reqFilesData)
+                        //     // spFiles = reqFilesData
+
+                        // }).catch((error) => {
+                        //     console.log("TCL: submitFormDB -> error", error)
+                            
+                        // })
                             
                            
-
-
-                        // let orignaldocs2 = Project_Documents.filter((file)=>{return file.upload === undefined || file.upload === null})
-                        //     console.log("TCL: RequirementsDefinition -> uploadFilesToSPWithoutSavingDB -> orignaldocs2", orignaldocs2)
-
-
                         this.setState({
                             showFileManager : false,
                             Project_Documents : orignaldocs,
                             newFilesCancelled : true
                         })
 
+                        this.filesArray = orignaldocs
 
                         // this.setState({ state: this.state });
 
@@ -1399,6 +1499,23 @@
         /* ==========================================================================
         ** Render Methods
         ** ========================================================================== */
+
+                
+            // --------------------------------------
+            // Set Request ID Value
+            // Check if ID has GSD
+            // --------------------------------------
+            setRequestIDValue(request_id) {
+                if (!request_id || request_id === '')
+                    return ''
+
+                
+
+                let request = (request_id).toString().indexOf('GSD') >= 0 ? request_id : `GSD${request_id.toString()}`;
+
+                return request
+            }
+
 
 
             // --------------------------------------
@@ -1486,7 +1603,7 @@
                     blockInputs = false;
                     
 
-                let showFileManager = this.filesArray.length > 0 ? true : false;
+                // let showFileManager = this.filesArray.length > 0 ? true : false;
                 
 				// console.log("TCL: renderFormFields -> this.filesArray", this.filesArray)
                 return (
@@ -1578,8 +1695,12 @@
             // Remove Error Status to Control
             // --------------------------------------
             removeErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.remove('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.remove('int-errorStatus')
+                else
+                    return;
+                
             }
 
 

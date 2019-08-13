@@ -213,6 +213,10 @@
         
     }
 
+    .react-select-extra-wide__single-value .react-select__single-value, .react-select-wide__single-value {
+        color: #000000 !important;
+    }
+
 /* 
     .react-select-wide__placeholder {
         color: #000 !important;
@@ -458,6 +462,11 @@
         background: #0099dd;
         border: 1px double #0099dd;
         color: #fff;
+    }
+
+
+    .DateInput.DateInput_1.DateInput__small.DateInput__small_2 input {
+        color: #000 !important;
     }
 
 /* ---------------------------------------------------

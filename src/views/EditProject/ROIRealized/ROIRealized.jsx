@@ -25,6 +25,7 @@
         savePMOEvaluationDB,
         saveROIRealizedDB, 
         saveDynatraceDB,
+        saveProjectFiles,
         updateRequirementsDB,
         updateBusinesInformationDB,
         updateTechnicalDB,
@@ -153,8 +154,10 @@
             // unloads by the menu navigation
             // --------------------------------------
             componentWillUnmount() {
-                // let formData =  this.saveFormValues();
-                // this.props.saveLocalRoiRealized(formData);
+                 // let formData =  this.saveFormValues(null, null);
+                 this.submitFormLocalData(true)
+                 // this.props.saveLocalRoiRealized(formData);
+                 window.removeEventListener("resize", this.updateContainerDimensions);
             }
 
 
@@ -526,7 +529,7 @@
             // --------------------------------------
             getProjectID() {
                 const {projectID} = this.props.locationData.match.params;
-                const requestID = projectID.substr(projectID.indexOf('D')+1,projectID.length);
+                const requestID = projectID.substr(projectID.indexOf('GSD')+3,projectID.length);
 
                 return requestID
             }
@@ -735,7 +738,7 @@
                 saveFormValues() {
                     //! const currentUser = window.getCurrentSPUser();
                     // const projId = this.props.projectID || this.props.requirementsDefinition.newProjectID;
-                    // const requestID = projId.substr(projId.indexOf('D')+1,projId.length);
+                    // const requestID = projId.substr(projId.indexOf('GSD')+3,projId.length);
 
                     const requestID = this.getProjectID();
                     
@@ -804,12 +807,7 @@
                 // Submit Form
                 // --------------------------------------
                 submitFormLocalData = (exitFromMenu =  false) => {
-                    
-                    // if(this.validateFormInputs() === false) {
-                    //     this.createErrorAlertTop('Please Fill all the Required Fields');
-                    //     this.setState({checkForErrors: true})
-                    //     return;
-                    // }
+                 
     
                     this.renderLoader(true);
     
@@ -952,7 +950,7 @@
                     console.log("TCL: saveOtherTabs -> this.props", this.props)
 
                     const {requirementsDefinition, businessInformation, technicalEvaluation, pmoEvaluation, roiRealized} = this.props.projectIntake;
-                    const id = projectID.indexOf('D') >= 0  ? projectID.substr(projectID.indexOf('D')+1,projectID.length) : projectID;
+                    const id = projectID.indexOf('GSD') >= 0  ? projectID.substr(projectID.indexOf('GSD')+3,projectID.length) : projectID;
 
                     try {
 
@@ -966,14 +964,14 @@
                             if(requirementsDefinition.Project_id || requirementsDefinition.project_id ) {
                                 updateRequirementsDB(requirementsDefinition, id);
                                 let reqFolderURL = `${requirementsDefinition.Request_ID}/RequirementsDefinition`;
-                                // ? this.uploadReqFiles(requirementsDefinition.Request_ID, reqFolderURL);
+                                this.uploadReqFiles(id, reqFolderURL);
                             }
                                 
                             else
                                 saveRequirementsDB(requirementsDefinition).then((newRequirementsID) => {
                                     requirementsDefinition.Project_id = newRequirementsID;
                                     let reqFolderURL = `${newRequirementsID}/RequirementsDefinition`;
-                                    //? this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
+                                    this.uploadReqFiles(requirementsDefinition.newProjectID, reqFolderURL);
                                 })
 
 
@@ -1034,12 +1032,19 @@
                         // ? Save PMO Evaluation
                         if(!isEmpty(pmoEvaluation) && pmoEvaluation.SavedLocally === true) {
                             if(pmoEvaluation.Pmo_eval_id || pmoEvaluation.pmo_eval_id) {
+
+                                let reqFolderURL = `${id}/PMO`;
+                                this.uploadPMOFiles(id, reqFolderURL)
                                 updatePMOEvaluation(pmoEvaluation, id)
                             }
                             else
                                 savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
                                     console.log("TCL: saveOtherTabs -> newPmoId", newPmoId)
+                                    
                                     pmoEvaluation.Pmo_eval_id = newPmoId
+
+                                    let reqFolderURL = `${id}/PMO`;
+                                    this.uploadPMOFiles(id, reqFolderURL)
                                 }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
 
                             // ? Update Props
@@ -1113,10 +1118,13 @@
                 // --------------------------------------*/
                 uploadReqFiles (folderName, foldertoUpload) {
                     this.setState({currentMessage : 'Saving Files'})
-                    const filesArray = this.props.requirementsDefinition.Project_docs;
+                    const filesArray = this.props.projectIntake.requirementsDefinition.Project_Documents || [];
                     
+                    let projectFolder = foldertoUpload.indexOf('GSD')>= 0 ? foldertoUpload : `GSD${foldertoUpload}`
 
-                    const folderURL = `intakeFiles/${foldertoUpload}`;
+                    const folderURL = `intakeFiles/${projectFolder}`;
+
+                    
                     let filesToUploadDBArray = [];
                     if(filesArray.length <= 0)
                         return;
@@ -1126,11 +1134,7 @@
                         let saveFile = null
                         let fileURL = '';
                         
-                        // //console.log('TCL: uploadFiles -> file', file)
-                        // let fileURL = `sites/gsd/intake_process/IntakeProcess/${folderURL}/${file.name}`;
-                        // window.uploadFilesToFolder(folderURL,file.name, file, filesArray.length);
-                        
-                        // filesToUploadDBArray.push(fileURL);
+                      
 
 
                         if(!file.name) 
@@ -1162,17 +1166,21 @@
                 // --------------------------------------
                 // Save Files on DB
                 // --------------------------------------
-                saveFilesonDB(projectID,filesToUploadDBArray ) {
-					//console.log('TCL: saveFilesonDB -> projectID', projectID)
-                    //console.log('TCL: saveFilesonDB -> filesToUploadDBArray', filesToUploadDBArray)
-                    const id = this.props.requirementsDefinition.Project_id;
-                    const requestID = id.indexOf('D') >= 0 ? id.substr(id.indexOf('D')+1,id.length) : id;
+                saveFilesonDB(folderName,filesToUploadDBArray ) {
+				 
+                    console.log("TCL: saveFilesonDB -> folderName", folderName)                    
+                    console.log("TCL: saveFilesonDB -> filesToUploadDBArray", filesToUploadDBArray)
+				
+
+                    // const {projectID} = this.props.match.params;
+                    const requestID =  this.props.projectIntake.requirementsDefinition.Project_id ||  this.props.projectIntake.requirementsDefinition.Request_ID
+                    // const requestID = projectID.substr(projectID.indexOf('GSD')+3,projectID.length);
                     const filesString = filesToUploadDBArray.join(',');
-                    const currentUser = window.getCurrentSPUser();
+                    // const currentUser = window.getCurrentSPUser();
 
                     // Loomk For Files on SP FOlder
-                    this.props.saveProjectFiles(requestID, filesString, currentUser.userEmail).then((data)=>{
-                        //console.log('TCL: saveFilesonDB -> data', data);
+                    saveProjectFiles(requestID, filesString, currentUser.userEmail).then((data)=>{
+                        console.log('TCL: saveFilesonDB -> data', data);
                         
 
                     })
@@ -1235,6 +1243,63 @@
 
                 }
             
+
+                /**  --------------------------------------
+                // Call SP Function to Upload File
+                // @param {folderName}  GSD126
+                // @param {folderToUpload} RequirementsDefinition
+                // on Each Child of filesArray
+                // --------------------------------------*/
+                uploadPMOFiles (foldertoUpload, folderName) {
+                    
+                      
+    
+                    // const folderURL = `intakeFiles/${foldertoUpload}`;
+
+                    let projectFolder = foldertoUpload.indexOf('GSD')>= 0 ? foldertoUpload : `GSD${foldertoUpload}`
+
+                    const folderURL = `intakeFiles/${projectFolder}/PMO`;
+
+                    // let filesToUploadDBArray = [];
+                   
+                    const filesArray = this.props.projectIntake.pmoEvaluation.Documents
+                     if(filesArray ) {
+                         // ? Iterate Files
+                            for(let file of filesArray) {
+                                let saveFile = null
+                                let fileURL = '';
+
+                                if(!file.name) 
+                                    saveFile =  this.createMockFile(file )
+                                else
+                                    saveFile = file;
+                                
+                                // //console.log('TCL: uploadFiles -> file', file)
+                                //? Set File URL to Save on DB
+                                if(saveFile.name.indexOf('sites/') >= 0) 
+                                    fileURL = saveFile.name
+                                else {
+                                    // ? Create new URl and the just upload the new file
+                                    // ? Dont save here. Thats on the Update Method
+                                    fileURL = `sites/gsd/intake_process/${folderURL}/${saveFile.name}`;
+                                    window.uploadFilesToFolder(folderURL, saveFile.name, saveFile, filesArray.length);
+                                }
+
+
+                                
+                                
+                                    
+                            }
+                     }
+                     else
+                        return
+
+                   
+                    
+                 
+                }
+
+
 
 
 
