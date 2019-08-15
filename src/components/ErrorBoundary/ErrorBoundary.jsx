@@ -91,7 +91,7 @@ class ErrorBoundary extends Component {
                                         </details>
 
 
-                                        <ProjectLink route = {"/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx"}>
+                                        <ProjectLink route = {"/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx"}>
                                             <AppButton buttonText = {'Go to Main Page'} buttonClass = {'continueButton'}></AppButton>
                                         </ProjectLink>
 

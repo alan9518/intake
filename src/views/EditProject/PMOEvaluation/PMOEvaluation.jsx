@@ -1165,7 +1165,7 @@
             // // --------------------------------------
             // redirectUser() {
             //     const {history} = this.props;
-            //     const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+            //     const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
                 
             //     history.push(`${path}/add-project/roi-realized`);
             // }
@@ -1176,7 +1176,7 @@
             redirectUser() {
                 const {history, location, match} = this.props.locationData;
                 const id = match.params.projectID
-               const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+               const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                 //const path = '/intake';
                 
@@ -1190,7 +1190,7 @@
             
             redirectUserPrev =() => {
                 const {history, location} = this.props.locationData;
-               const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+               const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                 //const path = '/intake';
 

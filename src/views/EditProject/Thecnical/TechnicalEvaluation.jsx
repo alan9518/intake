@@ -1994,7 +1994,7 @@
             redirectUser() {
                 const {history} = this.props.locationData;
                 const id = this.props.locationData.match.params.projectID
-               const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+               const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                 //const path = '/intake'
                 
@@ -2008,7 +2008,7 @@
             
             redirectUserPrev() {
                 const {history, location} = this.props.locationData;
-               const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+               const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                 //const path = '/intake'
                 let pathArray = location.pathname.split('/');
@@ -2427,8 +2427,8 @@
                 //     return (<Redirect to={'/'}/>)
                 if (! this.props.projectIntake.requirementsDefinition || !this.props.isPMO)  {
                     let currentProject = this.props.locationData.match.params.projectID
-                    // return (<Redirect to={`/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx/project/${currentProject}/requirement-definition`}/>)
-                    window.location.href = `/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx/project/${currentProject}/requirement-definition`
+                    // return (<Redirect to={`/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx/project/${currentProject}/requirement-definition`}/>)
+                    window.location.href = `/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx/project/${currentProject}/requirement-definition`
                 }
                 const formContainer =  <form ref={form => this.formTechnical = form}>
                                             <div className="int-container">

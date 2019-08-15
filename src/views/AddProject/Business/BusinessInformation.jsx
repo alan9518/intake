@@ -1068,7 +1068,7 @@
 
                 }
                 // nextStep = isPMO ? '' : '';
-                const path =  '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+                const path =  '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
                 //const path = '/intake';
                 history.push(`${path}/${nextStep}`);
             }
@@ -1080,7 +1080,7 @@
 
             redirectUserPrev() {
                 const {history} = this.props.locationData;
-                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                 //const path = '/intake';
                 

@@ -1488,7 +1488,7 @@
             redirectUser() {
                 const {history} = this.props.locationData;
                 const id = this.props.locationData.match.params.projectID
-                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                 //const path = '/intake'
                 
@@ -1498,7 +1498,7 @@
 
             cancelRequirementsDefinition = () => {
                 const {history} = this.props.locationData;
-                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
                 history.push(`${path}/intake-projects/`);
             }
 

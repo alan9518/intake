@@ -644,7 +644,7 @@
                 let currentRouteArray = window.location.pathname.split('/')
                 let currentRoute = currentRouteArray[currentRouteArray.length-1];
 
-                if(nextRoute === '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx/intake-projects') {
+                if(nextRoute === '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx/intake-projects') {
                     this.redirectUser(nextRoute)
                     // return;
                 }

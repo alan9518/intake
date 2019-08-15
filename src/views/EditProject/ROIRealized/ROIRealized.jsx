@@ -1085,11 +1085,11 @@
                     // const {isPMO} = this.props;
                     // const step = '/intake-projects'
                     // const {history} = this.props;
-                    // const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+                    // const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
                     // history.push(`${path}/${step}`);
-                    // https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/itVectorTip.aspx
+                    // https://flextronics365.sharepoint.com/sites/gsd/intake_process/IntakeProcess/itVectorTip.aspx
 
-                    window.location.href = 'https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx/intake-projects';
+                    window.location.href = 'https://flextronics365.sharepoint.com/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx/intake-projects';
                 }
 
 
@@ -1099,7 +1099,7 @@
                 
                 redirectUserPrev =() => {
                     const {history,location} = this.props.locationData;
-                    const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+                    const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                     //const path = '/intake';
 

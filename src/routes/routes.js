@@ -23,7 +23,7 @@
 
     // --------------------------------------
     // Edit Project
-    // https://flextronics365.sharepoint.com/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx
+    // https://flextronics365.sharepoint.com/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx
     // --------------------------------------
     import editformHolder from '../layouts/Projects/EditFormHolder';
 

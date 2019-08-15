@@ -1241,7 +1241,7 @@
             // --------------------------------------
             redirectUser() {
                 const {history} = this.props.locationData;
-                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                 //const path = '/intake';
                 
@@ -1254,7 +1254,7 @@
             
             redirectUserPrev() {
                 const {history, location} = this.props.locationData;
-                const path = '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx';
+                const path = '/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx';
 
                 //const path = '/intake';
 

@@ -91,7 +91,7 @@
                                             </h3>
 
                                             <h3 className="int-processMessage">
-                                                Project <ProjectLink route = {`/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx/project/${projId}/requirement-definition`}> {projId}  </ProjectLink> 
+                                                Project <ProjectLink route = {`/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx/project/${projId}/requirement-definition`}> {projId}  </ProjectLink> 
                                             </h3>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@
                         <FormBody>
 
                             {this.renderHeaderSection()}
-                            <ProjectLink route = {"/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx/add-project/requirement-definition"}>
+                            <ProjectLink route = {"/sites/gsd/intake_process/IntakeProcess/ProjectIntake.aspx/add-project/requirement-definition"}>
                                 <AppButton buttonText = {'Add Another Project'} buttonClass = {'continueButton'}></AppButton>
                             </ProjectLink>
                             
