@@ -74,7 +74,7 @@
             saveROIRealized : `${path}?op=insertROIReal`,
 
 
-          /** --------------------------------------
+        /** --------------------------------------
         // Save ROI Realized
         // @param {op <String>} insertROIReal
         // --------------------------------------*/
@@ -185,6 +185,13 @@
             uploadRequirementsFiles : `${path}/setProjDocs`,
             // uploadRequirementsFiles : `${path}/setProjectDocs?project_id=8&project_docs=test.pdf,abc.docx&last_by=abc@flex.co`'
 
+
+        /** --------------------------------------
+        // Send Email After Session Update
+        // @param {project_id <String>} 
+         // --------------------------------------*/
+
+            sendEmailUpdate : 'https://spapps.flex.com/emailtrg/SendEmail.asmx/SendEmailUpdate',
 
 
     /* ==========================================================================

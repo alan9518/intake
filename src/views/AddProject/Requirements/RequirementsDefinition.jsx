@@ -824,7 +824,7 @@
                     //   saveRequirementsDB(formData)
 
                     saveRequirementsDB(formData).then((newProjectID)=>{
-                    console.log("TCL: saveNewProjectDB -> newProjectID", newProjectID)
+                        console.log("TCL: saveNewProjectDB -> newProjectID", newProjectID)
                         // const newProjectID = this.props.requirementsDefinition.newProjectID
                         let reqFolderURL = `${newProjectID}/RequirementsDefinition`;
                         let pmoFolderURL = `${newProjectID}/PMO`;
@@ -877,25 +877,30 @@
                                     //console.log('fail react')
                             });
 
+
+                        // ? Update All Tabs
                             this.setState({isSavedOnDB : true})
 
                             this.saveOtherTabs(newProjectID);
+
+
+                            
+
+                        // ? Send Email Update
+                            this.props.sendEmailUpdate(newProjectID).then((repsonse) => {
+                                console.log("TCL: submitFormDB -> repsonse", repsonse)
+                                
+                            })
 
 
                             this.setState({sendingData : false})
                             
 
                         
-                        //? Redirect User
-                        //? this.redirectUser();
-
-                        
-                        
-                        // Check If Action was Success
                         
 
-                        // If theres and Id, Update Tab and documents with New Name
-                        //console.log('TCL: submitFormDB -> newProject', newProjectID)
+                        
+                      
                         
                         
                         
@@ -945,7 +950,11 @@
                         this.props.updateProjectIntakeValues('requirements',formData, null, true)
 
 
-                        // this.setState({ Request_ID : currentProjectID , sendingData : false}, this.redirectUser())
+                        // ? Send Email Update
+                        this.props.sendEmailUpdate(currentProjectID).then((response) => {
+                                console.log("TCL: submitFormDB -> response", response)
+
+                        })
 
                         this.setState({ Request_ID : currentProjectID , sendingData : false})
                        
@@ -968,8 +977,7 @@
                 // !--------------------------------------
                 submitFormDB = () => {
 
-                    // Validate Dates
-                      // Validate Dates
+                    //? Validate Dates
                      
                     if(this.validateDates(this.state.Expected_Start_Date, this.state.Expected_Completion_Date) === false) {
                         
@@ -989,10 +997,6 @@
 
                     const {requirementsDefinition} = this.props.projectIntake;
 
-                    // const {isSaved} = this.props;
-					//console.log('TCL: submitFormDB -> this.props', this.props)
-                    //console.log('TCL: submitFormDB -> this.props.requirementsDefinition.newProjectID', this.props.requirementsDefinition.newProjectID)
-
 
                     if(requirementsDefinition.SavedOnDB === true || requirementsDefinition.Project_id !== null ||  requirementsDefinition.Request_ID !== null ) {
                         // Update Project
@@ -1007,7 +1011,8 @@
                     }     
 
 
-                    
+
+                   
                     
                 }
 
@@ -1400,10 +1405,12 @@
             // Add Red Border to Control
             // --------------------------------------   
             addErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.add('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
             }
-
             // --------------------------------------
             // Remove Error Status to Control
             // --------------------------------------

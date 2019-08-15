@@ -734,6 +734,12 @@
                         this.props.updateProjectIntakeValues('pmoEval',formData, null, true)
 						
                         this.saveOtherTabs(projId);
+
+                        // ? Send Email Update
+                        this.props.sendEmailUpdate(projId).then((repsonse) => {
+                            console.log("TCL: submitFormDB -> repsonse", repsonse)
+
+                        })
                         
                         this.setState({ Request_ID : newPMOEvaluationID , sendingData : false});
 
@@ -996,29 +1002,25 @@
                                 }
 
                                 // ? Save Tehnical Evaluation
-                            if(!isEmpty(technicalEvaluation) && technicalEvaluation.SavedLocally === true) {
-                                if(technicalEvaluation.Tech_eval_id) {
-                                    updateTechnicalDB(technicalEvaluation, id).then(()=> {
-                                        // ? Update Props
-                                        this.props.updateProjectIntakeValues('technical',technicalEvaluation, null, true)
-                                    })
-                                }
-                                else
-                                    saveTechnicalDB(technicalEvaluation, id).then((newTechId) => {
-                                        console.log("TCL: saveOtherTabs -> newTechId", newTechId)
-                                        technicalEvaluation.Tech_eval_id = newTechId
+                                if(!isEmpty(technicalEvaluation) && technicalEvaluation.SavedLocally === true) {
+                                    if(technicalEvaluation.Tech_eval_id) {
+                                        updateTechnicalDB(technicalEvaluation, id).then(()=> {
+                                            // ? Update Props
+                                            this.props.updateProjectIntakeValues('technical',technicalEvaluation, null, true)
+                                        })
+                                    }
+                                    else
+                                        saveTechnicalDB(technicalEvaluation, id).then((newTechId) => {
+                                            console.log("TCL: saveOtherTabs -> newTechId", newTechId)
+                                            technicalEvaluation.Tech_eval_id = newTechId
 
-                                        // ? Update Props
-                                        this.props.updateProjectIntakeValues('technical',technicalEvaluation, null, true)
+                                            // ? Update Props
+                                            this.props.updateProjectIntakeValues('technical',technicalEvaluation, null, true)
 
-                                    }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
-
-                              
-                            }
-                            
+                                        }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
 
                                 
-
+                                }
 
                                 // ? Save Roi Realized
                                 if(!isEmpty(roiRealized) && roiRealized.SavedLocally === true) {
@@ -1056,6 +1058,11 @@
                                 }
 
 
+
+                                // ? Send Email Update
+                                this.props.sendEmailUpdate(id).then((repsonse) => {
+                                    console.log("TCL: submitFormDB -> repsonse", repsonse)
+                                })
 
                                 this.setState({sendingData : false})
                                 this.createSuccessAlert('All Tabs were saved')
@@ -1490,16 +1497,23 @@
             // Add Red Border to Control
             // --------------------------------------   
             addErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.add('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
             }
 
             // --------------------------------------
             // Remove Error Status to Control
             // --------------------------------------
             removeErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.remove('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.remove('int-errorStatus')
+                else
+                    return;
+                
             }
 
 

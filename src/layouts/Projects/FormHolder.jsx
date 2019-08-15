@@ -11,11 +11,9 @@
 // --------------------------------------
     import React, { Component, Fragment } from 'react';
     import PropTypes from 'prop-types';
-    import {  NavBar, Header, FormBody, AppButton} from '../../components';
+    import {  NavBar, Header} from '../../components';
     import {  Switch, Route, Link, Redirect } from "react-router-dom";
-    // import { connect } from 'react-redux';
-    import { withRouter, Prompt } from 'react-router';
-    // import { fetchSitePMOS } from '../../actions'
+    import {Endpoints} from '../../services/Endpoints'
     import { newProjectRoutes } from '../../routes/routes';
     import '../styles.css'
     import Alert from 'react-s-alert';
@@ -24,7 +22,7 @@
     import {Config} from '../../Config';
 
     import {saveRequirementsDB} from '../../actions';
-
+    import axios from 'axios';
     import moment from "moment";
 
     
@@ -261,22 +259,19 @@
         ** API Connection
         ** ========================================================================== */
 
+                
+            // ?--------------------------------------
+            // ? Send Email Update with the last changes
+            // ? By Session
+            // ?--------------------------------------
+            sendEmailUpdate = async (projectID) =>{  
+                const params = {project_id : projectID};
 
-          // ?--------------------------------------
-          // ? Create New Requirements
-          // ?--------------------------------------
-          createRequirements = () => {
+                console.log("TCL: formHolder -> getProjectDynatrace -> params", params)
+                return axios.get(Endpoints.sendEmailUpdate, {params})
+            }
 
-            const {requirementsDefinition} = projectIntake;
-            console.log("TCL: formHolder -> createRequirements -> requirementsDefinition", requirementsDefinition)
-
-            // saveRequirementsDB(requirementsDefinition)
-            
-
-            
-          }
-
-
+         
         /* ==========================================================================
         ** Handle State
         ** ========================================================================== */
@@ -636,6 +631,344 @@
 
 
 
+              
+            // ?--------------------------------------
+            // ? Validate Data Before Leving Route
+            // ?--------------------------------------
+            onNavItemClick = (nextRoute) => {
+                console.log("TCL: formHolder -> onNavItemClick -> nextRoute", nextRoute)
+
+                // let routeNameArray = route.split('/')
+                // let tabRouteName = routeNameArray[routeNameArray.length-1];
+
+                let currentRouteArray = window.location.pathname.split('/')
+                let currentRoute = currentRouteArray[currentRouteArray.length-1];
+
+                if(nextRoute === '/sites/gsd/intake_process/intake_process_v3/ProjectIntake.aspx/intake-projects') {
+                    this.redirectUser(nextRoute)
+                    // return;
+                }
+
+                let isValid = this.validateEmptyTabs(currentRoute);
+
+                if(isValid ===  true) 
+                    this.redirectUser(nextRoute)
+                    // console.log('allow redirect');
+                else
+                    this.createErrorAlertTop("Please fill all the required Fields");
+
+            }
+
+
+
+            
+            // ?--------------------------------------
+            // ? Validate Empty Fields before Route Chage
+            // ? Check For empty Required Fields, 
+            // ? using regular JS Form Control
+            // ? Allow/block Route Button
+            // ? Update Child status
+            // ?--------------------------------------
+            validateEmptyTabs(tabName) {
+                let errorsCount = 0
+                switch(tabName) {
+                    case 'requirement-definition' : 
+                                const requiredFieldsReq = ['Project_Name', 'Description' , 'Deadline_Justification', 'Project_Type']
+                                errorsCount = 0;
+                                for (let field of requiredFieldsReq) {
+                                    
+                                    // ? Add Error
+                                    if(document.getElementById(field).value === "")  {
+                                        errorsCount++;
+                                        this.addErrorStatus(field)
+                                    }
+
+                                    else if (field === 'Project_Type') {
+                                        let sel = document.getElementById(field)
+                                        let selectInput = sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent
+                                        // console.log("TCL: formHolder -> validateEmptyTabs -> sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent", sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent)
+                                        // ? Add Error
+                                        if ( selectInput === "" || selectInput === 'Project Type'){
+                                            
+                                            errorsCount++;
+                                            this.addErrorStatus(field)
+                                        }
+                                        else {
+                                            errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                            this.removeErrorStatus(field)
+                                        }
+                                    }
+
+                                    // ? Remove Error
+                                    else {
+                                        errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                        this.removeErrorStatus(field)
+                                    }
+                                }
+                    break;
+
+                    case 'business-information' :   
+                        const requiredFieldsBus = [
+                                'Business_Objective', 
+                                'Outcomes_from_the_Objective' , 
+                                'Project_Purpose', 
+                                'Line_of_Business',
+                                'Business_lead',
+                                'Sales_Contact',
+                                'IT_Vector',
+                                'RPA',
+                                'Region',
+                                // 'Sites_Impacted',
+                                'Customer',
+                                'Requested_by_Customer',
+                                'Customer_Priority',
+                                'Estimated_Annual_Revenue',
+                            ]
+                        errorsCount = 0;
+
+                        for (let field of requiredFieldsBus) {
+                                    
+                            console.log(field)
+
+
+                            
+                            // ? Look For People Pickers
+                            if (field === 'Business_lead' || field === 'Sales_Contact') {
+                                if(!document.getElementById(`peoplePicker${field}_TopSpan_HiddenInput`))
+                                    return true
+            
+                                if (document.getElementById(`peoplePicker${field}_TopSpan_HiddenInput`).value === "[]" || document.getElementById(`peoplePicker${field}_TopSpan_HiddenInput`).value === "") {
+                                    errorsCount++;
+                                    document.getElementById(`peoplePicker${field}_TopSpan`).style = 'border: 1px solid #e76c90 !important';
+                                }
+                                else {
+                                    document.getElementById(`peoplePicker${field}_TopSpan`).style = 'border: 1px solid #ced4da !important';
+                                    errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                }
+                            }   
+                           
+                            // ?Look For Select Fields
+                            else if (document.getElementById(field).className.indexOf('react-select-container') >= 0 ) {
+                                let sel = document.getElementById(field)
+                                let selectInput = null;
+
+                                console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value'))
+                                console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value').length)
+
+                                if( sel.getElementsByClassName('react-select-extra-wide__single-value').length > 0 )
+                                    selectInput = sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent
+
+                                else if(sel.getElementsByClassName('react-select__single-value').length > 0)
+                                    selectInput = sel.getElementsByClassName('react-select__single-value')[0].textContent
+                                
+                                else if(sel.getElementsByClassName('react-select-wide__control').length  > 0)
+                                    selectInput = sel.getElementsByClassName('react-select-wide__control')[0].textContent
+
+                                // ? Add Error
+                                if ( selectInput === "" || selectInput.indexOf('Select') >= 0){
+                                    
+                                    errorsCount++;
+                                    this.addErrorStatus(field)
+                                }
+                                else {
+                                    errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                    this.removeErrorStatus(field)
+                                }
+                            }
+
+
+
+                            // ? Look For Text Inputs
+                            else  if(document.getElementById(field).value === "")  {
+                                errorsCount++;
+                                this.addErrorStatus(field)
+                            }
+
+                            // ? Remove Error
+                            else {
+                                errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                this.removeErrorStatus(field)
+                            }
+                        }
+                    break;
+
+                    case 'technical-evaluation' :
+                            const requiredFieldsTech = [
+                                'Delivery_Team', 
+                                'Platform_type' , 
+                                'Applications_involved', 
+                                'Technology',
+                                'IT_Groups_Required',
+                                'Estimated_Effort',
+                                'Project_Team_Size',
+                                'IT_FTE_required',
+                                'Approver',
+                                'Project_Manager',
+                                'Justification_ROI',
+                                'Design_Development_Testing_Effort'
+                            ]
+                            errorsCount = 0;
+
+
+                            for (let field of requiredFieldsTech) {
+                                    
+                                console.log(field)
+    
+    
+                                
+                                // ? Look For People Pickers
+                                if (field === 'Approver' || field === 'Project_Manager') {
+                                    if(!document.getElementById(`peoplePicker${field}_TopSpan_HiddenInput`))
+                                        return true
+                
+                                    if (document.getElementById(`peoplePicker${field}_TopSpan_HiddenInput`).value === "[]" || document.getElementById(`peoplePicker${field}_TopSpan_HiddenInput`).value === "") {
+                                        errorsCount++;
+                                        document.getElementById(`peoplePicker${field}_TopSpan`).style = 'border: 1px solid #e76c90 !important';
+                                    }
+                                    else {
+                                        document.getElementById(`peoplePicker${field}_TopSpan`).style = 'border: 1px solid #ced4da !important';
+                                        errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                    }
+                                }   
+                               
+                                // ?Look For Select Fields
+                                else if (document.getElementById(field).className.indexOf('react-select-container') >= 0 ) {
+                                    let sel = document.getElementById(field)
+                                    let selectInput = null;
+    
+                                    console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value'))
+                                    console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value').length)
+    
+                                    if( sel.getElementsByClassName('react-select-extra-wide__single-value').length > 0 )
+                                        selectInput = sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent
+    
+                                    else if(sel.getElementsByClassName('react-select__single-value').length > 0)
+                                        selectInput = sel.getElementsByClassName('react-select__single-value')[0].textContent
+                                    
+                                    else if(sel.getElementsByClassName('react-select-wide__control').length  > 0) {
+                                        if(sel.getElementsByClassName('react-select-wide__control').length  > 0)
+                                            selectInput = sel.getElementsByClassName('react-select-wide__control')[0].textContent
+                                        else if (sel.getElementsByClassName('react-select-wide__value-container react-select-wide__value-container--is-multi').length  > 0)
+                                            selectInput = sel.getElementsByClassName('react-select-wide__placeholder')[0].textContent
+                                    }
+                                        
+
+                                    else if(sel.getElementsByClassName('react-select-wide__control').length  > 0)
+                                        selectInput = sel.getElementsByClassName('react-select-wide__control')[0].textContent
+    
+                                    // ? Add Error
+                                    if ( selectInput === "" || selectInput.indexOf('Select') >= 0){
+                                        
+                                        errorsCount++;
+                                        this.addErrorStatus(field)
+                                    }
+                                    else {
+                                        errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                        this.removeErrorStatus(field)
+                                    }
+                                }
+    
+    
+    
+                                // ? Look For Text Inputs
+                                else  if(document.getElementById(field).value === "")  {
+                                    errorsCount++;
+                                    this.addErrorStatus(field)
+                                }
+    
+                                // ? Remove Error
+                                else {
+                                    errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                    this.removeErrorStatus(field)
+                                }
+                            }
+                    break;
+
+                    case 'pmo-evaluation' :
+                            const requiredFieldsPMO = [
+                                'Expected_total_ROI', 
+                                'Expected_IRR' , 
+                                'ROI_Category', 
+                                'WorkID_PlanView_FlexPM_SN_Ticket'
+                            ]
+                        errorsCount = 0;
+
+                        for (let field of requiredFieldsPMO) {
+                                    
+                            console.log(field)
+
+
+                            
+                          
+                           
+                            // ?Look For Select Fields
+                            if (document.getElementById(field).className.indexOf('react-select-container') >= 0 ) {
+                                let sel = document.getElementById(field)
+                                let selectInput = null;
+
+                                console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value'))
+                                console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value').length)
+
+                                if( sel.getElementsByClassName('react-select-extra-wide__single-value').length > 0 )
+                                    selectInput = sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent
+
+                                else if(sel.getElementsByClassName('react-select__single-value').length > 0)
+                                    selectInput = sel.getElementsByClassName('react-select__single-value')[0].textContent
+                                
+                                else if(sel.getElementsByClassName('react-select-wide__control').length  > 0)
+                                    selectInput = sel.getElementsByClassName('react-select-wide__control')[0].textContent
+
+                                // ? Add Error
+                                if ( selectInput === "" || selectInput.indexOf('Select') >= 0){
+                                    
+                                    errorsCount++;
+                                    this.addErrorStatus(field)
+                                }
+                                else {
+                                    errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                    this.removeErrorStatus(field)
+                                }
+                            }
+
+
+
+                            // ? Look For Text Inputs
+                            else  if(document.getElementById(field).value === "")  {
+                                errorsCount++;
+                                this.addErrorStatus(field)
+                            }
+
+                            // ? Remove Error
+                            else {
+                                errorsCount = errorsCount === 0 ? 0 : errorsCount--;
+                                this.removeErrorStatus(field)
+                            }
+                        }
+                    break;
+
+                    default  : return true
+                        
+                }
+
+
+                return errorsCount > 0 ?  false : true
+            }
+
+
+
+            
+            // ?--------------------------------------
+            // ? Redirect User
+            // ?--------------------------------------
+            redirectUser(redirectPath) {
+                const {history, location} = this.props;
+                if(location.pathname === redirectPath)
+                    return;
+                
+                history.push(redirectPath);
+            }
+
+
         /* ==========================================================================
         ** Render Methods
         ** ========================================================================== */
@@ -647,8 +980,51 @@
             renderNavigation() {
                 // const activeRoute = newProjectRoutes[0];
                 const navigationRoutes = this.enableNavigationRoutes();
-                return <NavBar routes = {navigationRoutes} activeRoute = {0}/>
+
+                let currentRoute = window.location.pathname;
+
+                return <NavBar routes = {navigationRoutes} activeRoute = {currentRoute} onItemClick = {this.onNavItemClick} renderLinks = {false}/>
             }
+
+
+
+            // --------------------------------------
+            // Add Red Border to Control
+            // --------------------------------------   
+            addErrorStatus = (controlID)=> {
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
+            }
+
+            // --------------------------------------
+            // Remove Error Status to Control
+            // --------------------------------------
+            removeErrorStatus = (controlID)=> {
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.remove('int-errorStatus')
+                else
+                    return;
+                
+            }
+
+
+
+
+            // --------------------------------------
+            // Top Alert
+            // --------------------------------------
+            createErrorAlertTop= (message) => {
+                Alert.error(message, {
+                    position: 'top',
+                    effect : 'slide',
+                    timeout: 2000
+                });
+            }
+
 
 
             // --------------------------------------
@@ -697,7 +1073,9 @@
                                                     updateProjectIntakeValues = {this.updateProjectIntakeValues} 
                                                     createRequirements = {this.createRequirements}
                                                     resetProjectIntake = {this.resetProjectIntake}
-                                                    />}
+                                                    sendEmailUpdate = {this.sendEmailUpdate}
+                                                />
+                                    }
                         />
 
                         <Route
@@ -710,14 +1088,24 @@
                                                         resetForm = {this.state.resetForm} 
                                                         locationData = {this.props} 
                                                         updateProjectIntakeValues = {this.updateProjectIntakeValues} 
-                                                        />}
+                                                        sendEmailUpdate = {this.sendEmailUpdate}
+                                                />
+                                    }
                         />
 
                         <Route
                             path = {`${relativePath}/add-project/technical-evaluation`}
                             key =  'route-addTechnicalEvaluation'
                             ref = 'route-addTechnicalEvaluation'
-                            render={(props) => <AddTechnicalEvaluation projectIntake = {projectIntake}  isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
+                            render={(props) => <AddTechnicalEvaluation 
+                                                            projectIntake = {projectIntake}  
+                                                            isPMO = {isPMO} 
+                                                            resetForm = {this.state.resetForm} 
+                                                            locationData = {this.props} 
+                                                            updateProjectIntakeValues = {this.updateProjectIntakeValues}
+                                                            sendEmailUpdate = {this.sendEmailUpdate} 
+                                                />
+                                    }
                         />
 
 
@@ -725,7 +1113,15 @@
                             path = {`${relativePath}/add-project/pmo-evaluation`}
                             key =  'route-addPmoEvaluation'
                             ref = 'route-addPmoEvaluation'
-                            render={(props) => <AddPMOEvaluation projectIntake = {projectIntake} isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
+                            render={(props) => <AddPMOEvaluation 
+                                                            projectIntake = {projectIntake} 
+                                                            isPMO = {isPMO} 
+                                                            resetForm = {this.state.resetForm} 
+                                                            locationData = {this.props} 
+                                                            updateProjectIntakeValues = {this.updateProjectIntakeValues}
+                                                            sendEmailUpdate = {this.sendEmailUpdate} 
+                                                />
+                                    }
                         />
 
 
@@ -733,7 +1129,15 @@
                             path = {`${relativePath}/add-project/roi-realized`}
                             key =  'route-addRoiRealized'
                             ref = 'route-addRoiRealized'
-                            render={(props) => <AddROIRealized projectIntake = {projectIntake} isPMO = {isPMO} resetForm = {this.state.resetForm} locationData = {this.props} updateProjectIntakeValues = {this.updateProjectIntakeValues} />}
+                            render={(props) => <AddROIRealized 
+                                                            projectIntake = {projectIntake} 
+                                                            isPMO = {isPMO} 
+                                                            resetForm = {this.state.resetForm} 
+                                                            locationData = {this.props} 
+                                                            updateProjectIntakeValues = {this.updateProjectIntakeValues}
+                                                            sendEmailUpdate = {this.sendEmailUpdate} 
+                                                />
+                                    }
                         />
 
 

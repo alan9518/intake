@@ -15,6 +15,8 @@
   
     import { isEqual , isEmpty} from 'lodash';
     import { withRouter } from 'react-router';
+
+    import { Prompt  } from 'react-router-dom';
   
     import Alert from 'react-s-alert';
     import 'react-s-alert/dist/s-alert-default.css';
@@ -857,12 +859,10 @@
 
                     // this.props.updateSPFiles(folderName).then((response) => {
                        
-                    //     console.log("TCL: submitFormDB -> response", response)
                                
                     // })
                     // .catch((error) => {
                     
-                    //  console.log("TCL: submitFormDB -> error", error)
     
                     // })
                     
@@ -1210,6 +1210,13 @@
 
                         this.saveOtherTabs(projectID);
 
+
+
+                        // ? Send Email Update
+                        this.props.sendEmailUpdate(projectID).then((repsonse) => {
+                            console.log("TCL: submitFormDB -> repsonse", repsonse)
+                            
+                        })
                       
                         
 
@@ -1687,8 +1694,11 @@
             // Add Red Border to Control
             // --------------------------------------   
             addErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.add('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
             }
 
             // --------------------------------------
@@ -1733,6 +1743,8 @@
             renderRequirementsDefinition(requirements) {
 				//console.log('TCL: renderRequirementsDefinition -> requirements', requirements)
                 const {isShowingModal, hasErrors, sendingData} = this.state;
+                const {location, match} = this.props.locationData;
+                const {projectID} = match.params
                 console.log("TCL: RequirementsDefinition -> renderRequirementsDefinition -> this.state", this.state)
                 // this.createErrorAlert('The name is already on Use. Please a type a different one');
                 const formContainer =  <form ref={form => this.formEl = form}  >

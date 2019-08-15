@@ -69,3 +69,9 @@ a.int-disabledLink span {
         flex-basis: 100%;
     }
 }
+
+
+
+.int-linkButton {
+    cursor: pointer;
+}

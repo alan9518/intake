@@ -52,6 +52,8 @@
             // --------------------------------------
             constructor(props) {
                 super(props);
+                console.log("TCL: constructor -> props", props)
+                
                 this.state = {
                     isLoaded: true,
                     responsiveWidth : window.innerWidth,
@@ -1424,11 +1426,11 @@
 
                 // this.props.saveLocalTechnical(formData);
 
-                //! if(this.validateFormInputs() === false) {
-                //!     this.createErrorAlertTop('Please Fill all the Required Fields');
-                //!     this.setState({checkForErrors: true})
-                //!     return;
-                //! }
+                 if(this.validateFormInputs() === false) {
+                     this.createErrorAlertTop('Please Fill all the Required Fields');
+                     this.setState({checkForErrors: true})
+                     return;
+                 }
 
                 if(redirectNextStep !== false) {
 
@@ -1483,6 +1485,13 @@
                     // ? Create New Tech, the Update/Save Other Tabs
                     this.saveOtherTabs(projectID)
 
+                    // ? Send Email Update
+                    this.props.sendEmailUpdate(projectID).then((repsonse) => {
+                        console.log("TCL: submitFormDB -> repsonse", repsonse)
+    
+                    })
+  
+
                     this.setState({sendingData : false})
 
                 })
@@ -1516,6 +1525,12 @@
 
                     // ? Update New Tech, the Update/Save Other Tabs
                     this.saveOtherTabs(projectID)
+
+                    // ? Send Email Update
+                    this.props.sendEmailUpdate(projectID).then((repsonse) => {
+                        console.log("TCL: submitFormDB -> repsonse", repsonse)
+                    })
+    
                     
                     this.setState({sendingData : false}, this.redirectUser(nextStep))
                     
@@ -1575,6 +1590,7 @@
                     // ? Create New Project, the Save Tech Eval
 
                     this.saveOtherTabs(null, true);
+                    
                     
                     return;
                 }
@@ -1810,6 +1826,12 @@
                                     }
 
 
+                                    // ? Send Email Update
+                                    this.props.sendEmailUpdate(id).then((repsonse) => {
+                                        console.log("TCL: submitFormDB -> repsonse", repsonse)
+                    
+                                    })
+
 
                                     this.setState({sendingData : false})
                                     this.createSuccessAlert('All Tabs were saved')
@@ -1823,6 +1845,9 @@
                                 this.setState({sendingData : false})
                             })
                         }
+
+                          
+            
                     }
                     
 
@@ -2294,18 +2319,24 @@
             // Add Red Border to Control
             // --------------------------------------   
             addErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.add('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
             }
 
             // --------------------------------------
             // Remove Error Status to Control
             // --------------------------------------
             removeErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.remove('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.remove('int-errorStatus')
+                else
+                    return;
+                
             }
-
 
             // --------------------------------------
             // Look IF input has error class
@@ -2325,7 +2356,7 @@
                     
                     // console.log("TCL: checkErrorClass -> pickerName", pickerName)
                    
-                  if(this.state.checkForErrors ===  true) {
+                //   if(this.state.checkForErrors ===  true) {
                     if (document.getElementById(`${pickerName}_HiddenInput`).value === "[]" || document.getElementById(`${pickerName}_HiddenInput`).value === "") 
                         document.getElementById(pickerName).style = 'border: 1px solid #e76c90 !important';
                     
@@ -2338,12 +2369,13 @@
                     
     
                     // let stateName = id.substr('')
-                }
+                // }
 
                 
 
                  //? Check Select Inputs Fields
-                else if((this.state.checkForErrors === true && this.state[id].value !== "" ) || (this.state.checkForErrors === true &&  this.state[id].value !== null) )
+                // else if((this.state.checkForErrors === true && this.state[id].value !== "" ) || (this.state.checkForErrors === true &&  this.state[id].value !== null) )
+                if((this.state[id] && this.state[id].value !== "" ) || (this.state[id] &&  this.state[id].value !== null) )
                     this.removeErrorStatus(id)
 
                 //? Check Input Text Fields
@@ -2351,7 +2383,10 @@
                     this.removeErrorStatus(id)
                
                 //? Puth Back Error Message
-                else  if(this.state.checkForErrors === true)
+                // else  if(this.state.checkForErrors === true)
+                //     this.addErrorStatus(id)
+
+                else
                     this.addErrorStatus(id)
                 
             }

@@ -993,6 +993,7 @@
 
                     // Check if is New PMO Eval or Update Current
                     const {pmo_eval_id, Pmo_eval_id} = this.props.projectIntake.pmoEvaluation;
+                    const {projectID} = this.props.locationData.match.params;
 
                     if(pmo_eval_id || Pmo_eval_id || this.state.SavedOnDB === true) {
                         // Update Current
@@ -1011,7 +1012,13 @@
 
                     // this.setState({state:this.state})
 
+            
+                    
+                    // ? Send Email Update
+                    this.props.sendEmailUpdate(projectID).then((repsonse) => {
+                        console.log("TCL: submitFormDB -> repsonse", repsonse)
 
+                    })
                    
                         
 
@@ -1409,16 +1416,23 @@
             // Add Red Border to Control
             // --------------------------------------   
             addErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.add('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
             }
 
             // --------------------------------------
             // Remove Error Status to Control
             // --------------------------------------
             removeErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.remove('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.remove('int-errorStatus')
+                else
+                    return;
+                
             }
 
 

@@ -2110,6 +2110,12 @@
                                         this.saveOtherTabs(newProjectID)
 
                                         this.createSuccessAlert('Data Saved ');
+
+                                          // ? Send Email Update
+                                            this.props.sendEmailUpdate(newProjectID).then((repsonse) => {
+                                                console.log("TCL: submitFormDB -> repsonse", repsonse)
+
+                                            })
                                         
                                         this.setState({sendingData : false, isSavedOnDB : true, Buss_info_id : newBusinesId, Project_ID : newProjectID })
                                      //   // ? this.setState({sendingData : false}, this.redirectUser())
@@ -2231,6 +2237,12 @@
                                 this.saveOtherTabs(projectID)
 
 
+                                // ? Send Email Update
+                                this.props.sendEmailUpdate(projectID).then((repsonse) => {
+                                    console.log("TCL: submitFormDB -> repsonse", repsonse)
+
+                                })
+
                                 // this.setState({sendingData : false}, this.redirectUser())
 
                                 this.setState({sendingData : false, isSavedOnDB : true, Buss_info_id : newBusinesId, Project_ID : newProjectID },this.redirectUser())
@@ -2320,7 +2332,6 @@
                     this.setState({sendingData : true})
 
 
-                    // this.saveOtherTabs();
 
                     
                     const {requirementsDefinition} = this.props.projectIntake;
@@ -2486,53 +2497,6 @@
 
                     
                 }
-
-
-
-                validateEmptyRequirements() {
-                    let requiredFields = [];
-                    const {requirementsDefinition} = this.props;
-                    
-                    // Object.keys(this.props.requirementsDefinition).map((key, index) => {
-                    //     // this.props.requirementsDefinition[key]
-                    //     console.log("TCL: validateEmptyRequirements -> this.props.requirementsDefinition[key]", this.props.requirementsDefinition[key])
-
-                    //     if(this.props.requirementsDefinition[key].value) {
-                    //         if(this.props.requirementsDefinition[key].value === "")
-                    //             requiredFields.push(this.props.requirementsDefinition[key])
-                    //     }
-                    //     else if (this.props.requirementsDefinition[key] === "")
-                    //         requiredFields.push(this.props.requirementsDefinition[key])
-                        
-                        
-                    // })
-
-                    for (let [key, value] of Object.entries(requirementsDefinition)) {
-                        console.log(key, value);
-
-                        if(value) {
-                              // ? Search for Select Fields
-                            if(value.value !== undefined) {
-                                if(value.value === "")
-                                    requiredFields.push(key)
-                            }
-                            else if(value === "")
-                                requiredFields.push(key)
-                        }
-                        else {
-                            requiredFields.push(key)
-                        }
-                      
-                    }
-
-
-                    console.log("TCL: validateEmptyRequirements -> requiredFields", requiredFields)
-                    
-                }
-
-
-
-
 
                 /**  --------------------------------------
                 // Call SP Function to Upload File
@@ -2844,19 +2808,24 @@
             // Add Red Border to Control
             // --------------------------------------   
             addErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.add('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
             }
 
             // --------------------------------------
             // Remove Error Status to Control
             // --------------------------------------
             removeErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.remove('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.remove('int-errorStatus')
+                else
+                    return;
+                
             }
-
-
             // --------------------------------------
             // Look IF input has error class
             // And remove it or keept it
@@ -2871,7 +2840,7 @@
                 const {id, value} = target;
                 
                 
-                if(this.state.checkForErrors === true) {
+                // if(this.state.checkForErrors === true) {
 
                 
                     //? Check for PeopplePicker
@@ -2907,12 +2876,12 @@
                     
                 
                     //? Check Select Inputs Fields
-                    else if(this.state[id].value !== "" )
+                    else if(this.state[id] && this.state[id].value !== "" )
                         this.removeErrorStatus(id)
                     //? Puth Back Error Message
                     // else  if(this.state.checkForErrors === true)
                     //     this.addErrorStatus(id)
-                }
+                // }
 
                }
                catch(error) {

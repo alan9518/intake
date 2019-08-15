@@ -11,7 +11,7 @@
     import React, { Component, Fragment } from 'react';
     import CustomerValues from '../../../LocalData/customerValues.json'
     import PropTypes from 'prop-types';
-    import { withRouter, Redirect } from 'react-router';
+    import { Prompt  } from 'react-router-dom';
     import { isEqual , isEmpty} from 'lodash'
     import Alert from 'react-s-alert';
     import 'react-s-alert/dist/s-alert-default.css';
@@ -1615,8 +1615,9 @@
                 saveNewBusinessDB = (isRequirementViewSaved, requirementsDefinition) => {
                     
                     // Look if Requirements Were Saved
+                    let reqID = requirementsDefinition.project_id || requirementsDefinition.Project_id || requirementsDefinition.Request_ID
 
-                    if(isRequirementViewSaved === false) {
+                    if(!reqID ) {
 
 
                         let reqToSave = null;
@@ -1632,6 +1633,7 @@
                             reqToSave = requirementsDefinition
 
 
+                        // ? Save New Req
 
                         saveRequirementsDB(reqToSave).then((newRequirementsID)=>{
 
@@ -1778,7 +1780,18 @@
                         this.setState({checkForErrors: false})
                     }
 
+                    
+
+                    // ? Update All Tabs
                     this.saveOtherTabs(projectID);
+
+
+                    // ? Send Email Update
+                    this.props.sendEmailUpdate(projectID).then((repsonse) => {
+                        console.log("TCL: submitFormDB -> repsonse", repsonse)
+
+                    })
+                      
 
 
                   
@@ -3260,17 +3273,25 @@
             // Add Red Border to Control
             // --------------------------------------   
             addErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.add('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
             }
 
             // --------------------------------------
             // Remove Error Status to Control
             // --------------------------------------
             removeErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.remove('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.remove('int-errorStatus')
+                else
+                    return;
+                
             }
+
 
             // --------------------------------------
             // Look IF input has error class
@@ -3334,6 +3355,8 @@
             // --------------------------------------
             renderBusinessInformation() {
                 const {sendingData} = this.state;
+                const {location, match} = this.props.locationData;
+                const {projectID} = match.params
                 // const {isLoaded} = this.props.loadedBusinessInformation;
 
                 let workstage = '';

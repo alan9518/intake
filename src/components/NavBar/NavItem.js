@@ -16,20 +16,39 @@
 // Create Functional Component
 // --------------------------------------
     const NavItem = (props) => {
-        const { title, activeRoute, route, disabled } = props;
+        const { title, activeRoute, route, disabled, renderLinks } = props;
+        console.log("TCL: NavItem -> activeRoute", activeRoute)
         // Set Active Route
         let activeClass = activeRoute === true ? 'int-active' : '';
-        return (
-            <li>
-                <ProjectLink route = {route} disabled = {disabled}>
+        console.log("TCL: NavItem -> activeClass", activeClass)
+
+        if(renderLinks) {
+            return (
+                <li>
+                    <ProjectLink route = {route} disabled = {disabled}>
+                        <div className={`int-navItem ${activeClass}`}>
+                            <span >
+                                {title}
+                            </span>
+                        </div>
+                    </ProjectLink>
+                </li>
+            );
+        }
+
+        else {
+            return (
+                <li onClick = {(e) => {props.onClick(route)}} disabled = {disabled} className = "int-linkButton">
                     <div className={`int-navItem ${activeClass}`}>
-                        <span >
-                            {title}
+                        <span>
+                            { title }
                         </span>
                     </div>
-                </ProjectLink>
-            </li>
-        );
+                </li>
+            );
+        }
+
+        
     }
 
 

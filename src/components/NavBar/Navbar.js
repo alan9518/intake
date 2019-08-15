@@ -31,8 +31,8 @@
 // Create Functional Component
 // --------------------------------------
     const Navbar = (props) => {
-        const {routes, currentProjectID} = props;
-        console.log("TCL: Navbar -> routes", routes)
+        const {routes, currentProjectID, renderLinks} = props;
+
         return (
             <div className = "int-navigationContainer">
                 <ul className = "int-navList">
@@ -41,10 +41,13 @@
                             return route.menuTitle &&  (<NavItem 
                                                             title = {route.menuTitle} 
                                                             // activeRoute = {(index+1) === props.activeRoute ? true : false}
+                                                            activeRoute = {props.activeRoute === setProjectRoute(route, currentProjectID) ? true : false}
                                                             disabled = {route.disabled}
                                                             route = {setProjectRoute(route, currentProjectID)}
                                                             Key = {route.menuTitle}
-                                                            />)
+                                                            renderLinks = {renderLinks}
+                                                            onClick = {props.onItemClick}    
+                                                        />)
                         })
                     }
                 </ul>

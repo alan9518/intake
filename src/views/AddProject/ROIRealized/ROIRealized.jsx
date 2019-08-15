@@ -923,6 +923,12 @@
                         this.saveNewROI(Project_id)
                     }
 
+                    // ? Send Email Update
+                    this.props.sendEmailUpdate(Project_id).then((repsonse) => {
+                        console.log("TCL: submitFormDB -> repsonse", repsonse)
+
+                    })
+
                     this.saveOtherTabs(Project_id);
 
 
@@ -1609,41 +1615,31 @@
                 });
             }
 
-            // --------------------------------------
-            // Create Alert With Confirmation Button
-            // --------------------------------------
-            // createSuccessAlertWithConfirmation = (message) =>{
-            //     return (
-            //         <div className={classNames} id={id} style={styles}>
-            //             <div className='s-alert-box-inner'>
-            //             {message}
-            //             </div>
-            //             <h3 className="customer">{customFields.customerName}</h3>
-            //             <button className="customButton" onClick={this.redirectUser()}>Go to Home Page</button>
-            //             <span className='s-alert-close' onClick={handleClose}></span>
-            //         </div>
-            //     )
-            // }
+         
 
 
             // --------------------------------------
             // Add Red Border to Control
             // --------------------------------------   
             addErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.add('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
             }
 
-
-          
             // --------------------------------------
             // Remove Error Status to Control
             // --------------------------------------
             removeErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.remove('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.remove('int-errorStatus')
+                else
+                    return;
+                
             }
-
 
             // --------------------------------------
             // Dynatrace Table

@@ -937,6 +937,12 @@
 
                     this.setState({ sendingData : false})
 
+                    // ? Send Email Update
+                    this.props.sendEmailUpdate(projectID).then((repsonse) => {
+                        console.log("TCL: submitFormDB -> repsonse", repsonse)
+
+                    })
+
                     
 
                 }
@@ -1423,22 +1429,24 @@
             // Add Red Border to Control
             // --------------------------------------   
             addErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.add('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.add('int-errorStatus');
+                else
+                    return;
             }
 
             // --------------------------------------
             // Remove Error Status to Control
             // --------------------------------------
             removeErrorStatus = (controlID)=> {
-                const control = document.getElementById(controlID);
-                control.classList.remove('int-errorStatus');
+                const control =  document.getElementById(controlID) ? document.getElementById(controlID) : null;
+                if(control)
+                    control.classList.remove('int-errorStatus')
+                else
+                    return;
+                
             }
-
-
-    
-          
-
 
 
             

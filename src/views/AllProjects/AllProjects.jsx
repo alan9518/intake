@@ -344,7 +344,7 @@
             // --------------------------------------
             renderNavigation() {
                 // const activeRoute = newProjectRoutes[0];
-                return <NavBar routes = {appRoutes} isRoute = {true}/>
+                return <NavBar routes = {appRoutes} isRoute = {true} renderLinks = {true}/>
             }
 
 
@@ -368,7 +368,7 @@
                         <div className="int-container">
                             <div className="int-row">
                                 <div className="int-column ">
-                {/* this.state.tableData.length > 0 && <Search onChange = {this.onChange} onSubmit = {this.onSubmitFilter}/> */}
+                
                                     <Search onChange = {this.onChange} onSubmit = {this.onSubmitFilter}/>
                                 </div>
                             </div>

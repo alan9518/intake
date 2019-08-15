@@ -99,7 +99,7 @@ const checkInputBlur = (event) => {
                 {
                     // Text Area
                     isTextArea &&
-                    <div className="int-fieldText int-fieldTextArea" style={{ minWidth: inputWidth }} name={Field_Name} id={Field_Name}>
+                    <div className="int-fieldText int-fieldTextArea" style={{ minWidth: inputWidth }} name={Field_Name} >
                         {Mandatory && <span className="int-blueText"> * </span>}
                         <textarea
                             rows="4"
