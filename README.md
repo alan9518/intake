@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+
+
+## Project Intake
+
+    Web Service Endpoints : https://wsprojectintakenew.azurewebsites.net/projectintake.asmx
+    Sharepoint PMOS Group : https://flextronics365.sharepoint.com/sites/gsd/intake_process/_layouts/15/people.aspx?MembershipGroupId=97
+    
+
+
 ## Available Scripts
 
 In the project directory, you can run:
