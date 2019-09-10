@@ -17,35 +17,72 @@
 // --------------------------------------
     const NavItem = (props) => {
         const { title, activeRoute, route, disabled, renderLinks } = props;
-        console.log("TCL: NavItem -> activeRoute", activeRoute)
         // Set Active Route
         let activeClass = activeRoute === true ? 'int-active' : '';
-        console.log("TCL: NavItem -> activeClass", activeClass)
 
         if(renderLinks) {
-            return (
-                <li>
-                    <ProjectLink route = {route} disabled = {disabled}>
+            if(!disabled)
+                // ? Item Enabled
+                return (
+                    <li>
+                        <ProjectLink route = {route} disabled = {disabled}>
+                            <div className={`int-navItem ${activeClass}`}>
+                                <span >
+                                    {title}
+                                </span>
+                            </div>
+                        </ProjectLink>
+                    </li>
+
+                );
+            else 
+                // ? Item is Disabled
+                return (
+                    <li  onClick = {(e) => {props.onClick(route)}} disabled = {disabled} className = "int-linkButton ">
                         <div className={`int-navItem ${activeClass}`}>
-                            <span >
-                                {title}
+                            <span>
+                                { title }
                             </span>
                         </div>
-                    </ProjectLink>
-                </li>
-            );
+                    </li>
+                );
         }
 
         else {
-            return (
-                <li onClick = {(e) => {props.onClick(route)}} disabled = {disabled} className = "int-linkButton">
-                    <div className={`int-navItem ${activeClass}`}>
-                        <span>
-                            { title }
-                        </span>
-                    </div>
-                </li>
-            );
+
+            if(!disabled)
+                // ? Item Enabled
+                return (
+                    // <li>
+                    //     <ProjectLink route = {route} disabled = {disabled}>
+                    //         <div className={`int-navItem ${activeClass}`}>
+                    //             <span >
+                    //                 {title}
+                    //             </span>
+                    //         </div>
+                    //     </ProjectLink>
+                    // </li>
+
+                     <li onClick = {(e) => {props.onClick(route)}} disabled = {disabled} className = {`${disabled === true ? 'int-linkButton int-disabledLink' : 'int-linkButton'}`}>
+                        <div className={`int-navItem ${activeClass}`}>
+                            <span>
+                                { title }
+                            </span>
+                        </div>
+                    </li>
+
+                );
+            else 
+                return (
+                    // <li onClick = {(e) => {props.onClick(route)}} disabled = {disabled} className = "int-linkButton int-disabledLink">
+                    <li disabled = {disabled} className = "int-linkButton int-disabledLink">
+                        <div className={`int-navItem ${activeClass}`}>
+                            <span>
+                                { title }
+                            </span>
+                        </div>
+                    </li>
+                );
         }
 
         

@@ -21,6 +21,9 @@
     
     import '../styles.css'
 
+
+    const currentUser = window.getCurrentSPUser();
+
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -112,7 +115,8 @@
             // --------------------------------------
             async loadAPI() {
                 const sitePMOsPromise =  await this.fetchSitePMOS();
-                const sitePMOS =   await  sitePMOsPromise.data ?  sitePMOsPromise.data.value : this.users.value
+                const sitePMOS = await sitePMOsPromise.data.value;
+                // const sitePMOS =   await  sitePMOsPromise.data ?  sitePMOsPromise.data.value : this.users.value
 
                 // const sitePMOS = this.users.value
                 console.log("TCL: Dashboard -> loadAPI -> sitePMOS", sitePMOS)
@@ -121,32 +125,55 @@
                 // ? If there is Pmo, look for current user
                 if(sitePMOS.length >0) {
                     console.log("TCL: Dashboard -> loadAPI -> sitePMOS", sitePMOS)
-                    //? const currentUser = window.getCurrentSPUser();
-                    const currentUser = {userEmail : 'alan.medina@flex.com'}
+                    
+                    
+                    // const currentUser = {userEmail : 'alan.medina@flex.com'}
                     const PMOSData = sitePMOS.filter((pmo) => {
+                        console.log("TCL: Dashboard -> loadAPI -> pmo", pmo)
+                        console.log("TCL: Dashboard -> loadAPI -> currentUser", currentUser)
+
+                        console.log("TCL: Dashboard -> loadAPI -> (pmo.Email)", pmo.Email.toLowerCase())
+
+                        console.log("TCL: Dashboard -> loadAPI -> (currentUser.userEmail)", currentUser.userEmail.toLowerCase())
 			
                         if((pmo.Email).toLowerCase() === (currentUser.userEmail).toLowerCase())
                             return {
                                 pmoName : pmo.Title,
-                                pmoEmail :pmo.Email
+                                pmoEmail: pmo.Email
                             }
+                        // else
+                        //     return null
                     })
 
+
+                    console.log("TCL: Dashboard -> loadAPI -> PMOSData", PMOSData)
+
                     if(PMOSData.length > 0)
-                        isPMO = true;
+                        isPMO = true;    
                     else
                         isPMO = false;
 
-                    // ? Set PMO value on localStorage to acces it later
-                    if(localStorage.getItem('isUserPMO') === null) {
-                        window.localStorage.setItem('isUserPMO', JSON.stringify(isPMO))
+                    console.log("TCL: Dashboard -> loadAPI -> isPMO", isPMO)
+
+                    // ? Set PMO value on sessionStorage to acces it later
+                    if(sessionStorage.getItem('isUserPMO') === null ) {
+                        window.sessionStorage.setItem('isUserPMO', JSON.stringify(isPMO))
+                    }
+                    // ? If user wasnt in the list on the first check
+                    else if (sessionStorage.getItem('isUserPMO') === "false" && isPMO === true) {
+                        window.sessionStorage.setItem('isUserPMO', JSON.stringify(isPMO))
+                    }
+
+                    // ? If user was in the list on the first check but now is removed
+                    else if (sessionStorage.getItem('isUserPMO') === "true" && isPMO === false) {
+                        window.sessionStorage.removeItem('isUserPMO')
                     }
                     
                 }
                 else {
                     isPMO = false 
-                    if(localStorage.getItem('isUserPMO') !== null) {
-                        window.localStorage.removeItem('isUserPMO')
+                    if(sessionStorage.getItem('isUserPMO') !== null) {
+                        window.sessionStorage.removeItem('isUserPMO')
                     }
 
                 }

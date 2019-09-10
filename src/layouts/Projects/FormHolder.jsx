@@ -283,10 +283,10 @@
             enableNavigationRoutes() {
                 // const {isPMO} = this.props;
 
-                const isPMO = localStorage.getItem('isUserPMO') === "true" ? true  : false
+                const isPMO = sessionStorage.getItem('isUserPMO') === "true" ? true  : false
 
                 const routesWithState = newProjectRoutes.map((route)=> {
-                    if(route.allowNormalUser) 
+                    if(route.allowNormalUser === true) 
                         route.disabled = false
                     else {
                         if(isPMO)  
@@ -636,7 +636,6 @@
             // ? Validate Data Before Leving Route
             // ?--------------------------------------
             onNavItemClick = (nextRoute) => {
-                console.log("TCL: formHolder -> onNavItemClick -> nextRoute", nextRoute)
 
                 // let routeNameArray = route.split('/')
                 // let tabRouteName = routeNameArray[routeNameArray.length-1];
@@ -686,7 +685,6 @@
                                     else if (field === 'Project_Type') {
                                         let sel = document.getElementById(field)
                                         let selectInput = sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent
-                                        // console.log("TCL: formHolder -> validateEmptyTabs -> sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent", sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent)
                                         // ? Add Error
                                         if ( selectInput === "" || selectInput === 'Project Type'){
                                             
@@ -752,8 +750,6 @@
                                 let sel = document.getElementById(field)
                                 let selectInput = null;
 
-                                console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value'))
-                                console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value').length)
 
                                 if( sel.getElementsByClassName('react-select-extra-wide__single-value').length > 0 )
                                     selectInput = sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent
@@ -836,8 +832,7 @@
                                     let sel = document.getElementById(field)
                                     let selectInput = null;
     
-                                    console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value'))
-                                    console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value').length)
+                                   
     
                                     if( sel.getElementsByClassName('react-select-extra-wide__single-value').length > 0 )
                                         selectInput = sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent
@@ -906,9 +901,7 @@
                                 let sel = document.getElementById(field)
                                 let selectInput = null;
 
-                                console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value'))
-                                console.log('sel class' , sel.getElementsByClassName('react-select-extra-wide__single-value').length)
-
+                             
                                 if( sel.getElementsByClassName('react-select-extra-wide__single-value').length > 0 )
                                     selectInput = sel.getElementsByClassName('react-select-extra-wide__single-value')[0].textContent
 
@@ -1041,7 +1034,7 @@
             // --------------------------------------
             renderformBody() {
 
-                const isPMO = localStorage.getItem('isUserPMO') === "true" ? true  : false
+                const isPMO = sessionStorage.getItem('isUserPMO') === "true" ? true  : false
 
                 return (
                     

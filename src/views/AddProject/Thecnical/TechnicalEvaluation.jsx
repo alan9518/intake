@@ -157,6 +157,10 @@
                             {
                                 "label": "4.- D&E, WFD and Pulse  Aristoteles Portillo´s Org",
                                 "value": "D&E, WFD and Pulse  Aristoteles Portillo´s Org"
+                            },
+                            {
+                                "label": "5.- Architects Group - Ganesh Parameswaran's Org",
+                                "value": "Architects Group - Ganesh Parameswaran's Org"
                             }
                         ],
                         "columns":  this.state.responsiveWidth <=1440 ? 1 : 2,
@@ -671,7 +675,7 @@
                         })
                         break;
                         // ? Data from DB
-                        case "Global Ops - Sujit Gopinath´s Org":    
+                    case "Global Ops - Sujit Gopinath´s Org":    
                             this.setState({
                                 Technology : [],
                                 Applications_involved :  {},
@@ -732,7 +736,7 @@
                             
                         break;
                         // ? Data from DB
-                        case "GSS & Sales & Quality - Sapan Parikh´s Org" :
+                    case "GSS & Sales & Quality - Sapan Parikh´s Org" :
                             this.setState({
                                 // Technology : {},
                                 // Applications_involved :  {},
@@ -851,7 +855,39 @@
                                 ]
                             })
                         break;
+
                     
+                    // ? Data from DB
+                    case "Architects Group - Ganesh Parameswaran's Org" : 
+                        this.setState({
+                            
+                            conditionalApplications : [
+                                {"label" : "Nucleus", "value" : "Nucleus"} ,
+                                {"label" : "Architecture Group Initiatives", "value" : "Architecture Group Initiatives"} ,
+                                {"label" : "Innovation Lab Projects", "value" : 'Innovation Lab Projects'} ,
+                                {"label" : "APPSEC", "value" : 'APPSEC'} 
+                            ],
+                            conditionalTechnologies : [
+                                {"label" : "Microsoft Technologies", "value" : "Microsoft Technologies"} ,
+                                {"label" : "Java", "value" : "Java"} ,
+                                {"label" : "Integration Services", "value" : "Integration Services"}, 
+                                {"label" : "SQL Server, Oracle", "value" : "SQL Server, Oracle"}, 
+                                {"label" : "ELK", "value" : "ELK"} 
+                            ],
+                            conditionalIT_Groups_Required : [
+                                {"label" : "Software Development", "value" : "Software Development"} ,
+                                {"label" : "Database Administrators", "value" : "Database Administrators"} ,
+                                {"label" : "Network Administrators", "value" : "Network Administrators"} ,
+                                {"label" : "F5 Administrators", "value" : "F5 Administrators"} ,
+                                {"label" : "Wintel", "value" : "Wintel"} ,
+                                {"label" : "Linux", "value" : "Linux"} ,
+                                {"label" : " UX-UI", "value" : " UX-UI"}
+                            
+                                
+                            ]
+                        
+                        })
+                    break;
                    
                     default : this.setState({conditionalApplications : []}); 
                 }

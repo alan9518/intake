@@ -36,19 +36,19 @@
       renderApp () { 
           const history = createBrowserHistory();
           
-          //? const CurrentSPUser = window.getCurrentSPUser();
+          const CurrentSPUser = window.getCurrentSPUser();
 
           ReactGA.initialize('UA-142850304-1', {
             debug: true,
             titleCase: false,
-            gaOptions: {
-              userId: 13,
-              dimensionValue: 'alan.medina@flex.com'
-            }
             // gaOptions: {
-            //   userId: CurrentSPUser.user_ID,
-            //   dimensionValue: CurrentSPUser.user_email
+            //   userId: 13,
+            //   dimensionValue: 'alan.medina@flex.com'
             // }
+            gaOptions: {
+              userId: CurrentSPUser.user_ID,
+              dimensionValue: CurrentSPUser.user_email
+            }
           });
     
           ReactGA.pageview(window.location.pathname + window.location.search);

@@ -73,9 +73,6 @@
 const CustomTableItem = (props) => {
     const {textValue} = props;
     const tableCellStyleColor = setBackgroundColor(textValue);
-    const tableCellStyle = {
-        backgroundColor : tableCellStyleColor
-    }
     return (
         <div className = "int-tableColorHolder"  style={{backgroundColor: tableCellStyleColor}}>
 

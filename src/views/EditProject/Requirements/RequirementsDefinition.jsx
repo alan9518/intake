@@ -440,15 +440,28 @@
 
             setDateSubmittedValue(date) {
                 
-               
+               let newDate = this.props.projectIntake.requirementsDefinition.Date_submitted  || '';
                 if(!date)
                     return ''
 
                 if(date === 'NaN/NaN/NaN')
-                    return this.props.projectIntake.requirementsDefinition.Date_submitted
+                    newDate = this.props.projectIntake.requirementsDefinition.Date_submitted
+
+
+                else if(date._isValid === false)
+                    newDate = this.props.projectIntake.requirementsDefinition.Date_submitted || date._i
                 else
                     // return 'date'
-                    return moment(date).format("DD/MM/YYYY");
+                    newDate =  moment(date).format("DD/MM/YYYY") || this.props.projectIntake.requirementsDefinition.Date_submitted;
+                    
+
+
+                
+                console.log("TCL: RequirementsDefinition -> setDateSubmittedValue -> newDate", newDate)
+
+                return newDate;
+
+                
             }
 
 
@@ -1062,7 +1075,7 @@
                         Project_Name : this.state.Project_Name,
                         Description : this.state.Description,
                         Project_Type : this.state.Project_Type,
-                        Date_submitted : moment().format("DD/MM/YYYY"),
+                        Date_submitted : this.state.Date_Submitted || this.props.projectIntake.requirementsDefinition.Date_Submitted || moment().format("DD/MM/YYYY"),
                         Request_Owner : this.state.Request_Owner,
                         Workstage : this.state.Workstage,   
                         Expected_Start_Date : this.state.Expected_Start_Date || moment(),

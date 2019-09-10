@@ -106,7 +106,7 @@
                
                 try {
                     // ? Get Projects. Check if user is PMO
-                    const userProjectsPromise = await localStorage.getItem('isUserPMO') === "true" ?  this.fetchProjects() : this.fetchProjectsByUser()
+                    const userProjectsPromise = await sessionStorage.getItem('isUserPMO') === "true" ?  this.fetchProjects() : this.fetchProjectsByUser()
 
                     // const userProjects =  await userProjectsPromise.data;
 

@@ -305,6 +305,10 @@
                             {
                                 "label": "4.- D&E, WFD and Pulse  Aristoteles Portillo´s Org",
                                 "value": "D&E, WFD and Pulse  Aristoteles Portillo´s Org"
+                            },
+                            {
+                                "label": "5.- Architects Group - Ganesh Parameswaran's Org",
+                                "value": "Architects Group - Ganesh Parameswaran's Org"
                             }
                         ],
                         "columns":  this.state.responsiveWidth <=1440 ? 1 : 2,
@@ -970,7 +974,7 @@
                         break;
                         // ? Data from DB
                     case "2.- Global Ops - Sujit Gopinath´s Org":    
-                            this.setState({
+                        this.setState({
                                 // Technology : {},
                                 // Applications_involved :  {},
                                 conditionalApplications : [
@@ -1031,7 +1035,7 @@
                         break;
                         // ? When loading data from state
                     case "Global Ops - Sujit Gopinath´s Org":    
-                            this.setState({
+                        this.setState({
                                 // Technology : {},
                                 // Applications_involved :  {},
                                 conditionalApplications : [
@@ -1088,10 +1092,10 @@
                                     
                                 ]
                             });
-                            break;
+                        break;
                         // ? Data from DB
                     case "3.- GSS & Sales & Quality - Sapan Parikh´s Org" :
-                            this.setState({
+                        this.setState({
                                 // Technology : {},
                                 // Applications_involved :  {},
                                 conditionalApplications : [
@@ -1137,10 +1141,10 @@
                                     {"label" : "Net Development", "value" : "Net Development"} ,
                                 ]
                             })
-                            break;
+                        break;
                         // ? When loading data from state
                     case "GSS & Sales & Quality - Sapan Parikh´s Org" :
-                                this.setState({
+                            this.setState({
                                     // Technology : {},
                                     // Applications_involved :  {},
                                     conditionalApplications : [
@@ -1189,74 +1193,74 @@
                             break;
                     // ? Data from DB
                     case "4.- D&E, WFD and Pulse  Aristoteles Portillo´s Org" :
-                        this.setState({
-                                // Technology : {},
-                                // Applications_involved :  {},
-                                conditionalApplications : [
-                                    {"label" : "aPriori", "value" : "aPriori"} ,
-                                    {"label" : "BOM Processing and Management", "value" : 'BOM Processing and Management'} ,
-                                    {"label" : "CMT - Commercial Management Tracker", "value" : 'CMT - Commercial Management Tracker'} ,
-                                    {"label" : "Customer Setup", "value" : 'Customer Setup'} ,
-                                    {"label" : "Elementum", "value" : 'Elementum'} ,
-                                    {"label" : "Flex Escalation Tool", "value" : 'Flex Escalation Tool'} ,
-                                    {"label" : "Flex Q Medical", "value" : 'Flex Q Medical'} ,
-                                    {"label" : "PLanView", "value" : 'PLanView'} ,
-                                    {"label" : "QUALfx", "value" : 'QUALfx'} ,
-                                    {"label" : "TDMS", "value" : 'TDMS'} ,
-                                    {"label" : "Workforce Design", "value" : 'Workforce Design'} ,
-                                    {"label" : "RFQ", "value" : 'RFQ'} ,
-                                    {"label" : "FlexPulse Action Tracker", "value" : 'FlexPulse Action Tracker'} ,
-                                    {"label" : "FLexware", "value" : 'FLexware'} ,
-                                    {"label" : "Computer Integrated Manufacturing", "value" : 'Computer Integrated Manufacturing'} ,
-                                    {"label" : "Checkmarx Vulnerabilities Remediation", "value" : 'Checkmarx Vulnerabilities Remediation'} ,
-                                    {"label" : "Cisco Services Material Request Portal", "value" : 'Cisco Services Material Request Portal'} ,
-                                    {"label" : "Jigsaw", "value" : 'Jigsaw'} ,
-                                    {"label" : "Equator", "value" : 'Equator'} ,
-                                    {"label" : "Libre", "value" : 'Libre'} ,
-                                    {"label" : "WFD", "value" : 'WFD'} ,
-                                    {"label" : "Other", "value" : 'Other'}
+                            this.setState({
+                                    // Technology : {},
+                                    // Applications_involved :  {},
+                                    conditionalApplications : [
+                                        {"label" : "aPriori", "value" : "aPriori"} ,
+                                        {"label" : "BOM Processing and Management", "value" : 'BOM Processing and Management'} ,
+                                        {"label" : "CMT - Commercial Management Tracker", "value" : 'CMT - Commercial Management Tracker'} ,
+                                        {"label" : "Customer Setup", "value" : 'Customer Setup'} ,
+                                        {"label" : "Elementum", "value" : 'Elementum'} ,
+                                        {"label" : "Flex Escalation Tool", "value" : 'Flex Escalation Tool'} ,
+                                        {"label" : "Flex Q Medical", "value" : 'Flex Q Medical'} ,
+                                        {"label" : "PLanView", "value" : 'PLanView'} ,
+                                        {"label" : "QUALfx", "value" : 'QUALfx'} ,
+                                        {"label" : "TDMS", "value" : 'TDMS'} ,
+                                        {"label" : "Workforce Design", "value" : 'Workforce Design'} ,
+                                        {"label" : "RFQ", "value" : 'RFQ'} ,
+                                        {"label" : "FlexPulse Action Tracker", "value" : 'FlexPulse Action Tracker'} ,
+                                        {"label" : "FLexware", "value" : 'FLexware'} ,
+                                        {"label" : "Computer Integrated Manufacturing", "value" : 'Computer Integrated Manufacturing'} ,
+                                        {"label" : "Checkmarx Vulnerabilities Remediation", "value" : 'Checkmarx Vulnerabilities Remediation'} ,
+                                        {"label" : "Cisco Services Material Request Portal", "value" : 'Cisco Services Material Request Portal'} ,
+                                        {"label" : "Jigsaw", "value" : 'Jigsaw'} ,
+                                        {"label" : "Equator", "value" : 'Equator'} ,
+                                        {"label" : "Libre", "value" : 'Libre'} ,
+                                        {"label" : "WFD", "value" : 'WFD'} ,
+                                        {"label" : "Other", "value" : 'Other'}
+                                        
+                                    ],
+                                    conditionalTechnologies : [
+                                        // {"label" : "Select Technology", "value" : ""},
+                                        {"label" : "Java", "value" : "Java"} ,
+                                        {"label" : ".NET", "value" : ".NET"} ,
+                                        {"label" : "SQL", "value" : "SQL"}, 
+                                        {"label" : "Mongo DB", "value" : "Mongo DB"}, 
+                                        {"label" : "Sharepoint", "value" : "Sharepoint"} ,
+                                        {"label" : "JavaScript", "value" : "JavaScript"}, 
+                                        {"label" : "HTML5", "value" : "HTML5"}, 
+                                        {"label" : "CSS3", "value" : "CSS3"}, 
+                                        {"label" : "Cielo", "value" : "Cielo"}, 
+                                        {"label" : "Single Page App (.Net, SQL, AngularJS, WebAPI)", "value" : "Single Page App (.Net, SQL, AngularJS, WebAPI)"}, 
+                                        {"label" : "Traditional Web App (.Net, SQL, ASP.Net, MVC", "value" : "Traditional Web App (.Net, SQL, ASP.Net, MVC"}, 
+                                        {"label" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)", "value" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)"}, 
+                                        {"label" : "Mobile", "value" : "Mobile"}, 
+                                        {"label" : "AWS", "value" : "AWS"}, 
+                                        {"label" : "ELK Stack", "value" : "ELK Stack"}, 
+                                        {"label" : "Other / New Technology", "value" : "Other / New Technology"}, 
+                                        {"label" : "Azure", "value" : "Azure"}, 
+                                        
                                     
-                                ],
-                                conditionalTechnologies : [
-                                    // {"label" : "Select Technology", "value" : ""},
-                                    {"label" : "Java", "value" : "Java"} ,
-                                    {"label" : ".NET", "value" : ".NET"} ,
-                                    {"label" : "SQL", "value" : "SQL"}, 
-                                    {"label" : "Mongo DB", "value" : "Mongo DB"}, 
-                                    {"label" : "Sharepoint", "value" : "Sharepoint"} ,
-                                    {"label" : "JavaScript", "value" : "JavaScript"}, 
-                                    {"label" : "HTML5", "value" : "HTML5"}, 
-                                    {"label" : "CSS3", "value" : "CSS3"}, 
-                                    {"label" : "Cielo", "value" : "Cielo"}, 
-                                    {"label" : "Single Page App (.Net, SQL, AngularJS, WebAPI)", "value" : "Single Page App (.Net, SQL, AngularJS, WebAPI)"}, 
-                                    {"label" : "Traditional Web App (.Net, SQL, ASP.Net, MVC", "value" : "Traditional Web App (.Net, SQL, ASP.Net, MVC"}, 
-                                    {"label" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)", "value" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)"}, 
-                                    {"label" : "Mobile", "value" : "Mobile"}, 
-                                    {"label" : "AWS", "value" : "AWS"}, 
-                                    {"label" : "ELK Stack", "value" : "ELK Stack"}, 
-                                    {"label" : "Other / New Technology", "value" : "Other / New Technology"}, 
-                                    {"label" : "Azure", "value" : "Azure"}, 
-                                    
-                                
-                                ],
-                                conditionalIT_Groups_Required : [
-                                    // {"label" : "Select IT Group", "value" : ""},
-                                    {"label" : "Java", "value" : "Java"} ,
-                                    {"label" : ".NET", "value" : ".NET"} ,
-                                    {"label" : "Advanced Analytics", "value" : "Advanced Analytics"} ,
-                                    {"label" : "Database Administrators", "value" : "Database Administrators"} ,
-                                    {"label" : "Network Administrators", "value" : "Network Administrators"} ,
-                                    {"label" : "F5 Administrators", "value" : "F5 Administrators"} ,
-                                    {"label" : "Wintel", "value" : "Wintel"} ,
-                                    {"label" : "Linux", "value" : "Linux"} ,
-                                    {"label" : "FlexPulse", "value" : "FlexPulse"} ,
-                                    {"label" : "Systems Architecture", "value" : "Systems Architecture"} ,
-                                    {"label" : "Development", "value" : "Development"} ,
-                                    {"label" : "Azure", "value" : "Azure"} ,
-                                    
-                                ]
-                            })
-                        break;
+                                    ],
+                                    conditionalIT_Groups_Required : [
+                                        // {"label" : "Select IT Group", "value" : ""},
+                                        {"label" : "Java", "value" : "Java"} ,
+                                        {"label" : ".NET", "value" : ".NET"} ,
+                                        {"label" : "Advanced Analytics", "value" : "Advanced Analytics"} ,
+                                        {"label" : "Database Administrators", "value" : "Database Administrators"} ,
+                                        {"label" : "Network Administrators", "value" : "Network Administrators"} ,
+                                        {"label" : "F5 Administrators", "value" : "F5 Administrators"} ,
+                                        {"label" : "Wintel", "value" : "Wintel"} ,
+                                        {"label" : "Linux", "value" : "Linux"} ,
+                                        {"label" : "FlexPulse", "value" : "FlexPulse"} ,
+                                        {"label" : "Systems Architecture", "value" : "Systems Architecture"} ,
+                                        {"label" : "Development", "value" : "Development"} ,
+                                        {"label" : "Azure", "value" : "Azure"} ,
+                                        
+                                    ]
+                                })
+                            break;
                     case "D&E, WFD and Pulse  Aristoteles Portillo´s Org" :
                             this.setState({
                                     // Technology : {},
@@ -1325,7 +1329,72 @@
                                         
                                     ]
                                 })
+                            break;
+
+                    // ? Data from DB
+                    case "5.- Architects Group - Ganesh Parameswaran's Org" : 
+                        this.setState({
+                            
+                            conditionalApplications : [
+                                {"label" : "Nucleus", "value" : "Nucleus"} ,
+                                {"label" : "Architecture Group Initiatives", "value" : "Architecture Group Initiatives"} ,
+                                {"label" : "Innovation Lab Projects", "value" : 'Innovation Lab Projects'} ,
+                                {"label" : "APPSEC", "value" : 'APPSEC'} 
+                            ],
+                            conditionalTechnologies : [
+                                {"label" : "Microsoft Technologies", "value" : "Microsoft Technologies"} ,
+                                {"label" : "Java", "value" : "Java"} ,
+                                {"label" : "Integration Services", "value" : "Integration Services"}, 
+                                {"label" : "SQL Server, Oracle", "value" : "SQL Server, Oracle"}, 
+                                {"label" : "ELK", "value" : "ELK"} 
+                            ],
+                            conditionalIT_Groups_Required : [
+                                {"label" : "Software Development", "value" : "Software Development"} ,
+                                {"label" : "Database Administrators", "value" : "Database Administrators"} ,
+                                {"label" : "Network Administrators", "value" : "Network Administrators"} ,
+                                {"label" : "F5 Administrators", "value" : "F5 Administrators"} ,
+                                {"label" : "Wintel", "value" : "Wintel"} ,
+                                {"label" : "Linux", "value" : "Linux"} ,
+                                {"label" : " UX-UI", "value" : " UX-UI"}
+                            
+                                
+                            ]
+                        
+                        })
                         break;
+                
+                    // ? Data from DB
+                    case "Architects Group - Ganesh Parameswaran's Org" : 
+                        this.setState({
+                            
+                            conditionalApplications : [
+                                {"label" : "Nucleus", "value" : "Nucleus"} ,
+                                {"label" : "Architecture Group Initiatives", "value" : "Architecture Group Initiatives"} ,
+                                {"label" : "Innovation Lab Projects", "value" : 'Innovation Lab Projects'} ,
+                                {"label" : "APPSEC", "value" : 'APPSEC'} 
+                            ],
+                            conditionalTechnologies : [
+                                {"label" : "Microsoft Technologies", "value" : "Microsoft Technologies"} ,
+                                {"label" : "Java", "value" : "Java"} ,
+                                {"label" : "Integration Services", "value" : "Integration Services"}, 
+                                {"label" : "SQL Server, Oracle", "value" : "SQL Server, Oracle"}, 
+                                {"label" : "ELK", "value" : "ELK"} 
+                            ],
+                            conditionalIT_Groups_Required : [
+                                {"label" : "Software Development", "value" : "Software Development"} ,
+                                {"label" : "Database Administrators", "value" : "Database Administrators"} ,
+                                {"label" : "Network Administrators", "value" : "Network Administrators"} ,
+                                {"label" : "F5 Administrators", "value" : "F5 Administrators"} ,
+                                {"label" : "Wintel", "value" : "Wintel"} ,
+                                {"label" : "Linux", "value" : "Linux"} ,
+                                {"label" : " UX-UI", "value" : " UX-UI"}
+                            
+                                
+                            ]
+                        
+                        })
+                        break;
+                   
                    
                     default : this.setState({conditionalApplications : []}); 
                 }

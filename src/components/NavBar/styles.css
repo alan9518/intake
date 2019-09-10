@@ -55,7 +55,7 @@ ul {
     pointer-events: none;
 }
 
-a.int-disabledLink span {
+.int-disabledLink span {
     color: #333;
 }
 
