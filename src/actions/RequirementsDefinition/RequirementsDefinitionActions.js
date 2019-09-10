@@ -102,7 +102,7 @@
                                                         "project_name": "${removeSpecialCharacters(formData.Project_Name)}", 
                                                         "description": "${removeSpecialCharacters(formData.Description)}",
                                                         "project_type": "${formData.Project_Type.value}",
-                                                        "Date_submitted": "${formData.Date_submitted || moment().format("DD/MM/YYYY")}",
+                                                        "Date_submitted": "${formatDate(formData.Date_submitted) || moment().format("DD/MM/YYYY")}",
                                                         "request_owner": "${formData.Request_Owner}",
                                                         "workstage": "${formData.Workstage.value}",
                                                         "expectedstart_date": "${formatDate(formData.Expected_Start_Date)}",

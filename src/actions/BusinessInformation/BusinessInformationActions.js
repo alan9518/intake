@@ -73,9 +73,19 @@
     // --------------------------------------
     const formatSitesImpacted = (sitesArray) => {
 
+       // ? Check if the sites Array has this pattern |||
+       if(sitesArray.indexOf('|||') >= 0)
+        return ''
+
         // ? Check if the sites are already in string format
         if(sitesArray.indexOf('||') >= 0)
             return sitesArray
+
+        // ? Check if the sites array is empty
+        if(sitesArray.length <= 0)
+            return '';
+
+
 
         let sitesArrayString = [];
         for (let site of sitesArray) {
