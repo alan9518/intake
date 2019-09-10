@@ -158,6 +158,8 @@
         let Request_ID = projectID.indexOf('GSD') >= 0  ? projectID.substr(projectID.indexOf('GSD')+3,projectID.length) : projectID;
         console.log("TCL: updateRequirementsDB -> Request_ID", Request_ID)
 
+        let dateSubmitted = formData.Date_Submitted || formData.Date_submitted
+
         const updateRequirementData =  {
             tab1: { 
                 // "project_id": formData.Project_id || formData.newProjectID,
@@ -165,7 +167,7 @@
                 "project_name": removeSpecialCharacters(formData.Project_Name),
                 "description":  removeSpecialCharacters(formData.Description),
                 "project_type": formData.Project_Type.value,
-                "date_submitted": formData.Date_Submitted || formData.Date_submitted,
+                "date_submitted": formatDate(dateSubmitted),
                 "request_owner": formData.Request_Owner,
                 "workstage": formData.Workstage.value,
                 "expectedstart_date":  formatDate(formData.Expected_Start_Date) ,

@@ -1043,14 +1043,7 @@
                 // Save Form Values
                 // --------------------------------------
                 saveFormValues () { 
-                    //! const currentUser = window.getCurrentSPUser();
-                    // const startDate = this.state.Expected_Start_Date || moment();
-                    // const completionDate = this.state.Expected_Completion_Date || moment();
-
-                    //console.log('TCL: saveFormValues -> startDate',  moment(startDate).format("DD/MM/YYYY")  )
-                    //console.log('TCL: saveFormValues -> completionDate', moment(completionDate).format("DD/MM/YYYY"))
-                    
-                    // if()
+                   
 
                     this.filesArray = this.state.Project_Documents;
 
@@ -1061,14 +1054,7 @@
 
                     console.log("TCL: RequirementsDefinition -> saveFormValues -> this.originalFiles", this.originalFiles)
 
-                    // ?Filter Docs
-                    // let docsToSave = [];
-                    // if(this.state.newFilesCancelled === true &)
-                    //     docsToSave = this.originalFiles
-                    
-                    // else
-                    //     docsToSave = this.state.Project_Documents
-
+                 
                     const formData = {
 						
                         Project_id : requestID,
