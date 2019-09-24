@@ -214,7 +214,7 @@
             renderDocuments(fileExtension, fileName, fileLink, linkingUri) {
                 let documentLink = "";
 
-                if(fileExtension == 'doc' || fileExtension == 'docx' || fileExtension == 'ppt' || fileExtension == 'pptx' || fileExtension == 'xsl' || fileExtension == 'xslx'  || fileExtension == 'csv'   )
+                if(fileExtension == 'doc' || fileExtension === 'docx' || fileExtension === 'ppt' || fileExtension === 'pptx' || fileExtension === 'xls' || fileExtension === 'xlsx' || fileExtension === 'xslx'  || fileExtension === 'csv'   )
                     documentLink = linkingUri
 
                 

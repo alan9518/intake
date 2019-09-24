@@ -295,8 +295,8 @@
                                 "value": "Platform Solution - Ben Web´s Org"
                             },
                             {
-                                "label": "2.- Global Ops - Sujit Gopinath´s Org",
-                                "value": "Global Ops - Sujit Gopinath´s Org"
+                                "label": "2.- Global Ops - Sudha Narayanan´s Org",
+                                "value": "Global Ops - Sudha Narayanan´s Org"
                             },
                             {
                                 "label": "3.- GSS & Sales & Quality - Sapan Parikh´s Org",
@@ -973,7 +973,7 @@
                         })
                         break;
                         // ? Data from DB
-                    case "2.- Global Ops - Sujit Gopinath´s Org":    
+                    case "2.- Global Ops - Sudha Narayanan´s Org":    
                         this.setState({
                                 // Technology : {},
                                 // Applications_involved :  {},
@@ -1034,7 +1034,7 @@
                             
                         break;
                         // ? When loading data from state
-                    case "Global Ops - Sujit Gopinath´s Org":    
+                    case "Global Ops - Sudha Narayanan´s Org":    
                         this.setState({
                                 // Technology : {},
                                 // Applications_involved :  {},
@@ -1227,13 +1227,12 @@
                                         {"label" : ".NET", "value" : ".NET"} ,
                                         {"label" : "SQL", "value" : "SQL"}, 
                                         {"label" : "Mongo DB", "value" : "Mongo DB"}, 
-                                        {"label" : "Sharepoint", "value" : "Sharepoint"} ,
                                         {"label" : "JavaScript", "value" : "JavaScript"}, 
                                         {"label" : "HTML5", "value" : "HTML5"}, 
                                         {"label" : "CSS3", "value" : "CSS3"}, 
                                         {"label" : "Cielo", "value" : "Cielo"}, 
                                         {"label" : "Single Page App (.Net, SQL, AngularJS, WebAPI)", "value" : "Single Page App (.Net, SQL, AngularJS, WebAPI)"}, 
-                                        {"label" : "Traditional Web App (.Net, SQL, ASP.Net, MVC", "value" : "Traditional Web App (.Net, SQL, ASP.Net, MVC"}, 
+                                        {"label" : "Traditional Web App (.Net, SQL, ASP.Net, MVC", "value" : "Traditional Web App (.Net, SQL, ASP.Net, MVC)"}, 
                                         {"label" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)", "value" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)"}, 
                                         {"label" : "Mobile", "value" : "Mobile"}, 
                                         {"label" : "AWS", "value" : "AWS"}, 
@@ -1296,13 +1295,12 @@
                                         {"label" : ".NET", "value" : ".NET"} ,
                                         {"label" : "SQL", "value" : "SQL"}, 
                                         {"label" : "Mongo DB", "value" : "Mongo DB"}, 
-                                        {"label" : "Sharepoint", "value" : "Sharepoint"} ,
                                         {"label" : "JavaScript", "value" : "JavaScript"}, 
                                         {"label" : "HTML5", "value" : "HTML5"}, 
                                         {"label" : "CSS3", "value" : "CSS3"}, 
                                         {"label" : "Cielo", "value" : "Cielo"}, 
                                         {"label" : "Single Page App (.Net, SQL, AngularJS, WebAPI)", "value" : "Single Page App (.Net, SQL, AngularJS, WebAPI)"}, 
-                                        {"label" : "Traditional Web App (.Net, SQL, ASP.Net, MVC", "value" : "Traditional Web App (.Net, SQL, ASP.Net, MVC"}, 
+                                        {"label" : "Traditional Web App (.Net, SQL, ASP.Net, MVC", "value" : "Traditional Web App (.Net, SQL, ASP.Net, MVC)"}, 
                                         {"label" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)", "value" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)"}, 
                                         {"label" : "Mobile", "value" : "Mobile"}, 
                                         {"label" : "AWS", "value" : "AWS"}, 

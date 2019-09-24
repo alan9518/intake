@@ -147,8 +147,8 @@
                                 "value": "Platform Solution - Ben Web´s Org"
                             },
                             {
-                                "label": "2.- Global Ops - Sujit Gopinath´s Org",
-                                "value": "Global Ops - Sujit Gopinath´s Org"
+                                "label": "2.- Global Ops - Sudha Narayanan´s Org",
+                                "value": "Global Ops - Sudha Narayanan´s Org"
                             },
                             {
                                 "label": "3.- GSS & Sales & Quality - Sapan Parikh´s Org",
@@ -675,7 +675,7 @@
                         })
                         break;
                         // ? Data from DB
-                    case "Global Ops - Sujit Gopinath´s Org":    
+                    case "Global Ops - Sudha Narayanan´s Org":    
                             this.setState({
                                 Technology : [],
                                 Applications_involved :  {},
@@ -821,13 +821,11 @@
                                     {"label" : ".NET", "value" : ".NET"} ,
                                     {"label" : "SQL", "value" : "SQL"}, 
                                     {"label" : "Mongo DB", "value" : "Mongo DB"}, 
-                                    {"label" : "Sharepoint", "value" : "Sharepoint"} ,
                                     {"label" : "JavaScript", "value" : "JavaScript"}, 
                                     {"label" : "HTML5", "value" : "HTML5"}, 
-                                    {"label" : "CSS3", "value" : "CSS3"}, 
                                     {"label" : "Cielo", "value" : "Cielo"}, 
                                     {"label" : "Single Page App (.Net, SQL, AngularJS, WebAPI)", "value" : "Single Page App (.Net, SQL, AngularJS, WebAPI)"}, 
-                                    {"label" : "Traditional Web App (.Net, SQL, ASP.Net, MVC", "value" : "Traditional Web App (.Net, SQL, ASP.Net, MVC"}, 
+                                    {"label" : "Traditional Web App (.Net, SQL, ASP.Net, MVC", "value" : "Traditional Web App (.Net, SQL, ASP.Net, MVC)"}, 
                                     {"label" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)", "value" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)"}, 
                                     {"label" : "Mobile", "value" : "Mobile"}, 
                                     {"label" : "AWS", "value" : "AWS"}, 
@@ -893,20 +891,9 @@
                 }
 
 
-                if(preloadData === false) {
-                    // this.props
-                    // console.log("TCL: TechnicalEvaluation -> loadConditionalValues -> this.props", this.props)
-                    // this.setState({
-                    //     Technology : this.createSelectOption(this.props.loadedtechnicalEvaluation.technicalEvaluation.Technology),
-                    //     Applications_involved :  this.createSelectOption(this.props.loadedtechnicalEvaluation.technicalEvaluation.Applications_involved)
-                    // })
+               
 
-                //     // this.setState({
-                      
-                }
-
-                
-                        
+                 
                     this.setState({
                         Applications_involved : null,
                         Technology : [],
@@ -938,260 +925,6 @@
             }
 
 
-            // --------------------------------------
-            // Load Conditional Select Values
-            // --------------------------------------
-            
-            // loadConditionalValues(selectedOption) {
-                
-            //     switch(selectedOption) {
-            //         case "1- PlatformSolution - Ben Webs Org" :
-            //             this.setState({
-            //                 // Technology : {label : "Select Technology Used", value : null},
-            //                 // Technology : null,
-            //                 // Applications_involved :  {label : "Select Applications Involved", value : null},
-            //                 // Applications_involved :  null,
-            //                 conditionalApplications : [
-            //                     {"label" : "Select Application", "value" : ""},
-            //                     {"label" : "Sharepoint", "value" : "Sharepoint"} ,
-            //                     {"label" : "Corporate Marketing", "value" : 'Corporate Marketing'} ,
-            //                     {"label" : "Mobile Apps", "value" : "Mobile Apps"} ,
-            //                     {"label" : "Medical Quality", "value" : "Medical Quality"} ,
-            //                     {"label" : "UX/UI", "value" : "UX/UI"} 
-            //                 ],
-            //                 conditionalTechnologies : [
-            //                     {label : "Select Technology", "value" : ""},
-            //                     {"label" : ".Net", "value" : ".Net"} ,
-            //                     {"label" : "C#", "value" : 'C#'} ,
-            //                     {"label" : "JavaScript", "value" : "JavaScript"} ,
-            //                     {"label" : "SQL", "value" : "SQL"} ,
-                                
-            //                 ],
-            //                 conditionalIT_Groups_Required : [
-            //                     {"label" : "Select IT Group", "value" : ""},
-            //                     {"label" : "Web solutions and enablement", "value" : "Web solutions and enablement"} ,
-            //                     {"label" : "Brand and Identity", "value" : 'Brand and Identity'} ,
-            //                     {"label" : "Mobile", "value" : "Mobile"} ,
-            //                     {"label" : "UX-UI", "value" : "UX-UI"} 
-            //                 ]
-
-            //             })
-            //             break;
-            //         case "2.- Global Ops - Sujit Gopinath´s Org":    
-            //             this.setState({
-            //                 // Technology : {},
-            //                 // Applications_involved :  {},
-            //                 conditionalApplications : [
-            //                     {"label" : "Select Application", "value" : ""},
-            //                     {"label" : "Corporate IT", "value" : "Corporate IT"} ,
-            //                     {"label" : "eDHR", "value" : "eDHR"} ,
-            //                     {"label" : "FlexFlow Custom Reports", "value" : "FlexFlow Custom Reports"} ,
-            //                     {"label" : "FlexXR", "value" : "FlexXR"} ,
-            //                     {"label" : "FTS", "value" : "FTS"} ,
-            //                     {"label" : "GBS Support", "value" : "GBS Support"} ,
-            //                     {"label" : "GPSC Apps", "value" : "GPSC Apps"} ,
-            //                     {"label" : "Ingrex", "value" : "Ingrex"} ,
-            //                     {"label" : "Platform Development & DevOps", "value" : "Platform Development & DevOps"} ,
-            //                     {"label" : "Rubicon", "value" : "Rubicon"} ,
-            //                     {"label" : "Site Specific Application", "value" : "Site Specific Application"} ,
-            //                     {"label" : "Other", "value" : "Other"} 
-            //                 ],
-            //                 conditionalTechnologies : [
-            //                     // {"label" : "Select Technology", "value" : ""},
-            //                     {"label" : ".Net", "value" : ".Net"} ,
-            //                     {"label" : "Java", "value" : "Java"} ,
-            //                     {"label" : "SQL", "value" : "SQL"} ,
-            //                     {"label" : "SSRS", "value" : "SSRS"} ,
-            //                     {"label" : "SSIS", "value" : "SSIS"} ,
-            //                     {"label" : "Mongo DB", "value" : "Mongo DB"} ,
-            //                     {"label" : "ELK Stack", "value" : "ELK Stack"} ,
-            //                     {"label" : "JavaScript", "value" : "JavaScript"} ,
-            //                     {"label" : "HTML5", "value" : "HTML5"} ,
-            //                     {"label" : "Angular", "value" : "Angular"} ,
-            //                     {"label" : "Mobile platforms", "value" : "Mobile platforms"} ,
-            //                     {"label" : "SAP", "value" : "SAP"},
-            //                     {"label" : "Sharepoint", "value" : "Sharepoint"},
-            //                 ],
-                            
-            //                 conditionalIT_Groups_Required : [
-                            
-            //                     {"label" : "Select IT Group", "value" : ""},
-            //                     {"label" : "Advanced Analytics", "value" : "Advanced Analytics"} ,
-            //                     {"label" : "Customer IT", "value" : "Customer IT"} ,
-            //                     {"label" : "Database Administrators", "value" : "Database Administrators"} ,
-            //                     {"label" : "Network Administrators", "value" : "Network Administrators"} ,
-            //                     {"label" : "F5 Administrators", "value" : "F5 Administrators"} ,
-            //                     {"label" : "Wintel", "value" : "Wintel"} ,
-            //                     {"label" : "Linux", "value" : "Linux"} ,
-            //                     {"label" : "FlexPulse", "value" : "FlexPulse"} ,
-            //                     {"label" : "Systems Architecture", "value" : "Systems Architecture"} ,
-            //                     {"label" : "Development", "value" : "Development"} ,
-            //                     {"label" : "Site IT", "value" : "Site IT"} ,
-            //                     {"label" : "GI", "value" : "GI"} ,
-            //                     {"label" : "PMO – Americas", "value" : "PMO – Americas"} ,
-            //                     {"label" : "PMO", "value" : "PMO"} ,
-            //                     {"label" : "GAS", "value" : "GAS"} ,
-                                
-                                
-            //                 ]
-            //             });
-            //             break;
-            //         case "3.- GSS & Sales & Quality - Sapan Parikh´s Org" :
-            //             this.setState({
-            //                 // Technology : {},
-            //                 // Applications_involved :  {},
-            //                 conditionalApplications : [
-            //                     {"label" : "Select Application", "value" : ""},
-            //                     {"label" : "Apttus", "value" : "Apttus"} ,
-            //                     {"label" : "Epicenter", "value" : 'Epicenter'} ,
-            //                     {"label" : "Flexlink 2.0", "value" : "Flexlink 2.0"} ,
-            //                     {"label" : "FlexQ Medical", "value" : "FlexQ Medical"} ,
-            //                     {"label" : "MES", "value" : "MES"} ,
-            //                     {"label" : "Orion Cloud", "value" : "Orion Cloud"} ,
-            //                     {"label" : "QUALfx", "value" : "QUALfx"},
-            //                     {"label" : "SFDC Services", "value" : "SFDC Services"}, 
-            //                     {"label" : "TDMS", "value" : "TDMS"}, 
-            //                     {"label" : "FlexPulse Action Tracker", "value" : "FlexPulse Action Tracker"}, 
-            //                     {"label" : "SUgarCRM", "value" : "SUgarCRM"}, 
-            //                     {"label" : "P2P Notifications", "value" : "P2P Notifications"}, 
-            //                     {"label" : "Factory Quality", "value" : "Factory Quality"}, 
-            //                     {"label" : "Other", "value" : "Other"},
-            //                     {"label" : "Command Center", "value" : 'Command Center'}
-                                
-            //                 ],
-            //                 conditionalTechnologies : [
-            //                     {"label" : "Select Technology", "value" : ""},
-            //                     {"label" : "Nucleus", "value" : "Nucleus"} ,
-            //                     {"label" : "Orion", "value" : 'Orion'} ,
-            //                     {"label" : ".NET", "value" : ".NET"} ,
-            //                     {"label" : "Java", "value" : "Java"} ,
-            //                     {"label" : "Sharepoint", "value" : "Sharepoint"} ,
-            //                     {"label" : "Mobile", "value" : "Mobile"} ,
-            //                     {"label" : "SNC", "value" : "SNC"},
-            //                     {"label" : "Unity Framework", "value" : "Unity Framework"} ,
-            //                     {"label" : "MuleSoft", "value" : "MuleSoft"}, 
-            //                     {"label" : "SQL", "value" : "SQL"}, 
-            //                     {"label" : "Azure SQL", "value" : "Azure SQL"}, 
-            //                     {"label" : "Angular JS", "value" : "Angular JS"}, 
-            //                     {"label" : "SFDC", "value" : "SFDC"}, 
-            //                     {"label" : "Sugar CRM", "value" : "Sugar CRM"}, 
-            //                 ],
-            //                 conditionalIT_Groups_Required : [
-            //                     {"label ": "Select IT Group", "value" : ""},
-            //                     {"label" : "Sales, Services & Legal Platform", "value" : "Sales, Services & Legal Platform"} ,
-            //                     {"label" : "SQA", "value" : "SQA"} ,
-            //                     {"label" : "Net Development", "value" : "Net Development"} ,
-            //                 ]
-            //             })
-            //             break;
-            //         case "4.- D&E, WFD and Pulse  Aristoteles Portillo´s Org" :
-            //             this.setState({
-            //                 Technology : {},
-            //                 Applications_involved :  {},
-            //                 conditionalApplications : [
-            //                     {"label" : "aPriori", "value" : "aPriori"} ,
-            //                     {"label" : "BOM Processing and Management", "value" : 'BOM Processing and Management'} ,
-            //                     {"label" : "CMT - Commercial Management Tracker", "value" : 'CMT - Commercial Management Tracker'} ,
-            //                     {"label" : "Customer Setup", "value" : 'Customer Setup'} ,
-            //                     {"label" : "Elementum", "value" : 'Elementum'} ,
-            //                     {"label" : "Flex Escalation Tool", "value" : 'Flex Escalation Tool'} ,
-            //                     {"label" : "Flex Q Medical", "value" : 'Flex Q Medical'} ,
-            //                     {"label" : "PLanView", "value" : 'PLanView'} ,
-            //                     {"label" : "QUALfx", "value" : 'QUALfx'} ,
-            //                     {"label" : "TDMS", "value" : 'TDMS'} ,
-            //                     {"label" : "Workforce Design", "value" : 'Workforce Design'} ,
-            //                     {"label" : "RFQ", "value" : 'RFQ'} ,
-            //                     {"label" : "FlexPulse Action Tracker", "value" : 'FlexPulse Action Tracker'} ,
-            //                     {"label" : "FLexware", "value" : 'FLexware'} ,
-            //                     {"label" : "Computer Integrated Manufacturing", "value" : 'Computer Integrated Manufacturing'} ,
-            //                     {"label" : "Checkmarx Vulnerabilities Remediation", "value" : 'Checkmarx Vulnerabilities Remediation'} ,
-            //                     {"label" : "Cisco Services Material Request Portal", "value" : 'Cisco Services Material Request Portal'} ,
-            //                     {"label" : "Jigsaw", "value" : 'Jigsaw'} ,
-            //                     {"label" : "Equator", "value" : 'Equator'} ,
-            //                     {"label" : "Libre", "value" : 'Libre'} ,
-            //                     {"label" : "WFD", "value" : 'WFD'} ,
-            //                     {"label" : "Other", "value" : 'Other'}
-                                
-            //                 ],
-            //                 conditionalTechnologies : [
-            //                     {"label" : "Select Technology", "value" : ""},
-            //                     {"label" : "Java", "value" : "Java"} ,
-            //                     {"label" : ".NET", "value" : ".NET"} ,
-            //                     {"label" : "SQL", "value" : "SQL"}, 
-            //                     {"label" : "Mongo DB", "value" : "Mongo DB"}, 
-            //                     {"label" : "Sharepoint", "value" : "Sharepoint"} ,
-            //                     {"label" : "JavaScript", "value" : "JavaScript"}, 
-            //                     {"label" : "HTML5", "value" : "HTML5"}, 
-            //                     {"label" : "CSS3", "value" : "CSS3"}, 
-            //                     {"label" : "Cielo", "value" : "Cielo"}, 
-            //                     {"label" : "Single Page App (.Net, SQL, AngularJS, WebAPI)", "value" : "Single Page App (.Net, SQL, AngularJS, WebAPI)"}, 
-            //                     {"label" : "Traditional Web App (.Net, SQL, ASP.Net, MVC", "value" : "Traditional Web App (.Net, SQL, ASP.Net, MVC"}, 
-            //                     {"label" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)", "value" : "Microservice (.Net Core, WebAPI, SQL/NoSQL)"}, 
-            //                     {"label" : "Mobile", "value" : "Mobile"}, 
-            //                     {"label" : "AWS", "value" : "AWS"}, 
-            //                     {"label" : "ELK Stack", "value" : "ELK Stack"}, 
-            //                     {"label" : "Other / New Technology", "value" : "Other / New Technology"}, 
-            //                     {"label" : "Azure", "value" : "Azure"}, 
-                                
-                               
-            //                 ],
-            //                 conditionalIT_Groups_Required : [
-            //                     {"label" : "Select IT Group", "value" : ""},
-            //                     {"label" : "Java", "value" : "Java"} ,
-            //                     {"label" : ".NET", "value" : ".NET"} ,
-            //                     {"label" : "Advanced Analytics", "value" : "Advanced Analytics"} ,
-            //                     {"label" : "Database Administrators", "value" : "Database Administrators"} ,
-            //                     {"label" : "Network Administrators", "value" : "Network Administrators"} ,
-            //                     {"label" : "F5 Administrators", "value" : "F5 Administrators"} ,
-            //                     {"label" : "Wintel", "value" : "Wintel"} ,
-            //                     {"label" : "Linux", "value" : "Linux"} ,
-            //                     {"label" : "FlexPulse", "value" : "FlexPulse"} ,
-            //                     {"label" : "Systems Architecture", "value" : "Systems Architecture"} ,
-            //                     {"label" : "Development", "value" : "Development"} ,
-            //                     {"label" : "Azure", "value" : "Azure"} ,
-
-                                
-            //                 ]
-            //             })
-            //             break;
-                   
-            //         default : this.setState({conditionalApplications : []}); 
-            //     }
-
-
-            //     this.setState({
-            //         Applications_involved : null,
-            //         Technology : null,
-            //         IT_Groups_Required : null
-            //     })
-
-
-
-            //     // reset Other Selects
-            //     let sel1 = document.getElementById('Applications_involved').getElementsByClassName('react-select-wide__single-value')[0];
-            //         sel1.textContent = "Select Applications Involved";
-
-
-            //     let sel2 = document.getElementById('Technology').querySelectorAll('.react-select-wide__multi-value')
-                    
-
-            //         if(sel2) {
-            //             for (var paragraph of sel2) {
-            //                 paragraph.remove();
-            //               }
-
-            //             // document.getElementById('Technology').querySelectorAll('.react-select-wide__clear-indicator')[0].remove()
-
-            //             document.getElementById('Technology').querySelectorAll('.react-select-wide__clear-indicator').length > 0 && document.getElementById('Technology').querySelectorAll('.react-select-wide__clear-indicator')[0].remove()
-
-            //         }
-
-
-            //     let sel3 = document.getElementById('IT_Groups_Required').getElementsByClassName('react-select-wide__single-value')[0];
-            //         sel3.textContent = "Select IT Groups Required"
-
-                    
-            // }
             
             // --------------------------------------
             // Control Date Inputs
