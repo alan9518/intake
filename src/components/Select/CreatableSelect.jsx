@@ -35,10 +35,7 @@ class CreatableCustomSelect extends Component {
         
 
         handleChange = (newValue , actionMeta) => {
-            // console.group('Value Changed');
-            // //console.log(newValue);
-            // //console.log(`action: ${actionMeta.action}`);
-            // console.groupEnd();
+         
 
             this.props.onChange(newValue);
         }

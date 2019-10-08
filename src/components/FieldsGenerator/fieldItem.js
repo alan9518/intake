@@ -16,25 +16,6 @@
 
 
 
-// --------------------------------------
-// Check Input Focus for Error Class
-// --------------------------------------
-    const checkInputFocus = (event)=> {
-        console.log("TCL: checkInputFocus -> event", event)
-        // props.checkErrorClass()
-
-    }
-
-
-// --------------------------------------
-// Check Input Blur
-// --------------------------------------
-const checkInputBlur = (event) => {
-    console.log("TCL: checkInputBlur -> event", event)
-    // props.checkErrorClass()
-    
-}
-
 
 
 

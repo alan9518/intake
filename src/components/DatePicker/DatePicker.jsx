@@ -27,7 +27,6 @@ class DatePicker extends Component {
     constructor(props) {
         super(props);
 
-        console.log("TCL: DatePicker -> constructor -> rops.initialValue", props)
 
         this.state = {
             startDate: moment() ,
@@ -42,7 +41,6 @@ class DatePicker extends Component {
     componentDidMount() {
         try {
             const {name, tabIndex, initialValue} = this.props;
-            console.log("TCL: DatePicker -> componentDidMount -> initialValue", initialValue)
             document.getElementById(name).tabIndex = tabIndex;
 
             let datePickerDate = initialValue
@@ -59,10 +57,11 @@ class DatePicker extends Component {
             })
 
 
-            console.log("TCL: DatePicker -> constructor -> this.state", this.state)
         }
         catch(error) {
             console.log("TCL: DatePicker -> componentDidMount -> error", error)
+            throw error
+            
             
         }
       

@@ -18,10 +18,8 @@
 // Render Inputs
 // --------------------------------------
     const renderInputs = (rows,  Field_State_Name, value, onChange)=> {
-		//console.log('TCL: renderInputs -> rows', rows)
         return (
             rows.map((rowData)=> {
-				//console.log('TCL: renderInputs -> rowData', rowData)
                 return (
                             <input 
                                 type="text" 
@@ -55,7 +53,6 @@
         // Get Current Row
         // --------------------------------------
         const currentRow = Field_State_Name === 'Site_Usage' ? rows[0] : rows[1];
-		//console.log('TCL: MultiFieldInput -> currentRow' + Field_State_Name, currentRow)
 
         return (
             <div className={columns === 2 ? 'int-fieldItemContainerRow' : 'int-fieldItemContainerColumn'} >
@@ -76,16 +73,7 @@
                         <div className="int-fieldText" style={{ minWidth: inputWidth }}>
                             {Mandatory && <span className = "int-blueText"> * </span>   }
                             {renderInputs(currentRow, Field_State_Name, value, onChange )}
-                          {/*  <input 
-                                type="text" 
-                                name={Field_State_Name} 
-                                id={Field_State_Name} 
-                                className = "int-textInput" 
-                                value = {value}
-                                onChange = {props.onChange}
-                            
-                            />*/}
-
+                       
                             
                         </div>
                         

@@ -33,11 +33,9 @@ const FilesList = (props) => {
                 {
                     filesData && filesData.length > 0 
                     ? filesData.map((doc) => {
-                        // let nameToSplit = "";
-                        // console.log('render doc', doc);
+                      
 
                         if(doc.name ) {
-                            // nameToSplit =  doc.name;
                             documentArray = doc.name.split('.');
                             fileExtension = documentArray.length > 0 ? documentArray[documentArray.length - 1] : doc.type
                             fileName = documentArray.length > 0 ? documentArray[0] : doc.name
@@ -49,7 +47,6 @@ const FilesList = (props) => {
 
 
                             documentArray = doc.split('/');
-                            // console.log("TCL: FilesList -> documentArray", documentArray)
                         
                             fileExtensionArray = (documentArray[documentArray.length - 1]).split('.');
                             fileExtension =  fileExtensionArray[fileExtensionArray.length -1];
@@ -57,18 +54,12 @@ const FilesList = (props) => {
                             fileName = documentArray[documentArray.length - 1]
 
                             urlDocument = `/${doc}`;
-                            // nameToSplit = doc;
                            
                         }
                             
                         
 
-                        
-                       
-
-                        // if (doc.uriLink)
-                        //     isDocument = true;
-                        
+                  
 
                         return (
                             <React.Fragment>

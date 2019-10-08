@@ -18,14 +18,7 @@
 // --------------------------------------
 // Handle Config
 // --------------------------------------
-    // const componentConfig = {
-    //     iconFiletypes: ['.jpg', '.png', '.gif'],
-    //     showFiletypeIcon: true,
-    //     postUrl: '/uploadHandler'
-    // };
-
-    // const eventHandlers = { addedfile: (file) => //console.log(file) }
-
+   
 
     const componentConfig = {
         // iconFiletypes: ['.jpg', '.doc', '.txt', '.pdf'],
@@ -40,8 +33,6 @@
 
     const FilesManager = (props) => { 
 
-        // const {Enabled} = props.data;
-		// console.log("TCL: FilesManager -> props.data", props.disabled)
     
     // --------------------------------------
     // Event Handlers

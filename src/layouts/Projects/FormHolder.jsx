@@ -215,17 +215,6 @@
                 this.resetProjectIntake()
                 this.setState({isLoaded : true});
 
-                
-                console.log("TCL: formHolder -> componentDidMount -> this.props.resetProjectIntake", this.props.resetProjectIntake)
-
-
-                
-                console.log("TCL: formHolder -> componentDidMount -> this.props", this.props)
-
-
-
-                // this.setState({resetForm : true})
-
             }
 
 
@@ -235,14 +224,11 @@
             // ? User Goes to all Projects View
             // ?--------------------------------------
             componentWillReceiveProps(nextProps) {
-                console.log("TCL: formHolder -> componentWillReceiveProps -> nextProps", nextProps)
-
                 
-
                 if(this.props.location.pathname === '/intake/add-project/') {
                     if(projectIntake.requirementsDefinition.SavedLocally === true || projectIntake.requirementsDefinition.SavedOnDB === false ) {
                         // ? Reset Object
-                        console.log("TCL: formHolder -> componentWillReceiveProps -> Reset Object")
+                        
                         this.resetProjectIntake()
                         this.setState({isLoaded : true});
                     }
@@ -267,7 +253,7 @@
             sendEmailUpdate = async (projectID) =>{  
                 const params = {project_id : projectID};
 
-                console.log("TCL: formHolder -> getProjectDynatrace -> params", params)
+                
                 return axios.get(Endpoints.sendEmailUpdate, {params})
             }
 
@@ -310,8 +296,8 @@
             // ?--------------------------------------
 
             updateProjectIntakeValues(objectToChange,  newValues , extraValues = null, savedonDB = false, savedLocally = true) {
-                console.log("TCL: formHolder -> updateProjectIntakeValues -> newValues", newValues)
-                console.log("TCL: formHolder -> updateProjectIntakeValues -> currentView", objectToChange)
+                
+                
 
 
                   // ? Set Requirements Definition
@@ -340,7 +326,7 @@
                     
                     // ? Assign New Values to DataSet
                     projectIntake.requirementsDefinition = Object.assign({}, projectIntake.requirementsDefinition, requirementsDefinition)
-                    console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                    
                     
 
                 }
@@ -388,7 +374,7 @@
 
                       // ? Assign New Values to DataSet
                       projectIntake.businessInformation = Object.assign({}, projectIntake.businessInformation, businessInformation)
-                      console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                      
 
                 }
 
@@ -427,7 +413,7 @@
 
                       // ? Assign New Values to DataSet
                       projectIntake.technicalEvaluation = Object.assign({}, projectIntake.technicalEvaluation, technicalEvaluation)
-                      console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                      
                 }
 
 
@@ -447,14 +433,14 @@
 
                     // ? Assign New Values to DataSet
                     projectIntake.pmoEvaluation = Object.assign({}, projectIntake.pmoEvaluation, pmoEvaluation)
-                    console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                    
                 }
 
 
                 // ? Set Roi Realized Data
                 if(objectToChange === 'roiRealized') {
 
-                    console.log("TCL: formHolder -> setDataSourceValuesFromDB -> extraValues", extraValues)
+                    
 
                     let roiRealized = {
                         Roi_real_id : newValues.roi_real_id || newValues.Roi_real_id || null,
@@ -482,7 +468,7 @@
 
                     // ? Assign New Values to DataSet
                     projectIntake.roiRealized = Object.assign({}, projectIntake.roiRealized, roiRealized)
-                    console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                    
 
 
                     
@@ -498,7 +484,7 @@
             // ? Reset Project Intake state
             // ?--------------------------------------
             resetProjectIntake() {
-                console.log('reset State');
+                
                 projectIntake = {
                     requirementsDefinition : {
                         Project_id : null,
@@ -626,7 +612,7 @@
                     }
                 
                 }
-                console.log("TCL: formHolder -> resetProjectIntake -> projectIntake", projectIntake)
+                
             }
 
 
@@ -652,7 +638,7 @@
 
                 if(isValid ===  true) 
                     this.redirectUser(nextRoute)
-                    // console.log('allow redirect');
+                    
                 else
                     this.createErrorAlertTop("Please fill all the required Fields");
 
@@ -726,7 +712,7 @@
 
                         for (let field of requiredFieldsBus) {
                                     
-                            console.log(field)
+                            
 
 
                             
@@ -808,7 +794,7 @@
 
                             for (let field of requiredFieldsTech) {
                                     
-                                console.log(field)
+                                
     
     
                                 
@@ -890,7 +876,7 @@
 
                         for (let field of requiredFieldsPMO) {
                                     
-                            console.log(field)
+                            
 
 
                             
@@ -1193,20 +1179,6 @@
     // };
 
 
-
-
-/* ==========================================================================
-** Redux Functions
-** ========================================================================== */
-// const mapStateToProps = (state) => {
-//     //console.log('TCL: mapStateToProps -> state', state)
-//     return {
-//         pmos : state.sharepoint,
-//         pmosData:state.sharepoint.pmos,
-//         isPMO : state.sharepoint.isPMO,
-//         isLoaded : state.sharepoint.pmosLoaded
-//     }
-// }
 
 
 

@@ -52,7 +52,6 @@
             // --------------------------------------
             constructor(props) {
                 super(props);
-                //console.log('TCL: constructor -> props.businessInformation.Business_lead', props.businessInformation.Business_lead)
                 this.state = {
                     isLoaded: false,
                     responsiveWidth : window.innerWidth,
@@ -1008,7 +1007,6 @@
             // --------------------------------------
             fillPickers() {
                 const {Business_lead, Sales_Contact} = this.props.projectIntake.businessInformation;
-				//console.log('TCL: fillPickers -> this.props.businessInformation', this.props.businessInformation)
                 if(Business_lead && Business_lead !== 'null')
                     window.fillPeoplePicker(Business_lead, 'Business_lead');
                 if(Sales_Contact && Sales_Contact !== 'null')
@@ -1054,8 +1052,7 @@
                 const {isPMO} = this.props;
                 const projId = this.props.projectIntake.requirementsDefinition.Project_id;
                 let nextStep = "";
-				//console.log('TCL: redirectUser -> isPMO', isPMO)
-				//console.log('TCL: redirectUser -> this.props', this.props)
+        
                 const {history} = this.props.locationData;
                 if(isPMO === true) {
                     nextStep = 'add-project/technical-evaluation'
@@ -1839,7 +1836,6 @@
 
                             // Check PP
                             if(fieldItem.Type === "PeoplePicker") {
-                                //console.log('TCL: validateFormInputs -> fieldItem PP', fieldItem)
                                 if(this.validatePeoplePicker(fieldItem.Field_State_Name) === true)
                                     return false
                                 else {
@@ -1849,7 +1845,6 @@
                             }
                             // Check empty value for text input
                             else if(fieldItem.Type === "Text" || fieldItem.Type === "Decimal" || fieldItem.Type === "Integer") {
-                                //console.log(`TCL: validateFormInputs -> fieldItem.value Text->${fieldItem.Field_State_Name}`, fieldItem.value)
                                     if(this.state[fieldItem.Field_State_Name] === null || this.state[fieldItem.Field_State_Name] === "" ) {
                                     this.addErrorStatus(fieldItem.Field_State_Name);
                                     return true;
@@ -1862,7 +1857,6 @@
                             }
                             // Check Combo
                             else if(fieldItem.Type === "Combo" || fieldItem.Type === "DynamicField") {
-                                //console.log(`TCL: validateFormInputs -> fieldItem.value Copmbo->${fieldItem.Field_State_Name}`, fieldItem.value)
                                 if(this.state[fieldItem.Field_State_Name].value === "" || this.state[fieldItem.Field_State_Name].value === null  || this.state[fieldItem.Field_State_Name] === null  || this.state[fieldItem.Field_State_Name] === [])  {
                                     this.addErrorStatus(fieldItem.Field_State_Name);
                                     return true;
@@ -1882,7 +1876,6 @@
 
                     // Check How Many erros Are
                     const errorsCount = errors.filter(error=>{return error===true}).length
-					//console.log('TCL: validateFormInputs -> errorsCount', errorsCount)
 
                     return errorsCount > 0 ?  false : true
                     
@@ -2199,7 +2192,6 @@
                                     }, 
                                         () => {
                                             this.createErrorAlert('There was a problem creating the Folder, please try again ');
-                                            //console.log('fail react')
                                     });
 
                             
@@ -2672,7 +2664,6 @@
                                 else
                                     saveFile = file;
                                 
-                                // //console.log('TCL: uploadFiles -> file', file)
                                 //? Set File URL to Save on DB
                                 if(saveFile.name.indexOf('sites/') >= 0) 
                                     fileURL = saveFile.name

@@ -211,12 +211,12 @@
             // ?--------------------------------------
             async loadAPI () {
                 // this.props
-                console.log("TCL: formHolder -> loadAPI -> this.props", this.props)
+                
                 const {projectID} = this.props.match.params;
 
                 const requestID = projectID.substr(projectID.indexOf('GSD')+3,projectID.length);
 
-                console.log("TCL: formHolder -> loadAPI -> projectID", requestID)
+                
 
 
                 const getReqPromise = this.handleGetRequestsForData('requirements', requestID)
@@ -230,17 +230,6 @@
 
                 const [reqData, businessData, techData, pmoData, roiData, reqFiles, pmoFiles] = await Promise.all([getReqPromise, getBussPromise, getTechPromise, getPmoPromise, getRoiPromise, reqFilesPromise, pmoFilesPromise]);
                
-
-                
-                console.log("TCL: formHolder -> loadAPI -> roiData", roiData)
-                console.log("TCL: formHolder -> loadAPI -> pmoData", pmoData)
-                console.log("TCL: formHolder -> loadAPI -> techData", techData)
-                console.log("TCL: formHolder -> loadAPI -> businessData", businessData)
-                console.log("TCL: formHolder -> loadAPI -> reqData", reqData)
-
-                console.log("TCL: formHolder -> loadAPI -> reqFiles", reqFiles)
-
-                console.log("TCL: formHolder -> loadAPI -> pmoFiles", pmoFiles)
 
 
 
@@ -270,7 +259,7 @@
                     this.getProjectDynatrace(requestID, roiID).then((result) => {
                     
                     
-                        console.log("TCL: formHolder -> loadAPI -> result", result)
+                        
 
                         
                         const roiDataDyna = result.data;
@@ -280,7 +269,7 @@
 
                     })
                     .catch((error) => {
-                        console.log("TCL: formHolder -> loadAPI -> error", error)
+                        
 
                         this.setDataSourceValuesFromDB('roiRealized', roiDataObject, true, requestID, null)
 
@@ -361,12 +350,12 @@
             async getSharepointFilesByProject(currentProject , folderName) {
 
                 let projectIDFolder = currentProject.indexOf('GSD') >= 0 ? currentProject : `GSD${currentProject}`
-                console.log("TCL: formHolder -> getSharepointFilesByProject -> projectIDFolder", projectIDFolder)
+                
 
                 let folderURL = `intakeFiles/${projectIDFolder}/${folderName}`
                 let serviceUrl = `${Endpoints.getProjectFolder}('${folderURL}')/Files?$expand=LinkingUri`;
                 // let projectFiles = [];
-                console.log("TCL: fetchProjectFiles -> serviceUrl", serviceUrl)
+                
 
                 return axios.get(serviceUrl)
                 
@@ -380,7 +369,7 @@
             async getProjectDynatrace(projectID, roiID) {
                 const params = {project_id : projectID, roi_id : roiID};
 
-                console.log("TCL: formHolder -> getProjectDynatrace -> params", params)
+                
                 return axios.get(Endpoints.getROITrace, {params})
             }
 
@@ -394,7 +383,7 @@
                 let project_id = projectID.indexOf('GSD') >= 0  ? projectID.substr(projectID.indexOf('GSD')+3,projectID.length) : projectID;
                 const params = {project_id : project_id};
 
-                console.log("TCL: formHolder -> getProjectDynatrace -> params", params)
+                
                 return axios.get(Endpoints.sendEmailUpdate, {params})
             }
 
@@ -562,7 +551,7 @@
                 // ? Set Roi Realized Data
                 if(objectToChange === 'roiRealized') {
 
-                    console.log("TCL: formHolder -> setDataSourceValuesFromDB -> extraValues", extraValues)
+                    
 
                     let roiRealized = {
                         roi_real_id: newValues.roi_real_id,
@@ -620,8 +609,8 @@
             // ?--------------------------------------
 
             updateProjectIntakeValues(objectToChange,  newValues , extraValues = null, savedonDB = false, SavedLocally = true) {
-                console.log("TCL: formHolder -> updateProjectIntakeValues -> newValues", newValues)
-                console.log("TCL: formHolder -> updateProjectIntakeValues -> currentView", objectToChange)
+                
+                
 
 
                 // ? Set Requirements Definition
@@ -654,7 +643,7 @@
                     
                     // ? Assign New Values to DataSet
                     projectIntake.requirementsDefinition = Object.assign({}, projectIntake.requirementsDefinition, requirementsDefinition)
-                    console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                    
                     
 
                 }
@@ -708,7 +697,7 @@
 
                       // ? Assign New Values to DataSet
                       projectIntake.businessInformation = Object.assign({}, projectIntake.businessInformation, businessInformation)
-                      console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                      
 
                 }
 
@@ -757,7 +746,7 @@
 
                       // ? Assign New Values to DataSet
                       projectIntake.technicalEvaluation = Object.assign({}, projectIntake.technicalEvaluation, technicalEvaluation)
-                      console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                      
                 }
 
 
@@ -783,14 +772,14 @@
 
                     // ? Assign New Values to DataSet
                     projectIntake.pmoEvaluation = Object.assign({}, projectIntake.pmoEvaluation, pmoEvaluation)
-                    console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                    
                 }
 
 
                 // ? Set Roi Realized Data
                 if(objectToChange === 'roiRealized') {
 
-                    console.log("TCL: formHolder -> setDataSourceValuesFromDB -> extraValues", extraValues)
+                    
 
                     let roiRealized = {
                         roi_real_id : newValues.roi_real_id || newValues.Roi_real_id,
@@ -823,7 +812,7 @@
 
                     // ? Assign New Values to DataSet
                     projectIntake.roiRealized = Object.assign({}, projectIntake.roiRealized, roiRealized)
-                    console.log("TCL: formHolder -> updateProjectIntakeValues -> projectIntake", projectIntake)
+                    
 
 
                     
@@ -840,7 +829,7 @@
             // ? Reset Project Intake state
             // ?--------------------------------------
             resetProjectIntake() {
-                console.log('reset State');
+                
                 projectIntake = {
                     requirementsDefinition : {
                         Project_id : null,
@@ -973,7 +962,7 @@
                     }
                 
                 }
-                console.log("TCL: formHolder -> resetProjectIntake -> projectIntake", projectIntake)
+                
             }
 
 
@@ -985,9 +974,9 @@
             updateSPFiles = async (projectID) =>  {
 
 
-                console.log("TCL: formHolder -> updateSPFiles ->  projectIntake.requirementsDefinition.SPFiles before",  projectIntake.requirementsDefinition.SPFiles)
+                
 
-                console.log("TCL: formHolder -> updateSPFiles ->  projectIntake.pmoEvaluation.SPFiles before",  projectIntake.pmoEvaluation.SPFiles)
+                
 
                 const reqFilesPromise = this.getSharepointFilesByProject(projectID, 'RequirementsDefinition');
                 const pmoFilesPromise = this.getSharepointFilesByProject(projectID, 'PMO');
@@ -997,10 +986,10 @@
 
 
 
-                console.log("TCL: formHolder -> updateSPFiles -> pmoFiles", pmoFiles)
+                
 
                 
-                console.log("TCL: formHolder -> updateSPFiles -> reqFiles", reqFiles)
+                
 
                 projectIntake.requirementsDefinition.SPFiles = reqFiles.data.value
 
@@ -1009,9 +998,9 @@
 
 
 
-                console.log("TCL: formHolder -> updateSPFiles ->  projectIntake.requirementsDefinition.SPFiles after",  projectIntake.requirementsDefinition.SPFiles)
+                
 
-                console.log("TCL: formHolder -> updateSPFiles ->  projectIntake.pmoEvaluation.SPFiles after",  projectIntake.pmoEvaluation.SPFiles)
+                
 
 
                 
@@ -1071,7 +1060,7 @@
 
                 if(isValid ===  true ) 
                     this.redirectUser(nextRoute)
-                    // console.log('allow redirect');
+                    
                 else
                     this.createErrorAlertTop("Please fill all the required Fields");
 
@@ -1144,7 +1133,7 @@
 
                         for (let field of requiredFieldsBus) {
                                     
-                            console.log(field)
+                            
 
 
                             
@@ -1225,7 +1214,7 @@
 
 
                             for (let field of requiredFieldsTech) {
-                                console.log("TCL: formHolder -> validateEmptyTabs -> field", field)
+                                
                                     
                                 
     
@@ -1309,7 +1298,7 @@
 
                         for (let field of requiredFieldsPMO) {
                                     
-                            console.log(field)
+                            
 
 
                             
@@ -1455,13 +1444,13 @@
             // --------------------------------------
             renderformBody() {
                 // const {currentProjectID} = this.props;
-                console.log("TCL: formHolder -> renderformBody -> this.props", this.props)
+                
 
 
                 // return <span> Edit Content  </span>
 
                 
-                // //console.log('TCL: formHolder -> renderformBody -> currentProjectID', currentProjectID)
+                
 
                 
                 const isPMO = sessionStorage.getItem('isUserPMO') === "true" ? true  : false
@@ -1586,7 +1575,7 @@
             renderLoader (isTransparent) {
 
                 // const {currentMessage} = this.state
-				//console.log('TCL: renderLoader -> currentMessage', currentMessage)
+				
 
                 const container = document.getElementsByClassName('int-formFieldsContainer')[0]
                 const containerWidth = isTransparent ?  container && container.clientWidth : null;
@@ -1600,7 +1589,6 @@
             // Render Projects
             // --------------------------------------
             renderformHolder() {
-                const {location}  = this.props;
                 return (
                         <Fragment>
                             {this.renderNavigation()}

@@ -54,7 +54,6 @@
             return currentColor.color
         }
         catch (error) {
-			//console.log('TCL: setBackgroundColor -> error', error)
             let currentColor = "#f8c20a"
             return currentColor.color
 

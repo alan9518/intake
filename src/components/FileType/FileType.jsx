@@ -91,7 +91,7 @@
                             return spDoc
                     })[0]
                     
-                    console.log("TCL: FileType -> formatDocLink -> spFile", spFile)
+                    
 
                     if(spFile && spFile.LinkingUri) return  spFile.LinkingUri
                     
@@ -176,7 +176,7 @@
                 else if (fileLink === null || fileLink === undefined )
                     fileOpenLink = ''
 
-                console.log("TCL: FileType -> renderImages -> fileOpenLink", fileOpenLink)
+                
                
 
 
@@ -239,7 +239,7 @@
                 let fileNameToCompareSP = (`${fileName}.${fileExtension}`).toLowerCase();
               
                 documentLink = this.formatDocLink(documentLink,fileNameToCompareSP )
-                console.log("TCL: FileType -> renderDocuments -> documentLink", documentLink)
+                
 
                 if(documentLink.indexOf('/sites') < 0)
                     documentLink = `/${documentLink}`

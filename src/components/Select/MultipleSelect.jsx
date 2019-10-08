@@ -18,24 +18,7 @@
 // --------------------------------------
     
     const MultipleSelect = (props) => {
-        // const SingleSelect = (props) => {
-
-        
-
-        // let optionsArray = [];
-        // if(props.defaultValue.length > 0 && typeof props.defaultValue === 'string') {
-        //     let multipleOptions = props.defaultValue.split('||');
-        //     console.log("TCL: //SingleSelect -> multipleOptions", multipleOptions)
-        
-            
-        //     for(let optionsCounter = 0; optionsCounter < multipleOptions.length; optionsCounter++) {
-        //         optionsArray.push({
-        //             'label' : multipleOptions[optionsCounter],
-        //             'value' : multipleOptions[optionsCounter],
-        //         })
-        //     }   
-        // }   
-
+     
    
 
         return (
@@ -45,7 +28,6 @@
                     className= {props.className}
                     classNamePrefix = {props.classNamePrefix}
                     defaultValue = {props.defaultValue}
-                    // defaultValue = {optionsArray.length > 0 ? optionsArray : props.defaultValue}
                     isDisabled={props.isDisabled}
                     isLoading={props.isLoading}
                     isClearable={props.isClearable}

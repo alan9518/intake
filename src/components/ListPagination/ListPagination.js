@@ -11,12 +11,8 @@
 // Create Layuot Component
 // --------------------------------------
 const ListPagination = (props) => {
-    const {projectsCount, itemsPerPage, currentPage, numberOfPages,  nextPage, previousPage, firstPage, lastPage } = props;
-	//console.log('TCL: ListPagination -> props', props)
-    // if (projectsCount <= itemsPerPage) {
-    //     return null;
-    // }
-
+    const {currentPage, numberOfPages,  nextPage, previousPage, firstPage, lastPage } = props;
+	
 
     // --------------------------------------
     // Render Component

@@ -19,7 +19,6 @@
     const setProjectRoute = (route, currentProjectID)=> {
         if(route.editRoute === true) {
             let projectEditRoute = route.path.replace(':projectID', currentProjectID)
-			//console.log('TCL: setProjectRoute -> projectEditRoute', projectEditRoute)
 
             return projectEditRoute;
         }

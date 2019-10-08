@@ -19,8 +19,6 @@ import './styles.css'
 // --------------------------------------
 const FilesList = (props) => {
     const {filesData, currentProject,currentView, spDocs} = props;
-    console.log("TCL: FilesList -> filesData", filesData)
-    console.log("TCL: FilesList -> spDocs", spDocs)
     let documentArray;
     let fileExtensionArray;
     let fileExtension;
@@ -31,7 +29,6 @@ const FilesList = (props) => {
 
     // ? Check type of elemnts inside filesDataArray
     let stringfilesData = JSON.stringify(filesData)
-        console.log("TCL: FilesList -> stringfilesData", stringfilesData)
 
 
     if(stringfilesData.indexOf('previewElement') >= 0) {
@@ -151,7 +148,7 @@ const FilesList = (props) => {
                         // ? Iterate Sharepoint Files to look for a match between the SP FIles and DB
                         filesData && filesData.length > 0 ?
                             spDocs.map((spDoc) => {
-                                console.log("TCL: FilesList -> spDoc", spDoc)
+                                
                                 //? Check if spdoc is in relative URL
                                 try {
                                     // let relURl = spDoc.ServerRelativeUrl ? spDoc.ServerRelativeUrl : 
@@ -161,7 +158,7 @@ const FilesList = (props) => {
 
                                         let currentDoc = filesData[filesData.indexOf(relURl)];
                                         documentArray =    currentDoc.split('/');
-                                        console.log("TCL: FilesList -> documentArray", documentArray)
+                                        
                                     
                                         fileExtensionArray = (documentArray[documentArray.length - 1]).split('.');
                                         fileExtension =  fileExtensionArray[fileExtensionArray.length -1];
@@ -193,7 +190,7 @@ const FilesList = (props) => {
                                     }
                                 }
                                 catch(error) {
-                                    console.log("TCL: FilesList -> error", error)
+                                    
 
                                     // ? DB File could be Obect type instead of string
                                     

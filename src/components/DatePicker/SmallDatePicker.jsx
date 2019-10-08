@@ -54,7 +54,6 @@
         render() {
             const { name, initialValue, readOnly, tabIndex } = this.props;
             const showIcon = readOnly ? true : false;
-            //console.log('TCL: DatePicker -> render -> readOnly', readOnly)
             return (
                 <SingleDatePicker
                     date={this.state.startDate} // momentPropTypes.momentObj or null

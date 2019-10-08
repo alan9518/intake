@@ -59,12 +59,8 @@
             // --------------------------------------
             constructor(props) {
                 super(props);
-                // //console.log('TCL: RequirementsDefinition -> constructor -> props.loadedRequirements', props)
-                //? const currentUser = window.getCurrentSPUser();
-
-                // const currentUser =  {userName : 'Alan Medina', userEmail : 'alan.medina@flex.com'}
+               
                 const projectID = props.projectIntake.requirementsDefinition.Project_id || props.projectIntake.requirementsDefinition.Request_ID;
-                console.log("TCL: RequirementsDefinition -> constructor -> props", props)
 				
                 this.state = {
                     isLoaded: false,
@@ -101,11 +97,7 @@
                 this.preloadFiles =  this.preloadFiles.bind(this);
                 this.filesArray = [];
                 this.originalFiles = [];
-                // this.filesArray =  this.props.requirementsDefinition.project_docs || this.props.requirementsDefinition.Project_docs ||  [];
-                // this.filesArray =  this.props.requirementsDefinition.project_docs[0] === "" ? [] : props.requirementsDefinition.project_docs ;
-				//console.log('TCL: RequirementsDefinition -> constructor -> this.props.requirementsDefinition.project_docs', this.props.requirementsDefinition.project_docs)
-                
-
+             
             }
 
 
@@ -120,7 +112,6 @@
             componentWillUnmount() {
                 
                 this.submitFormLocalData(true)
-                // this.props.saveLocalRequirements(formData);
             }
 
 
@@ -169,18 +160,11 @@
             // Convert String to Moment Object
             // --------------------------------------
             convertStringToMomentObject(date) {
-                console.log("TCL: RequirementsDefinition -> convertStringToMomentObject -> date", date)
                 let dateObj = new Date(date);
-                console.log("TCL: RequirementsDefinition -> convertStringToMomentObject -> dateObj", dateObj)
 
                 let momentObj = moment(dateObj);
 
 
-                console.log("TCL: RequirementsDefinition -> convertStringToMomentObject -> momentObj", momentObj)
-                // let dateFormat = moment(dateObj).format("DD/MM/YYYY");
-                
-				//console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> dateFormat', dateFormat)
-                //console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> momentObj', momentObj)
                 
                 return momentObj;
             }
@@ -208,7 +192,6 @@
             // Crate JSON Data FIelds
             // --------------------------------------
             createFormStructure() {
-                // this.props.loadedRequirements.requirementsDefinition
                 let usersCanEdit = false;
                 if(this.state.Workstage.value === "Requested" && this.props.isPMO === false)
                     usersCanEdit = false;
@@ -455,10 +438,6 @@
                     newDate =  moment(date).format("DD/MM/YYYY") || this.props.projectIntake.requirementsDefinition.Date_submitted;
                     
 
-
-                
-                console.log("TCL: RequirementsDefinition -> setDateSubmittedValue -> newDate", newDate)
-
                 return newDate;
 
                 
@@ -504,7 +483,6 @@
             // TODO : Cnvert to sting Before POST
             // --------------------------------------
             onDateChange = (control, selectedDateString, selectedDate) =>{
-				//console.log('TCL: onDateChange -> selectedDateString', selectedDateString)
 				
                 this.setState({
                     [control] : selectedDate
@@ -570,7 +548,6 @@
 
                     this.filesArray.push(file);
                     this.setState({Project_Documents : this.filesArray});
-                    //console.log('files array', this.filesArray);
                     if( file.type.indexOf('image/') < 0 )
                     // if( type !== "png" || type !== "jpg" || type !== "jpeg" || type !== "gif" )
                     {
@@ -586,18 +563,10 @@
                
 
                     let newFilesarray = this.state.Project_Documents.filter((delFile) => {
-                        // console.log("TCL: handleFileRemoved -> delFile", delFile)
-
-                        // if(file.name === delFile.name)  {
-                        //     console.log("TCL: handleFileRemoved -> file equal", file)
-                        //     console.log("TCL: handleFileRemoved -> delFile equal", delFile)
-                            
-                        // }
-
+                       
                         return file.name !==  delFile.name
                         
                     })
-                    // console.log("TCL: handleFileRemoved -> newFilesarray", newFilesarray)
 
                     this.setState({Project_Documents : newFilesarray, fileRemoved : true})
                     this.filesArray = newFilesarray
@@ -616,7 +585,6 @@
                 // --------------------------------------
 
                 preloadFiles = (dropzone)=> {
-                    // const {project_docs} = this.props.loadedRequirements.requirementsDefinition;
                     let mockFile = null;
                     const project_docs = this.filesArray
 
@@ -639,10 +607,8 @@
                             
                         let mockFileImage = ''
                             
-                        //console.log('TCL: preloadFiles -> mockFile', mockFile)
                                 
 
-                        // let mockFile = this.props.fieldValues.ProjectImage;
                         dropzone.options.addedfile = mockFile;
                         dropzone.emit("addedfile", mockFile);
 
@@ -654,17 +620,14 @@
                         dropzone.emit("thumbnail", mockFile, mockFileImage);
                         dropzone.emit("complete", mockFile);
 
-                        //console.log('mockFile', mockFile);
                         dropzone.files.push(mockFile);
-						// this.filesArray = dropzone.files;
 
 
-                        // Set width and height of Thumbnail
+                        
 
                         
                         //? Set Preview of of files that are not images
                         let type = mockDoc.TypeDocument || mockFile.type
-                        // if( type.indexOf('image/') < 0 )
                         if( type !== "png" || type !== "jpg" || type !== "jpeg" || type !== "gif" )
                         {
                             this.createPreviewImageDropzone(index, mockFile);
@@ -694,7 +657,6 @@
                         return mockFile;
                         
                     });
-                    // console.log("TCL: preloadFiles -> mockFiles", mockFiles)
                     
 
 
@@ -782,7 +744,6 @@
                         
                     
                 
-                    //console.log('TCL: createPreviewImageDropzone -> imageContainer', imageContainer)
                     
                     let image = imageContainer.childNodes[0];
                     let imageSrc = this.getFileIconDropzone(file.type , file.name);
@@ -809,7 +770,6 @@
                     else       
                         fileExtension =  fileName.split('.')[1]
                     let iconSrc = `https://flextronics365.sharepoint.com/sites/project_intake/ProjectIntake/assets/File-Icons/${fileExtension}.png`;
-                    //console.log('iconSrc', iconSrc);
 
                     return iconSrc;
                 }
@@ -841,7 +801,6 @@
                         else
                             saveFile = file;
                         
-                        // //console.log('TCL: uploadFiles -> file', file)
                         //? Set File URL to Save on DB
                         if(saveFile.name.indexOf('sites/') >= 0) 
                             fileURL = saveFile.name
@@ -853,31 +812,15 @@
                             
 
 
-                        // console.log("TCL: uploadFiles -> fileURL", fileURL)
-                       
-                        // if(filesArray.length > 0)
-                            
-                        
+                   
                         
                         filesToUploadDBArray.push(fileURL);
-                        // console.log("TCL: uploadFiles -> filesToUploadDBArray", filesToUploadDBArray)
                     }
 
                    if(saveOnDB === true) 
                         this.saveFilesonDB(folderName, filesToUploadDBArray)
 
 
-
-                    // ? GET Updated Files
-
-                    // this.props.updateSPFiles(folderName).then((response) => {
-                       
-                               
-                    // })
-                    // .catch((error) => {
-                    
-    
-                    // })
                     
                 }
 
@@ -889,17 +832,12 @@
 
                     const {projectID} = this.props.locationData.match.params;
 
-                    
-                    // let projectFolder = foldertoUpload.indexOf('GSD')>= 0 ? foldertoUpload : `GSD${foldertoUpload}`
-
-                    // const folderURL = `intakeFiles/${projectFolder}`;
 
                     const id = projectID || this.props.projectIntake.requirementsDefinition.Request_ID || this.props.projectIntake.requirementsDefinition.Project_id ;
                     const requestID = id.substr(id.indexOf('GSD')+3,id.length);
                     const filesString = filesToUploadDBArray.join(',');
-                    // const currentUser = window.getCurrentSPUser();
 
-                    // Loomk For Files on SP FOlder
+                    //? Look For Files on SP FOlder
                     saveProjectFiles(requestID, filesString, currentUser.userEmail).then((data)=>{
                         console.log('TCL: saveFilesonDB -> data', data);
                         
@@ -925,16 +863,13 @@
                 // on Each Child of filesArray
                 // --------------------------------------*/
                 uploadPMOFiles (foldertoUpload, folderName) {
-                    console.log("TCL: uploadPMOFiles -> folderName", folderName)
                   
 
-                    // const folderURL = `intakeFiles/${foldertoUpload}`;
 
                     let projectFolder = foldertoUpload.indexOf('GSD')>= 0 ? foldertoUpload : `GSD${foldertoUpload}`
 
                     const folderURL = `intakeFiles/${projectFolder}/PMO`;
 
-                    // let filesToUploadDBArray = [];
                    
                     const filesArray = this.props.projectIntake.pmoEvaluation.Documents
                      if(filesArray ) {
@@ -948,7 +883,6 @@
                                 else
                                     saveFile = file;
                                 
-                                // //console.log('TCL: uploadFiles -> file', file)
                                 //? Set File URL to Save on DB
                                 if(saveFile.name.indexOf('sites/') >= 0) 
                                     fileURL = saveFile.name
@@ -993,11 +927,7 @@
                         if(fieldItem.Mandatory === true) {
                             // Check empty value for text input
                             if(fieldItem.Type === "Text" || fieldItem.Type === "Decimal" || fieldItem.Type === "Integer") {
-                                
-                                    // console.log("TCL: validateFormInputs -> fieldItem", fieldItem)
-                                    // console.log("TCL: validateFormInputs -> state item", this.state[fieldItem.Field_State_Name])
-                                //console.log(`TCL: validateFormInputs -> fieldItem.value Text->${fieldItem.Field_State_Name}`, fieldItem.value)
-                                    if(this.state[fieldItem.Field_State_Name] === null || this.state[fieldItem.Field_State_Name] === "" ) {
+                                     if(this.state[fieldItem.Field_State_Name] === null || this.state[fieldItem.Field_State_Name] === "" ) {
                                         
                                         this.addErrorStatus(fieldItem.Field_State_Name);
                                         return true;
@@ -1010,11 +940,9 @@
                             }
                             // Check Combo
                             else if(fieldItem.Type === "Combo" || fieldItem.Type === "DynamicField") {
-                                //console.log(`TCL: validateFormInputs -> fieldItem.value Copmbo->${fieldItem.Field_State_Name}`, fieldItem.value)
                                 if(this.state[fieldItem.Field_State_Name].value === "" || this.state[fieldItem.Field_State_Name].value === null  || this.state[fieldItem.Field_State_Name] === null  || this.state[fieldItem.Field_State_Name] === [])  {
                                     this.addErrorStatus(fieldItem.Field_State_Name);
                                     return true;
-                                    // errors.push( {error : true, field : fieldItem.Field_State_Name})
                                 }
                                 else {
                                     this.removeErrorStatus(fieldItem.Field_State_Name)
@@ -1030,7 +958,6 @@
 
                     // Check How Many erros Are
                     const errorsCount = errors.filter(error=>{return error===true}).length
-					//console.log('TCL: validateFormInputs -> errorsCount', errorsCount)
 
                     return errorsCount > 0 ?  false : true
                     
@@ -1047,12 +974,10 @@
 
                     this.filesArray = this.state.Project_Documents;
 
-                    // const projId = this.props.projectIntake.requirementsDefinition ? this.props.projectIntake.requirementsDefinition.Request_ID : this.props.loadedRequirements.Project_id
                     const projId = (this.props.projectIntake.requirementsDefinition.Request_ID ).toString()
                     const requestID =  projId.indexOf('GSD') >= 0 ?  projId.substr(projId.indexOf('GSD')+3,projId.length) : projId;
 
 
-                    console.log("TCL: RequirementsDefinition -> saveFormValues -> this.originalFiles", this.originalFiles)
 
                  
                     const formData = {
@@ -1075,7 +1000,6 @@
                         
                     }
 
-                    console.log("TCL: saveFormValues -> formData", formData)
 
 
                     this.setState({
@@ -1089,14 +1013,11 @@
                         Expected_Completion_Date : formData.Expected_Completion_Date || moment(),
                         Deadline_Justification :formData.Deadline_Justification,
                         Project_docs : this.filesArray || [],
-                        // Created_by : currentUser.userEmail,
-                        // Last_modifed_by : currentUser.userEmail,
                         showFileManager : false
                     })
 
                     
 
-                    // //console.log('New Date ', this.formatDate())
 
                     return formData;
 
@@ -1154,6 +1075,12 @@
                 // !--------------------------------------
                 submitFormDB = () => {
 
+                    
+                    if(this.validateDates(this.state.Expected_Start_Date, this.state.Expected_Completion_Date) === false) {
+                        return;
+                    }
+
+
                     if(this.validateFormInputs() === false) {
                         this.createErrorAlertTop('Please Fill all the Required Fields');
                         this.setState({checkForErrors: true})
@@ -1165,9 +1092,7 @@
                     const formData = this.saveFormValues();
                     const {filesArray} = this;
                     let spFiles = [];
-					//console.log('TCL: submitFormDB -> filesArray', filesArray)
-                    // this.props.saveLocalRequirements(formData);
-                    
+				
 
                     //? Save Requirements
                     updateRequirementsDB(formData).then(()=>{
@@ -1182,7 +1107,7 @@
 
                         
 
-                        // this.setState({ Request_ID : newProjectID , sendingData : false})
+                       
 
                         // ?Rename Files Based on Project ID
 
@@ -1194,14 +1119,6 @@
                         this.uploadFiles(projectID, reqFolderURL, filesArray);
 
 
-
-                       
-                       
-
-
-                        console.log("TCL: submitFormDB -> spFiles", spFiles)
-
-                   
 
                         this.props.updateProjectIntakeValues('requirements',formData, null, true)
 
@@ -1249,16 +1166,8 @@
                 // ! Save Other Tabs
                 // !--------------------------------------
                 saveOtherTabs = async (projectID) => {
-                    console.log("TCL: projectID", projectID)
-                    // this.props.businessInformation
-
-                    console.log("TCL: saveOtherTabs -> this.props", this.props)
-                    
-
-
-                    
+              
                     const id = projectID.indexOf('GSD') >= 0  ? projectID.substr(projectID.indexOf('GSD')+3,projectID.length) : projectID;
-                    console.log("TCL: id", id)
                     const {businessInformation, technicalEvaluation, pmoEvaluation, roiRealized} = this.props.projectIntake;
                    
                     
@@ -1267,18 +1176,14 @@
                         // ? Save Business Information
                         if( !isEmpty(businessInformation) && businessInformation.SavedLocally === true) {
 
-                            console.log("TCL: saveOtherTabs -> businessInformation", businessInformation)
-                            
-                            // businessInformation.Project_id = id;
+                      
                             
                             if(businessInformation.Buss_info_id || businessInformation.buss_info_id )
                                 updateBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
-                                    console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
                                     // businessInformation.Buss_info_id = newBusinesId
                                 }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
                             else {
                                 saveBusinesInformationDB(businessInformation, id).then((newBusinesId) => {
-                                    console.log("TCL: saveOtherTabs -> newBusinesId", newBusinesId)
                                     businessInformation.Buss_info_id = newBusinesId
                                 }).catch((error) => {console.log("TCL: saveOtherTabs -> error", error)})
                                 
@@ -1317,7 +1222,6 @@
                             }
                             else
                                 savePMOEvaluationDB(pmoEvaluation, id).then((newPmoId) => {
-                                    console.log("TCL: saveOtherTabs -> newPmoId", newPmoId)
                                     pmoEvaluation.Pmo_eval_id = newPmoId
                                     let reqFolderURL = `${id}/PMO`;
                                     
@@ -1337,7 +1241,6 @@
                             // ? Look For Roi Relized Data
                             if(roiRealized.Roi_real_id || roiRealized.roi_real_id ) {
                                 updateROIRealizedDB(roiRealized, id).then((roiID) => {
-                                    console.log("TCL: roiID", roiID)
                                     roiRealized.Roi_real_id = roiID
                                     // ? Look for Dynatrace
                                     if(!isEmpty (roiRealized.dynatrace))
@@ -1347,7 +1250,6 @@
                             }
                             else {
                                 saveROIRealizedDB(roiRealized, id).then((roiID) => {
-                                    console.log("TCL: roiID", roiID)
                                     roiRealized.Roi_real_id = roiID
                                     // ? Look for Dynatrace
                                     if(!isEmpty (roiRealized.dynatrace))
@@ -1366,11 +1268,6 @@
                         }
 
 
-
-                    console.log("TCL: pmoEvaluation", pmoEvaluation)
-                    console.log("TCL: technicalEvaluation", technicalEvaluation)
-                    console.log("TCL: businessInformation", businessInformation)
-
                     }   
                     catch(error) {
                         console.log("TCL: error", error)
@@ -1384,18 +1281,7 @@
                 }
 
 
-                validateObjectValues(object) {
-
-                    for (var property in object) {
-                        console.log("TCL: validateObjectValues -> property", property)
-                        if (object.hasOwnProperty(property)) {
-                            console.log("TCL: validateObjectValues -> property", property)
-                            // do stuff
-                        }
-                    }
-
-                }
-
+          
             
 
 
@@ -1407,7 +1293,6 @@
                 // ? And update add / show files State
                 // ?--------------------------------------
                 uploadFilesToSPWithoutSavingDB = (event)=> {
-                    console.log("TCL: RequirementsDefinition -> uploadFilesToSPWithoutSavingDB -> event", event)
 
                     const {Project_Documents} = this.state;
 
@@ -1432,16 +1317,6 @@
                         }
 
 
-                        //  const {projectID} = this.props.locationData.match.params
-                        // getSharepointReqFiles(projectID).then((reqFilesPromise) => {
-                        //     const reqFilesData =   reqFilesPromise.data.value
-                        //     console.log("TCL: submitFormDB -> reqFilesData", reqFilesData)
-                        //     // spFiles = reqFilesData
-
-                        // }).catch((error) => {
-                        //     console.log("TCL: submitFormDB -> error", error)
-                            
-                        // })
                             
                            
                         this.setState({
@@ -1452,9 +1327,6 @@
 
                         this.filesArray = orignaldocs
 
-                        // this.setState({ state: this.state });
-
-                        // this.props.resetRequirementsState();
                     }
 
                     else

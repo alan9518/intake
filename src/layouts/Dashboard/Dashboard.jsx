@@ -83,7 +83,7 @@
                 }
                 catch(error) {
                     console.log("TCL: Dashboard -> componentDidMount -> error", error)
-                    
+                    throw error
                 }
             }
 
@@ -116,25 +116,13 @@
             async loadAPI() {
                 const sitePMOsPromise =  await this.fetchSitePMOS();
                 const sitePMOS = await sitePMOsPromise.data.value;
-                // const sitePMOS =   await  sitePMOsPromise.data ?  sitePMOsPromise.data.value : this.users.value
-
-                // const sitePMOS = this.users.value
-                console.log("TCL: Dashboard -> loadAPI -> sitePMOS", sitePMOS)
-                let isPMO = false
+                let isPMO = false;
 
                 // ? If there is Pmo, look for current user
                 if(sitePMOS.length >0) {
-                    console.log("TCL: Dashboard -> loadAPI -> sitePMOS", sitePMOS)
                     
-                    
-                    // const currentUser = {userEmail : 'alan.medina@flex.com'}
                     const PMOSData = sitePMOS.filter((pmo) => {
-                        console.log("TCL: Dashboard -> loadAPI -> pmo", pmo)
-                        console.log("TCL: Dashboard -> loadAPI -> currentUser", currentUser)
-
-                        console.log("TCL: Dashboard -> loadAPI -> (pmo.Email)", pmo.Email.toLowerCase())
-
-                        console.log("TCL: Dashboard -> loadAPI -> (currentUser.userEmail)", currentUser.userEmail.toLowerCase())
+                      
 			
                         if((pmo.Email).toLowerCase() === (currentUser.userEmail).toLowerCase())
                             return {
@@ -146,14 +134,12 @@
                     })
 
 
-                    console.log("TCL: Dashboard -> loadAPI -> PMOSData", PMOSData)
 
                     if(PMOSData.length > 0)
                         isPMO = true;    
                     else
                         isPMO = false;
 
-                    console.log("TCL: Dashboard -> loadAPI -> isPMO", isPMO)
 
                     // ? Set PMO value on sessionStorage to acces it later
                     if(sessionStorage.getItem('isUserPMO') === null ) {

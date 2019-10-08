@@ -61,13 +61,10 @@ const fieldCombo = (props) => {
     // Define Default Value
     // --------------------------------------
         
-        // let defaultComboValue = value.value === null || value.value === '' ? General_Value[0] : value;
-        // let defaultComboValue = value || General_Value[0];
-        
-        // let selectDisabled = Field_Name === 'Workstage' ? true : false
+      
         let selectDisabled =  !Enabled ;
         
-        // //console.log("TCL: fieldCombo -> visible", visible)
+        
 
         // Show/Hide COntainer
         const visibleStyles = {"display" : visible === false ? 'none': 'flex'}
@@ -104,7 +101,6 @@ const fieldCombo = (props) => {
         }
 
 
-        // console.log("TCL: fieldCombo -> General_Value", General_Value)
         
 
         
@@ -130,17 +126,12 @@ const fieldCombo = (props) => {
           
         else
             indexFromData = null
-        // console.log("TCL: fieldCombo -> indexFromData", indexFromData)
         
 
 
         
 
         let defaultComboValue = comboValueFromDB || value ||  null ;
-        // console.log("TCL: fieldCombo -> defaultComboValue", defaultComboValue)
-        
-
-        // console.log("TCL: fieldCombo -> val", val)
 
         let selectValue = value
         
@@ -148,13 +139,6 @@ const fieldCombo = (props) => {
             selectValue = null
         else 
             selectValue = value
-
-            // if(Field_State_Name === 'Applications_involved' || Field_State_Name === 'Technology' || Field_State_Name === 'IT_Groups_Required') {
-            //     console.log("TCL: fieldCombo -> comboValueFromDB"  + Field_State_Name, comboValueFromDB)
-            //     console.log("TCL: fieldCombo -> defaultComboValue" + Field_State_Name, defaultComboValue)
-            //     console.log("TCL: fieldCombo -> selectValue" + Field_State_Name , selectValue)
-        
-            // }
 
 
     return (
