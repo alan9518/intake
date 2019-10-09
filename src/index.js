@@ -29,9 +29,18 @@
     import * as serviceWorker from './serviceWorker';
     import { ErrorBoundary } from './components';
 
+
+
+// --------------------------------------
+// Deactivate Console.log on Production
+// --------------------------------------
+if (process.env.NODE_ENV !== 'development') {
+    console.log = () => {}
+}
+
+
 // --------------------------------------
 // Render App 
-// Redux Provider & Store
 // --------------------------------------
     ReactDOM.render(
             <ErrorBoundary>
