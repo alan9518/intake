@@ -121,12 +121,17 @@
     // --------------------------------------
 
     function getCurrentSPUser() {
-      var currentUser = {
-        userID: _spPageContextInfo.userId,
-        userEmail: _spPageContextInfo.userEmail,
-        userName: _spPageContextInfo.userDisplayName,
 
-      }
+     
+     var currentUser = {
+          userID: _spPageContextInfo.userId,
+          userEmail: _spPageContextInfo.userEmail,
+          userName: _spPageContextInfo.userDisplayName,
+
+        }
+      
+
+    
       return currentUser;
     }
 

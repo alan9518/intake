@@ -114,61 +114,75 @@
             // Load All API GET Requests
             // --------------------------------------
             async loadAPI() {
-                const sitePMOsPromise =  await this.fetchSitePMOS();
-                const sitePMOS = await sitePMOsPromise.data.value;
-                let isPMO = false;
-
-                // ? If there is Pmo, look for current user
-                if(sitePMOS.length >0) {
-                    
-                    const PMOSData = sitePMOS.filter((pmo) => {
+                try {
+                    const sitePMOsPromise =  await this.fetchSitePMOS();
+                    const sitePMOS = await sitePMOsPromise.data.value;
+                    let isPMO = false;
+    
+                    // ? If there is Pmo, look for current user
+                    if(sitePMOS.length >0) {
+                        
+                        const PMOSData = sitePMOS.filter((pmo) => {
+                          
+                
+                            if((pmo.Email).toLowerCase() === (currentUser.userEmail).toLowerCase())
+                                return {
+                                    pmoName : pmo.Title,
+                                    pmoEmail: pmo.Email
+                                }
+                            // else
+                            //     return null
+                        })
+    
+    
+    
+                        if(PMOSData.length > 0)
+                            isPMO = true;    
+                        else
+                            isPMO = false;
+    
+    
+                        // ? Set PMO value on sessionStorage to acces it later
+                        if(sessionStorage.getItem('isUserPMO') === null ) {
+                            window.sessionStorage.setItem('isUserPMO', JSON.stringify(isPMO))
+                        }
+                        // ? If user wasnt in the list on the first check
+                        else if (sessionStorage.getItem('isUserPMO') === "false" && isPMO === true) {
+                            window.sessionStorage.setItem('isUserPMO', JSON.stringify(isPMO))
+                        }
+    
+                        // ? If user was in the list on the first check but now is removed
+                        else if (sessionStorage.getItem('isUserPMO') === "true" && isPMO === false) {
+                            window.sessionStorage.removeItem('isUserPMO')
+                        }
+                        
+                    }
+                    else {
+                        isPMO = false 
+                        if(sessionStorage.getItem('isUserPMO') !== null) {
+                            window.sessionStorage.removeItem('isUserPMO')
+                        }
+    
+                    }
                       
-			
-                        if((pmo.Email).toLowerCase() === (currentUser.userEmail).toLowerCase())
-                            return {
-                                pmoName : pmo.Title,
-                                pmoEmail: pmo.Email
-                            }
-                        // else
-                        //     return null
-                    })
+    
+                    // ? Set State
+                    this.setState({
+                        isLoaded : true
+                    });
+                }
 
-
-
-                    if(PMOSData.length > 0)
-                        isPMO = true;    
-                    else
-                        isPMO = false;
-
-
-                    // ? Set PMO value on sessionStorage to acces it later
-                    if(sessionStorage.getItem('isUserPMO') === null ) {
-                        window.sessionStorage.setItem('isUserPMO', JSON.stringify(isPMO))
-                    }
-                    // ? If user wasnt in the list on the first check
-                    else if (sessionStorage.getItem('isUserPMO') === "false" && isPMO === true) {
-                        window.sessionStorage.setItem('isUserPMO', JSON.stringify(isPMO))
-                    }
-
-                    // ? If user was in the list on the first check but now is removed
-                    else if (sessionStorage.getItem('isUserPMO') === "true" && isPMO === false) {
-                        window.sessionStorage.removeItem('isUserPMO')
-                    }
+                catch(error) {
+                    console.log("TCL: Dashboard -> loadAPI -> error", error)
+                    let isPMO = true;    
+                    window.sessionStorage.setItem('isUserPMO', JSON.stringify(isPMO))
+                    // ? Set State
+                    this.setState({
+                        isLoaded : true
+                    });
                     
                 }
-                else {
-                    isPMO = false 
-                    if(sessionStorage.getItem('isUserPMO') !== null) {
-                        window.sessionStorage.removeItem('isUserPMO')
-                    }
-
-                }
-                  
-
-                // ? Set State
-                this.setState({
-                    isLoaded : true
-                });
+               
             }
 
 

@@ -3180,14 +3180,15 @@
                 const {isPMO} = this.props;
                 let buttonDisabled =  false ;
                 let workstage = '';
+                const {requirementsDefinition} =  this.props.projectIntake;
                 try {
                     // const {workstage} = this.props.requirementsDefinition.requirementsDefinition;
 
-                    if(this.props.requirementsDefinition) {
-                        if(this.props.requirementsDefinition.requirementsDefinition &&  this.props.requirementsDefinition.requirementsDefinition.workstage !== "")
-                            workstage =  this.props.requirementsDefinition.requirementsDefinition.workstage  
-                        else if(this.props.requirementsDefinition.Workstage)
-                            workstage = this.props.requirementsDefinition.Workstage.value
+                    if(requirementsDefinition) {
+                        if(requirementsDefinition &&  requirementsDefinition.workstage !== "")
+                            workstage =  requirementsDefinition.workstage  
+                        else if(requirementsDefinition.Workstage)
+                            workstage = requirementsDefinition.Workstage.value
                         else
                             workstage = ''
                        

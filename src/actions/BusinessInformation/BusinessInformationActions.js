@@ -78,7 +78,7 @@
         return ''
 
         // ? Check if the sites are already in string format
-        if(sitesArray.indexOf('||') >= 0)
+        if(sitesArray.indexOf('||') >= 0 || typeof (sitesArray) === 'string')
             return sitesArray
 
         // ? Check if the sites array is empty
